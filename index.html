@@ -34,8 +34,8 @@
 
         /* Custom styling for better visual appeal and responsiveness */
         .card {
-            background: rgba(255, 255, 255, 0.06); /* Adjusted transparency for less frosty effect */
-            backdrop-filter: blur(4.3px); /* Adjusted blur for less frosty effect */
+            background: rgba(255, 255, 255, 0.02175); /* Reduced transparency by 50% */
+            backdrop-filter: blur(1.6095px); /* Reduced blur by 50% */
             border-radius: 1.5rem; /* More rounded corners */
             border: 1px solid rgba(255, 255, 255, 0.1); /* Very subtle white border */
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Softer, more elegant shadow */
@@ -302,15 +302,14 @@
                 0 0 20px rgba(255, 165, 0, 0.2); /* Even softer orange glow */
             
             /* Animation for color shift */
-            animation: colorShift 3s infinite alternate;
+            animation: colorShift 6s infinite alternate; /* Slower cycle change */
             font-size: 2.25rem; /* Default for mobile */
         }
 
         @keyframes colorShift {
-            0% { color: var(--digital-green); } /* Start with digital green */
-            33% { color: var(--digital-cyan); } /* Transition to digital cyan */
-            66% { color: var(--indigo-800); } /* Transition to indigo-800 */
-            100% { color: var(--digital-green); } /* Back to digital green */
+            0% { color: var(--indigo-800); } /* Start with indigo-800 */
+            50% { color: var(--logo-green); } /* Transition to logo green */
+            100% { color: var(--indigo-800); } /* Back to indigo-800 */
         }
         /* Desktop font size for opportunities title */
         @media (min-width: 768px) {
@@ -324,24 +323,24 @@
             height: auto; /* Will be set by JS based on 2 lines + header/footer */
             overflow: hidden;
             position: relative; /* Crucial for positioning children */
-            margin-top: 1rem; /* Adjusted margin-top */
-            margin-bottom: 1rem;
+            margin-top: 0.25rem; /* Reduced by 75% from 1rem */
+            margin-bottom: 0.25rem; /* Reduced by 75% from 1rem */
             background-color: rgba(20, 20, 20, 0.8); /* Darker, more opaque background for screen effect */
-            border-radius: 0.75rem; /* Slightly more rounded */
+            border-radius: 0.1875rem; /* Reduced by 75% from 0.75rem */
             box-shadow: 
-                inset 0 0 8px rgba(0, 255, 255, 0.2), /* Inner cyan glow */
-                0 0 10px rgba(0, 255, 255, 0.1); /* Outer cyan glow */
-            border: 1px solid rgba(0, 255, 255, 0.3); /* Thinner, softer cyan border for screen bezel */
+                inset 0 0 2px rgba(0, 255, 255, 0.05), /* Reduced glow by 75% */
+                0 0 2.5px rgba(0, 255, 255, 0.025); /* Reduced glow by 75% */
+            border: 0.25px solid rgba(0, 255, 255, 0.075); /* Reduced border by 75% */
             display: flex; /* Use flexbox to stack header, content area and footer */
             flex-direction: column;
-            max-width: 300px; /* Default for mobile/small screens */
+            max-width: 75px; /* Reduced by 75% from 300px */
             margin-left: auto; /* Center the thinner window */
             margin-right: auto;
             /* Removed 3D transform for a flatter, more professional look */
 
             /* Responsive adjustments for desktop */
             @media (min-width: 768px) { /* md breakpoint */
-                max-width: 500px; /* Make it wider on desktop */
+                max-width: 125px; /* Reduced by 75% from 500px */
             }
         }
 
@@ -356,9 +355,9 @@
             background: repeating-linear-gradient(
                 to bottom,
                 transparent 0px,
-                transparent 1px,
-                rgba(0, 255, 255, 0.03) 1px, /* More subtle scanline */
-                rgba(0, 255, 255, 0.03) 2px
+                transparent 0.25px, /* Reduced by 75% from 1px */
+                rgba(0, 255, 255, 0.0075) 0.25px, /* Reduced by 75% from 0.03 */
+                rgba(0, 255, 255, 0.0075) 0.5px /* Reduced by 75% from 0.03 */
             );
             pointer-events: none; /* Allow clicks to pass through */
             z-index: 1; /* Above content but below main text */
@@ -375,15 +374,15 @@
         .digital-header-text {
             background-color: rgba(0, 0, 0, 0.7); /* Dark background */
             color: var(--digital-green); /* Green digital text */
-            padding: 6px 10px; /* Reduced padding for a thinner strip */
-            font-size: 0.8rem; /* Default for mobile */
+            padding: 1.5px 2.5px; /* Reduced by 75% from 6px 10px */
+            font-size: 0.2rem; /* Reduced by 75% from 0.8rem */
             font-weight: 600; /* Bold */
             text-align: center;
-            border-bottom: 1px solid rgba(0, 255, 0, 0.2); /* Softer green separator */
-            border-top-left-radius: 0.75rem; /* Match container border radius */
-            border-top-right-radius: 0.75rem;
+            border-bottom: 0.25px solid rgba(0, 255, 0, 0.05); /* Reduced by 75% from 1px 0.2 */
+            border-top-left-radius: 0.1875rem; /* Reduced by 75% from 0.75rem */
+            border-top-right-radius: 0.1875rem; /* Reduced by 75% from 0.75rem */
             text-shadow: 
-                0 0 6px rgba(0, 255, 0, 0.6); /* Softer green glow */
+                0 0 1.5px rgba(0, 255, 0, 0.15); /* Reduced glow by 75% */
             animation: digitalHeaderGlowPulse 2.5s infinite alternate; /* Slower pulsing glow effect */
             white-space: nowrap; /* Keep on one line */
             overflow: hidden;
@@ -391,14 +390,14 @@
 
             /* Responsive adjustments for desktop */
             @media (min-width: 768px) { /* md breakpoint */
-                font-size: 1.1rem; /* Larger on desktop */
-                padding: 8px 15px; /* Slightly more padding for desktop */
+                font-size: 0.275rem; /* Reduced by 75% from 1.1rem */
+                padding: 2px 3.75px; /* Reduced by 75% from 8px 15px */
             }
         }
 
         @keyframes digitalHeaderGlowPulse {
-            from { text-shadow: 0 0 6px rgba(0, 255, 0, 0.6); }
-            to { text-shadow: 0 0 10px rgba(0, 255, 0, 0.8); }
+            from { text-shadow: 0 0 1.5px rgba(0, 255, 0, 0.15); }
+            to { text-shadow: 0 0 2.5px rgba(0, 255, 0, 0.2); }
         }
 
         /* New wrapper for the scrolling content area */
@@ -406,7 +405,7 @@
             flex-grow: 1; /* Allows it to take available space */
             position: relative; /* For absolute positioning of inner wrapper */
             overflow: hidden; /* Crucial for hiding parts of the scrolling list */
-            height: 48px; /* Adjusted fixed height for two lines of text, made smaller */
+            height: 12px; /* Reduced by 75% from 48px */
             /* Desktop height adjustment will be handled by JS based on new font-size */
         }
 
@@ -425,27 +424,27 @@
 
         .company-list-content {
             /* This div contains one full set of company names */
-            padding-top: 5px; /* Padding inside the scrolling area */
-            padding-bottom: 5px;
+            padding-top: 1.25px; /* Reduced by 75% from 5px */
+            padding-bottom: 1.25px; /* Reduced by 75% from 5px */
         }
 
         .company-list-item {
-            padding: 0.25rem 0; /* 4px top/bottom */
-            font-size: 0.9rem; /* Default for mobile */
-            line-height: 1.2; /* approx 17.28px */
+            padding: 0.0625rem 0; /* Reduced by 75% from 0.25rem */
+            font-size: 0.225rem; /* Reduced by 75% from 0.9rem */
+            line-height: 0.3; /* Reduced by 75% from 1.2 */
             font-weight: 600; /* Bolder for digital display */
             color: var(--digital-cyan); /* Bright cyan for digital text */
             text-align: center;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            text-shadow: 0 0 4px rgba(0, 255, 255, 0.5); /* Softer cyan glow for company names */
+            text-shadow: 0 0 1px rgba(0, 255, 255, 0.125); /* Reduced by 75% from 4px 0.5 */
             animation: textFlicker 6s infinite alternate; /* Slower, more subtle flicker for each name */
 
             /* Responsive adjustments for desktop */
             @media (min-width: 768px) { /* md breakpoint */
-                font-size: 1.2rem; /* Larger on desktop */
-                line-height: 1.4; /* Better spacing for larger text */
+                font-size: 0.3rem; /* Reduced by 75% from 1.2rem */
+                line-height: 0.35; /* Reduced by 75% from 1.4 */
             }
         }
 
@@ -461,37 +460,37 @@
         .digital-footer {
             background-color: rgba(0, 0, 0, 0.7); /* Dark background */
             color: var(--digital-green); /* Green digital text */
-            padding: 8px 10px;
-            font-size: 0.8rem; /* Default for mobile */
+            padding: 2px 2.5px; /* Reduced by 75% from 8px 10px */
+            font-size: 0.2rem; /* Reduced by 75% from 0.8rem */
             font-weight: 600;
-            border-top: 1px solid rgba(0, 255, 0, 0.2); /* Softer green separator */
-            border-bottom-left-radius: 0.75rem; /* Match container border radius */
-            border-bottom-right-radius: 0.75rem;
+            border-top: 0.25px solid rgba(0, 255, 0, 0.05); /* Reduced by 75% from 1px 0.2 */
+            border-bottom-left-radius: 0.1875rem; /* Reduced by 75% from 0.75rem */
+            border-bottom-right-radius: 0.1875rem; /* Reduced by 75% from 0.75rem */
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 0.75rem; /* Increased space between elements */
-            text-shadow: 0 0 4px rgba(0, 255, 0, 0.4); /* Softer green glow */
+            gap: 0.1875rem; /* Reduced by 75% from 0.75rem */
+            text-shadow: 0 0 1px rgba(0, 255, 0, 0.1); /* Reduced by 75% from 4px 0.4 */
             animation: digitalFooterGlow 3.5s infinite alternate; /* Slower animation */
 
             /* Responsive adjustments for desktop */
             @media (min-width: 768px) { /* md breakpoint */
-                font-size: 1rem; /* Slightly larger on desktop */
+                font-size: 0.25rem; /* Reduced by 75% from 1rem */
             }
         }
 
         @keyframes digitalFooterGlow {
-            from { text-shadow: 0 0 4px rgba(0, 255, 0, 0.4); }
-            to { text-shadow: 0 0 8px rgba(0, 255, 0, 0.6); }
+            from { text-shadow: 0 0 1px rgba(0, 255, 0, 0.1); }
+            to { text-shadow: 0 0 2px rgba(0, 255, 0, 0.15); }
         }
 
         .digital-icon {
-            font-size: 1rem; /* Icon size */
+            font-size: 0.25rem; /* Reduced by 75% from 1rem */
             vertical-align: middle;
         }
 
         .digital-separator {
-            color: rgba(0, 255, 0, 0.4); /* Even more transparent green separator */
+            color: rgba(0, 255, 0, 0.1); /* Reduced by 75% from 0.4 */
             font-weight: 300;
         }
 
