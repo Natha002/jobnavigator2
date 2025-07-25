@@ -10,7 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --logo-green: #00CC00; /* Defined logo green color */
+            --logo-green: #00CC00; /* Defined logo green color (for logo image/text) */
+            --logo-orange-original: #D2691E; /* Original logo orange color for animation */
             --indigo-800: #3730a3; /* Tailwind indigo-800 equivalent for consistency */
             --indigo-500: #6366f1; /* Tailwind indigo-500 equivalent */
             --digital-cyan: #00FFFF; /* Bright cyan for digital text */
@@ -34,8 +35,8 @@
 
         /* Custom styling for better visual appeal and responsiveness */
         .card {
-            background: rgba(255, 255, 255, 0.02175); /* Reduced transparency by 50% */
-            backdrop-filter: blur(1.6095px); /* Reduced blur by 50% */
+            background: transparent; /* Removed transparency */
+            backdrop-filter: none; /* Removed blur */
             border-radius: 1.5rem; /* More rounded corners */
             border: 1px solid rgba(255, 255, 255, 0.1); /* Very subtle white border */
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Softer, more elegant shadow */
@@ -43,6 +44,7 @@
             overflow: hidden;
             animation: fadeInScale 0.8s ease-out forwards;
             color: #e0e0e0; /* Light text color for dark background */
+            margin: 0; /* Ensure no conflicting margins from parent centering */
         }
 
         @keyframes fadeInScale {
@@ -157,17 +159,15 @@
             color: #4f46e5;
         }
         /* Header specific styling */
-        .header-title {
-            font-size: 2.25rem;
-            font-weight: 800;
-            color: var(--logo-green); /* Used CSS variable for green logo */
+        .header-text-outline { /* New class for Kazi Connect text */
+            color: var(--indigo-800); /* Keep original text color */
             text-shadow: 
-                1px 1px 0 #FFF, -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, /* White outline */
-                0 0 8px rgba(255, 255, 255, 0.5); /* Subtle white glow */
+                1px 1px 0 var(--logo-orange-original), -1px -1px 0 var(--logo-orange-original), 
+                1px -1px 0 var(--logo-orange-original), -1px 1px 0 var(--logo-orange-original); /* Logo orange outline */
             transition: color 0.3s ease-in-out;
         }
-        .header-title:hover {
-            color: var(--logo-green); /* Keep same color on hover for consistency with outline */
+        .header-text-outline:hover {
+            color: var(--indigo-800); /* Keep same color on hover for consistency with outline */
         }
         .nav-link {
             position: relative;
@@ -175,6 +175,9 @@
             color: var(--indigo-800); /* Ensure nav links use indigo-800 */
             font-size: 1rem; /* Default for mobile */
             text-transform: uppercase; /* All caps for navigation links */
+            text-shadow: 
+                1px 1px 0 var(--logo-orange-original), -1px -1px 0 var(--logo-orange-original), 
+                1px -1px 0 var(--logo-orange-original), -1px 1px 0 var(--logo-orange-original); /* Logo orange outline */
         }
         .nav-link::after {
             content: '';
@@ -302,13 +305,13 @@
                 0 0 20px rgba(255, 165, 0, 0.2); /* Even softer orange glow */
             
             /* Animation for color shift */
-            animation: colorShift 6s infinite alternate; /* Slower cycle change */
+            animation: colorShift 9s infinite alternate; /* Slower cycle change */
             font-size: 2.25rem; /* Default for mobile */
         }
 
         @keyframes colorShift {
             0% { color: var(--indigo-800); } /* Start with indigo-800 */
-            50% { color: var(--logo-green); } /* Transition to logo green */
+            50% { color: var(--logo-orange-original); } /* Transition to original logo orange */
             100% { color: var(--indigo-800); } /* Back to indigo-800 */
         }
         /* Desktop font size for opportunities title */
@@ -323,24 +326,24 @@
             height: auto; /* Will be set by JS based on 2 lines + header/footer */
             overflow: hidden;
             position: relative; /* Crucial for positioning children */
-            margin-top: 0.25rem; /* Reduced by 75% from 1rem */
-            margin-bottom: 0.25rem; /* Reduced by 75% from 1rem */
+            margin-top: 0.390625rem; /* Increased by 25% from 0.3125rem */
+            margin-bottom: 0.390625rem; /* Increased by 25% from 0.3125rem */
             background-color: rgba(20, 20, 20, 0.8); /* Darker, more opaque background for screen effect */
-            border-radius: 0.1875rem; /* Reduced by 75% from 0.75rem */
+            border-radius: 0.29296875rem; /* Increased by 25% from 0.234375rem */
             box-shadow: 
-                inset 0 0 2px rgba(0, 255, 255, 0.05), /* Reduced glow by 75% */
-                0 0 2.5px rgba(0, 255, 255, 0.025); /* Reduced glow by 75% */
-            border: 0.25px solid rgba(0, 255, 255, 0.075); /* Reduced border by 75% */
+                inset 0 0 3.125px rgba(0, 255, 255, 0.078125), /* Increased glow by 25% */
+                0 0 3.90625px rgba(0, 255, 255, 0.0390625); /* Increased glow by 25% */
+            border: 0.390625px solid rgba(0, 255, 255, 0.1171875); /* Increased border by 25% */
             display: flex; /* Use flexbox to stack header, content area and footer */
             flex-direction: column;
-            max-width: 75px; /* Reduced by 75% from 300px */
+            max-width: 151.2px; /* Reverted to previous size */
             margin-left: auto; /* Center the thinner window */
             margin-right: auto;
             /* Removed 3D transform for a flatter, more professional look */
 
             /* Responsive adjustments for desktop */
             @media (min-width: 768px) { /* md breakpoint */
-                max-width: 125px; /* Reduced by 75% from 500px */
+                max-width: 216px; /* Reverted to previous size */
             }
         }
 
@@ -355,9 +358,9 @@
             background: repeating-linear-gradient(
                 to bottom,
                 transparent 0px,
-                transparent 0.25px, /* Reduced by 75% from 1px */
-                rgba(0, 255, 255, 0.0075) 0.25px, /* Reduced by 75% from 0.03 */
-                rgba(0, 255, 255, 0.0075) 0.5px /* Reduced by 75% from 0.03 */
+                transparent 0.390625px, /* Increased by 25% from 0.3125px */
+                rgba(0, 255, 255, 0.01171875) 0.390625px, /* Increased by 25% from 0.009375 */
+                rgba(0, 255, 255, 0.01171875) 0.78125px /* Increased by 25% from 0.625px */
             );
             pointer-events: none; /* Allow clicks to pass through */
             z-index: 1; /* Above content but below main text */
@@ -374,30 +377,31 @@
         .digital-header-text {
             background-color: rgba(0, 0, 0, 0.7); /* Dark background */
             color: var(--digital-green); /* Green digital text */
-            padding: 1.5px 2.5px; /* Reduced by 75% from 6px 10px */
-            font-size: 0.2rem; /* Reduced by 75% from 0.8rem */
+            padding: 2.34375px 3.90625px; /* Increased by 25% from 1.875px 3.125px */
+            font-size: 0.5rem; /* Increased from 0.375rem */
             font-weight: 600; /* Bold */
             text-align: center;
-            border-bottom: 0.25px solid rgba(0, 255, 0, 0.05); /* Reduced by 75% from 1px 0.2 */
-            border-top-left-radius: 0.1875rem; /* Reduced by 75% from 0.75rem */
-            border-top-right-radius: 0.1875rem; /* Reduced by 75% from 0.75rem */
+            border-bottom: 0.390625px solid rgba(0, 255, 0, 0.078125); /* Increased by 25% from 0.3125px 0.0625 */
+            border-top-left-radius: 0.29296875rem; /* Increased by 25% from 0.234375rem */
+            border-top-right-radius: 0.29296875rem; /* Increased by 25% from 0.1875rem */
             text-shadow: 
-                0 0 1.5px rgba(0, 255, 0, 0.15); /* Reduced glow by 75% */
+                0 0 2.34375px rgba(0, 255, 0, 0.234375); /* Increased glow by 25% */
             animation: digitalHeaderGlowPulse 2.5s infinite alternate; /* Slower pulsing glow effect */
             white-space: nowrap; /* Keep on one line */
             overflow: hidden;
             text-overflow: ellipsis;
+            text-transform: uppercase; /* All caps */
 
             /* Responsive adjustments for desktop */
             @media (min-width: 768px) { /* md breakpoint */
-                font-size: 0.275rem; /* Reduced by 75% from 1.1rem */
-                padding: 2px 3.75px; /* Reduced by 75% from 8px 15px */
+                font-size: 0.7rem; /* Increased from 0.515625rem */
+                padding: 3.125px 5.859375px; /* Increased by 25% from 2.5px 4.6875px */
             }
         }
 
         @keyframes digitalHeaderGlowPulse {
-            from { text-shadow: 0 0 1.5px rgba(0, 255, 0, 0.15); }
-            to { text-shadow: 0 0 2.5px rgba(0, 255, 0, 0.2); }
+            from { text-shadow: 0 0 2.34375px rgba(0, 255, 0, 0.234375); }
+            to { text-shadow: 0 0 3.90625px rgba(0, 255, 0, 0.3125); }
         }
 
         /* New wrapper for the scrolling content area */
@@ -405,7 +409,7 @@
             flex-grow: 1; /* Allows it to take available space */
             position: relative; /* For absolute positioning of inner wrapper */
             overflow: hidden; /* Crucial for hiding parts of the scrolling list */
-            height: 12px; /* Reduced by 75% from 48px */
+            height: 18.75px; /* Increased by 25% from 15px */
             /* Desktop height adjustment will be handled by JS based on new font-size */
         }
 
@@ -424,27 +428,27 @@
 
         .company-list-content {
             /* This div contains one full set of company names */
-            padding-top: 1.25px; /* Reduced by 75% from 5px */
-            padding-bottom: 1.25px; /* Reduced by 75% from 5px */
+            padding-top: 1.953125px; /* Increased by 25% from 1.5625px */
+            padding-bottom: 1.953125px; /* Increased by 25% from 1.5625px */
         }
 
         .company-list-item {
-            padding: 0.0625rem 0; /* Reduced by 75% from 0.25rem */
-            font-size: 0.225rem; /* Reduced by 75% from 0.9rem */
-            line-height: 0.3; /* Reduced by 75% from 1.2 */
+            padding: 0.09765625rem 0; /* Increased by 25% from 0.078125rem */
+            font-size: 0.3375rem; /* Font size remains the same as per request */
+            line-height: 0.45; /* Line height remains the same as per request */
             font-weight: 600; /* Bolder for digital display */
             color: var(--digital-cyan); /* Bright cyan for digital text */
             text-align: center;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            text-shadow: 0 0 1px rgba(0, 255, 255, 0.125); /* Reduced by 75% from 4px 0.5 */
+            text-shadow: 0 0 1.5625px rgba(0, 255, 255, 0.1953125); /* Increased by 25% from 1.25px 0.15625 */
             animation: textFlicker 6s infinite alternate; /* Slower, more subtle flicker for each name */
 
             /* Responsive adjustments for desktop */
             @media (min-width: 768px) { /* md breakpoint */
-                font-size: 0.3rem; /* Reduced by 75% from 1.2rem */
-                line-height: 0.35; /* Reduced by 75% from 1.4 */
+                font-size: 0.45rem; /* Font size remains the same as per request */
+                line-height: 0.525; /* Line height remains the same as per request */
             }
         }
 
@@ -460,37 +464,38 @@
         .digital-footer {
             background-color: rgba(0, 0, 0, 0.7); /* Dark background */
             color: var(--digital-green); /* Green digital text */
-            padding: 2px 2.5px; /* Reduced by 75% from 8px 10px */
-            font-size: 0.2rem; /* Reduced by 75% from 0.8rem */
+            padding: 3.125px 3.90625px; /* Increased by 25% from 2.5px 3.125px */
+            font-size: 0.5rem; /* Increased from 0.375rem */
             font-weight: 600;
-            border-top: 0.25px solid rgba(0, 255, 0, 0.05); /* Reduced by 75% from 1px 0.2 */
-            border-bottom-left-radius: 0.1875rem; /* Reduced by 75% from 0.75rem */
-            border-bottom-right-radius: 0.1875rem; /* Reduced by 75% from 0.75rem */
+            border-top: 0.390625px solid rgba(0, 255, 0, 0.078125); /* Increased by 25% from 0.3125px 0.0625 */
+            border-bottom-left-radius: 0.29296875rem; /* Increased by 25% from 0.234375rem */
+            border-bottom-right-radius: 0.29296875rem; /* Increased by 25% from 0.1875rem */
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 0.1875rem; /* Reduced by 75% from 0.75rem */
-            text-shadow: 0 0 1px rgba(0, 255, 0, 0.1); /* Reduced by 75% from 4px 0.4 */
+            gap: 0.29296875rem; /* Increased by 25% from 0.234375rem */
+            text-shadow: 0 0 1.5625px rgba(0, 255, 0, 0.15625); /* Increased by 25% from 1.25px 0.125 */
             animation: digitalFooterGlow 3.5s infinite alternate; /* Slower animation */
+            text-transform: uppercase; /* All caps */
 
             /* Responsive adjustments for desktop */
             @media (min-width: 768px) { /* md breakpoint */
-                font-size: 0.25rem; /* Reduced by 75% from 1rem */
+                font-size: 0.7rem; /* Increased from 0.46875rem */
             }
         }
 
         @keyframes digitalFooterGlow {
-            from { text-shadow: 0 0 1px rgba(0, 255, 0, 0.1); }
-            to { text-shadow: 0 0 2px rgba(0, 255, 0, 0.15); }
+            from { text-shadow: 0 0 1.5625px rgba(0, 255, 0, 0.15625); }
+            to { text-shadow: 0 0 3.125px rgba(0, 255, 0, 0.234375); }
         }
 
         .digital-icon {
-            font-size: 0.25rem; /* Reduced by 75% from 1rem */
+            font-size: 0.7rem; /* Increased from 0.46875rem */
             vertical-align: middle;
         }
 
         .digital-separator {
-            color: rgba(0, 255, 0, 0.1); /* Reduced by 75% from 0.4 */
+            color: rgba(0, 255, 0, 0.15625); /* Increased by 25% from 0.125 */
             font-weight: 300;
         }
 
@@ -503,6 +508,24 @@
             footer p {
                 font-size: 1rem; /* Increased for desktop */
             }
+        }
+
+        /* Thin glassy strip around the form */
+        .glass-strip-wrapper {
+            position: relative;
+            z-index: 10;
+            padding: 0.75rem; /* Thin padding for the strip */
+            border-radius: 1.75rem; /* Slightly larger than card's border-radius */
+            background: rgba(255, 255, 255, 0.05); /* Very light transparent white background */
+            backdrop-filter: blur(3px); /* Subtle blur for glassy effect */
+            border: 1px solid rgba(255, 255, 255, 0.15); /* Thin white border */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); /* Subtle white glow */
+            display: flex; /* To center the card inside */
+            justify-content: center;
+            align-items: center;
+            width: 100%; /* Take full width within its parent */
+            max-width: calc(448px + 1.5rem); /* Max-width of card + 2*padding */
+            margin: 0 auto; /* Center the wrapper */
         }
     </style>
 </head>
@@ -517,8 +540,8 @@
                 </div>
                 <!-- Kazi Connect Text -->
                 <div class="flex flex-col items-start leading-none">
-                    <span class="text-xl font-extrabold" style="color: var(--indigo-800);">Kazi</span>
-                    <span class="text-base font-semibold" style="color: var(--indigo-800);">Connect</span>
+                    <span class="text-xl font-extrabold header-text-outline">Kazi</span>
+                    <span class="text-base font-semibold header-text-outline">Connect</span>
                 </div>
             </div>
             <!-- Desktop Navigation -->
@@ -548,109 +571,111 @@
 
     <!-- Main Content Area -->
     <main class="flex-grow flex items-center justify-center p-4 sm:p-6 md:p-8">
-        <div class="card w-full max-w-md p-6 sm:p-8 md:p-10 text-center relative">
-            <h1 class="text-3xl sm:text-4xl font-extrabold mb-4 leading-tight opportunities-title-outline">
-                Opportunities waiting for you!
-            </h1>
-            
-            <!-- Company Scanning Section -->
-            <div class="mb-6">
-                <div class="company-scroller-container">
-                    <!-- Digital Header for the scan window -->
-                    <div class="digital-header-text">
-                        Scanning over 10k employers
-                    </div>
-                    <div class="company-scroller-content-area">
-                        <div class="company-scroller-inner-wrapper" id="company-scroller-inner-wrapper">
-                            <div class="company-list-content" id="company-list-1">
-                                <!-- Company names will be dynamically added here -->
-                            </div>
-                            <div class="company-list-content" id="company-list-2" aria-hidden="true">
-                                <!-- Duplicated company names for seamless loop -->
+        <div class="glass-strip-wrapper">
+            <div class="card w-full max-w-md p-6 sm:p-8 md:p-10 text-center relative">
+                <h1 class="text-3xl sm:text-4xl font-extrabold mb-4 leading-tight opportunities-title-outline">
+                    Opportunities waiting for you!
+                </h1>
+                
+                <!-- Company Scanning Section -->
+                <div class="mb-6">
+                    <div class="company-scroller-container">
+                        <!-- Digital Header for the scan window -->
+                        <div class="digital-header-text">
+                            SCANNING OVER 10K EMPLOYERS
+                        </div>
+                        <div class="company-scroller-content-area">
+                            <div class="company-scroller-inner-wrapper" id="company-scroller-inner-wrapper">
+                                <div class="company-list-content" id="company-list-1">
+                                    <!-- Company names will be dynamically added here -->
+                                </div>
+                                <div class="company-list-content" id="company-list-2" aria-hidden="true">
+                                    <!-- Duplicated company names for seamless loop -->
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Digital Footer for the scan window -->
-                    <div class="digital-footer">
-                        <span class="digital-icon">🔒</span> SSL SECURE
-                        <span class="digital-separator">|</span>
-                        <span class="digital-icon">📞</span> 24/7 SUPPORT
+                        <!-- Digital Footer for the scan window -->
+                        <div class="digital-footer">
+                            <span class="digital-icon">🔒</span> SSL SECURE
+                            <span class="digital-separator">|</span>
+                            <span class="digital-icon">📞</span> 24/7 SUPPORT
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Industry Toggle Button (Segmented Control) -->
-            <div class="industry-toggle-container mb-6">
-                <button type="button" id="construction-tab" class="industry-toggle-button-segment">
-                    Construction Industry
-                </button>
-                <button type="button" id="other-industry-tab" class="industry-toggle-button-segment">
-                    Other Industry
-                </button>
-            </div>
-
-            <form class="space-y-6">
-                <!-- Construction Industry Form Section -->
-                <div id="construction-form-section" class="space-y-6">
-                    <div>
-                        <label for="qualification-level-construction" class="block text-left text-indigo-800 text-base font-bold mb-2">
-                            Select Qualification Level:
-                        </label>
-                        <select id="qualification-level-construction" name="qualification-level-construction" class="input-field appearance-none">
-                            <option value="">-- Select Level --</option>
-                            <option value="certificate">Certificate</option>
-                            <option value="diploma">Diploma</option>
-                            <option value="technician">Technician</option>
-                            <option value="degree">Degree</option>
-                            <option value="higher-diploma">Higher Diploma</option>
-                        </select>
-                    </div>
-                    <div class="relative">
-                        <label for="course-name-construction" class="block text-left text-indigo-800 text-base font-bold mb-2">
-                            Enter Your Course Name:
-                        </label>
-                        <input type="text" id="course-name-construction" name="course-name-construction" placeholder="e.g., Civil Engineering, Construction Management" class="input-field">
-                        <div id="course-suggestions-construction" class="suggestions-container hidden"></div>
-                    </div>
-                    <button type="submit" class="btn-primary w-full">
-                        Job Matches For You
+                <!-- Industry Toggle Button (Segmented Control) -->
+                <div class="industry-toggle-container mb-6">
+                    <button type="button" id="construction-tab" class="industry-toggle-button-segment">
+                        Construction Industry
+                    </button>
+                    <button type="button" id="other-industry-tab" class="industry-toggle-button-segment">
+                        Other Industry
                     </button>
                 </div>
 
-                <!-- Other Industry Form Section -->
-                <div id="other-industry-form-section" class="space-y-6 hidden">
-                    <div>
-                        <label for="other-industry-input" class="block text-left text-black text-base font-bold mb-2">
-                            Enter Your Industry:
-                        </label>
-                        <input type="text" id="other-industry-input" name="other-industry-input" placeholder="e.g., Healthcare, IT, Education" class="input-field">
-                        <div id="industry-suggestions-other" class="suggestions-container hidden"></div>
+                <form class="space-y-6">
+                    <!-- Construction Industry Form Section -->
+                    <div id="construction-form-section" class="space-y-6">
+                        <div>
+                            <label for="qualification-level-construction" class="block text-left text-indigo-800 text-base font-bold mb-2">
+                                Select Qualification Level:
+                            </label>
+                            <select id="qualification-level-construction" name="qualification-level-construction" class="input-field appearance-none">
+                                <option value="">-- Select Level --</option>
+                                <option value="certificate">Certificate</option>
+                                <option value="diploma">Diploma</option>
+                                <option value="technician">Technician</option>
+                                <option value="degree">Degree</option>
+                                <option value="higher-diploma">Higher Diploma</option>
+                            </select>
+                        </div>
+                        <div class="relative">
+                            <label for="course-name-construction" class="block text-left text-indigo-800 text-base font-bold mb-2">
+                                Enter Your Course Name:
+                            </label>
+                            <input type="text" id="course-name-construction" name="course-name-construction" placeholder="e.g., Civil Engineering, Construction Management" class="input-field">
+                            <div id="course-suggestions-construction" class="suggestions-container hidden"></div>
+                        </div>
+                        <button type="submit" class="btn-primary w-full">
+                            Job Matches For You
+                        </button>
                     </div>
-                    <div>
-                        <label for="qualification-level-other" class="block text-left text-black text-base font-bold mb-2">
-                            Select Qualification Level:
-                        </label>
-                        <select id="qualification-level-other" name="qualification-level-other" class="input-field appearance-none">
-                            <option value="">-- Select Level --</option>
-                            <option value="certificate">Certificate</option>
-                            <option value="diploma">Diploma</option>
-                            <option value="technician">Technician</option>
-                            <option value="degree">Degree</option>
-                            <option value="higher-diploma">Higher Diploma</option>
-                        </select>
+
+                    <!-- Other Industry Form Section -->
+                    <div id="other-industry-form-section" class="space-y-6 hidden">
+                        <div>
+                            <label for="other-industry-input" class="block text-left text-black text-base font-bold mb-2">
+                                Enter Your Industry:
+                            </label>
+                            <input type="text" id="other-industry-input" name="other-industry-input" placeholder="e.g., Healthcare, IT, Education" class="input-field">
+                            <div id="industry-suggestions-other" class="suggestions-container hidden"></div>
+                        </div>
+                        <div>
+                            <label for="qualification-level-other" class="block text-left text-black text-base font-bold mb-2">
+                                Select Qualification Level:
+                            </label>
+                            <select id="qualification-level-other" name="qualification-level-other" class="input-field appearance-none">
+                                <option value="">-- Select Level --</option>
+                                <option value="certificate">Certificate</option>
+                                <option value="diploma">Diploma</option>
+                                <option value="technician">Technician</option>
+                                <option value="degree">Degree</option>
+                                <option value="higher-diploma">Higher Diploma</option>
+                            </select>
+                        </div>
+                        <div class="relative">
+                            <label for="course-name-other" class="block text-left text-black text-base font-bold mb-2">
+                                Enter Your Course Name:
+                            </label>
+                            <input type="text" id="course-name-other" name="course-name-other" placeholder="e.g., Nursing, Software Development, Teaching" class="input-field">
+                            <div id="course-suggestions-other" class="suggestions-container hidden"></div>
+                        </div>
+                        <button type="submit" class="btn-primary w-full">
+                            Find Opportunities
+                        </button>
                     </div>
-                    <div class="relative">
-                        <label for="course-name-other" class="block text-left text-black text-base font-bold mb-2">
-                            Enter Your Course Name:
-                        </label>
-                        <input type="text" id="course-name-other" name="course-name-other" placeholder="e.g., Nursing, Software Development, Teaching" class="input-field">
-                        <div id="course-suggestions-other" class="suggestions-container hidden"></div>
-                    </div>
-                    <button type="submit" class="btn-primary w-full">
-                        Find Opportunities
-                    </button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </main>
 
@@ -922,3 +947,4 @@
     </script>
 </body>
 </html>
+
