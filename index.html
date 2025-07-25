@@ -172,6 +172,7 @@
             position: relative;
             padding-bottom: 0.25rem;
             color: var(--indigo-800); /* Ensure nav links use indigo-800 */
+            font-size: 1rem; /* Default for mobile */
         }
         .nav-link::after {
             content: '';
@@ -186,6 +187,12 @@
         }
         .nav-link:hover::after {
             width: 100%;
+        }
+        /* Desktop font size for nav links */
+        @media (min-width: 768px) {
+            .nav-link {
+                font-size: 1.1rem; /* Increased for desktop */
+            }
         }
 
         /* New styles for the segmented industry toggle */
@@ -209,7 +216,7 @@
             padding: 0.75rem 1rem;
             border-radius: 9999px;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 1rem; /* Default for mobile */
             transition: all 0.3s ease-in-out;
             cursor: pointer;
             text-align: center;
@@ -227,6 +234,13 @@
             color: white;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+        /* Desktop font size for industry toggle buttons */
+        @media (min-width: 768px) {
+            .industry-toggle-button-segment {
+                font-size: 1.1rem; /* Increased for desktop */
+            }
+        }
+
         /* Header background gradient */
         .header-gradient {
             background-image: linear-gradient(to right, #87CEEB, #FFC0CB); /* Sky blue to Pinkish */
@@ -262,7 +276,19 @@
                 1px 1px 0 #FFF, -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, /* White outline */
                 0 0 12px rgba(255, 215, 0, 0.9), /* Stronger Gold glow */
                 0 0 25px rgba(255, 165, 0, 0.5); /* Wider, softer Orange halo */
+            font-size: 1rem; /* Default for mobile */
         }
+        /* Desktop font size for labels */
+        @media (min-width: 768px) {
+            label[for="qualification-level-construction"],
+            label[for="course-name-construction"],
+            label[for="other-industry-input"],
+            label[for="qualification-level-other"],
+            label[for="course-name-other"] {
+                font-size: 1.1rem; /* Increased for desktop */
+            }
+        }
+
         /* Specific styling for "Opportunities waiting for you!" text outline */
         .opportunities-title-outline {
             text-shadow: 
@@ -272,12 +298,19 @@
             
             /* Animation for color shift */
             animation: colorShift 3s infinite alternate;
+            font-size: 2.25rem; /* Default for mobile */
         }
 
         @keyframes colorShift {
             0% { color: var(--indigo-800); }
             50% { color: var(--logo-orange); } /* Changed to golden orange */
             100% { color: var(--indigo-800); }
+        }
+        /* Desktop font size for opportunities title */
+        @media (min-width: 768px) {
+            .opportunities-title-outline {
+                font-size: 2.75rem; /* Increased for desktop */
+            }
         }
 
         /* Styles for the company scroller container (the "window") */
@@ -362,7 +395,7 @@
 
             /* Responsive adjustments for desktop */
             @media (min-width: 768px) { /* md breakpoint */
-                font-size: 0.9rem; /* Slightly larger on desktop */
+                font-size: 1rem; /* Slightly larger on desktop */
             }
         }
 
@@ -413,7 +446,7 @@
 
             /* Responsive adjustments for desktop */
             @media (min-width: 768px) { /* md breakpoint */
-                font-size: 1rem; /* Larger on desktop */
+                font-size: 1.1rem; /* Larger on desktop */
                 line-height: 1.5; /* Better spacing for larger text */
             }
         }
@@ -445,7 +478,7 @@
 
             /* Responsive adjustments for desktop */
             @media (min-width: 768px) { /* md breakpoint */
-                font-size: 0.9rem; /* Slightly larger on desktop */
+                font-size: 1rem; /* Slightly larger on desktop */
             }
         }
 
@@ -462,6 +495,26 @@
         .digital-separator {
             color: rgba(0, 255, 0, 0.5); /* Semi-transparent green separator */
             font-weight: 300;
+        }
+
+        /* Button font size */
+        .btn-primary {
+            font-size: 1rem; /* Default for mobile */
+        }
+        @media (min-width: 768px) {
+            .btn-primary {
+                font-size: 1.1rem; /* Increased for desktop */
+            }
+        }
+
+        /* Footer text font size */
+        footer p {
+            font-size: 0.875rem; /* Default for mobile (text-sm) */
+        }
+        @media (min-width: 768px) {
+            footer p {
+                font-size: 1rem; /* Increased for desktop */
+            }
         }
     </style>
 </head>
