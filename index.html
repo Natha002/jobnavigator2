@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opportunities Await!</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --logo-orange: #D2691E; /* Defined logo color as a CSS variable */
+            --indigo-800: #3730a3; /* Tailwind indigo-800 equivalent for consistency */
+            --indigo-500: #6366f1; /* Tailwind indigo-500 equivalent */
+            --digital-cyan: #00FFFF; /* Bright cyan for digital text */
+            --digital-green: #00FF00; /* Bright green for digital text */
+            --list-height: 0px; /* Will be set dynamically by JS for seamless scroll */
+            --scroll-duration: 20s; /* Will be set dynamically by JS */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: url('background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scroll on animations */
+        }
+
+        /* Custom styling for better visual appeal and responsiveness */
+        .card {
+            /* Adjusted transparency and gradient for a more distinct "screen" appearance */
+            background: 
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 50%), /* Subtle glossy highlight */
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.02)), /* Mild black gradient, slightly more opaque */
+                rgba(255, 0, 0, 0.08), /* Red tint, slightly more opaque */
+                rgba(255, 255, 255, 0.4); /* Base white, more opaque */
+            backdrop-filter: none; /* Removed frosted glass effect */
+            border-radius: 1.5rem; /* More rounded corners */
+            /* Shiny glassy distinct outline */
+            border: 1px solid rgba(255, 255, 255, 0.7); /* Semi-transparent white border, slightly more visible */
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3), /* More pronounced white glow for shininess */
+                        0 25px 30px -5px rgba(0, 0, 0, 0.15), /* Deeper shadow */
+                        0 12px 12px -5px rgba(0, 0, 0, 0.06);
+            position: relative; /* Needed for potential future internal effects */
+            overflow: hidden; /* Ensures content respects border-radius */
+            animation: fadeInScale 0.8s ease-out forwards; /* Added fade-in and scale animation */
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .input-field {
+            border: 1px solid #d1d5db; /* Light gray border */
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem; /* Rounded input fields */
+            width: 100%;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smoother transition */
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly opaque for readability */
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #6366f1; /* Indigo on focus */
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.3); /* Softer, wider shadow on focus */
+        }
+        .btn-primary {
+            background-image: linear-gradient(to right, #6366f1, #8b5cf6); /* Gradient background */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-image 0.3s ease; /* Added background-image transition */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px); /* More noticeable lift */
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+            background-image: linear-gradient(to right, #8b5cf6, #6366f1); /* Reverse gradient on hover */
+        }
+        .btn-primary:active {
+            transform: translateY(0); /* Press effect */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Ensure the main content pushes the footer down */
+        .flex-grow {
+            flex-grow: 1;
+        }
+        .suggestions-container {
+            position: absolute;
+            width: calc(100% - 2rem);
+            max-height: 150px;
+            overflow-y: auto;
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            margin-top: 0.25rem;
+        }
+        .suggestion-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.9rem;
+            color: #000000;
+        }
+        .suggestion-item:hover {
+            background-color: #f3f4f6;
+        }
+        /* Mobile navigation styling */
+        .mobile-nav-menu {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            max-width: 250px;
+            background-color: rgba(255, 255, 255, 0.98);
+            position: absolute;
+            top: 100%;
+            right: 0;
+            padding: 0.5rem 0;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 0.75rem;
+            z-index: 20;
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        .mobile-nav-menu.active {
+            display: flex;
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .mobile-nav-menu a {
+            padding: 0.75rem 1.5rem;
+            text-align: right;
+            color: #4b5563;
+            font-weight: 500;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .mobile-nav-menu a:hover {
+            background-color: #e0e7ff;
+            color: #4f46e5;
+        }
+        /* Header specific styling */
+        .header-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--logo-orange); /* Used CSS variable */
+            text-shadow: 
+                1px 1px 0 #FFF, -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, /* White outline */
+                0 0 8px rgba(255, 255, 255, 0.5); /* Subtle white glow */
+            transition: color 0.3s ease-in-out;
+        }
+        .header-title:hover {
+            color: var(--logo-orange); /* Keep same color on hover for consistency with outline */
+        }
+        .nav-link {
+            position: relative;
+            padding-bottom: 0.25rem;
+            color: var(--indigo-800); /* Ensure nav links use indigo-800 */
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #6366f1;
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* New styles for the segmented industry toggle */
+        .industry-toggle-container {
+            background-color: #e5e7eb;
+            border-radius: 9999px;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 320px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .industry-toggle-button-segment {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            text-align: center;
+            border: none;
+            background-color: transparent;
+            color: #000000;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .industry-toggle-button-segment.active {
+            background-image: linear-gradient(to right, #6366f1, #8b5cf6);
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        /* Header background gradient */
+        .header-gradient {
+            background-image: linear-gradient(to right, #87CEEB, #FFC0CB); /* Sky blue to Pinkish */
+        }
+        /* Logo specific styling for diamond shape */
+        .diamond-logo {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.3);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .diamond-logo:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .diamond-logo img {
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
+        }
+        /* Fiery text shadow for distinct elements - now more of a gold/orange glow */
+        label[for="qualification-level-construction"],
+        label[for="course-name-construction"],
+        label[for="other-industry-input"],
+        label[for="qualification-level-other"],
+        label[for="course-name-other"] {
+            text-shadow: 
+                1px 1px 0 #FFF, -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, /* White outline */
+                0 0 12px rgba(255, 215, 0, 0.9), /* Stronger Gold glow */
+                0 0 25px rgba(255, 165, 0, 0.5); /* Wider, softer Orange halo */
+        }
+        /* Specific styling for "Opportunities waiting for you!" text outline */
+        .opportunities-title-outline {
+            text-shadow: 
+                1px 1px 0 #FFF, -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, /* White outline */
+                0 0 15px rgba(255, 215, 0, 0.6), /* Subtle gold glow */
+                0 0 30px rgba(255, 165, 0, 0.3); /* Even softer orange glow */
+            
+            /* Animation for color shift */
+            animation: colorShift 3s infinite alternate;
+        }
+
+        @keyframes colorShift {
+            0% { color: var(--indigo-800); }
+            50% { color: var(--logo-orange); } /* Changed to golden orange */
+            100% { color: var(--indigo-800); }
+        }
+
+        /* Styles for the company scroller container (the "window") */
+        .company-scroller-container {
+            height: auto; /* Will be set by JS based on 2 lines + header/footer */
+            overflow: hidden;
+            position: relative; /* Crucial for positioning children */
+            margin-top: 1rem; /* Adjusted margin-top */
+            margin-bottom: 1rem;
+            background-color: rgba(20, 20, 20, 0.8); /* Darker, more opaque background for screen effect */
+            border-radius: 0.75rem; /* Slightly more rounded */
+            box-shadow: 
+                inset 0 0 10px rgba(0, 255, 255, 0.3), /* Inner cyan glow */
+                0 0 15px rgba(0, 255, 255, 0.2); /* Outer cyan glow */
+            border: 2px solid rgba(0, 255, 255, 0.5); /* Cyan border for screen bezel */
+            perspective: 1000px; /* For 3D tilt effect */
+            transform: rotateX(5deg) scale(1.02); /* Slight tilt and scale for screen appearance */
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+            display: flex; /* Use flexbox to stack header, content area and footer */
+            flex-direction: column;
+            max-width: 300px; /* Made even thinner horizontally */
+            margin-left: auto; /* Center the thinner window */
+            margin-right: auto;
+        }
+
+        .company-scroller-container:hover {
+            transform: rotateX(0deg) scale(1.0); /* Straighten on hover */
+            box-shadow: 
+                inset 0 0 15px rgba(0, 255, 255, 0.5), 
+                0 0 25px rgba(0, 255, 255, 0.4);
+        }
+
+        /* Scanline overlay effect */
+        .company-scroller-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 1px,
+                rgba(0, 255, 255, 0.05) 1px,
+                rgba(0, 255, 255, 0.05) 2px
+            );
+            pointer-events: none; /* Allow clicks to pass through */
+            z-index: 1; /* Above content but below main text */
+            animation: scanlineFlicker 0.5s infinite steps(1); /* Subtle flicker */
+        }
+
+        @keyframes scanlineFlicker {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+
+        /* Digital Header for the scan window */
+        .digital-header-text {
+            background-color: rgba(0, 0, 0, 0.7); /* Dark background */
+            color: var(--digital-green); /* Green digital text */
+            padding: 8px 10px;
+            font-size: 0.8rem; /* Even smaller font size */
+            font-weight: 600; /* Bold */
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3); /* Green separator */
+            border-top-left-radius: 0.75rem; /* Match container border radius */
+            border-top-right-radius: 0.75rem;
+            text-shadow: 
+                0 0 8px rgba(0, 255, 0, 0.7), /* Green glow */
+                0 0 15px rgba(0, 128, 0, 0.4); /* Darker green glow */
+            animation: digitalHeaderGlowPulse 2s infinite alternate; /* Pulsing glow effect */
+            white-space: nowrap; /* Keep on one line */
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @keyframes digitalHeaderGlowPulse {
+            from { text-shadow: 0 0 8px rgba(0, 255, 0, 0.7), 0 0 15px rgba(0, 128, 0, 0.4); }
+            to { text-shadow: 0 0 12px rgba(0, 255, 0, 0.9), 0 0 25px rgba(0, 128, 0, 0.6); }
+        }
+
+        /* New wrapper for the scrolling content area */
+        .company-scroller-content-area {
+            flex-grow: 1; /* Allows it to take available space */
+            position: relative; /* For absolute positioning of inner wrapper */
+            overflow: hidden; /* Crucial for hiding parts of the scrolling list */
+            height: 48px; /* Adjusted fixed height for two lines of text, made smaller */
+        }
+
+        .company-scroller-inner-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            animation: scrollCompanies var(--scroll-duration) linear infinite;
+        }
+
+        @keyframes scrollCompanies {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(calc(-1 * var(--list-height))); } /* Scrolls up by height of one list */
+        }
+
+        .company-list-content {
+            /* This div contains one full set of company names */
+            padding-top: 5px; /* Padding inside the scrolling area */
+            padding-bottom: 5px;
+        }
+
+        .company-list-item {
+            padding: 0.25rem 0; /* 4px top/bottom */
+            font-size: 0.9rem; /* 14.4px */
+            line-height: 1.2; /* approx 17.28px */
+            font-weight: 600; /* Bolder for digital display */
+            color: var(--digital-cyan); /* Bright cyan for digital text */
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.7); /* Cyan glow for company names */
+            animation: textFlicker 4s infinite alternate; /* Subtle flicker for each name */
+        }
+
+        @keyframes textFlicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; }
+            52% { opacity: 1; }
+            54% { opacity: 0.9; }
+            56% { opacity: 1; }
+        }
+
+        /* Digital Footer for the scan window */
+        .digital-footer {
+            background-color: rgba(0, 0, 0, 0.7); /* Dark background */
+            color: var(--digital-green); /* Green digital text */
+            padding: 8px 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-top: 1px solid rgba(0, 255, 0, 0.3); /* Green separator */
+            border-bottom-left-radius: 0.75rem; /* Match container border radius */
+            border-bottom-right-radius: 0.75rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem; /* Space between elements */
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5); /* Green glow */
+            animation: digitalFooterGlow 3s infinite alternate;
+        }
+
+        @keyframes digitalFooterGlow {
+            from { text-shadow: 0 0 5px rgba(0, 255, 0, 0.5); }
+            to { text-shadow: 0 0 10px rgba(0, 255, 0, 0.8); }
+        }
+
+        .digital-icon {
+            font-size: 1rem; /* Icon size */
+            vertical-align: middle;
+        }
+
+        .digital-separator {
+            color: rgba(0, 255, 0, 0.5); /* Semi-transparent green separator */
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header for Navigation -->
+    <header class="w-full header-gradient shadow-md py-4 px-6 md:px-10 relative">
+        <nav class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2"> <!-- Flex container for logo and text -->
+                <div class="diamond-logo">
+                    <img src="logo2.png" alt="Kilele Connect Logo">
+                </div>
+                <!-- Kazi Connect Text -->
+                <div class="flex flex-col items-start leading-none">
+                    <span class="text-xl font-extrabold" style="color: var(--logo-orange);">Kazi</span>
+                    <span class="text-base font-semibold" style="color: var(--logo-orange);">Connect</span>
+                </div>
+            </div>
+            <!-- Desktop Navigation -->
+            <ul class="hidden md:flex space-x-8">
+                <li><a href="#" class="text-indigo-800 hover:text-indigo-600 font-medium transition-colors duration-200 nav-link">Home</a></li>
+                <li><a href="#" class="text-indigo-800 hover:text-indigo-600 font-medium transition-colors duration-200 nav-link">About</a></li>
+                <li><a href="#" class="text-indigo-800 hover:text-indigo-600 font-medium transition-colors duration-200 nav-link">Services</a></li>
+                <li><a href="#" class="text-indigo-800 hover:text-indigo-600 font-medium transition-colors duration-200 nav-link">Post a job</a></li>
+            </ul>
+            <!-- Mobile Menu Button (Hamburger Icon) -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white hover:text-gray-200 focus:outline-none p-2 rounded-md">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-nav-menu" class="mobile-nav-menu md:hidden">
+            <a href="#" class="block">Home</a>
+            <a href="#" class="block">About</a>
+            <a href="#" class="block">Services</a>
+            <a href="#" class="block">Post a job</a>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow flex items-center justify-center p-4 sm:p-6 md:p-8">
+        <div class="card w-full max-w-md p-6 sm:p-8 md:p-10 text-center relative">
+            <h1 class="text-3xl sm:text-4xl font-extrabold mb-4 leading-tight opportunities-title-outline">
+                Opportunities waiting for you!
+            </h1>
+            
+            <!-- Company Scanning Section -->
+            <div class="mb-6">
+                <div class="company-scroller-container">
+                    <!-- Digital Header for the scan window -->
+                    <div class="digital-header-text">
+                        Scanning over 10k employers
+                    </div>
+                    <div class="company-scroller-content-area">
+                        <div class="company-scroller-inner-wrapper" id="company-scroller-inner-wrapper">
+                            <div class="company-list-content" id="company-list-1">
+                                <!-- Company names will be dynamically added here -->
+                            </div>
+                            <div class="company-list-content" id="company-list-2" aria-hidden="true">
+                                <!-- Duplicated company names for seamless loop -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Digital Footer for the scan window -->
+                    <div class="digital-footer">
+                        <span class="digital-icon">🔒</span> SSL SECURE
+                        <span class="digital-separator">|</span>
+                        <span class="digital-icon">📞</span> 24/7 SUPPORT
+                    </div>
+                </div>
+            </div>
+
+            <!-- Industry Toggle Button (Segmented Control) -->
+            <div class="industry-toggle-container mb-6">
+                <button type="button" id="construction-tab" class="industry-toggle-button-segment">
+                    Construction Industry
+                </button>
+                <button type="button" id="other-industry-tab" class="industry-toggle-button-segment">
+                    Other Industry
+                </button>
+            </div>
+
+            <form class="space-y-6">
+                <!-- Construction Industry Form Section -->
+                <div id="construction-form-section" class="space-y-6">
+                    <div>
+                        <label for="qualification-level-construction" class="block text-left text-indigo-800 text-base font-bold mb-2">
+                            Select Qualification Level:
+                        </label>
+                        <select id="qualification-level-construction" name="qualification-level-construction" class="input-field appearance-none">
+                            <option value="">-- Select Level --</option>
+                            <option value="certificate">Certificate</option>
+                            <option value="diploma">Diploma</option>
+                            <option value="technician">Technician</option>
+                            <option value="degree">Degree</option>
+                            <option value="higher-diploma">Higher Diploma</option>
+                        </select>
+                    </div>
+                    <div class="relative">
+                        <label for="course-name-construction" class="block text-left text-indigo-800 text-base font-bold mb-2">
+                            Enter Your Course Name:
+                        </label>
+                        <input type="text" id="course-name-construction" name="course-name-construction" placeholder="e.g., Civil Engineering, Construction Management" class="input-field">
+                        <div id="course-suggestions-construction" class="suggestions-container hidden"></div>
+                    </div>
+                    <button type="submit" class="btn-primary w-full">
+                        Job Matches For You
+                    </button>
+                </div>
+
+                <!-- Other Industry Form Section -->
+                <div id="other-industry-form-section" class="space-y-6 hidden">
+                    <div>
+                        <label for="other-industry-input" class="block text-left text-black text-base font-bold mb-2">
+                            Enter Your Industry:
+                        </label>
+                        <input type="text" id="other-industry-input" name="other-industry-input" placeholder="e.g., Healthcare, IT, Education" class="input-field">
+                        <div id="industry-suggestions-other" class="suggestions-container hidden"></div>
+                    </div>
+                    <div>
+                        <label for="qualification-level-other" class="block text-left text-black text-base font-bold mb-2">
+                            Select Qualification Level:
+                        </label>
+                        <select id="qualification-level-other" name="qualification-level-other" class="input-field appearance-none">
+                            <option value="">-- Select Level --</option>
+                            <option value="certificate">Certificate</option>
+                            <option value="diploma">Diploma</option>
+                            <option value="technician">Technician</option>
+                            <option value="degree">Degree</option>
+                            <option value="higher-diploma">Higher Diploma</option>
+                        </select>
+                    </div>
+                    <div class="relative">
+                        <label for="course-name-other" class="block text-left text-black text-base font-bold mb-2">
+                            Enter Your Course Name:
+                        </label>
+                        <input type="text" id="course-name-other" name="course-name-other" placeholder="e.g., Nursing, Software Development, Teaching" class="input-field">
+                        <div id="course-suggestions-other" class="suggestions-container hidden"></div>
+                    </div>
+                    <button type="submit" class="btn-primary w-full">
+                        Find Opportunities
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full bg-gray-800 bg-opacity-90 text-white py-6 px-4 md:px-8 text-center mt-auto">
+        <p class="text-sm">
+            Any challenge? <a href="https://wa.me/yourphonenumber" class="text-lime-400 hover:text-lime-300 underline">WhatsApp</a> or <a href="mailto:youremail@example.com" class="text-lime-400 hover:text-lime-300 underline">email now.</a>
+        </p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileNavMenu = document.getElementById('mobile-nav-menu');
+
+            const constructionTab = document.getElementById('construction-tab');
+            const otherIndustryTab = document.getElementById('other-industry-tab');
+            const constructionFormSection = document.getElementById('construction-form-section');
+            const otherIndustryFormSection = document.getElementById('other-industry-form-section');
+
+            // Input fields for Construction section
+            const qualificationLevelConstructionSelect = document.getElementById('qualification-level-construction');
+            const courseNameConstructionInput = document.getElementById('course-name-construction');
+            const courseSuggestionsConstruction = document.getElementById('course-suggestions-construction');
+
+            // Input fields for Other Industry section
+            const otherIndustryInput = document.getElementById('other-industry-input');
+            const industrySuggestionsOther = document.getElementById('industry-suggestions-other');
+            const qualificationLevelOtherSelect = document.getElementById('qualification-level-other');
+            const courseNameOtherInput = document.getElementById('course-name-other');
+            const courseSuggestionsOther = document.getElementById('course-suggestions-other');
+
+            let isConstructionMode = true; // Default state: In Construction
+
+            // Suggestion data
+            const constructionCourses = [
+                "Civil Engineering", "Construction Management", "Architecture",
+                "Quantity Surveying", "Structural Engineering", "Building Technology",
+                "Land Surveying", "Urban Planning", "Environmental Engineering",
+                "Geotechnical Engineering", "Electrical Engineering (Construction Focus)",
+                "Mechanical Engineering (Construction Focus)", "Construction Project Management",
+                "Real Estate Development", "Interior Design (Construction)", "Building Services Engineering"
+            ];
+
+            const otherIndustryTypes = [
+                "Healthcare", "Information Technology", "Education", "Finance",
+                "Marketing", "Retail", "Hospitality", "Manufacturing",
+                "Logistics", "Science", "Arts & Culture", "Legal", "Media",
+                "Telecommunications", "Automotive", "Aerospace", "Agriculture"
+            ];
+
+            const otherIndustryCourses = [
+                "Nursing", "Software Development", "Teaching", "Financial Analysis",
+                "Digital Marketing", "Business Administration", "Human Resources",
+                "Data Science", "Graphic Design", "Journalism", "Cybersecurity",
+                "Biomedical Engineering", "Environmental Science", "Culinary Arts",
+                "Education" 
+            ];
+
+            // Company names for the scroller
+            const companyNames = [
+                // Construction-related companies (real ones from search)
+                "Epco Builders Ltd", "Seyani Brothers & Co. (K) Ltd", "Laxmanbhai Construction Ltd",
+                "Intex Construction", "Cementers Ltd", "Hayer Bishan Singh & Sons Ltd",
+                "Associated Construction Co (K) Ltd", "Parbat Siyani Construction Ltd",
+                "Put Sarajevo General Engineering Co", "Nyoro Construction Company Ltd",
+                "Sogea Satom Kenya", "Bechtel Corporation Kenya", "INTEGRUM", "Dancom Construction",
+                "Archistra Construction Company Ltd", "Aspax Construction Company",
+                
+                // Government Road Agencies (as requested)
+                "Kenya Urban Roads Authority (KURA)",
+                "Kenya National Highways Authority (KeNHA)",
+                "Kenya Rural Roads Authority (KeRRA)",
+
+                // Other major Kenyan companies
+                "Safaricom PLC", "Equity Bank Group", "KCB Group PLC", "East African Breweries PLC",
+                "Co-operative Bank of Kenya", "Absa Bank Kenya PLC", "Standard Chartered Bank Kenya",
+                "Bamburi Cement PLC", "Kenya Power & Lighting Co. PLC", "Centum Investment Company PLC",
+                "Jubilee Holdings Ltd", "Britam Holdings PLC", "NCBA Group PLC", "Kenya Airways PLC",
+                "TotalEnergies Marketing Kenya PLC", "KenGen PLC", "Sanlam Kenya PLC",
+                "CIC Insurance Group PLC", "Liberty Kenya Holdings PLC", "Crown Paints Kenya PLC",
+                "Carbacid Investments PLC", "Longhorn Publishers PLC", "Nation Media Group PLC",
+                "Standard Group PLC", "Home Afrika Ltd", "Flame Tree Group Holdings Ltd",
+                "Kakuzi PLC", "Limuru Tea PLC", "Sasini PLC", "Eaagads Ltd"
+            ];
+
+            // Function to populate the company scroller
+            function populateCompanyScroller() {
+                const companyList1 = document.getElementById('company-list-1');
+                const companyList2 = document.getElementById('company-list-2');
+                const companyScrollerContentArea = document.querySelector('.company-scroller-content-area');
+                const innerWrapper = document.getElementById('company-scroller-inner-wrapper');
+
+                // Clear existing content
+                companyList1.innerHTML = '';
+                companyList2.innerHTML = '';
+
+                // Create list items for each company
+                const createCompanyItems = (listElement) => {
+                    companyNames.forEach(name => {
+                        const div = document.createElement('div');
+                        div.classList.add('company-list-item');
+                        div.textContent = name;
+                        listElement.appendChild(div);
+                    });
+                };
+
+                createCompanyItems(companyList1);
+                createCompanyItems(companyList2); // Duplicate for seamless looping
+
+                // Pause animation for accurate measurement
+                innerWrapper.style.animation = 'none'; 
+
+                // Measure the height of one full list of companies after rendering
+                const singleListHeight = companyList1.offsetHeight;
+                
+                // Set CSS variable for animation
+                document.documentElement.style.setProperty('--list-height', `${singleListHeight}px`);
+                
+                // Calculate animation duration based on content length and desired speed
+                const scrollSpeedPxPerSec = 40; // Adjust this value to change scroll speed (pixels per second)
+                const scrollDuration = singleListHeight / scrollSpeedPxPerSec;
+                document.documentElement.style.setProperty('--scroll-duration', `${scrollDuration}s`);
+
+                // Restore animation
+                innerWrapper.style.animation = `scrollCompanies var(--scroll-duration) linear infinite`;
+
+                // Set the height of the content area to show exactly two lines
+                const sampleItem = companyList1.querySelector('.company-list-item');
+                const itemHeight = sampleItem ? sampleItem.offsetHeight : 25; // Fallback if no items
+                companyScrollerContentArea.style.height = `${itemHeight * 2}px`; // Show exactly two lines
+            }
+
+            // Reusable function to handle suggestions
+            function handleSuggestions(inputElement, suggestionsContainer, suggestionsArray) {
+                const inputValue = inputElement.value.toLowerCase();
+                suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+
+                if (inputValue.length === 0) {
+                    suggestionsContainer.classList.add('hidden');
+                    return;
+                }
+
+                const filteredSuggestions = suggestionsArray.filter(item =>
+                    item.toLowerCase().includes(inputValue)
+                );
+
+                if (filteredSuggestions.length > 0) {
+                    filteredSuggestions.forEach(suggestion => {
+                        const suggestionItem = document.createElement('div');
+                        suggestionItem.classList.add('suggestion-item');
+                        suggestionItem.textContent = suggestion;
+                        suggestionItem.addEventListener('mousedown', function(event) {
+                            event.preventDefault(); // Prevent input from losing focus
+                            inputElement.value = suggestion;
+                            suggestionsContainer.classList.add('hidden');
+                            inputElement.focus();
+                        });
+                        suggestionsContainer.appendChild(suggestionItem);
+                    });
+                    suggestionsContainer.classList.remove('hidden');
+                } else {
+                    suggestionsContainer.classList.add('hidden');
+                }
+            }
+
+            // Function to update the view based on industry mode
+            function updateIndustryView() {
+                if (isConstructionMode) {
+                    constructionFormSection.classList.remove('hidden');
+                    otherIndustryFormSection.classList.add('hidden');
+                    constructionTab.classList.add('active');
+                    otherIndustryTab.classList.remove('active');
+                    
+                    // Clear other industry specific fields when switching back
+                    otherIndustryInput.value = '';
+                    industrySuggestionsOther.classList.add('hidden');
+                    qualificationLevelOtherSelect.value = '';
+                    courseNameOtherInput.value = '';
+                    courseSuggestionsOther.classList.add('hidden');
+
+                    // Attach listeners for construction fields
+                    courseNameConstructionInput.oninput = () => handleSuggestions(courseNameConstructionInput, courseSuggestionsConstruction, constructionCourses);
+                    courseNameConstructionInput.onfocus = () => handleSuggestions(courseNameConstructionInput, courseSuggestionsConstruction, constructionCourses);
+                    courseNameConstructionInput.onblur = () => setTimeout(() => courseSuggestionsConstruction.classList.add('hidden'), 150);
+
+                    // Detach listeners from other industry fields
+                    otherIndustryInput.oninput = null;
+                    otherIndustryInput.onfocus = null;
+                    otherIndustryInput.onblur = null;
+                    qualificationLevelOtherSelect.onchange = null; // Detach if any
+                    courseNameOtherInput.oninput = null;
+                    courseNameOtherInput.onfocus = null;
+                    courseNameOtherInput.onblur = null;
+
+                } else {
+                    constructionFormSection.classList.add('hidden');
+                    otherIndustryFormSection.classList.remove('hidden');
+                    constructionTab.classList.remove('active');
+                    otherIndustryTab.classList.add('active');
+                    
+                    // Clear construction specific fields when switching away
+                    qualificationLevelConstructionSelect.value = '';
+                    courseNameConstructionInput.value = '';
+                    courseSuggestionsConstruction.classList.add('hidden');
+
+                    // Attach listeners for other industry fields
+                    otherIndustryInput.oninput = () => handleSuggestions(otherIndustryInput, industrySuggestionsOther, otherIndustryTypes);
+                    otherIndustryInput.onfocus = () => handleSuggestions(otherIndustryInput, industrySuggestionsOther, otherIndustryTypes);
+                    otherIndustryInput.onblur = () => setTimeout(() => industrySuggestionsOther.classList.add('hidden'), 150);
+
+                    // No specific suggestions for qualificationLevelOtherSelect, but keep for consistency if needed later
+                    // qualificationLevelOtherSelect.onchange = () => { /* handle change if needed */ };
+
+                    courseNameOtherInput.oninput = () => handleSuggestions(courseNameOtherInput, courseSuggestionsOther, otherIndustryCourses);
+                    courseNameOtherInput.onfocus = () => handleSuggestions(courseNameOtherInput, courseSuggestionsOther, otherIndustryCourses);
+                    courseNameOtherInput.onblur = () => setTimeout(() => courseSuggestionsOther.classList.add('hidden'), 150);
+
+                    // Detach listeners from construction fields
+                    courseNameConstructionInput.oninput = null;
+                    courseNameConstructionInput.onfocus = null;
+                    courseNameConstructionInput.onblur = null;
+                }
+            }
+
+            // Mobile menu toggle functionality
+            mobileMenuButton.addEventListener('click', function(event) {
+                event.stopPropagation(); // Prevent click from immediately propagating to document
+                mobileNavMenu.classList.toggle('active');
+            });
+
+            // Hide mobile menu when clicking outside of it or the button
+            document.addEventListener('click', function(event) {
+                if (!mobileNavMenu.contains(event.target) && !mobileMenuButton.contains(event.target)) {
+                    mobileNavMenu.classList.remove('active');
+                }
+            });
+
+            // Hide mobile menu if a link is clicked
+            mobileNavMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileNavMenu.classList.remove('active');
+                });
+            });
+
+            // Industry toggle button functionality
+            constructionTab.addEventListener('click', function() {
+                if (!isConstructionMode) { // Only toggle if not already in construction mode
+                    isConstructionMode = true;
+                    updateIndustryView();
+                }
+            });
+
+            otherIndustryTab.addEventListener('click', function() {
+                if (isConstructionMode) { // Only toggle if not already in other industry mode
+                    isConstructionMode = false;
+                    updateIndustryView();
+                }
+            });
+
+            // Initial view setup
+            updateIndustryView(); // Call once to set the initial state
+            populateCompanyScroller(); // Populate the scroller on load
+        });
+    </script>
+</body>
+</html>
