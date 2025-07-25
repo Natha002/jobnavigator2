@@ -298,9 +298,14 @@
             transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
             display: flex; /* Use flexbox to stack header, content area and footer */
             flex-direction: column;
-            max-width: 300px; /* Made even thinner horizontally */
+            max-width: 300px; /* Default for mobile/small screens */
             margin-left: auto; /* Center the thinner window */
             margin-right: auto;
+
+            /* Responsive adjustments for desktop */
+            @media (min-width: 768px) { /* md breakpoint */
+                max-width: 400px; /* Make it wider on desktop */
+            }
         }
 
         .company-scroller-container:hover {
@@ -341,7 +346,7 @@
             background-color: rgba(0, 0, 0, 0.7); /* Dark background */
             color: var(--digital-green); /* Green digital text */
             padding: 8px 10px;
-            font-size: 0.8rem; /* Even smaller font size */
+            font-size: 0.8rem; /* Default for mobile */
             font-weight: 600; /* Bold */
             text-align: center;
             border-bottom: 1px solid rgba(0, 255, 0, 0.3); /* Green separator */
@@ -354,6 +359,11 @@
             white-space: nowrap; /* Keep on one line */
             overflow: hidden;
             text-overflow: ellipsis;
+
+            /* Responsive adjustments for desktop */
+            @media (min-width: 768px) { /* md breakpoint */
+                font-size: 0.9rem; /* Slightly larger on desktop */
+            }
         }
 
         @keyframes digitalHeaderGlowPulse {
@@ -390,7 +400,7 @@
 
         .company-list-item {
             padding: 0.25rem 0; /* 4px top/bottom */
-            font-size: 0.9rem; /* 14.4px */
+            font-size: 0.9rem; /* Default for mobile */
             line-height: 1.2; /* approx 17.28px */
             font-weight: 600; /* Bolder for digital display */
             color: var(--digital-cyan); /* Bright cyan for digital text */
@@ -400,6 +410,12 @@
             text-overflow: ellipsis;
             text-shadow: 0 0 5px rgba(0, 255, 255, 0.7); /* Cyan glow for company names */
             animation: textFlicker 4s infinite alternate; /* Subtle flicker for each name */
+
+            /* Responsive adjustments for desktop */
+            @media (min-width: 768px) { /* md breakpoint */
+                font-size: 1rem; /* Larger on desktop */
+                line-height: 1.5; /* Better spacing for larger text */
+            }
         }
 
         @keyframes textFlicker {
@@ -415,7 +431,7 @@
             background-color: rgba(0, 0, 0, 0.7); /* Dark background */
             color: var(--digital-green); /* Green digital text */
             padding: 8px 10px;
-            font-size: 0.8rem;
+            font-size: 0.8rem; /* Default for mobile */
             font-weight: 600;
             border-top: 1px solid rgba(0, 255, 0, 0.3); /* Green separator */
             border-bottom-left-radius: 0.75rem; /* Match container border radius */
@@ -426,6 +442,11 @@
             gap: 0.5rem; /* Space between elements */
             text-shadow: 0 0 5px rgba(0, 255, 0, 0.5); /* Green glow */
             animation: digitalFooterGlow 3s infinite alternate;
+
+            /* Responsive adjustments for desktop */
+            @media (min-width: 768px) { /* md breakpoint */
+                font-size: 0.9rem; /* Slightly larger on desktop */
+            }
         }
 
         @keyframes digitalFooterGlow {
@@ -717,8 +738,12 @@
                 innerWrapper.style.animation = `scrollCompanies var(--scroll-duration) linear infinite`;
 
                 // Set the height of the content area to show exactly two lines
+                // Ensure this calculation accounts for the potentially new font-size and line-height
                 const sampleItem = companyList1.querySelector('.company-list-item');
-                const itemHeight = sampleItem ? sampleItem.offsetHeight : 25; // Fallback if no items
+                // Get computed style for accurate height, including padding
+                const computedStyle = getComputedStyle(sampleItem);
+                const itemHeight = parseFloat(computedStyle.height) + parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom); 
+                
                 companyScrollerContentArea.style.height = `${itemHeight * 2}px`; // Show exactly two lines
             }
 
