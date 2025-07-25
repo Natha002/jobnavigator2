@@ -276,20 +276,20 @@
         }
         /* Logo specific styling for square shape */
         .logo-container { /* Renamed for clarity */
-            width: 60px; /* Adjusted size */
-            height: 60px; /* Adjusted size */
+            width: 39px; /* Reduced by 35% from 60px */
+            height: 39px; /* Reduced by 35% from 60px */
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 0.5rem; /* Standard rounded corners for a square */
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 0 0 2px var(--indigo-800); /* Indigo-800 outline */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 0 0 1.5px var(--indigo-800); /* Adjusted outline */
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
             border: 2px solid var(--indigo-800); /* Indigo-800 border */
         }
         .logo-container:hover {
             transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 0 0 3px var(--indigo-800); /* Slightly larger outline on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 0 0 2px var(--indigo-800); /* Adjusted outline on hover */
         }
         .logo-container img {
             width: 80%; /* Adjusted size to fit very well */
