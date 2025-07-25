@@ -35,8 +35,6 @@
             overflow-x: hidden; /* Prevent horizontal scroll on animations */
         }
 
-        /* Removed gradientBackground animation as background.png is back */
-
         /* Headings and specific text elements use Poppins */
         h1, h2, .header-text-outline, .nav-link, .industry-toggle-button-segment {
             font-family: 'Poppins', sans-serif;
@@ -276,8 +274,8 @@
         }
         /* Logo specific styling for square shape */
         .logo-container { /* Renamed for clarity */
-            width: 39px; /* Reduced by 35% from 60px */
-            height: 39px; /* Reduced by 35% from 60px */
+            width: 42px; /* Increased by 7% from 39px (approx 41.73px) */
+            height: 42px; /* Increased by 7% from 39px (approx 41.73px) */
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 0.5rem; /* Standard rounded corners for a square */
             display: flex;
@@ -292,8 +290,8 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 0 0 2px var(--indigo-800); /* Adjusted outline on hover */
         }
         .logo-container img {
-            width: 80%; /* Adjusted size to fit very well */
-            height: 80%; /* Adjusted size to fit very well */
+            width: 85%; /* Reverted to previous size */
+            height: 85%; /* Reverted to previous size */
             object-fit: contain;
         }
         /* Fiery text shadow for distinct elements - now more of a gold/orange glow */
@@ -565,8 +563,8 @@
                 </div>
                 <!-- Kazi Connect Text -->
                 <div class="flex flex-col items-start leading-none">
-                    <span class="text-xl font-extrabold header-text-outline">Kazi</span>
-                    <span class="text-base font-semibold header-text-outline">Connect</span>
+                    <span class="text-2xl font-extrabold header-text-outline">Kazi</span> <!-- Increased font size for Kazi -->
+                    <span class="text-sm font-semibold header-text-outline">Connect</span> <!-- Reduced font size for Connect -->
                 </div>
             </div>
             <!-- Desktop Navigation -->
