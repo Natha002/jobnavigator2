@@ -6,8 +6,10 @@
     <title>Opportunities Await!</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Inter (for body) and Poppins (for headings) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN for consistent iconography -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
             --logo-green: #00CC00; /* Defined logo green color (for logo image/text) */
@@ -21,8 +23,8 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-image: url('background.png'); /* Original background image */
+            font-family: 'Inter', sans-serif; /* Body text uses Inter */
+            background-image: url('background.png'); /* Reverted to background.png as requested */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -31,6 +33,13 @@
             display: flex;
             flex-direction: column;
             overflow-x: hidden; /* Prevent horizontal scroll on animations */
+        }
+
+        /* Removed gradientBackground animation as background.png is back */
+
+        /* Headings and specific text elements use Poppins */
+        h1, h2, .header-text-outline, .nav-link, .industry-toggle-button-segment {
+            font-family: 'Poppins', sans-serif;
         }
 
         /* Custom styling for better visual appeal and responsiveness */
@@ -70,8 +79,20 @@
         .input-field:focus {
             outline: none;
             border-color: #6366f1; /* Indigo on focus */
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.3); /* Softer, wider shadow on focus */
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.4), 0 0 15px rgba(99, 102, 241, 0.2); /* Enhanced glow on focus */
         }
+        /* Custom styling for select dropdowns */
+        .input-field.appearance-none {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem; /* Make space for the custom arrow */
+        }
+
         .btn-primary {
             background-image: linear-gradient(to right, #6366f1, #8b5cf6); /* Gradient background */
             color: white;
@@ -90,6 +111,7 @@
         .btn-primary:active {
             transform: translateY(0); /* Press effect */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-image: linear-gradient(to right, #6366f1, #8b5cf6); /* Ensure original gradient on press */
         }
         /* Desktop font size for buttons */
         @media (min-width: 768px) {
@@ -165,6 +187,7 @@
                 1px 1px 0 var(--logo-orange-original), -1px -1px 0 var(--logo-orange-original), 
                 1px -1px 0 var(--logo-orange-original), -1px 1px 0 var(--logo-orange-original); /* Logo orange outline */
             transition: color 0.3s ease-in-out;
+            font-weight: 700; /* Poppins Extra Bold */
         }
         .header-text-outline:hover {
             color: var(--indigo-800); /* Keep same color on hover for consistency with outline */
@@ -178,6 +201,7 @@
             text-shadow: 
                 1px 1px 0 var(--logo-orange-original), -1px -1px 0 var(--logo-orange-original), 
                 1px -1px 0 var(--logo-orange-original), -1px 1px 0 var(--logo-orange-original); /* Logo orange outline */
+            font-weight: 600; /* Poppins Semi-Bold */
         }
         .nav-link::after {
             content: '';
@@ -251,9 +275,9 @@
             background-image: linear-gradient(to right, rgba(135, 206, 235, 0.6), rgba(255, 192, 203, 0.6)); /* More subtle */
         }
         /* Logo specific styling for square shape */
-        .diamond-logo { /* Renamed from diamond-logo for clarity, but keeping class name for minimal change */
-            width: 70px; /* Increased size */
-            height: 70px; /* Increased size */
+        .logo-container { /* Renamed for clarity */
+            width: 60px; /* Adjusted size */
+            height: 60px; /* Adjusted size */
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 0.5rem; /* Standard rounded corners for a square */
             display: flex;
@@ -263,13 +287,13 @@
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
             border: 2px solid var(--indigo-800); /* Indigo-800 border */
         }
-        .diamond-logo:hover {
+        .logo-container:hover {
             transform: scale(1.1) rotate(5deg);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 0 0 3px var(--indigo-800); /* Slightly larger outline on hover */
         }
-        .diamond-logo img {
-            width: 85%; /* Increased size to fit better */
-            height: 85%; /* Increased size to fit better */
+        .logo-container img {
+            width: 80%; /* Adjusted size to fit very well */
+            height: 80%; /* Adjusted size to fit very well */
             object-fit: contain;
         }
         /* Fiery text shadow for distinct elements - now more of a gold/orange glow */
@@ -307,6 +331,7 @@
             /* Animation for color shift */
             animation: colorShift 9s infinite alternate; /* Slower cycle change */
             font-size: 2.25rem; /* Default for mobile */
+            font-weight: 800; /* Poppins Extra-Bold */
         }
 
         @keyframes colorShift {
@@ -533,10 +558,10 @@
 
     <!-- Header for Navigation -->
     <header class="w-full header-gradient shadow-md py-4 px-6 md:px-10 relative">
-        <nav class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-1"> <!-- Reduced space-x to bring logo and text closer -->
-                <div class="diamond-logo">
-                    <img src="logo2.png" alt="Kilele Connect Logo">
+        <nav class="container mx-auto flex justify-between items-center" aria-label="Main navigation">
+            <div class="flex items-center space-x-1">
+                <div class="logo-container"> <!-- Changed class name from diamond-logo -->
+                    <img src="logo2.png" alt="Kazi Connect Logo" loading="lazy">
                 </div>
                 <!-- Kazi Connect Text -->
                 <div class="flex flex-col items-start leading-none">
@@ -545,7 +570,7 @@
                 </div>
             </div>
             <!-- Desktop Navigation -->
-            <ul class="hidden md:flex space-x-10"> <!-- Increased space-x for more spacious links -->
+            <ul class="hidden md:flex space-x-10">
                 <li><a href="#" class="text-indigo-800 hover:text-indigo-600 font-medium transition-colors duration-200 nav-link">HOME</a></li>
                 <li><a href="#" class="text-indigo-800 hover:text-indigo-600 font-medium transition-colors duration-200 nav-link">ABOUT</a></li>
                 <li><a href="#" class="text-indigo-800 hover:text-indigo-600 font-medium transition-colors duration-200 nav-link">SERVICES</a></li>
@@ -553,7 +578,7 @@
             </ul>
             <!-- Mobile Menu Button (Hamburger Icon) -->
             <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-white hover:text-gray-200 focus:outline-none p-2 rounded-md">
+                <button id="mobile-menu-button" class="text-white hover:text-gray-200 focus:outline-none p-2 rounded-md" aria-controls="mobile-nav-menu" aria-expanded="false">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -596,26 +621,26 @@
                         </div>
                         <!-- Digital Footer for the scan window -->
                         <div class="digital-footer">
-                            <span class="digital-icon">🔒</span> SSL SECURE
+                            <span class="lucide-icon" data-lucide="lock"></span> SSL SECURE
                             <span class="digital-separator">|</span>
-                            <span class="digital-icon">📞</span> 24/7 SUPPORT
+                            <span class="lucide-icon" data-lucide="phone"></span> 24/7 SUPPORT
                         </div>
                     </div>
                 </div>
 
                 <!-- Industry Toggle Button (Segmented Control) -->
-                <div class="industry-toggle-container mb-6">
-                    <button type="button" id="construction-tab" class="industry-toggle-button-segment">
+                <div class="industry-toggle-container mb-6" role="tablist">
+                    <button type="button" id="construction-tab" class="industry-toggle-button-segment" role="tab" aria-selected="true" aria-controls="construction-form-section">
                         Construction Industry
                     </button>
-                    <button type="button" id="other-industry-tab" class="industry-toggle-button-segment">
+                    <button type="button" id="other-industry-tab" class="industry-toggle-button-segment" role="tab" aria-selected="false" aria-controls="other-industry-form-section">
                         Other Industry
                     </button>
                 </div>
 
                 <form class="space-y-6">
                     <!-- Construction Industry Form Section -->
-                    <div id="construction-form-section" class="space-y-6">
+                    <div id="construction-form-section" class="space-y-6" role="tabpanel" aria-labelledby="construction-tab">
                         <div>
                             <label for="qualification-level-construction" class="block text-left text-indigo-800 text-base font-bold mb-2">
                                 Select Qualification Level:
@@ -642,7 +667,7 @@
                     </div>
 
                     <!-- Other Industry Form Section -->
-                    <div id="other-industry-form-section" class="space-y-6 hidden">
+                    <div id="other-industry-form-section" class="space-y-6 hidden" role="tabpanel" aria-labelledby="other-industry-tab">
                         <div>
                             <label for="other-industry-input" class="block text-left text-black text-base font-bold mb-2">
                                 Enter Your Industry:
@@ -688,6 +713,9 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide icons
+            lucide.createIcons();
+
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileNavMenu = document.getElementById('mobile-nav-menu');
 
@@ -710,7 +738,7 @@
 
             let isConstructionMode = true; // Default state: In Construction
 
-            // Suggestion data
+            // Suggestion data (from auto-suggestion-data immersive)
             const constructionCourses = [
                 "Civil Engineering", "Construction Management", "Architecture",
                 "Quantity Surveying", "Structural Engineering", "Building Technology",
@@ -731,8 +759,7 @@
                 "Nursing", "Software Development", "Teaching", "Financial Analysis",
                 "Digital Marketing", "Business Administration", "Human Resources",
                 "Data Science", "Graphic Design", "Journalism", "Cybersecurity",
-                "Biomedical Engineering", "Environmental Science", "Culinary Arts",
-                "Education" 
+                "Biomedical Engineering", "Environmental Science", "Culinary Arts"
             ];
 
             // Company names for the scroller
@@ -854,6 +881,12 @@
                     constructionTab.classList.add('active');
                     otherIndustryTab.classList.remove('active');
                     
+                    // Set ARIA attributes for tab roles
+                    constructionTab.setAttribute('aria-selected', 'true');
+                    otherIndustryTab.setAttribute('aria-selected', 'false');
+                    constructionFormSection.removeAttribute('hidden'); // Ensure content is accessible
+                    otherIndustryFormSection.setAttribute('hidden', 'true'); // Hide content semantically
+
                     // Clear other industry specific fields when switching back
                     otherIndustryInput.value = '';
                     industrySuggestionsOther.classList.add('hidden');
@@ -880,6 +913,12 @@
                     otherIndustryFormSection.classList.remove('hidden');
                     constructionTab.classList.remove('active');
                     otherIndustryTab.classList.add('active');
+
+                    // Set ARIA attributes for tab roles
+                    constructionTab.setAttribute('aria-selected', 'false');
+                    otherIndustryTab.setAttribute('aria-selected', 'true');
+                    constructionFormSection.setAttribute('hidden', 'true'); // Hide content semantically
+                    otherIndustryFormSection.removeAttribute('hidden'); // Ensure content is accessible
                     
                     // Clear construction specific fields when switching away
                     qualificationLevelConstructionSelect.value = '';
@@ -908,6 +947,8 @@
             // Mobile menu toggle functionality
             mobileMenuButton.addEventListener('click', function(event) {
                 event.stopPropagation(); // Prevent click from immediately propagating to document
+                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
                 mobileNavMenu.classList.toggle('active');
             });
 
@@ -915,6 +956,7 @@
             document.addEventListener('click', function(event) {
                 if (!mobileNavMenu.contains(event.target) && !mobileMenuButton.contains(event.target)) {
                     mobileNavMenu.classList.remove('active');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
                 }
             });
 
@@ -922,6 +964,7 @@
             mobileNavMenu.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', function() {
                     mobileNavMenu.classList.remove('active');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
                 });
             });
 
