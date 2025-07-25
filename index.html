@@ -250,26 +250,26 @@
         .header-gradient {
             background-image: linear-gradient(to right, rgba(135, 206, 235, 0.6), rgba(255, 192, 203, 0.6)); /* More subtle */
         }
-        /* Logo specific styling for diamond shape */
-        .diamond-logo {
-            width: 60px;
-            height: 60px;
+        /* Logo specific styling for square shape */
+        .diamond-logo { /* Renamed from diamond-logo for clarity, but keeping class name for minimal change */
+            width: 70px; /* Increased size */
+            height: 70px; /* Increased size */
             background-color: rgba(255, 255, 255, 0.3);
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            border-radius: 0.5rem; /* Standard rounded corners for a square */
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 0 0 2px var(--indigo-800); /* Indigo-800 outline */
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            border: 2px solid var(--indigo-800); /* Indigo-800 outline for logo window */
+            border: 2px solid var(--indigo-800); /* Indigo-800 border */
         }
         .diamond-logo:hover {
             transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 0 0 3px var(--indigo-800); /* Slightly larger outline on hover */
         }
         .diamond-logo img {
-            width: 70%;
-            height: 70%;
+            width: 85%; /* Increased size to fit better */
+            height: 85%; /* Increased size to fit better */
             object-fit: contain;
         }
         /* Fiery text shadow for distinct elements - now more of a gold/orange glow */
@@ -947,4 +947,3 @@
     </script>
 </body>
 </html>
-
