@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opportunities Await!</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Kazi Connect - Opportunities Await!</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter (for body) and Poppins (for headings) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-    <!-- Lucide Icons CDN for consistent iconography -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
@@ -25,7 +22,7 @@
 
         body {
             font-family: 'Inter', sans-serif; /* Body text uses Inter */
-            background-image: url('background.png'); /* Reverted to background.png as requested */
+            background-image: url('background.png'); /* Changed to background.png */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -47,7 +44,9 @@
             backdrop-filter: none; /* Removed blur */
             border-radius: 1.5rem; /* More rounded corners */
             border: 1px solid rgba(255, 255, 255, 0.1); /* Very subtle white border */
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Softer, more elegant shadow */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), /* Existing shadow */
+                        0 0 0 3px var(--indigo-800), /* First indigo outline */
+                        0 0 0 6px rgba(55, 48, 163, 0.5); /* Second indigo outline (semi-transparent) */
             position: relative;
             overflow: hidden;
             animation: fadeInScale 0.8s ease-out forwards;
@@ -85,7 +84,7 @@
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3E%3Csvg%3E");
             background-repeat: no-repeat;
             background-position: right 0.75rem center;
             background-size: 1.5em 1.5em;
@@ -150,40 +149,65 @@
             display: none;
             flex-direction: column;
             width: 100%;
-            max-width: 250px;
-            background-color: rgba(255, 255, 255, 0.98);
+            max-width: 180px; /* Reduced horizontal distance by roughly half */
+            background-color: rgba(255, 255, 255, 0.7); /* More transparent background */
+            backdrop-filter: blur(8px); /* Frosted glass effect */
             position: absolute;
             top: 100%;
             right: 0;
             padding: 0.5rem 0;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
             border-radius: 0.75rem;
             z-index: 20;
             transform: translateY(-10px);
             opacity: 0;
-            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out, background-color 0.3s ease;
         }
         .mobile-nav-menu.active {
             display: flex;
             transform: translateY(0);
             opacity: 1;
         }
-        .mobile-nav-menu a {
-            padding: 0.75rem 1.5rem;
+        /* Updated mobile nav links for better styling */
+        .mobile-nav-menu a, .mobile-nav-menu button {
+            padding: 0.75rem 1.2rem; /* Adjusted padding for narrower menu */
             text-align: right;
-            color: #4b5563;
-            font-weight: 500;
-            transition: background-color 0.2s, color 0.2s;
+            color: var(--indigo-800); /* Consistent with desktop nav links */
+            font-weight: 600; /* Poppins Semi-Bold */
+            transition: background-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s, text-shadow 0.2s; /* Added text-shadow transition */
+            border-radius: 0.5rem; /* Rounded corners for individual items */
+            margin: 0.25rem 0.5rem; /* Space between items */
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque white */
+            border: 1px solid rgba(55, 48, 163, 0.2); /* Subtle indigo border */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Soft shadow */
+            text-shadow: 0 0 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow for depth */
         }
-        .mobile-nav-menu a:hover {
-            background-color: #e0e7ff;
-            color: #4f46e5;
+        .mobile-nav-menu a:hover, .mobile-nav-menu button:hover {
+            background-color: var(--logo-orange-original); /* Orange on hover */
+            color: white; /* White text on hover */
+            transform: translateX(-5px); /* Slide effect on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* White glow on hover */
         }
+        /* Special styling for mobile logout button */
+        .mobile-nav-menu button.btn-primary {
+            background-image: linear-gradient(to right, #ef4444, #dc2626); /* Red gradient */
+            color: white;
+            border: none; /* No border for gradient buttons */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-shadow: none; /* Reset text shadow for gradient button */
+        }
+        .mobile-nav-menu button.btn-primary:hover {
+            background-image: linear-gradient(to right, #dc2626, #ef4444); /* Reverse gradient on hover */
+            transform: translateX(-5px);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.7); /* Stronger white glow on hover */
+        }
+
         /* Header specific styling */
         .header-text-outline { /* New class for Kazi Connect text */
             color: var(--indigo-800); /* Keep original text color */
-            text-shadow: 
-                1px 1px 0 var(--logo-orange-original), -1px -1px 0 var(--logo-orange-original), 
+            text-shadow:
+                1px 1px 0 var(--logo-orange-original), -1px -1px 0 var(--logo-orange-original),
                 1px -1px 0 var(--logo-orange-original), -1px 1px 0 var(--logo-orange-original); /* Logo orange outline */
             transition: color 0.3s ease-in-out;
             font-weight: 700; /* Poppins Extra Bold */
@@ -204,6 +228,7 @@
             transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Smooth transitions */
             display: inline-block; /* Allow padding and background to apply */
             border: 1px solid var(--logo-rectangle-color); /* Added border for the rectangular line */
+            animation: navLinkGlow 5s infinite alternate; /* Pulsing glow animation */
         }
         .nav-link::after {
             content: none; /* Remove the underline effect */
@@ -213,7 +238,21 @@
             color: white; /* White text on hover */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow on hover */
             border-color: var(--logo-orange-original); /* Keep border color consistent with background on hover */
+            animation: none; /* Stop pulsing on hover */
         }
+
+        /* Keyframes for nav link glow */
+        @keyframes navLinkGlow {
+            0%, 100% {
+                box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+                border-color: var(--logo-rectangle-color);
+            }
+            50% {
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.8);
+            }
+        }
+
         /* Desktop font size for nav links */
         @media (min-width: 768px) {
             .nav-link {
@@ -298,8 +337,13 @@
         label[for="course-name-construction"],
         label[for="other-industry-input"],
         label[for="qualification-level-other"],
-        label[for="course-name-other"] {
-            text-shadow: 
+        label[for="course-name-other"],
+        label[for="signup-fullname"], /* Added for signup form */
+        label[for="signup-mobile"], /* Added for signup form */
+        label[for="signup-email"], /* Added for signup form */
+        label[for="signup-password"] /* Added for signup form */
+        {
+            text-shadow:
                 1px 1px 0 #FFF, -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, /* White outline */
                 0 0 10px rgba(255, 215, 0, 0.6), /* Softer Gold glow */
                 0 0 20px rgba(255, 165, 0, 0.3); /* Softer Orange halo */
@@ -312,7 +356,12 @@
             label[for="course-name-construction"],
             label[for="other-industry-input"],
             label[for="qualification-level-other"],
-            label[for="course-name-other"] {
+            label[for="course-name-other"],
+            label[for="signup-fullname"], /* Added for signup form */
+            label[for="signup-mobile"], /* Added for signup form */
+            label[for="signup-email"], /* Added for signup form */
+            label[for="signup-password"] /* Added for signup form */
+            {
                 font-size: 1.15rem; /* Increased for desktop */
                 margin-bottom: 0.75rem; /* Increased margin for desktop */
             }
@@ -320,13 +369,13 @@
 
         /* Specific styling for "Opportunities waiting for you!" text outline */
         .opportunities-title-outline {
-            text-shadow: 
+            text-shadow:
                 1px 1px 0 #FFF, -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, /* White outline */
                 0 0 10px rgba(255, 215, 0, 0.4), /* Subtle gold glow */
                 0 0 20px rgba(255, 165, 0, 0.2); /* Even softer orange glow */
             
             /* Animation for color shift */
-            animation: colorShift 9s infinite alternate; /* Slower cycle change */
+            animation: colorShift 9s infinite alternate, opportunitiesSmoothPulse 4s infinite alternate ease-in-out; /* Combined animations */
             font-size: 2.25rem; /* Default for mobile */
             font-weight: 800; /* Poppins Extra-Bold */
         }
@@ -336,6 +385,20 @@
             50% { color: var(--logo-orange-original); } /* Transition to original logo orange */
             100% { color: var(--indigo-800); } /* Back to indigo-800 */
         }
+
+        /* New keyframes for smooth pulsing/breathing effect */
+        @keyframes opportunitiesSmoothPulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02); /* Subtle balloon out */
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
         /* Desktop font size for opportunities title */
         @media (min-width: 768px) {
             .opportunities-title-outline {
@@ -352,7 +415,7 @@
             margin-bottom: 0.390625rem; /* Increased by 25% from 0.3125rem */
             background-color: rgba(20, 20, 20, 0.8); /* Darker, more opaque background for screen effect */
             border-radius: 0.29296875rem; /* Increased by 25% from 0.234375rem */
-            box-shadow: 
+            box-shadow:
                 inset 0 0 3.125px rgba(0, 255, 255, 0.078125), /* Increased glow by 25% */
                 0 0 3.90625px rgba(0, 255, 255, 0.0390625); /* Increased glow by 25% */
             border: 0.390625px solid rgba(0, 255, 255, 0.1171875); /* Increased border by 25% */
@@ -406,7 +469,7 @@
             border-bottom: 0.390625px solid rgba(0, 255, 0, 0.078125); /* Increased by 25% from 0.3125px 0.0625 */
             border-top-left-radius: 0.29296875rem; /* Increased by 25% from 0.234375rem */
             border-top-right-radius: 0.29296875rem; /* Increased by 25% from 0.1875rem */
-            text-shadow: 
+            text-shadow:
                 0 0 2.34375px rgba(0, 255, 0, 0.234375); /* Increased glow by 25% */
             animation: digitalHeaderGlowPulse 2.5s infinite alternate; /* Slower pulsing glow effect */
             white-space: nowrap; /* Keep on one line */
@@ -522,15 +585,27 @@
         }
 
         /* Footer text font size */
-        footer p {
+        .footer-text {
             font-size: 0.875rem; /* Default for mobile (text-sm) */
             color: #ccc; /* Lighter text for footer */
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.1); /* Subtle white glow */
         }
         @media (min-width: 768px) {
-            footer p {
+            .footer-text {
                 font-size: 1.1rem; /* Increased for desktop from 1rem */
             }
         }
+        .footer-link {
+            color: var(--logo-orange-original);
+            transition: color 0.2s ease, text-shadow 0.2s ease; /* Added text-shadow transition */
+            text-shadow: 0 0 3px rgba(255, 165, 0, 0.3); /* Subtle orange glow */
+        }
+        .footer-link:hover {
+            color: var(--indigo-500);
+            text-shadow: 0 0 8px rgba(99, 102, 241, 0.6), 0 0 15px rgba(99, 102, 241, 0.4); /* Stronger indigo glow on hover */
+        }
+
 
         /* Thin glassy strip around the form */
         .glass-strip-wrapper {
@@ -549,31 +624,194 @@
             max-width: calc(448px + 1.5rem); /* Max-width of card + 2*padding */
             margin: 0 auto; /* Center the wrapper */
         }
+
+        /* Loader/Spinner styles */
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s linear;
+        }
+        .loader-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .spinner {
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-top: 8px solid #6366f1; /* Primary color */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s linear;
+        }
+        .modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+            color: #333; /* Dark text for modal content */
+        }
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .modal-close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.2s;
+        }
+        .modal-close-button:hover {
+            color: #333;
+        }
+        .modal-toggle-button {
+            background-color: #e5e7eb;
+            border-radius: 9999px;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            text-align: center;
+            border: none;
+            color: #000000;
+        }
+        .modal-toggle-button.active {
+            background-image: linear-gradient(to right, #6366f1, #8b5cf6);
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Job Matches Section Styles */
+        #job-matches-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            color: #e0e0e0;
+            display: none; /* Hidden by default */
+        }
+        .job-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .job-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--digital-cyan); /* Bright cyan for job titles */
+            margin-bottom: 0.5rem;
+        }
+        .job-card p {
+            font-size: 1rem;
+            color: #c0c0c0;
+            margin-bottom: 0.5rem;
+        }
+        .job-card a {
+            color: var(--logo-orange-original);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        .job-card a:hover {
+            color: var(--indigo-500);
+        }
+
+        /* Logout Button Styling */
+        #logout-button {
+            display: none; /* Hidden by default */
+            background-image: linear-gradient(to right, #ef4444, #dc2626); /* Red gradient */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-image 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+            margin-left: 1rem; /* Space from other nav items */
+        }
+        #logout-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+            background-image: linear-gradient(to right, #dc2626, #ef4444);
+        }
+        #logout-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-    <!-- Header for Navigation -->
     <header class="w-full header-gradient shadow-md py-4 px-6 md:px-10 relative">
         <nav class="container mx-auto flex justify-between items-center" aria-label="Main navigation">
             <div class="flex items-center space-x-1">
-                <div class="logo-container"> <!-- Changed class name from diamond-logo -->
-                    <img src="logo2.png" alt="Kazi Connect Logo" loading="lazy">
-                </div>
-                <!-- Kazi Connect Text -->
+                <div class="logo-container"> <img src="logo2.png" alt="Kazi Connect Logo" loading="lazy"> </div>
                 <div class="flex flex-col items-start leading-none">
-                    <span class="text-2xl font-extrabold header-text-outline">Kazi</span> <!-- Increased font size for Kazi -->
-                    <span class="text-sm font-semibold header-text-outline">Connect</span> <!-- Reduced font size for Connect -->
-                </div>
+                    <span class="text-2xl font-extrabold header-text-outline">Kazi</span> <span class="text-sm font-semibold header-text-outline">Connect</span> </div>
             </div>
-            <!-- Desktop Navigation -->
-            <ul class="hidden md:flex space-x-4"> <!-- Reduced space-x to bring links closer for rectangle backgrounds -->
-                <li><a href="#" class="nav-link">HOME</a></li>
+            <ul class="hidden md:flex space-x-4"> <li><a href="#" class="nav-link">HOME</a></li>
                 <li><a href="#" class="nav-link">ABOUT</a></li>
                 <li><a href="#" class="nav-link">SERVICES</a></li>
                 <li><a href="#" class="nav-link">POST A JOB</a></li>
+                <li><button id="logout-button" class="btn-primary">Logout</button></li>
             </ul>
-            <!-- Mobile Menu Button (Hamburger Icon) -->
             <div class="md:hidden">
                 <button id="mobile-menu-button" class="text-white hover:text-gray-200 focus:outline-none p-2 rounded-md" aria-controls="mobile-nav-menu" aria-expanded="false">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -582,41 +820,35 @@
                 </button>
             </div>
         </nav>
-        <!-- Mobile Navigation Menu -->
         <div id="mobile-nav-menu" class="mobile-nav-menu md:hidden">
             <a href="#" class="block">HOME</a>
             <a href="#" class="block">ABOUT</a>
             <a href="#" class="block">SERVICES</a>
             <a href="#" class="block">POST A JOB</a>
+            <button id="mobile-logout-button" class="btn-primary w-full mt-4">Logout</button>
         </div>
     </header>
 
-    <!-- Main Content Area -->
     <main class="flex-grow flex items-center justify-center p-4 sm:p-6 md:p-8">
         <div class="glass-strip-wrapper">
             <div class="card w-full max-w-md p-6 sm:p-8 md:p-10 text-center relative">
-                <h1 class="text-3xl sm:text-4xl font-extrabold mb-4 leading-tight opportunities-title-outline">
+                <h1 id="main-opportunities-title" class="text-3xl sm:text-4xl font-extrabold mb-4 leading-tight opportunities-title-outline">
                     Opportunities waiting for you!
                 </h1>
                 
-                <!-- Company Scanning Section -->
                 <div class="mb-6">
                     <div class="company-scroller-container">
-                        <!-- Digital Header for the scan window -->
                         <div class="digital-header-text">
                             OVER 10K EMPLOYERS
                         </div>
                         <div class="company-scroller-content-area">
                             <div class="company-scroller-inner-wrapper" id="company-scroller-inner-wrapper">
                                 <div class="company-list-content" id="company-list-1">
-                                    <!-- Company names will be dynamically added here -->
-                                </div>
+                                    </div>
                                 <div class="company-list-content" id="company-list-2" aria-hidden="true">
-                                    <!-- Duplicated company names for seamless loop -->
-                                </div>
+                                    </div>
                             </div>
                         </div>
-                        <!-- Digital Footer for the scan window -->
                         <div class="digital-footer">
                             <span class="lucide-icon" data-lucide="lock"></span> SSL SECURE
                             <span class="digital-separator">|</span>
@@ -625,7 +857,6 @@
                     </div>
                 </div>
 
-                <!-- Industry Toggle Button (Segmented Control) -->
                 <div class="industry-toggle-container mb-6" role="tablist">
                     <button type="button" id="construction-tab" class="industry-toggle-button-segment" role="tab" aria-selected="true" aria-controls="construction-form-section">
                         Construction Industry
@@ -635,8 +866,7 @@
                     </button>
                 </div>
 
-                <form class="space-y-6">
-                    <!-- Construction Industry Form Section -->
+                <form id="job-search-form" class="space-y-6">
                     <div id="construction-form-section" class="space-y-6" role="tabpanel" aria-labelledby="construction-tab">
                         <div>
                             <label for="qualification-level-construction" class="block text-left text-indigo-800 text-base font-bold mb-2">
@@ -663,7 +893,6 @@
                         </button>
                     </div>
 
-                    <!-- Other Industry Form Section -->
                     <div id="other-industry-form-section" class="space-y-6 hidden" role="tabpanel" aria-labelledby="other-industry-tab">
                         <div>
                             <label for="other-industry-input" class="block text-left text-black text-base font-bold mb-2">
@@ -699,92 +928,409 @@
                 </form>
             </div>
         </div>
+
+        <section id="job-matches-section" class="w-full max-w-2xl mx-auto p-6 sm:p-8 md:p-10 mt-8 rounded-2xl hidden">
+            <h2 id="job-matches-title" class="text-3xl sm:text-4xl font-extrabold mb-6 text-center opportunities-title-outline">
+                Your Curated Job Matches!
+            </h2>
+            <div id="job-list" class="space-y-6">
+                </div>
+        </section>
     </main>
 
-    <!-- Footer -->
+    <div id="loader-overlay" class="loader-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <div id="auth-modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <button id="modal-close-button" class="modal-close-button" aria-label="Close modal">
+                <span data-lucide="x"></span>
+            </button>
+            <h2 id="modal-title" class="text-2xl sm:text-3xl font-extrabold mb-6 text-center text-indigo-800">
+                Your first time here? Sign up first!
+            </h2>
+
+            <div class="flex justify-center gap-4 mb-6">
+                <button type="button" id="modal-signup-tab" class="modal-toggle-button active">Sign Up</button>
+                <button type="button" id="modal-signin-tab" class="modal-toggle-button">Sign In</button>
+            </div>
+
+            <form id="signup-form" class="space-y-4">
+                <div>
+                    <label for="signup-fullname" class="block text-left text-indigo-800 text-base font-bold mb-2">Full Name:</label>
+                    <input type="text" id="signup-fullname" name="fullname" placeholder="John Doe" class="input-field" required>
+                </div>
+                <div>
+                    <label for="signup-mobile" class="block text-left text-indigo-800 text-base font-bold mb-2">Mobile Phone Number:</label>
+                    <input type="tel" id="signup-mobile" name="mobile" placeholder="+2547XXXXXXXX" class="input-field" required>
+                </div>
+                <div>
+                    <label for="signup-email" class="block text-left text-indigo-800 text-base font-bold mb-2">Email:</label>
+                    <input type="email" id="signup-email" name="email" placeholder="you@example.com" class="input-field" required>
+                </div>
+                <div>
+                    <label for="signup-password" class="block text-left text-indigo-800 text-base font-bold mb-2">Password:</label>
+                    <input type="password" id="signup-password" name="password" placeholder="Min 6 characters" class="input-field" required minlength="6">
+                </div>
+                <button type="submit" class="btn-primary w-full">Sign Up</button>
+                <p id="signup-error-message" class="text-red-500 text-sm mt-2 text-center hidden"></p>
+            </form>
+
+            <form id="signin-form" class="space-y-4 hidden">
+                <div>
+                    <label for="signin-email" class="block text-left text-indigo-800 text-base font-bold mb-2">Email:</label>
+                    <input type="email" id="signin-email" name="email" placeholder="you@example.com" class="input-field" required>
+                </div>
+                <div>
+                    <label for="signin-password" class="block text-left text-indigo-800 text-base font-bold mb-2">Password:</label>
+                    <input type="password" id="signin-password" name="password" placeholder="Your password" class="input-field" required>
+                </div>
+                <button type="submit" class="btn-primary w-full">Sign In</button>
+                <p id="signin-error-message" class="text-red-500 text-sm mt-2 text-center hidden"></p>
+            </form>
+        </div>
+    </div>
+
     <footer class="w-full bg-gray-800 bg-opacity-90 text-white py-6 px-4 md:px-8 text-center mt-auto">
-        <p class="text-sm">
-            Any challenge? <a href="https://wa.me/yourphonenumber" class="text-lime-400 hover:text-lime-300 underline">WhatsApp</a> or <a href="mailto:youremail@example.com" class="text-lime-400 hover:text-lime-300 underline">Email now.</a>
-        </p>
+        <div class="container mx-auto">
+            <p id="footer-greeting" class="footer-text mb-4">
+                Any challenge? We're here to help!
+            </p>
+            <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
+                <a href="https://wa.me/254712345678" class="footer-link inline-flex items-center text-lg font-semibold" target="_blank" rel="noopener noreferrer">
+                    <span data-lucide="whatsapp" class="w-6 h-6 mr-2"></span> WhatsApp Support
+                </a>
+                <span class="text-gray-500 text-lg font-bold hidden sm:block">|</span>
+                <a href="mailto:support@kaziconnect.com" class="footer-link inline-flex items-center text-lg font-semibold">
+                    <span data-lucide="mail" class="w-6 h-6 mr-2"></span> Email Us
+                </a>
+            </div>
+            <p class="text-xs mt-4 text-gray-400">
+                &copy; <span id="current-year"></span> Kazi Connect. All rights reserved. Crafting futures, one connection at a time.
+            </p>
+        </div>
     </footer>
 
-    <script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, signInWithCustomToken, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+        // --- START OF NEW FIREBASE CONFIGURATION ---
+        // IMPORTANT: These values are from the new Firebase configuration you provided.
+        const firebaseConfig = {
+            apiKey: "AIzaSyAxh6u9xe0kfd_dnMxUo4d7Ph0U0lBibF8",
+            authDomain: "kaziconnectweb.firebaseapp.com",
+            projectId: "kaziconnectweb",
+            storageBucket: "kaziconnectweb.firebasestorage.app",
+            messagingSenderId: "782241286494",
+            appId: "1:782241286494:web:14adc692c3a96ca08ee7cf",
+            measurementId: "G-0PCWR2Z0SC"
+        };
+        // --- END OF NEW FIREBASE CONFIGURATION ---
+
+        // Initialize Firebase with the NEW configuration
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app); // Initialized analytics as requested
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        
+        // Global variables for app ID and user ID
+        // The __app_id variable is provided by the Canvas environment, use it for Firestore paths.
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        let currentUserId = null; // Will be set after authentication
+        let currentUserName = ''; // To store the user's name for personalization
+        let currentFilteredJobs = []; // To store the jobs currently displayed for export
+
+        // DOM Elements
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileNavMenu = document.getElementById('mobile-nav-menu');
+        const constructionTab = document.getElementById('construction-tab');
+        const otherIndustryTab = document.getElementById('other-industry-tab');
+        const constructionFormSection = document.getElementById('construction-form-section');
+        const otherIndustryFormSection = document.getElementById('other-industry-form-section');
+        const mainOpportunitiesTitle = document.getElementById('main-opportunities-title'); // Main title for personalization
+        const footerGreeting = document.getElementById('footer-greeting'); // Footer text for personalization
+
+        const qualificationLevelConstructionSelect = document.getElementById('qualification-level-construction');
+        const courseNameConstructionInput = document.getElementById('course-name-construction');
+        const courseSuggestionsConstruction = document.getElementById('course-suggestions-construction');
+
+        const otherIndustryInput = document.getElementById('other-industry-input');
+        const industrySuggestionsOther = document.getElementById('industry-suggestions-other');
+        const qualificationLevelOtherSelect = document.getElementById('qualification-level-other');
+        const courseNameOtherInput = document.getElementById('course-name-other');
+        const courseSuggestionsOther = document.getElementById('course-suggestions-other');
+
+        const jobSearchForm = document.getElementById('job-search-form');
+        const loaderOverlay = document.getElementById('loader-overlay');
+        const authModalOverlay = document.getElementById('auth-modal-overlay');
+        const modalCloseButton = document.getElementById('modal-close-button');
+        const modalTitle = document.getElementById('modal-title');
+        const modalSignupTab = document.getElementById('modal-signup-tab');
+        const modalSigninTab = document.getElementById('modal-signin-tab');
+        const signupForm = document.getElementById('signup-form');
+        const signinForm = document.getElementById('signin-form');
+        const signupErrorMessage = document.getElementById('signup-error-message');
+        const signinErrorMessage = document.getElementById('signin-error-message');
+
+        const jobMatchesSection = document.getElementById('job-matches-section');
+        const jobList = document.getElementById('job-list');
+        const logoutButton = document.getElementById('logout-button');
+        const mobileLogoutButton = document.getElementById('mobile-logout-button');
+        // const exportExcelButton = document.getElementById('export-excel-button'); // Removed export button
+
+        let isConstructionMode = true; // Default state: In Construction
+        let tempJobSearchData = {}; // Temporarily store form data before signup/signin
+
+        // Suggestion data
+        const constructionCourses = [
+            "Civil Engineering", "Construction Management", "Architecture",
+            "Quantity Surveying", "Structural Engineering", "Building Technology",
+            "Land Surveying", "Urban Planning", "Environmental Engineering",
+            "Geotechnical Engineering", "Electrical Engineering (Construction Focus)",
+            "Mechanical Engineering (Construction Focus)", "Construction Project Management",
+            "Real Estate Development", "Interior Design (Construction)", "Building Services Engineering"
+        ];
+
+        const otherIndustryTypes = [
+            "Healthcare", "Information Technology", "Education", "Finance",
+            "Marketing", "Retail", "Hospitality", "Manufacturing",
+            "Logistics", "Science", "Arts & Culture", "Legal", "Media",
+            "Telecommunications", "Automotive", "Aerospace", "Agriculture"
+        ];
+
+        const otherIndustryCourses = [
+            "Nursing", "Software Development", "Teaching", "Financial Analysis",
+            "Digital Marketing", "Business Administration", "Human Resources",
+            "Data Science", "Graphic Design", "Journalism", "Cybersecurity",
+            "Biomedical Engineering", "Environmental Science", "Culinary Arts"
+        ];
+
+        // Company names for the scroller (unchanged as per instruction)
+        const companyNames = [
+            "Epco Builders Ltd", "Seyani Brothers & Co. (K) Ltd", "Laxmanbhai Construction Ltd",
+            "Intex Construction", "Cementers Ltd", "Hayer Bishan Singh & Sons Ltd",
+            "Associated Construction Co (K) Ltd", "Parbat Siyani Construction Ltd",
+            "Put Sarajevo General Engineering Co", "Nyoro Construction Company Ltd",
+            "Sogea Satom Kenya", "Bechtel Corporation Kenya", "INTEGRUM", "Dancom Construction",
+            "Archistra Construction Company Ltd", "Aspax Construction Company",
+            "Kenya Urban Roads Authority (KURA)",
+            "Kenya National Highways Authority (KeNHA)",
+            "Kenya Rural Roads Authority (KeRRA)",
+            "Safaricom PLC", "Equity Bank Group", "KCB Group PLC", "East African Breweries PLC",
+            "Co-operative Bank of Kenya", "Absa Bank Kenya PLC", "Standard Chartered Bank Kenya",
+            "Bamburi Cement PLC", "Kenya Power & Lighting Co. PLC", "Centum Investment Company PLC",
+            "Jubilee Holdings Ltd", "Britam Holdings PLC", "NCBA Group PLC", "Kenya Airways PLC",
+            "TotalEnergies Marketing Kenya PLC", "KenGen PLC", "Sanlam Kenya PLC",
+            "CIC Insurance Group PLC", "Liberty Kenya Holdings PLC", "Crown Paints Kenya PLC",
+            "Carbacid Investments PLC", "Longhorn Publishers PLC", "Nation Media Group PLC",
+            "Standard Group PLC", "Home Afrika Ltd", "Flame Tree Group Holdings Ltd",
+            "Kakuzi PLC", "Limuru Tea PLC", "Sasini PLC", "Eaagads Ltd"
+        ];
+
+        // Simulated Job Data
+        const allJobs = [
+            {
+                id: "job1",
+                title: "Youth Polytechnic Instructor III (Building and Construction Technology)",
+                company: "Turkana County Government",
+                location: "Turkana County",
+                source: "Myjobmag",
+                date: "Wednesday, 23rd July 2025",
+                requirements: "Diploma in any of the following discipline: Civil Engineering, Building and Construction, or its equivalent qualification from a recognized institution.",
+                industry: "Construction",
+                qualification: "diploma",
+                course: "Building and Construction" // Specific course for filtering
+            },
+            {
+                id: "job2",
+                title: "Youth Polytechnic Instructor III (Carpentry and Joinery) - 2 Posts",
+                company: "Turkana County Government",
+                location: "Turkana County",
+                source: "Myjobmag",
+                date: "Wednesday, 23rd July 2025",
+                requirements: "Diploma in any of the following discipline: Building and Construction, Carpentry and joinery or its equivalent qualification from a recognized institution.",
+                industry: "Construction",
+                qualification: "diploma",
+                course: "Carpentry and Joinery" // Specific course for filtering
+            },
+            {
+                id: "job3",
+                title: "PROFESSIONAL CARPENTER",
+                company: "OTHER JOBS", // This seems like a placeholder, keep as is.
+                location: "Djibouti",
+                source: "Jobsinkenya",
+                date: "Wednesday, 23rd July 2025",
+                requirements: "JOB TITLE PROFESSIONAL CARPENTER NATURE OF JOB FULL TIME INDUSTRY CONSTRUCTION SALARY USD 500- 700 ( FURNISHED ACCOMMODATION AND FOOD PROVIDED) JOB LOCATION DJIBOUTI: let go",
+                industry: "Construction",
+                qualification: "technician", // Assuming a professional carpenter might fit technician/diploma level
+                course: "Carpentry" // General carpentry
+            },
+            {
+                id: "job4",
+                title: "Junior Civil Engineer",
+                company: "Epco Builders Ltd",
+                location: "Nairobi",
+                source: "Company Website",
+                date: "Tuesday, 22nd July 2025",
+                requirements: "Degree in Civil Engineering. Fresh graduates encouraged to apply.",
+                industry: "Construction",
+                qualification: "degree",
+                course: "Civil Engineering"
+            },
+            {
+                id: "job5",
+                title: "Site Supervisor",
+                company: "Seyani Brothers & Co. (K) Ltd",
+                location: "Mombasa",
+                source: "LinkedIn",
+                date: "Monday, 21st July 2025",
+                requirements: "Diploma or Higher Diploma in Building Construction or related field. 3+ years experience.",
+                industry: "Construction",
+                qualification: "diploma",
+                course: "Building Construction"
+            },
+            {
+                id: "job6",
+                title: "Quantity Surveyor Assistant",
+                company: "Laxmanbhai Construction Ltd",
+                location: "Kisumu",
+                source: "Career Portal",
+                date: "Friday, 18th July 2025",
+                requirements: "Certificate or Diploma in Quantity Surveying. Entry-level position.",
+                industry: "Construction",
+                qualification: "certificate",
+                course: "Quantity Surveying"
+            },
+            // Example jobs for 'Other Industry'
+            {
+                id: "job7",
+                title: "Software Developer Intern",
+                company: "Safaricom PLC",
+                location: "Nairobi",
+                source: "Safaricom Careers",
+                date: "Thursday, 24th July 2025",
+                requirements: "Currently pursuing a Degree in Computer Science, Software Engineering or related field.",
+                industry: "Information Technology",
+                qualification: "degree",
+                course: "Software Development"
+            },
+            {
+                id: "job8",
+                title: "Registered Nurse",
+                company: "Aga Khan University Hospital",
+                location: "Nairobi",
+                source: "Hospital Website",
+                date: "Wednesday, 23rd July 2025",
+                requirements: "Diploma in Nursing. Valid nursing license.",
+                industry: "Healthcare",
+                qualification: "diploma",
+                course: "Nursing"
+            },
+            {
+                id: "job9",
+                title: "High School Teacher (Mathematics)",
+                company: "Brookhouse School",
+                location: "Nairobi",
+                source: "School Portal",
+                date: "Tuesday, 22nd July 2025",
+                requirements: "Degree in Education (Mathematics). TSC registration.",
+                industry: "Education",
+                qualification: "degree",
+                course: "Teaching"
+            },
+            {
+                id: "job10",
+                title: "Financial Analyst",
+                company: "Equity Bank Group",
+                location: "Nairobi",
+                source: "Bank Careers",
+                date: "Monday, 21st July 2025",
+                requirements: "Degree in Finance, Economics or Accounting. CPA (K) preferred.",
+                industry: "Finance",
+                qualification: "degree",
+                course: "Financial Analysis"
+            }
+        ];
+
+
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize Lucide icons
             lucide.createIcons();
+            document.getElementById('current-year').textContent = new Date().getFullYear();
 
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileNavMenu = document.getElementById('mobile-nav-menu');
+            // Firebase Authentication Listener
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    currentUserId = user.uid;
+                    // User is signed in. Fetch user profile and pre-fill form/show jobs.
+                    const userProfileRef = doc(db, `artifacts/${appId}/users/${currentUserId}/profiles`, currentUserId);
+                    const userProfileSnap = await getDoc(userProfileRef);
 
-            const constructionTab = document.getElementById('construction-tab');
-            const otherIndustryTab = document.getElementById('other-industry-tab');
-            const constructionFormSection = document.getElementById('construction-form-section');
-            const otherIndustryFormSection = document.getElementById('other-industry-form-section');
+                    if (userProfileSnap.exists()) {
+                        const userData = userProfileSnap.data();
+                        currentUserName = userData.fullName || ''; // Store user's full name
+                        updatePersonalizedContent(currentUserName); // Update titles and footer
 
-            // Input fields for Construction section
-            const qualificationLevelConstructionSelect = document.getElementById('qualification-level-construction');
-            const courseNameConstructionInput = document.getElementById('course-name-construction');
-            const courseSuggestionsConstruction = document.getElementById('course-suggestions-construction');
+                        // Pre-fill job search form based on stored data
+                        if (userData.initialIndustry === 'Construction') {
+                            isConstructionMode = true;
+                            qualificationLevelConstructionSelect.value = userData.initialQualification || '';
+                            courseNameConstructionInput.value = userData.initialCourse || '';
+                        } else if (userData.initialIndustry === 'Other') {
+                            isConstructionMode = false;
+                            otherIndustryInput.value = userData.initialIndustry || '';
+                            qualificationLevelOtherSelect.value = userData.initialQualification || '';
+                            courseNameOtherInput.value = userData.initialCourse || '';
+                        }
+                        updateIndustryView(); // Apply the correct form view
 
-            // Input fields for Other Industry section
-            const otherIndustryInput = document.getElementById('other-industry-input');
-            const industrySuggestionsOther = document.getElementById('industry-suggestions-other');
-            const qualificationLevelOtherSelect = document.getElementById('qualification-level-other');
-            const courseNameOtherInput = document.getElementById('course-name-other');
-            const courseSuggestionsOther = document.getElementById('course-suggestions-other');
+                        // Automatically show job matches if initial data exists
+                        if (userData.initialQualification && userData.initialCourse) {
+                            displayJobMatches(userData.initialQualification, userData.initialCourse, userData.initialIndustry);
+                            // Scroll to job matches section
+                            setTimeout(() => {
+                                jobMatchesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }, 500);
+                        }
+                    }
+                    logoutButton.style.display = 'inline-block'; // Show logout for desktop
+                    mobileLogoutButton.style.display = 'block'; // Show logout for mobile
+                } else {
+                    // User is signed out
+                    currentUserId = null;
+                    currentUserName = ''; // Clear user name
+                    updatePersonalizedContent(currentUserName); // Reset titles and footer
+                    logoutButton.style.display = 'none'; // Hide logout
+                    mobileLogoutButton.style.display = 'none'; // Hide logout
+                    // Clear form fields and job matches if user logs out
+                    qualificationLevelConstructionSelect.value = '';
+                    courseNameConstructionInput.value = '';
+                    otherIndustryInput.value = '';
+                    qualificationLevelOtherSelect.value = '';
+                    courseNameOtherInput.value = '';
+                    jobList.innerHTML = '';
+                    jobMatchesSection.style.display = 'none';
+                }
+            });
 
-            let isConstructionMode = true; // Default state: In Construction
+            // Initial custom token sign-in
+            // This part uses the Canvas environment's specific token for initial authentication.
+            const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+            if (initialAuthToken) {
+                signInWithCustomToken(auth, initialAuthToken)
+                    .then(() => console.log("Signed in with custom token."))
+                    .catch(error => console.error("Error signing in with custom token:", error));
+            } else {
+                signInAnonymously(auth)
+                    .then(() => console.log("Signed in anonymously."))
+                    .catch(error => console.error("Error signing in anonymously:", error));
+            }
 
-            // Suggestion data (from auto-suggestion-data immersive)
-            const constructionCourses = [
-                "Civil Engineering", "Construction Management", "Architecture",
-                "Quantity Surveying", "Structural Engineering", "Building Technology",
-                "Land Surveying", "Urban Planning", "Environmental Engineering",
-                "Geotechnical Engineering", "Electrical Engineering (Construction Focus)",
-                "Mechanical Engineering (Construction Focus)", "Construction Project Management",
-                "Real Estate Development", "Interior Design (Construction)", "Building Services Engineering"
-            ];
-
-            const otherIndustryTypes = [
-                "Healthcare", "Information Technology", "Education", "Finance",
-                "Marketing", "Retail", "Hospitality", "Manufacturing",
-                "Logistics", "Science", "Arts & Culture", "Legal", "Media",
-                "Telecommunications", "Automotive", "Aerospace", "Agriculture"
-            ];
-
-            const otherIndustryCourses = [
-                "Nursing", "Software Development", "Teaching", "Financial Analysis",
-                "Digital Marketing", "Business Administration", "Human Resources",
-                "Data Science", "Graphic Design", "Journalism", "Cybersecurity",
-                "Biomedical Engineering", "Environmental Science", "Culinary Arts"
-            ];
-
-            // Company names for the scroller
-            const companyNames = [
-                // Construction-related companies (real ones from search)
-                "Epco Builders Ltd", "Seyani Brothers & Co. (K) Ltd", "Laxmanbhai Construction Ltd",
-                "Intex Construction", "Cementers Ltd", "Hayer Bishan Singh & Sons Ltd",
-                "Associated Construction Co (K) Ltd", "Parbat Siyani Construction Ltd",
-                "Put Sarajevo General Engineering Co", "Nyoro Construction Company Ltd",
-                "Sogea Satom Kenya", "Bechtel Corporation Kenya", "INTEGRUM", "Dancom Construction",
-                "Archistra Construction Company Ltd", "Aspax Construction Company",
-                
-                // Government Road Agencies (as requested)
-                "Kenya Urban Roads Authority (KURA)",
-                "Kenya National Highways Authority (KeNHA)",
-                "Kenya Rural Roads Authority (KeRRA)",
-
-                // Other major Kenyan companies
-                "Safaricom PLC", "Equity Bank Group", "KCB Group PLC", "East African Breweries PLC",
-                "Co-operative Bank of Kenya", "Absa Bank Kenya PLC", "Standard Chartered Bank Kenya",
-                "Bamburi Cement PLC", "Kenya Power & Lighting Co. PLC", "Centum Investment Company PLC",
-                "Jubilee Holdings Ltd", "Britam Holdings PLC", "NCBA Group PLC", "Kenya Airways PLC",
-                "TotalEnergies Marketing Kenya PLC", "KenGen PLC", "Sanlam Kenya PLC",
-                "CIC Insurance Group PLC", "Liberty Kenya Holdings PLC", "Crown Paints Kenya PLC",
-                "Carbacid Investments PLC", "Longhorn Publishers PLC", "Nation Media Group PLC",
-                "Standard Group PLC", "Home Afrika Ltd", "Flame Tree Group Holdings Ltd",
-                "Kakuzi PLC", "Limuru Tea PLC", "Sasini PLC", "Eaagads Ltd"
-            ];
 
             // Function to populate the company scroller
             function populateCompanyScroller() {
@@ -811,7 +1357,7 @@
                 createCompanyItems(companyList2); // Duplicate for seamless looping
 
                 // Pause animation for accurate measurement
-                innerWrapper.style.animation = 'none'; 
+                innerWrapper.style.animation = 'none';
 
                 // Measure the height of one full list of companies after rendering
                 const singleListHeight = companyList1.offsetHeight;
@@ -828,11 +1374,9 @@
                 innerWrapper.style.animation = `scrollCompanies var(--scroll-duration) linear infinite`;
 
                 // Set the height of the content area to show exactly two lines
-                // Ensure this calculation accounts for the potentially new font-size and line-height
                 const sampleItem = companyList1.querySelector('.company-list-item');
-                // Get computed style for accurate height, including padding
                 const computedStyle = getComputedStyle(sampleItem);
-                const itemHeight = parseFloat(computedStyle.height) + parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom); 
+                const itemHeight = parseFloat(computedStyle.height) + parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom);
                 
                 companyScrollerContentArea.style.height = `${itemHeight * 2}px`; // Show exactly two lines
             }
@@ -878,11 +1422,10 @@
                     constructionTab.classList.add('active');
                     otherIndustryTab.classList.remove('active');
                     
-                    // Set ARIA attributes for tab roles
                     constructionTab.setAttribute('aria-selected', 'true');
                     otherIndustryTab.setAttribute('aria-selected', 'false');
-                    constructionFormSection.removeAttribute('hidden'); // Ensure content is accessible
-                    otherIndustryFormSection.setAttribute('hidden', 'true'); // Hide content semantically
+                    constructionFormSection.removeAttribute('hidden');
+                    otherIndustryFormSection.setAttribute('hidden', 'true');
 
                     // Clear other industry specific fields when switching back
                     otherIndustryInput.value = '';
@@ -900,7 +1443,7 @@
                     otherIndustryInput.oninput = null;
                     otherIndustryInput.onfocus = null;
                     otherIndustryInput.onblur = null;
-                    qualificationLevelOtherSelect.onchange = null; // Detach if any
+                    qualificationLevelOtherSelect.onchange = null;
                     courseNameOtherInput.oninput = null;
                     courseNameOtherInput.onfocus = null;
                     courseNameOtherInput.onblur = null;
@@ -911,11 +1454,10 @@
                     constructionTab.classList.remove('active');
                     otherIndustryTab.classList.add('active');
 
-                    // Set ARIA attributes for tab roles
                     constructionTab.setAttribute('aria-selected', 'false');
                     otherIndustryTab.setAttribute('aria-selected', 'true');
-                    constructionFormSection.setAttribute('hidden', 'true'); // Hide content semantically
-                    otherIndustryFormSection.removeAttribute('hidden'); // Ensure content is accessible
+                    constructionFormSection.setAttribute('hidden', 'true');
+                    otherIndustryFormSection.removeAttribute('hidden');
                     
                     // Clear construction specific fields when switching away
                     qualificationLevelConstructionSelect.value = '';
@@ -926,9 +1468,6 @@
                     otherIndustryInput.oninput = () => handleSuggestions(otherIndustryInput, industrySuggestionsOther, otherIndustryTypes);
                     otherIndustryInput.onfocus = () => handleSuggestions(otherIndustryInput, industrySuggestionsOther, otherIndustryTypes);
                     otherIndustryInput.onblur = () => setTimeout(() => industrySuggestionsOther.classList.add('hidden'), 150);
-
-                    // No specific suggestions for qualificationLevelOtherSelect, but keep for consistency if needed later
-                    // qualificationLevelOtherSelect.onchange = () => { /* handle change if needed */ };
 
                     courseNameOtherInput.oninput = () => handleSuggestions(courseNameOtherInput, courseSuggestionsOther, otherIndustryCourses);
                     courseNameOtherInput.onfocus = () => handleSuggestions(courseNameOtherInput, courseSuggestionsOther, otherIndustryCourses);
@@ -943,7 +1482,7 @@
 
             // Mobile menu toggle functionality
             mobileMenuButton.addEventListener('click', function(event) {
-                event.stopPropagation(); // Prevent click from immediately propagating to document
+                event.stopPropagation();
                 const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
                 mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
                 mobileNavMenu.classList.toggle('active');
@@ -967,22 +1506,336 @@
 
             // Industry toggle button functionality
             constructionTab.addEventListener('click', function() {
-                if (!isConstructionMode) { // Only toggle if not already in construction mode
+                if (!isConstructionMode) {
                     isConstructionMode = true;
                     updateIndustryView();
                 }
             });
 
             otherIndustryTab.addEventListener('click', function() {
-                if (isConstructionMode) { // Only toggle if not already in other industry mode
+                if (isConstructionMode) {
                     isConstructionMode = false;
                     updateIndustryView();
                 }
             });
 
+            // Handle job search form submission
+            jobSearchForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                showLoader();
+
+                let qualification = '';
+                let course = '';
+                let industry = '';
+
+                if (isConstructionMode) {
+                    qualification = qualificationLevelConstructionSelect.value;
+                    course = courseNameConstructionInput.value.trim();
+                    industry = 'Construction';
+                } else {
+                    industry = otherIndustryInput.value.trim();
+                    qualification = qualificationLevelOtherSelect.value;
+                    course = courseNameOtherInput.value.trim();
+                    industry = otherIndustryInput.value.trim(); // Ensure industry is captured for 'Other'
+                }
+
+                tempJobSearchData = { qualification, course, industry };
+
+                // Check if user is authenticated
+                if (auth.currentUser && !auth.currentUser.isAnonymous) {
+                    // User is already signed in, proceed to display jobs
+                    await saveJobSearchData(currentUserId, tempJobSearchData);
+                    displayJobMatches(qualification, course, industry);
+                    hideLoader();
+                    // Scroll to job matches section
+                    setTimeout(() => {
+                        jobMatchesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 500);
+                } else {
+                    // User is not signed in, show signup/signin modal
+                    hideLoader();
+                    openAuthModal(''); 
+                }
+            });
+
+            // Show/Hide Loader
+            function showLoader() {
+                loaderOverlay.classList.add('active');
+            }
+
+            function hideLoader() {
+                loaderOverlay.classList.remove('active');
+            }
+
+            // Open Auth Modal
+            function openAuthModal(userNameForGreeting) {
+                modalTitle.textContent = userNameForGreeting ? `Welcome, ${userNameForGreeting}! Please sign up or sign in.` : `Your first time here? Sign up first!`;
+                authModalOverlay.classList.add('active');
+                modalSignupTab.classList.add('active');
+                modalSigninTab.classList.remove('active');
+                signupForm.classList.remove('hidden');
+                signinForm.classList.add('hidden');
+                signupErrorMessage.classList.add('hidden');
+                signinErrorMessage.classList.add('hidden');
+            }
+
+            // Close Auth Modal
+            modalCloseButton.addEventListener('click', function() {
+                authModalOverlay.classList.remove('active');
+            });
+
+            // Switch between Signup and Signin forms
+            modalSignupTab.addEventListener('click', function() {
+                modalSignupTab.classList.add('active');
+                modalSigninTab.classList.remove('active');
+                signupForm.classList.remove('hidden');
+                signinForm.classList.add('hidden');
+                signupErrorMessage.classList.add('hidden');
+                signinErrorMessage.classList.add('hidden');
+            });
+
+            modalSigninTab.addEventListener('click', function() {
+                modalSignupTab.classList.remove('active');
+                modalSigninTab.classList.add('active');
+                signupForm.classList.add('hidden');
+                signinForm.classList.remove('hidden');
+                signupErrorMessage.classList.add('hidden');
+                signinErrorMessage.classList.add('hidden');
+            });
+
+            // Handle Signup Form Submission
+            signupForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                signupErrorMessage.classList.add('hidden');
+                const fullName = document.getElementById('signup-fullname').value.trim();
+                const mobileNumber = document.getElementById('signup-mobile').value.trim();
+                const email = document.getElementById('signup-email').value.trim();
+                const password = document.getElementById('signup-password').value.trim();
+
+                if (!fullName || !mobileNumber || !email || !password) {
+                    signupErrorMessage.textContent = "Please fill in all fields.";
+                    signupErrorMessage.classList.remove('hidden');
+                    return;
+                }
+
+                showLoader();
+                try {
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    const user = userCredential.user;
+                    currentUserId = user.uid;
+                    currentUserName = fullName; // Set current user name
+
+                    // Save user profile data to Firestore
+                    // Path: /artifacts/{appId}/users/${currentUserId}/profiles/${currentUserId}
+                    const userProfileRef = doc(db, `artifacts/${appId}/users/${currentUserId}/profiles`, currentUserId);
+                    await setDoc(userProfileRef, {
+                        fullName: fullName,
+                        mobileNumber: mobileNumber,
+                        email: email,
+                        initialQualification: tempJobSearchData.qualification,
+                        initialCourse: tempJobSearchData.course,
+                        initialIndustry: tempJobSearchData.industry,
+                        createdAt: new Date()
+                    });
+
+                    await saveJobSearchData(currentUserId, tempJobSearchData);
+
+                    hideLoader();
+                    authModalOverlay.classList.remove('active'); // Close modal
+                    updatePersonalizedContent(currentUserName); // Update main title and footer
+                    displayJobMatches(tempJobSearchData.qualification, tempJobSearchData.course, tempJobSearchData.industry);
+                    
+                    setTimeout(() => {
+                        jobMatchesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 500);
+
+                } catch (error) {
+                    hideLoader();
+                    console.error("Signup Error:", error);
+                    let message = "An error occurred during signup.";
+                    if (error.code === 'auth/email-already-in-use') {
+                        message = "This email is already in use. Please sign in instead.";
+                    } else if (error.code === 'auth/invalid-email') {
+                        message = "Invalid email address.";
+                    } else if (error.code === 'auth/weak-password') {
+                        message = "Password should be at least 6 characters.";
+                    }
+                    signupErrorMessage.textContent = message;
+                    signupErrorMessage.classList.remove('hidden');
+                }
+            });
+
+            // Handle Signin Form Submission
+            signinForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                signinErrorMessage.classList.add('hidden');
+                const email = document.getElementById('signin-email').value.trim();
+                const password = document.getElementById('signin-password').value.trim();
+
+                if (!email || !password) {
+                    signinErrorMessage.textContent = "Please enter both email and password.";
+                    signinErrorMessage.classList.remove('hidden');
+                    return;
+                }
+
+                showLoader();
+                try {
+                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                    const user = userCredential.user;
+                    currentUserId = user.uid;
+
+                    // Update user profile with initial search data if it's new, or just fetch existing
+                    const userProfileRef = doc(db, `artifacts/${appId}/users/${currentUserId}/profiles`, currentUserId);
+                    const userProfileSnap = await getDoc(userProfileRef);
+                    if (userProfileSnap.exists()) {
+                        const userData = userProfileSnap.data();
+                        currentUserName = userData.fullName || email; // Use stored name or email if name not found
+                        if (userData.initialQualification !== tempJobSearchData.qualification ||
+                            userData.initialCourse !== tempJobSearchData.course ||
+                            userData.initialIndustry !== tempJobSearchData.industry) {
+                            await setDoc(userProfileRef, {
+                                initialQualification: tempJobSearchData.qualification,
+                                initialCourse: tempJobSearchData.course,
+                                initialIndustry: tempJobSearchData.industry,
+                                lastLogin: new Date()
+                            }, { merge: true }); // Merge to update only specified fields
+                        }
+                    } else {
+                        // This case should ideally not happen if user signs up first, but handle if profile doesn't exist
+                        currentUserName = email; // Default to email if no profile found
+                        await setDoc(userProfileRef, {
+                            fullName: email.split('@')[0], // Basic name if not available
+                            email: email,
+                            initialQualification: tempJobSearchData.qualification,
+                            initialCourse: tempJobSearchData.course,
+                            initialIndustry: tempJobSearchData.industry,
+                            createdAt: new Date(),
+                            lastLogin: new Date()
+                        });
+                    }
+
+                    await saveJobSearchData(currentUserId, tempJobSearchData);
+
+                    hideLoader();
+                    authModalOverlay.classList.remove('active'); // Close modal
+                    updatePersonalizedContent(currentUserName); // Update main title and footer
+                    displayJobMatches(tempJobSearchData.qualification, tempJobSearchData.course, tempJobSearchData.industry);
+                    
+                    setTimeout(() => {
+                        jobMatchesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 500);
+
+                } catch (error) {
+                    hideLoader();
+                    console.error("Signin Error:", error);
+                    let message = "Invalid email or password.";
+                    if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                        message = "Invalid email or password. Please try again.";
+                    } else if (error.code === 'auth/invalid-email') {
+                        message = "Invalid email address format.";
+                    }
+                    signinErrorMessage.textContent = message;
+                    signinErrorMessage.classList.remove('hidden');
+                }
+            });
+
+            // Save Job Search Data to Firestore
+            async function saveJobSearchData(userId, data) {
+                if (!userId) {
+                    console.error("User ID is not available to save job search data.");
+                    return;
+                }
+                try {
+                    // Path: /artifacts/${appId}/users/${userId}/jobSearches/${docId}
+                    const jobSearchesCollectionRef = collection(db, `artifacts/${appId}/users/${userId}/jobSearches`);
+                    await addDoc(jobSearchesCollectionRef, {
+                        qualification: data.qualification,
+                        course: data.course,
+                        industry: data.industry,
+                        searchDate: new Date(),
+                    });
+                    console.log("Job search data saved successfully!");
+                } catch (e) {
+                    console.error("Error adding document: ", e);
+                }
+            }
+
+            // Display Job Matches
+            function displayJobMatches(qualification, course, industry) {
+                jobList.innerHTML = ''; // Clear previous jobs
+                jobMatchesSection.style.display = 'block'; // Show the section
+
+                const filteredJobs = allJobs.filter(job => {
+                    const matchesQualification = qualification ? job.qualification === qualification : true;
+                    const matchesCourse = course ? job.course.toLowerCase().includes(course.toLowerCase()) : true;
+                    const matchesIndustry = industry ? job.industry === industry : true;
+
+                    return matchesQualification && matchesCourse && matchesIndustry;
+                });
+
+                currentFilteredJobs = filteredJobs; // Store filtered jobs for export
+
+                if (filteredJobs.length > 0) {
+                    filteredJobs.forEach(job => {
+                        const jobCard = document.createElement('div');
+                        jobCard.classList.add('job-card');
+                        jobCard.innerHTML = `
+                            <h3 class="mb-2">${job.title}</h3>
+                            <p class="text-gray-300"><strong>Company:</strong> ${job.company}</p>
+                            <p class="text-gray-300"><strong>Location:</strong> ${job.location}</p>
+                            <p class="text-gray-300"><strong>Posted:</strong> ${job.date} (Source: ${job.source})</p>
+                            <p class="text-gray-300 mb-4"><strong>Requirements:</strong> ${job.requirements}</p>
+                            <a href="#" class="text-indigo-400 hover:text-indigo-300 font-semibold">View Details & Apply</a>
+                        `;
+                        jobList.appendChild(jobCard);
+                    });
+                } else {
+                    jobList.innerHTML = `<p class="text-center text-gray-400 text-xl">No job matches found for your criteria. Keep exploring!</p>`;
+                }
+            }
+
+            // Function to update personalized content (titles, footer)
+            function updatePersonalizedContent(name) {
+                if (name) {
+                    mainOpportunitiesTitle.textContent = `Opportunities waiting for you, ${name}!`;
+                    footerGreeting.innerHTML = `Ready for your next big step, ${name}? We're here to help!`;
+                } else {
+                    mainOpportunitiesTitle.textContent = `Opportunities waiting for you!`;
+                    footerGreeting.innerHTML = `Any challenge? We're here to help!`;
+                }
+                lucide.createIcons(); // Re-render Lucide icons after updating innerHTML
+            }
+
+            // Handle Logout
+            logoutButton.addEventListener('click', async () => {
+                showLoader();
+                try {
+                    await signOut(auth);
+                    console.log("User signed out successfully.");
+                    hideLoader();
+                } catch (error) {
+                    console.error("Error signing out:", error);
+                    hideLoader();
+                }
+            });
+
+            mobileLogoutButton.addEventListener('click', async () => {
+                showLoader();
+                try {
+                    await signOut(auth);
+                    console.log("User signed out successfully.");
+                    hideLoader();
+                    mobileNavMenu.classList.remove('active'); // Close mobile menu
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                } catch (error) {
+                    console.error("Error signing out:", error);
+                    hideLoader();
+                }
+            });
+
             // Initial view setup
-            updateIndustryView(); // Call once to set the initial state
-            populateCompanyScroller(); // Populate the scroller on load
+            updateIndustryView();
+            populateCompanyScroller();
         });
     </script>
 </body>
