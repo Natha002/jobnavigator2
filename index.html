@@ -22,7 +22,7 @@
 
         body {
             font-family: 'Inter', sans-serif; /* Body text uses Inter */
-            background-image: url('background.png'); /* Changed to background.png */
+            background-image: url('background.png'); /* Default background for larger screens */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -31,6 +31,15 @@
             display: flex;
             flex-direction: column;
             overflow-x: hidden; /* Prevent horizontal scroll on animations */
+        }
+
+        /* Mobile specific background adjustments */
+        @media (max-width: 767px) { /* Targets screens up to 767px wide (typical mobile) */
+            body {
+                background-image: url('background3.png'); /* New background image for mobile */
+                background-size: cover; /* Ensure it covers the mobile screen */
+                background-position: center; /* Keep background image centered vertically and horizontally */
+            }
         }
 
         /* Headings and specific text elements use Poppins */
@@ -632,11 +641,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.4); /* Lightened background */
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 1002; /* Increased z-index to be in front of everything */
             visibility: hidden;
             opacity: 0;
             transition: visibility 0s, opacity 0.3s linear;
@@ -652,6 +661,7 @@
             width: 60px;
             height: 60px;
             animation: spin 1s linear infinite;
+            z-index: 1001; /* Ensure spinner is above the overlay */
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -665,7 +675,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.5); /* Lightened background */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -795,6 +805,53 @@
             transform: translateY(0);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
+        /* Styles for the User Entries Table (removed from this file, now in admin.html) */
+        /*
+        #user-entries-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            color: #e0e0e0;
+            overflow-x: auto;
+        }
+
+        #user-entries-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            color: #e0e0e0;
+            font-size: 0.9rem;
+        }
+
+        #user-entries-table th,
+        #user-entries-table td {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.75rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        #user-entries-table th {
+            background-color: rgba(0, 0, 0, 0.5);
+            font-weight: 700;
+            color: var(--digital-cyan);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        #user-entries-table tbody tr:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        #user-entries-table tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        */
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -806,10 +863,12 @@
                 <div class="flex flex-col items-start leading-none">
                     <span class="text-2xl font-extrabold header-text-outline">Kazi</span> <span class="text-sm font-semibold header-text-outline">Connect</span> </div>
             </div>
-            <ul class="hidden md:flex space-x-4"> <li><a href="#" class="nav-link">HOME</a></li>
+            <ul class="hidden md:flex space-x-4">
+                <li><a href="#" class="nav-link">HOME</a></li>
                 <li><a href="#" class="nav-link">ABOUT</a></li>
                 <li><a href="#" class="nav-link">SERVICES</a></li>
                 <li><a href="#" class="nav-link">POST A JOB</a></li>
+                <li><a href="admin.html" class="nav-link">AUTHORIZED PERSONNEL</a></li> <!-- New button -->
                 <li><button id="logout-button" class="btn-primary">Logout</button></li>
             </ul>
             <div class="md:hidden">
@@ -825,6 +884,7 @@
             <a href="#" class="block">ABOUT</a>
             <a href="#" class="block">SERVICES</a>
             <a href="#" class="block">POST A JOB</a>
+            <a href="admin.html" class="block">AUTHORIZED PERSONNEL</a> <!-- New button -->
             <button id="mobile-logout-button" class="btn-primary w-full mt-4">Logout</button>
         </div>
     </header>
@@ -844,9 +904,9 @@
                         <div class="company-scroller-content-area">
                             <div class="company-scroller-inner-wrapper" id="company-scroller-inner-wrapper">
                                 <div class="company-list-content" id="company-list-1">
-                                    </div>
+                                </div>
                                 <div class="company-list-content" id="company-list-2" aria-hidden="true">
-                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="digital-footer">
@@ -856,6 +916,11 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Moved "Already have an account? Sign In" link here -->
+                <p class="text-center text-sm mb-6 text-gray-700">
+                    Already have an account? <a href="#" id="main-form-signin-link" class="text-indigo-600 hover:text-indigo-800 underline font-semibold">Sign In</a>
+                </p>
 
                 <div class="industry-toggle-container mb-6" role="tablist">
                     <button type="button" id="construction-tab" class="industry-toggle-button-segment" role="tab" aria-selected="true" aria-controls="construction-form-section">
@@ -936,6 +1001,8 @@
             <div id="job-list" class="space-y-6">
                 </div>
         </section>
+
+        <!-- The "All User Entries" section has been moved to admin.html -->
     </main>
 
     <div id="loader-overlay" class="loader-overlay">
@@ -1017,7 +1084,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, signInWithCustomToken, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, where, onSnapshot, getDocs } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js"; // Added getDocs
 
         // --- START OF NEW FIREBASE CONFIGURATION ---
         // IMPORTANT: These values are from the new Firebase configuration you provided.
@@ -1076,12 +1143,15 @@
         const signinForm = document.getElementById('signin-form');
         const signupErrorMessage = document.getElementById('signup-error-message');
         const signinErrorMessage = document.getElementById('signin-error-message');
+        const mainFormSigninLink = document.getElementById('main-form-signin-link'); // New Sign In link
 
         const jobMatchesSection = document.getElementById('job-matches-section');
         const jobList = document.getElementById('job-list');
         const logoutButton = document.getElementById('logout-button');
         const mobileLogoutButton = document.getElementById('mobile-logout-button');
-        // const exportExcelButton = document.getElementById('export-excel-button'); // Removed export button
+        // Removed userEntriesSection and userEntriesTableBody DOM elements as they are moved to admin.html
+        // const userEntriesSection = document.getElementById('user-entries-section');
+        // const userEntriesTableBody = document.querySelector('#user-entries-table tbody');
 
         let isConstructionMode = true; // Default state: In Construction
         let tempJobSearchData = {}; // Temporarily store form data before signup/signin
@@ -1316,6 +1386,8 @@
                     jobList.innerHTML = '';
                     jobMatchesSection.style.display = 'none';
                 }
+                // Removed displayAllUserEntries() call from here as it's now in admin.html
+                // displayAllUserEntries();
             });
 
             // Initial custom token sign-in
@@ -1522,7 +1594,7 @@
             // Handle job search form submission
             jobSearchForm.addEventListener('submit', async function(event) {
                 event.preventDefault();
-                showLoader();
+                // No loader here, loader appears when auth modal forms are submitted.
 
                 let qualification = '';
                 let course = '';
@@ -1545,15 +1617,14 @@
                 if (auth.currentUser && !auth.currentUser.isAnonymous) {
                     // User is already signed in, proceed to display jobs
                     await saveJobSearchData(currentUserId, tempJobSearchData);
+                    await saveUserEntryToPublicCollection(currentUserId, currentUserName, auth.currentUser.email, tempJobSearchData); // Save to public collection
                     displayJobMatches(qualification, course, industry);
-                    hideLoader();
                     // Scroll to job matches section
                     setTimeout(() => {
                         jobMatchesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }, 500);
                 } else {
                     // User is not signed in, show signup/signin modal
-                    hideLoader();
                     openAuthModal(''); 
                 }
             });
@@ -1618,14 +1689,14 @@
                     return;
                 }
 
-                showLoader();
+                showLoader(); // Show loader immediately after form validation
                 try {
                     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                     const user = userCredential.user;
                     currentUserId = user.uid;
                     currentUserName = fullName; // Set current user name
 
-                    // Save user profile data to Firestore
+                    // Save user profile data to Firestore (private collection)
                     // Path: /artifacts/{appId}/users/${currentUserId}/profiles/${currentUserId}
                     const userProfileRef = doc(db, `artifacts/${appId}/users/${currentUserId}/profiles`, currentUserId);
                     await setDoc(userProfileRef, {
@@ -1639,9 +1710,10 @@
                     });
 
                     await saveJobSearchData(currentUserId, tempJobSearchData);
+                    await saveUserEntryToPublicCollection(currentUserId, fullName, email, tempJobSearchData); // Save to public collection
 
-                    hideLoader();
-                    authModalOverlay.classList.remove('active'); // Close modal
+                    hideLoader(); // Hide loader on success
+                    authModalOverlay.classList.remove('active'); // Close modal immediately
                     updatePersonalizedContent(currentUserName); // Update main title and footer
                     displayJobMatches(tempJobSearchData.qualification, tempJobSearchData.course, tempJobSearchData.industry);
                     
@@ -1650,7 +1722,7 @@
                     }, 500);
 
                 } catch (error) {
-                    hideLoader();
+                    hideLoader(); // Hide loader on error
                     console.error("Signup Error:", error);
                     let message = "An error occurred during signup.";
                     if (error.code === 'auth/email-already-in-use') {
@@ -1662,6 +1734,7 @@
                     }
                     signupErrorMessage.textContent = message;
                     signupErrorMessage.classList.remove('hidden');
+                    authModalOverlay.classList.add('active'); // Ensure modal reappears with error
                 }
             });
 
@@ -1678,7 +1751,7 @@
                     return;
                 }
 
-                showLoader();
+                showLoader(); // Show loader immediately after form validation
                 try {
                     const userCredential = await signInWithEmailAndPassword(auth, email, password);
                     const user = userCredential.user;
@@ -1715,9 +1788,10 @@
                     }
 
                     await saveJobSearchData(currentUserId, tempJobSearchData);
+                    await saveUserEntryToPublicCollection(currentUserId, currentUserName, email, tempJobSearchData); // Save to public collection
 
-                    hideLoader();
-                    authModalOverlay.classList.remove('active'); // Close modal
+                    hideLoader(); // Hide loader on success
+                    authModalOverlay.classList.remove('active'); // Close modal immediately
                     updatePersonalizedContent(currentUserName); // Update main title and footer
                     displayJobMatches(tempJobSearchData.qualification, tempJobSearchData.course, tempJobSearchData.industry);
                     
@@ -1726,7 +1800,7 @@
                     }, 500);
 
                 } catch (error) {
-                    hideLoader();
+                    hideLoader(); // Hide loader on error
                     console.error("Signin Error:", error);
                     let message = "Invalid email or password.";
                     if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
@@ -1736,10 +1810,24 @@
                     }
                     signinErrorMessage.textContent = message;
                     signinErrorMessage.classList.remove('hidden');
+                    authModalOverlay.classList.add('active'); // Ensure modal reappears with error
                 }
             });
 
-            // Save Job Search Data to Firestore
+            // Event listener for the new "Sign In" link at the bottom of the main form
+            mainFormSigninLink.addEventListener('click', (event) => {
+                event.preventDefault(); // Prevent default link behavior
+                openAuthModal(''); // Open the auth modal
+                modalSignupTab.classList.remove('active'); // Deactivate signup tab
+                modalSigninTab.classList.add('active'); // Activate signin tab
+                signupForm.classList.add('hidden'); // Hide signup form
+                signinForm.classList.remove('hidden'); // Show signin form
+                signupErrorMessage.classList.add('hidden'); // Hide any signup errors
+                signinErrorMessage.classList.add('hidden'); // Hide any signin errors
+            });
+
+
+            // Save Job Search Data to Firestore (private collection)
             async function saveJobSearchData(userId, data) {
                 if (!userId) {
                     console.error("User ID is not available to save job search data.");
@@ -1754,9 +1842,35 @@
                         industry: data.industry,
                         searchDate: new Date(),
                     });
-                    console.log("Job search data saved successfully!");
+                    console.log("Job search data saved successfully (private)!");
                 } catch (e) {
-                    console.error("Error adding document: ", e);
+                    console.error("Error adding document to private collection: ", e);
+                }
+            }
+
+            // Save User Entry to Public Collection
+            async function saveUserEntryToPublicCollection(userId, fullName, email, searchData) {
+                if (!userId) {
+                    console.error("User ID is not available to save to public collection.");
+                    return;
+                }
+                try {
+                    // Path: /artifacts/{appId}/public/data/allUserEntries/{userId}
+                    const publicUserEntryRef = doc(db, `artifacts/${appId}/public/data/allUserEntries`, userId);
+                    await setDoc(publicUserEntryRef, {
+                        fullName: fullName,
+                        mobileNumber: document.getElementById('signup-mobile')?.value || '', // Get from signup form if available
+                        email: email,
+                        qualification: searchData.qualification,
+                        course: searchData.course,
+                        industry: searchData.industry,
+                        lastUpdated: new Date()
+                    }, { merge: true }); // Use merge to update existing entry or create new
+                    console.log("User entry saved successfully (public)!");
+                    // Removed displayAllUserEntries() call from here as it's now in admin.html
+                    // displayAllUserEntries(); // Refresh the table after saving
+                } catch (e) {
+                    console.error("Error adding document to public collection: ", e);
                 }
             }
 
@@ -1793,6 +1907,46 @@
                     jobList.innerHTML = `<p class="text-center text-gray-400 text-xl">No job matches found for your criteria. Keep exploring!</p>`;
                 }
             }
+
+            // Removed displayAllUserEntries() function as it's now in admin.html
+            /*
+            async function displayAllUserEntries() {
+                userEntriesTableBody.innerHTML = ''; // Clear existing table rows
+                userEntriesSection.style.display = 'block'; // Ensure the section is visible
+
+                try {
+                    const allUserEntriesCollectionRef = collection(db, `artifacts/${appId}/public/data/allUserEntries`);
+                    const querySnapshot = await getDocs(allUserEntriesCollectionRef);
+
+                    if (querySnapshot.empty) {
+                        const row = userEntriesTableBody.insertRow();
+                        const cell = row.insertCell();
+                        cell.colSpan = 6; // Span all columns
+                        cell.textContent = "No user entries found yet.";
+                        cell.classList.add('text-center', 'py-4', 'text-gray-400');
+                        return;
+                    }
+
+                    querySnapshot.forEach((doc) => {
+                        const userData = doc.data();
+                        const row = userEntriesTableBody.insertRow();
+                        row.insertCell().textContent = userData.fullName || 'N/A';
+                        row.insertCell().textContent = userData.mobileNumber || 'N/A';
+                        row.insertCell().textContent = userData.email || 'N/A';
+                        row.insertCell().textContent = userData.qualification || 'N/A';
+                        row.insertCell().textContent = userData.course || 'N/A';
+                        row.insertCell().textContent = userData.industry || 'N/A';
+                    });
+                } catch (error) {
+                    console.error("Error fetching all user entries:", error);
+                    const row = userEntriesTableBody.insertRow();
+                    const cell = row.insertCell();
+                    cell.colSpan = 6;
+                    cell.textContent = "Error loading user entries.";
+                    cell.classList.add('text-center', 'py-4', 'text-red-500');
+                }
+            }
+            */
 
             // Function to update personalized content (titles, footer)
             function updatePersonalizedContent(name) {
@@ -1836,6 +1990,8 @@
             // Initial view setup
             updateIndustryView();
             populateCompanyScroller();
+            // Removed initial call to displayAllUserEntries() as it's now in admin.html
+            // displayAllUserEntries();
         });
     </script>
 </body>
