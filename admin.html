@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kazi Connect - Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --logo-green: #00CC00;
+            --logo-orange-original: #D2691E;
+            --indigo-800: #3730a3;
+            --indigo-500: #6366f1;
+            --digital-cyan: #00FFFF;
+            --digital-green: #00FF00;
+            --logo-rectangle-color: #D2691E;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: url('background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            color: #e0e0e0; /* Light text for dark background */
+        }
+
+        h1, h2, .header-text-outline, .nav-link {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .header-gradient {
+            background-image: linear-gradient(to right, rgba(135, 206, 235, 0.6), rgba(255, 192, 203, 0.6));
+        }
+
+        .logo-container {
+            width: 42px;
+            height: 42px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 0.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 0 0 1.5px var(--indigo-800);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border: 2px solid var(--indigo-800);
+        }
+        .logo-container:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 0 0 2px var(--indigo-800);
+        }
+        .logo-container img {
+            width: 85%;
+            height: 85%;
+            object-fit: contain;
+        }
+
+        .header-text-outline {
+            color: var(--indigo-800);
+            text-shadow:
+                1px 1px 0 var(--logo-orange-original), -1px -1px 0 var(--logo-orange-original),
+                1px -1px 0 var(--logo-orange-original), -1px 1px 0 var(--logo-orange-original);
+            transition: color 0.3s ease-in-out;
+            font-weight: 700;
+        }
+        .header-text-outline:hover {
+            color: var(--indigo-800);
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            background-color: transparent;
+            color: var(--indigo-800);
+            font-size: 1rem;
+            text-transform: uppercase;
+            text-shadow: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            display: inline-block;
+            border: 1px solid var(--logo-rectangle-color);
+            animation: navLinkGlow 5s infinite alternate;
+        }
+        .nav-link::after {
+            content: none;
+        }
+        .nav-link:hover {
+            background-color: var(--logo-orange-original);
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-color: var(--logo-orange-original);
+            animation: none;
+        }
+
+        @keyframes navLinkGlow {
+            0%, 100% {
+                box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+                border-color: var(--logo-rectangle-color);
+            }
+            50% {
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.8);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .nav-link {
+                font-size: 1.2rem;
+            }
+        }
+
+        .opportunities-title-outline {
+            text-shadow:
+                1px 1px 0 #FFF, -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF,
+                0 0 10px rgba(255, 215, 0, 0.4),
+                0 0 20px rgba(255, 165, 0, 0.2);
+            animation: colorShift 9s infinite alternate, opportunitiesSmoothPulse 4s infinite alternate ease-in-out;
+            font-size: 2.25rem;
+            font-weight: 800;
+        }
+
+        @keyframes colorShift {
+            0% { color: var(--indigo-800); }
+            50% { color: var(--logo-orange-original); }
+            100% { color: var(--indigo-800); }
+        }
+
+        @keyframes opportunitiesSmoothPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @media (min-width: 768px) {
+            .opportunities-title-outline {
+                font-size: 3.5rem;
+            }
+        }
+
+        /* Styles for the User Entries Table */
+        #user-entries-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            color: #e0e0e0;
+            overflow-x: auto; /* Enable horizontal scrolling for small screens */
+        }
+
+        #user-entries-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            color: #e0e0e0;
+            font-size: 0.9rem;
+        }
+
+        #user-entries-table th,
+        #user-entries-table td {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.75rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        #user-entries-table th {
+            background-color: rgba(0, 0, 0, 0.5);
+            font-weight: 700;
+            color: var(--digital-cyan);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            cursor: pointer; /* Indicate sortable */
+            position: relative;
+        }
+
+        #user-entries-table th .sort-indicator {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.7em;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        #user-entries-table th.asc .sort-indicator::after { content: ' ▲'; }
+        #user-entries-table th.desc .sort-indicator::after { content: ' ▼'; }
+
+
+        #user-entries-table tbody tr:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        #user-entries-table tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Loader/Spinner styles */
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s linear;
+        }
+        .loader-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .spinner {
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-top: 8px solid #6366f1; /* Primary color */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .footer-text {
+            font-size: 0.875rem;
+            color: #ccc;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+        }
+        @media (min-width: 768px) {
+            .footer-text {
+                font-size: 1.1rem;
+            }
+        }
+        .footer-link {
+            color: var(--logo-orange-original);
+            transition: color 0.2s ease, text-shadow 0.2s ease;
+            text-shadow: 0 0 3px rgba(255, 165, 0, 0.3);
+        }
+        .footer-link:hover {
+            color: var(--indigo-500);
+            text-shadow: 0 0 8px rgba(99, 102, 241, 0.6), 0 0 15px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Styles for Delete Button */
+        .delete-btn {
+            background-color: #ef4444; /* Red */
+            color: white;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            font-size: 0.85rem;
+        }
+        .delete-btn:hover {
+            background-color: #dc2626; /* Darker red */
+            transform: translateY(-2px);
+        }
+        .delete-btn .lucide-icon {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        /* Modal styles (reused from index.html for consistency) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s linear;
+        }
+        .modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+            color: #333; /* Dark text for modal content */
+        }
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .modal-close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.2s;
+        }
+        .modal-close-button:hover {
+            color: #333;
+        }
+        .btn-secondary {
+            background-color: #6b7280; /* Gray */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #4b5563; /* Darker gray */
+        }
+
+        /* Input field styles for filters */
+        .filter-input {
+            border: 1px solid #d1d5db;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+        }
+        .filter-input:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <header class="w-full header-gradient shadow-md py-4 px-6 md:px-10 relative">
+        <nav class="container mx-auto flex justify-between items-center" aria-label="Main navigation">
+            <div class="flex items-center space-x-1">
+                <div class="logo-container"> <img src="logo2.png" alt="Kazi Connect Logo" loading="lazy"> </div>
+                <div class="flex flex-col items-start leading-none">
+                    <span class="text-2xl font-extrabold header-text-outline">Kazi</span> <span class="text-sm font-semibold header-text-outline">Connect</span> </div>
+            </div>
+            <ul class="hidden md:flex space-x-4">
+                <li><a href="index.html" class="nav-link">HOME</a></li>
+                <li><a href="#" class="nav-link">ABOUT</a></li>
+                <li><a href="#" class="nav-link">SERVICES</a></li>
+                <li><a href="#" class="nav-link">POST A JOB</a></li>
+                <li><a href="admin.html" class="nav-link">AUTHORIZED PERSONNEL</a></li>
+            </ul>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white hover:text-gray-200 focus:outline-none p-2 rounded-md" aria-controls="mobile-nav-menu" aria-expanded="false">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-nav-menu" class="mobile-nav-menu md:hidden">
+            <a href="index.html" class="block">HOME</a>
+            <a href="#" class="block">ABOUT</a>
+            <a href="#" class="block">SERVICES</a>
+            <a href="#" class="block">POST A JOB</a>
+            <a href="admin.html" class="block">AUTHORIZED PERSONNEL</a>
+        </div>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center p-4 sm:p-6 md:p-8">
+        <!-- New Section for User Entries Table -->
+        <section id="user-entries-section" class="w-full max-w-4xl mx-auto p-6 sm:p-8 md:p-10 mt-8 rounded-2xl">
+            <h2 class="text-3xl sm:text-4xl font-extrabold mb-6 text-center opportunities-title-outline">
+                All User Entries
+            </h2>
+
+            <!-- Filter Controls -->
+            <div class="mb-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                <div>
+                    <label for="filter-search-input" class="block text-white text-sm font-bold mb-2">Search All:</label>
+                    <input type="text" id="filter-search-input" placeholder="Search by name, email..." class="filter-input">
+                </div>
+                <div>
+                    <label for="filter-qualification" class="block text-white text-sm font-bold mb-2">Filter by Qualification:</label>
+                    <select id="filter-qualification" class="filter-input appearance-none">
+                        <option value="">All Qualifications</option>
+                        <option value="certificate">Certificate</option>
+                        <option value="diploma">Diploma</option>
+                        <option value="technician">Technician</option>
+                        <option value="degree">Degree</option>
+                        <option value="higher-diploma">Higher Diploma</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="filter-industry" class="block text-white text-sm font-bold mb-2">Filter by Industry:</label>
+                    <select id="filter-industry" class="filter-input appearance-none">
+                        <option value="">All Industries</option>
+                        <option value="Construction">Construction</option>
+                        <option value="Other (Non-Construction)">Other (Non-Construction)</option>
+                        <option value="Healthcare">Healthcare</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Education">Education</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Retail">Retail</option>
+                        <option value="Hospitality">Hospitality</option>
+                        <option value="Manufacturing">Manufacturing</option>
+                        <option value="Logistics">Logistics</option>
+                        <option value="Science">Science</option>
+                        <option value="Arts & Culture">Arts & Culture</option>
+                        <option value="Legal">Legal</option>
+                        <option value="Media">Media</option>
+                        <option value="Telecommunications">Telecommunications</option>
+                        <option value="Automotive">Automotive</option>
+                        <option value="Aerospace">Aerospace</option>
+                        <option value="Agriculture">Agriculture</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="filter-course-name" class="block text-white text-sm font-bold mb-2">Filter by Course:</label>
+                    <input type="text" id="filter-course-name" placeholder="e.g., Civil Engineering" class="filter-input">
+                </div>
+                <div>
+                    <label for="filter-from-date" class="block text-white text-sm font-bold mb-2">From Date:</label>
+                    <input type="date" id="filter-from-date" class="filter-input">
+                </div>
+                <div>
+                    <label for="filter-to-date" class="block text-white text-sm font-bold mb-2">To Date:</label>
+                    <input type="date" id="filter-to-date" class="filter-input">
+                </div>
+            </div>
+
+            <!-- Filter Action Buttons -->
+            <div class="mb-6 flex justify-center gap-4">
+                <button id="apply-filters-btn" class="btn-primary">Apply Filters</button>
+                <button id="clear-filters-btn" class="btn-secondary">Clear Filters</button>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table id="user-entries-table">
+                    <thead>
+                        <tr>
+                            <th data-sort-by="fullName">Full Name <span class="sort-indicator"></span></th>
+                            <th data-sort-by="mobileNumber">Mobile Number <span class="sort-indicator"></span></th>
+                            <th data-sort-by="email">Email <span class="sort-indicator"></span></th>
+                            <th data-sort-by="qualification">Qualification Level <span class="sort-indicator"></span></th>
+                            <th data-sort-by="course">Course Name <span class="sort-indicator"></span></th>
+                            <th data-sort-by="industry">Industry <span class="sort-indicator"></span></th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- User data will be populated here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <div id="loader-overlay" class="loader-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmation-modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <button id="confirm-modal-close-button" class="modal-close-button" aria-label="Close modal">
+                <span data-lucide="x"></span>
+            </button>
+            <h2 id="confirmation-modal-title" class="text-2xl sm:text-3xl font-extrabold mb-6 text-center text-indigo-800">
+                Confirm Action
+            </h2>
+            <p id="confirmation-modal-message" class="text-center mb-8 text-lg text-gray-700">Are you sure you want to proceed?</p>
+            <div class="flex justify-center gap-4">
+                <button id="confirm-yes-button" class="btn-primary">Yes</button>
+                <button id="confirm-no-button" class="btn-secondary">No</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="w-full bg-gray-800 bg-opacity-90 text-white py-6 px-4 md:px-8 text-center mt-auto">
+        <div class="container mx-auto">
+            <p id="footer-greeting" class="footer-text mb-4">
+                Any challenge? We're here to help!
+            </p>
+            <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
+                <a href="https://wa.me/254712345678" class="footer-link inline-flex items-center text-lg font-semibold" target="_blank" rel="noopener noreferrer">
+                    <span data-lucide="whatsapp" class="w-6 h-6 mr-2"></span> WhatsApp Support
+                </a>
+                <span class="text-gray-500 text-lg font-bold hidden sm:block">|</span>
+                <a href="mailto:support@kaziconnect.com" class="footer-link inline-flex items-center text-lg font-semibold">
+                    <span data-lucide="mail" class="w-6 h-6 mr-2"></span> Email Us
+                </a>
+            </div>
+            <p class="text-xs mt-4 text-gray-400">
+                &copy; <span id="current-year"></span> Kazi Connect. All rights reserved. Crafting futures, one connection at a time.
+            </p>
+        </div>
+    </footer>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+        import { getFirestore, collection, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+        // --- START OF FIREBASE CONFIGURATION ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyAxh6u9xe0kfd_dnMxUo4d7Ph0U0lBibF8",
+            authDomain: "kaziconnectweb.firebaseapp.com",
+            projectId: "kaziconnectweb",
+            storageBucket: "kaziconnectweb.firebasestorage.app",
+            messagingSenderId: "782241286494",
+            appId: "1:782241286494:web:14adc692c3a96ca08ee7cf",
+            measurementId: "G-0PCWR2Z0SC"
+        };
+        // --- END OF FIREBASE CONFIGURATION ---
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        
+        // Global variables for app ID
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        // DOM Elements
+        const userEntriesTableBody = document.querySelector('#user-entries-table tbody');
+        const loaderOverlay = document.getElementById('loader-overlay');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileNavMenu = document.getElementById('mobile-nav-menu');
+
+        // Filter Elements
+        const filterSearchInput = document.getElementById('filter-search-input');
+        const filterQualificationSelect = document.getElementById('filter-qualification');
+        const filterIndustrySelect = document.getElementById('filter-industry');
+        const filterCourseNameInput = document.getElementById('filter-course-name');
+        const filterFromDateInput = document.getElementById('filter-from-date');
+        const filterToDateInput = document.getElementById('filter-to-date');
+        const applyFiltersBtn = document.getElementById('apply-filters-btn'); // New Apply Filters button
+        const clearFiltersBtn = document.getElementById('clear-filters-btn'); // New Clear Filters button
+        const tableHeaders = document.querySelectorAll('#user-entries-table th[data-sort-by]');
+
+        // Confirmation Modal Elements
+        const confirmationModalOverlay = document.getElementById('confirmation-modal-overlay');
+        const confirmModalCloseButton = document.getElementById('confirm-modal-close-button');
+        const confirmationModalTitle = document.getElementById('confirmation-modal-title');
+        const confirmationModalMessage = document.getElementById('confirmation-modal-message');
+        const confirmYesButton = document.getElementById('confirm-yes-button');
+        const confirmNoButton = document.getElementById('confirm-no-button');
+
+        let currentConfirmCallback = null; // To store the callback for the confirmation modal
+
+        // State for filters and sorting
+        let currentFilters = {
+            search: '',
+            qualification: '',
+            industry: '',
+            courseName: '',
+            fromDate: '',
+            toDate: ''
+        };
+        let currentSort = {
+            column: null,
+            direction: 'asc'
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide icons
+            lucide.createIcons();
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Show/Hide Loader
+            function showLoader() {
+                loaderOverlay.classList.add('active');
+            }
+
+            function hideLoader() {
+                loaderOverlay.classList.remove('active');
+            }
+
+            // Open Confirmation Modal
+            function openConfirmationModal(message, onConfirm) {
+                confirmationModalMessage.textContent = message;
+                currentConfirmCallback = onConfirm;
+                confirmationModalOverlay.classList.add('active');
+            }
+
+            // Close Confirmation Modal
+            function closeConfirmationModal() {
+                confirmationModalOverlay.classList.remove('active');
+                currentConfirmCallback = null;
+            }
+
+            confirmModalCloseButton.addEventListener('click', closeConfirmationModal);
+            confirmNoButton.addEventListener('click', closeConfirmationModal);
+            confirmYesButton.addEventListener('click', () => {
+                if (currentConfirmCallback) {
+                    currentConfirmCallback();
+                }
+                closeConfirmationModal();
+            });
+
+            // Function to delete a user entry
+            async function deleteUserEntry(docId) {
+                showLoader();
+                try {
+                    const docRef = doc(db, `artifacts/${appId}/public/data/allUserEntries`, docId);
+                    await deleteDoc(docRef);
+                    console.log("Document successfully deleted with ID:", docId);
+                    displayAllUserEntries(); // Refresh table after deletion
+                } catch (error) {
+                    console.error("Error removing document: ", error);
+                    openConfirmationModal("Error deleting entry. Please try again.", () => {});
+                } finally {
+                    hideLoader();
+                }
+            }
+
+            // Function to display all user entries in the table with filtering and sorting
+            async function displayAllUserEntries() {
+                userEntriesTableBody.innerHTML = ''; // Clear existing table rows
+                showLoader();
+
+                try {
+                    const allUserEntriesCollectionRef = collection(db, `artifacts/${appId}/public/data/allUserEntries`);
+                    const querySnapshot = await getDocs(allUserEntriesCollectionRef);
+                    let allUserData = [];
+                    querySnapshot.forEach((doc) => {
+                        allUserData.push({ id: doc.id, ...doc.data() });
+                    });
+
+                    // Apply Filtering
+                    let filteredData = allUserData.filter(entry => {
+                        const searchLower = currentFilters.search.toLowerCase();
+                        const qualificationLower = currentFilters.qualification.toLowerCase();
+                        const industryFilter = currentFilters.industry;
+                        const courseNameLower = currentFilters.courseName.toLowerCase();
+                        const fromDate = currentFilters.fromDate ? new Date(currentFilters.fromDate) : null;
+                        const toDate = currentFilters.toDate ? new Date(currentFilters.toDate) : null;
+
+                        // General search filter
+                        const matchesSearch = searchLower === '' ||
+                            (entry.fullName && entry.fullName.toLowerCase().includes(searchLower)) ||
+                            (entry.email && entry.email.toLowerCase().includes(searchLower)) ||
+                            (entry.course && entry.course.toLowerCase().includes(searchLower)) ||
+                            (entry.industry && entry.industry.toLowerCase().includes(searchLower)) ||
+                            (entry.qualification && entry.qualification.toLowerCase().includes(searchLower));
+
+                        // Qualification filter
+                        const matchesQualification = qualificationLower === '' ||
+                                                    (entry.qualification && entry.qualification.toLowerCase() === qualificationLower);
+                        
+                        // Industry filter (including "Other (Non-Construction)")
+                        let matchesIndustry = true;
+                        if (industryFilter === 'Other (Non-Construction)') {
+                            matchesIndustry = entry.industry && entry.industry.toLowerCase() !== 'construction';
+                        } else if (industryFilter !== '') {
+                            matchesIndustry = entry.industry && entry.industry.toLowerCase() === industryFilter.toLowerCase();
+                        }
+
+                        // Course Name filter
+                        const matchesCourseName = courseNameLower === '' ||
+                                                  (entry.course && entry.course.toLowerCase().includes(courseNameLower));
+
+                        // Date filters (using lastUpdated)
+                        let matchesDate = true;
+                        if (entry.lastUpdated && entry.lastUpdated.toDate) {
+                            const entryDate = entry.lastUpdated.toDate();
+                            entryDate.setHours(0, 0, 0, 0); 
+
+                            if (fromDate) {
+                                fromDate.setHours(0, 0, 0, 0);
+                                matchesDate = matchesDate && (entryDate >= fromDate);
+                            }
+                            if (toDate) {
+                                toDate.setHours(23, 59, 59, 999);
+                                matchesDate = matchesDate && (entryDate <= toDate);
+                            }
+                        } else if (fromDate || toDate) {
+                            matchesDate = false;
+                        }
+
+                        return matchesSearch && matchesQualification && matchesIndustry && matchesCourseName && matchesDate;
+                    });
+
+                    // Apply Sorting
+                    if (currentSort.column) {
+                        filteredData.sort((a, b) => {
+                            const valA = a[currentSort.column] || '';
+                            const valB = b[currentSort.column] || '';
+
+                            if (typeof valA === 'string' && typeof valB === 'string') {
+                                return currentSort.direction === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+                            }
+                            if (currentSort.column === 'lastUpdated' && a.lastUpdated && b.lastUpdated) {
+                                const dateA = a.lastUpdated.toDate().getTime();
+                                const dateB = b.lastUpdated.toDate().getTime();
+                                return currentSort.direction === 'asc' ? dateA - dateB : dateB - dateA;
+                            }
+                            if (valA < valB) return currentSort.direction === 'asc' ? -1 : 1;
+                            if (valA > valB) return currentSort.direction === 'asc' ? 1 : -1;
+                            return 0;
+                        });
+                    }
+
+                    if (filteredData.length === 0) {
+                        const row = userEntriesTableBody.insertRow();
+                        const cell = row.insertCell();
+                        cell.colSpan = 7;
+                        cell.textContent = "No user entries found matching your criteria.";
+                        cell.classList.add('text-center', 'py-4', 'text-gray-400');
+                    } else {
+                        filteredData.forEach((userData) => {
+                            const row = userEntriesTableBody.insertRow();
+                            row.insertCell().textContent = userData.fullName || 'N/A';
+                            row.insertCell().textContent = userData.mobileNumber || 'N/A';
+                            row.insertCell().textContent = userData.email || 'N/A';
+                            row.insertCell().textContent = userData.qualification || 'N/A';
+                            row.insertCell().textContent = userData.course || 'N/A';
+                            row.insertCell().textContent = userData.industry || 'N/A';
+
+                            const actionsCell = row.insertCell();
+                            const deleteButton = document.createElement('button');
+                            deleteButton.classList.add('delete-btn');
+                            deleteButton.setAttribute('data-id', userData.id);
+                            deleteButton.innerHTML = '<span data-lucide="trash-2"></span> Delete';
+                            deleteButton.addEventListener('click', () => {
+                                openConfirmationModal(`Are you sure you want to delete the entry for ${userData.fullName || userData.email}?`, () => deleteUserEntry(userData.id));
+                            });
+                            actionsCell.appendChild(deleteButton);
+                        });
+                        lucide.createIcons();
+                    }
+                } catch (error) {
+                    console.error("Error fetching all user entries:", error);
+                    const row = userEntriesTableBody.insertRow();
+                    const cell = row.insertCell();
+                    cell.colSpan = 7;
+                    cell.textContent = "Error loading user entries. Check console for details.";
+                    cell.classList.add('text-center', 'py-4', 'text-red-500');
+                } finally {
+                    hideLoader();
+                }
+            }
+
+            // Event Listeners for Filter Buttons
+            applyFiltersBtn.addEventListener('click', () => {
+                // Update currentFilters state from input values
+                currentFilters.search = filterSearchInput.value;
+                currentFilters.qualification = filterQualificationSelect.value;
+                currentFilters.industry = filterIndustrySelect.value;
+                currentFilters.courseName = filterCourseNameInput.value;
+                currentFilters.fromDate = filterFromDateInput.value;
+                currentFilters.toDate = filterToDateInput.value;
+                displayAllUserEntries(); // Apply filters and re-display
+            });
+
+            clearFiltersBtn.addEventListener('click', () => {
+                // Reset filter input fields
+                filterSearchInput.value = '';
+                filterQualificationSelect.value = '';
+                filterIndustrySelect.value = '';
+                filterCourseNameInput.value = '';
+                filterFromDateInput.value = '';
+                filterToDateInput.value = '';
+
+                // Reset currentFilters state
+                currentFilters = {
+                    search: '',
+                    qualification: '',
+                    industry: '',
+                    courseName: '',
+                    fromDate: '',
+                    toDate: ''
+                };
+                displayAllUserEntries(); // Clear filters and re-display
+            });
+
+
+            // Event Listeners for Sorting
+            tableHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const sortByColumn = header.getAttribute('data-sort-by');
+                    if (currentSort.column === sortByColumn) {
+                        currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+                    } else {
+                        // Reset previous sort indicator
+                        const prevSortedHeader = document.querySelector(`#user-entries-table th.asc, #user-entries-table th.desc`);
+                        if (prevSortedHeader) {
+                            prevSortedHeader.classList.remove('asc', 'desc');
+                        }
+                        currentSort.column = sortByColumn;
+                        currentSort.direction = 'asc';
+                    }
+                    // Update header class for visual indicator
+                    header.classList.remove('asc', 'desc'); // Remove existing classes
+                    header.classList.add(currentSort.direction);
+                    displayAllUserEntries();
+                });
+            });
+
+            // Firebase Authentication Listener for admin page
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    console.log("Admin page: User is authenticated. Fetching data.");
+                    displayAllUserEntries();
+                } else {
+                    console.log("Admin page: User is not authenticated. Attempting anonymous sign-in to fetch public data.");
+                    const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+                    if (initialAuthToken) {
+                        signInWithCustomToken(auth, initialAuthToken)
+                            .then(() => {
+                                console.log("Admin page: Signed in with custom token.");
+                                displayAllUserEntries();
+                            })
+                            .catch(error => {
+                                console.error("Admin page: Error signing in with custom token:", error);
+                                signInAnonymously(auth)
+                                    .then(() => {
+                                        console.log("Admin page: Signed in anonymously.");
+                                        displayAllUserEntries();
+                                    })
+                                    .catch(anonError => {
+                                        console.error("Admin page: Error signing in anonymously:", anonError);
+                                        userEntriesTableBody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-red-500">
+                                            Could not load user data. Please ensure Firebase Authentication (Anonymous) is enabled.
+                                        </td></tr>`;
+                                        hideLoader();
+                                    });
+                            });
+                    } else {
+                        signInAnonymously(auth)
+                            .then(() => {
+                                console.log("Admin page: Signed in anonymously.");
+                                displayAllUserEntries();
+                            })
+                            .catch(anonError => {
+                                console.error("Admin page: Error signing in anonymously:", anonError);
+                                userEntriesTableBody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-red-500">
+                                    Could not load user data. Please ensure Firebase Authentication (Anonymous) is enabled.
+                                </td></tr>`;
+                                hideLoader();
+                            });
+                    }
+                }
+            });
+
+            // Mobile menu toggle functionality
+            mobileMenuButton.addEventListener('click', function(event) {
+                event.stopPropagation();
+                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                mobileNavMenu.classList.toggle('active');
+            });
+
+            // Hide mobile menu when clicking outside of it or the button
+            document.addEventListener('click', function(event) {
+                if (!mobileNavMenu.contains(event.target) && !mobileMenuButton.contains(event.target)) {
+                    mobileNavMenu.classList.remove('active');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            // Hide mobile menu if a link is clicked
+            mobileNavMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileNavMenu.classList.remove('active');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
