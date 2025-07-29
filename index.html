@@ -124,7 +124,8 @@
         /* Desktop font size for buttons */
         @media (min-width: 768px) {
             .btn-primary {
-                font-size: 1.2rem; /* Increased for desktop */
+                font-size: 1.8rem; /* Increased by 50% from 1.2rem */
+                padding: 1.125rem 2.25rem; /* Increased by 50% from 0.75rem 1.5rem */
             }
         }
         
@@ -312,7 +313,8 @@
         /* Desktop font size for industry toggle buttons */
         @media (min-width: 768px) {
             .industry-toggle-button-segment {
-                font-size: 1.2rem; /* Increased for desktop */
+                font-size: 1.8rem; /* Increased by 50% from 1.2rem */
+                padding: 1.125rem 1.5rem; /* Increased by 50% from 0.75rem 1rem */
             }
         }
 
@@ -375,8 +377,8 @@
             label[for="signup-username"], /* Added for signup form */ /* Moved this label */
             label[for="signup-password"]
             {
-                font-size: 22px; /* Increased to 22px for desktop */
-                margin-bottom: 0.75rem; /* Increased margin for desktop */
+                font-size: 33px; /* Increased by 50% from 22px */
+                margin-bottom: 1.125rem; /* Increased by 50% from 0.75rem */
             }
         }
 
@@ -415,7 +417,7 @@
         /* Desktop font size for opportunities title */
         @media (min-width: 768px) {
             .opportunities-title-outline {
-                font-size: 3.5rem; /* Increased for desktop */
+                font-size: 5.25rem; /* Increased by 50% from 3.5rem */
             }
         }
 
@@ -424,14 +426,14 @@
             height: auto; /* Will be set by JS based on 2 lines + header/footer */
             overflow: hidden;
             position: relative; /* Crucial for positioning children */
-            margin-top: 0.1953125rem; /* Reduced by half from 0.390625rem */
-            margin-bottom: 2rem; /* Increased to 2rem as requested */
+            margin-top: 0.2734375rem; /* Increased by 40% from 0.1953125rem */
+            margin-bottom: 2.8rem; /* Increased by 40% from 2rem */
             background-color: rgba(20, 20, 20, 0.8); /* Darker, more opaque background for screen effect */
-            border-radius: 0.29296875rem; /* Increased by 25% from 0.234375rem */
+            border-radius: 0.41015625rem; /* Increased by 40% from 0.29296875rem */
             box-shadow:
-                inset 0 0 3.125px rgba(0, 255, 255, 0.078125), /* Increased glow by 25% */
-                0 0 3.90625px rgba(0, 255, 255, 0.0390625); /* Increased glow by 25% */
-            border: 0.390625px solid rgba(0, 255, 255, 0.1171875); /* Increased border by 25% */
+                inset 0 0 4.375px rgba(0, 255, 255, 0.109375), /* Increased glow by 40% */
+                0 0 5.46875px rgba(0, 255, 255, 0.0546875); /* Increased glow by 40% */
+            border: 0.546875px solid rgba(0, 255, 255, 0.1640625); /* Increased border by 40% */
             display: flex; /* Use flexbox to stack header, content area and footer */
             flex-direction: column;
             max-width: 151.2px; /* Reverted to previous size */
@@ -456,9 +458,9 @@
             background: repeating-linear-gradient(
                 to bottom,
                 transparent 0px,
-                transparent 0.390625px, /* Increased by 25% from 0.3125px */
-                rgba(0, 255, 255, 0.01171875) 0.390625px, /* Increased by 25% from 0.009375 */
-                rgba(0, 255, 255, 0.01171875) 0.78125px /* Increased by 25% from 0.625px */
+                transparent 0.546875px, /* Increased by 40% from 0.390625px */
+                rgba(0, 255, 255, 0.01640625) 0.546875px, /* Increased by 40% from 0.01171875 */
+                rgba(0, 255, 255, 0.01640625) 1.09375px /* Increased by 40% from 0.78125px */
             );
             pointer-events: none; /* Allow clicks to pass through */
             z-index: 1; /* Above content but below main text */
@@ -475,15 +477,15 @@
         .digital-header-text {
             background-color: rgba(0, 0, 0, 0.7); /* Dark background */
             color: var(--digital-green); /* Green digital text */
-            padding: 2.34375px 3.90625px; /* Increased by 25% from 1.875px 3.125px */
-            font-size: 0.5rem; /* Increased from 0.375rem */
+            padding: 3.28125px 5.46875px; /* Increased by 40% from 2.34375px 3.90625px */
+            font-size: 0.7rem; /* Increased by 40% from 0.5rem */
             font-weight: 600; /* Bold */
             text-align: center;
-            border-bottom: 0.390625px solid rgba(0, 255, 0, 0.078125); /* Increased by 25% from 0.3125px 0.0625 */
-            border-top-left-radius: 0.29296875rem; /* Increased by 25% from 0.234375rem */
-            border-top-right-radius: 0.29296875rem; /* Increased by 25% from 0.1875rem */
+            border-bottom: 0.546875px solid rgba(0, 255, 0, 0.109375); /* Increased by 40% from 0.390625px 0.078125 */
+            border-top-left-radius: 0.41015625rem; /* Increased by 40% from 0.29296875rem */
+            border-top-right-radius: 0.41015625rem; /* Increased by 40% from 0.29296875rem */
             text-shadow:
-                0 0 2.34375px rgba(0, 255, 0, 0.234375); /* Increased glow by 25% */
+                0 0 3.28125px rgba(0, 255, 0, 0.328125); /* Increased glow by 40% */
             animation: digitalHeaderGlowPulse 2.5s infinite alternate; /* Slower pulsing glow effect */
             white-space: nowrap; /* Keep on one line */
             overflow: hidden;
@@ -492,14 +494,14 @@
 
             /* Responsive adjustments for desktop */
             @media (min-width: 768px) { /* md breakpoint */
-                font-size: 0.7rem; /* Increased from 0.515625rem */
-                padding: 3.125px 5.859375px; /* Increased by 25% from 2.5px 4.6875px */
+                font-size: 0.98rem; /* Increased by 40% from 0.7rem */
+                padding: 4.375px 8.1975px; /* Increased by 40% from 3.125px 5.859375px */
             }
         }
 
         @keyframes digitalHeaderGlowPulse {
-            from { text-shadow: 0 0 2.34375px rgba(0, 255, 0, 0.234375); }
-            to { text-shadow: 0 0 3.90625px rgba(0, 255, 0, 0.3125); }
+            from { text-shadow: 0 0 3.28125px rgba(0, 255, 0, 0.328125); }
+            to { text-shadow: 0 0 5.46875px rgba(0, 255, 0, 0.4375); }
         }
 
         /* New wrapper for the scrolling content area */
@@ -507,7 +509,7 @@
             flex-grow: 1; /* Allows it to take available space */
             position: relative; /* For absolute positioning of inner wrapper */
             overflow: hidden; /* Crucial for hiding parts of the scrolling list */
-            height: 18.75px; /* Increased by 25% from 15px */
+            height: 26.25px; /* Increased by 40% from 18.75px */
             /* Desktop height adjustment will be handled by JS based on new font-size */
         }
 
@@ -526,27 +528,27 @@
 
         .company-list-content {
             /* This div contains one full set of company names */
-            padding-top: 1.953125px; /* Increased by 25% from 1.5625px */
-            padding-bottom: 1.953125px; /* Increased by 25% from 1.5625px */
+            padding-top: 2.734375px; /* Increased by 40% from 1.953125px */
+            padding-bottom: 2.734375px; /* Increased by 40% from 1.953125px */
         }
 
         .company-list-item {
-            padding: 0.09765625rem 0; /* Increased by 25% from 0.078125rem */
-            font-size: 0.3375rem; /* Font size remains the same as per request */
-            line-height: 0.45; /* Line height remains the same as per request */
+            padding: 0.13671875rem 0; /* Increased by 40% from 0.09765625rem */
+            font-size: 0.4725rem; /* Increased by 40% from 0.3375rem */
+            line-height: 0.63; /* Increased by 40% from 0.45 */
             font-weight: 600; /* Bolder for digital display */
             color: var(--digital-cyan); /* Bright cyan for digital text */
             text-align: center;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            text-shadow: 0 0 1.5625px rgba(0, 255, 255, 0.1953125); /* Increased by 25% from 1.25px 0.15625 */
+            text-shadow: 0 0 2.1875px rgba(0, 255, 255, 0.2734375); /* Increased by 40% from 1.5625px 0.1953125 */
             animation: textFlicker 6s infinite alternate; /* Slower, more subtle flicker for each name */
 
             /* Responsive adjustments for desktop */
             @media (min-width: 768px) { /* md breakpoint */
-                font-size: 0.45rem; /* Font size remains the same as per request */
-                line-height: 0.525; /* Line height remains the same as per request */
+                font-size: 0.63rem; /* Increased by 40% from 0.45rem */
+                line-height: 0.735; /* Increased by 40% from 0.525 */
             }
         }
 
@@ -562,38 +564,38 @@
         .digital-footer {
             background-color: rgba(0, 0, 0, 0.7); /* Dark background */
             color: var(--digital-green); /* Green digital text */
-            padding: 3.125px 3.90625px; /* Increased by 25% from 2.5px 3.125px */
-            font-size: 0.5rem; /* Increased from 0.375rem */
+            padding: 4.375px 5.46875px; /* Increased by 40% from 3.125px 3.90625px */
+            font-size: 0.7rem; /* Increased by 40% from 0.5rem */
             font-weight: 600;
-            border-top: 0.390625px solid rgba(0, 255, 0, 0.078125); /* Increased by 25% from 0.3125px 0.0625 */
-            border-bottom-left-radius: 0.29296875rem; /* Increased by 25% from 0.234375rem */
-            border-bottom-right-radius: 0.29296875rem; /* Increased by 25% from 0.1875rem */
+            border-top: 0.546875px solid rgba(0, 255, 0, 0.109375); /* Increased by 40% from 0.390625px 0.078125 */
+            border-bottom-left-radius: 0.41015625rem; /* Increased by 40% from 0.29296875rem */
+            border-bottom-right-radius: 0.41015625rem; /* Increased by 40% from 0.29296875rem */
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 0.29296875rem; /* Increased by 25% from 0.234375rem */
-            text-shadow: 0 0 1.5625px rgba(0, 255, 0, 0.15625); /* Increased by 25% from 1.25px 0.125 */
+            gap: 0.41015625rem; /* Increased by 40% from 0.29296875rem */
+            text-shadow: 0 0 2.1875px rgba(0, 255, 0, 0.21875); /* Increased by 40% from 1.5625px 0.15625 */
             animation: digitalFooterGlow 3.5s infinite alternate; /* Slower animation */
             text-transform: uppercase; /* All caps */
 
             /* Responsive adjustments for desktop */
             @media (min-width: 768px) { /* md breakpoint */
-                font-size: 0.7rem; /* Increased from 0.46875rem */
+                font-size: 0.98rem; /* Increased by 40% from 0.7rem */
             }
         }
 
         @keyframes digitalFooterGlow {
-            from { text-shadow: 0 0 1.5625px rgba(0, 255, 0, 0.15625); }
-            to { text-shadow: 0 0 3.125px rgba(0, 255, 0, 0.234375); }
+            from { text-shadow: 0 0 2.1875px rgba(0, 255, 0, 0.21875); }
+            to { text-shadow: 0 0 4.375px rgba(0, 255, 0, 0.328125); }
         }
 
         .digital-icon {
-            font-size: 0.7rem; /* Increased from 0.46875rem */
+            font-size: 0.98rem; /* Increased by 40% from 0.7rem */
             vertical-align: middle;
         }
 
         .digital-separator {
-            color: rgba(0, 255, 0, 0.15625); /* Increased by 25% from 0.125 */
+            color: rgba(0, 255, 0, 0.21875); /* Increased by 40% from 0.15625 */
             font-weight: 300;
         }
 
@@ -695,12 +697,12 @@
         .modal-content {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 1.5rem;
-            padding: 2rem; /* Reduced padding for more compact form */
+            padding: 3rem; /* Increased by 50% from 2rem */
             width: 90%;
-            max-width: 500px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            max-width: 750px; /* Increased by 50% from 500px */
+            box-shadow: 0 15px 37.5px rgba(0, 0, 0, 0.3); /* Increased by 50% */
             position: relative;
-            transform: translateY(-20px);
+            transform: translateY(-30px); /* Increased by 50% from -20px */
             opacity: 0;
             transition: transform 0.3s ease-out, opacity 0.3s ease-out;
             color: #333; /* Dark text for modal content */
@@ -711,37 +713,37 @@
         }
         /* Adjustments for signup form vertical size */
         #signup-form {
-            padding-top: 0.5rem; /* Reduce top padding */
-            padding-bottom: 0.5rem; /* Reduce bottom padding */
+            padding-top: 0.75rem; /* Increased by 50% from 0.5rem */
+            padding-bottom: 0.75rem; /* Increased by 50% from 0.5rem */
         }
         #signup-form > div { /* Target direct children div (each input group) */
-            margin-bottom: 0.75rem; /* Reduce space between input groups */
+            margin-bottom: 1.125rem; /* Increased by 50% from 0.75rem */
         }
         #signup-form label {
-            font-size: 0.95rem; /* Slightly smaller label font */
-            margin-bottom: 0.25rem; /* Reduce margin below label */
+            font-size: 1.425rem; /* Increased by 50% from 0.95rem */
+            margin-bottom: 0.375rem; /* Increased by 50% from 0.25rem */
         }
         #signup-form .input-field {
-            padding: 0.6rem 0.8rem; /* Reduce input field padding */
-            font-size: 0.9rem; /* Slightly smaller input font */
+            padding: 0.9rem 1.2rem; /* Increased by 50% from 0.6rem 0.8rem */
+            font-size: 1.35rem; /* Increased by 50% from 0.9rem */
         }
         #signup-form .btn-primary {
-            padding: 0.6rem 1.2rem; /* Reduce button padding */
-            font-size: 0.95rem; /* Slightly smaller button font */
-            margin-top: 1rem; /* Adjust button margin-top */
+            padding: 0.9rem 1.8rem; /* Increased by 50% from 0.6rem 1.2rem */
+            font-size: 1.425rem; /* Increased by 50% from 0.95rem */
+            margin-top: 1.5rem; /* Increased by 50% from 1rem */
         }
         #signup-error-message {
-            font-size: 0.85rem; /* Smaller error message font */
-            margin-top: 0.5rem; /* Adjust error message margin */
+            font-size: 1.275rem; /* Increased by 50% from 0.85rem */
+            margin-top: 0.75rem; /* Increased by 50% from 0.5rem */
         }
 
         .modal-close-button {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
+            top: 1.5rem; /* Increased by 50% from 1rem */
+            right: 1.5rem; /* Increased by 50% from 1rem */
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 2.25rem; /* Increased by 50% from 1.5rem */
             cursor: pointer;
             color: #666;
             transition: color 0.2s;
@@ -752,9 +754,9 @@
         .modal-toggle-button {
             background-color: #e5e7eb;
             border-radius: 9999px;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.5rem; /* Increased by 50% from 0.5rem 1rem */
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 1.35rem; /* Increased by 50% from 0.9rem */
             transition: all 0.3s ease-in-out;
             cursor: pointer;
             text-align: center;
@@ -764,7 +766,7 @@
         .modal-toggle-button.active {
             background-image: linear-gradient(to right, #6366f1, #8b5cf6);
             color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Increased by 50% */
         }
 
         /* Job Matches Section Styles */
@@ -772,37 +774,37 @@
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(5px);
             border-radius: 1.5rem;
-            padding: 2rem;
-            margin-top: 2rem;
+            padding: 3rem; /* Increased by 50% from 2rem */
+            margin-top: 3rem; /* Increased by 50% from 2rem */
             border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2); /* Increased by 50% */
             color: #e0e0e0;
             display: none; /* Hidden by default */
         }
         .job-card {
             background: rgba(0, 0, 0, 0.4);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            border-radius: 1.5rem; /* Increased by 50% from 1rem */
+            padding: 2.25rem; /* Increased by 50% from 1.5rem */
+            margin-bottom: 2.25rem; /* Increased by 50% from 1.5rem */
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 22.5px rgba(0, 0, 0, 0.2); /* Increased by 50% */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .job-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-7.5px); /* Increased by 50% from -5px */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); /* Increased by 50% */
         }
         .job-card h3 {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.5rem;
+            font-size: 2.25rem; /* Increased by 50% from 1.5rem */
             font-weight: 700;
             color: var(--digital-cyan); /* Bright cyan for job titles */
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem; /* Increased by 50% from 0.5rem */
         }
         .job-card p {
-            font-size: 1rem;
+            font-size: 1.5rem; /* Increased by 50% from 1rem */
             color: #c0c0c0;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem; /* Increased by 50% from 0.5rem */
         }
         .job-card a {
             color: var(--logo-orange-original);
@@ -818,32 +820,32 @@
             display: none; /* Hidden by default */
             background-image: linear-gradient(to right, #ef4444, #dc2626); /* Red gradient */
             color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.75rem;
+            padding: 1.125rem 2.25rem; /* Increased by 50% from 0.75rem 1.5rem */
+            border-radius: 1.125rem; /* Increased by 50% from 0.75rem */
             font-weight: 600;
             transition: transform 0.2s ease, box-shadow 0.2s ease, background-image 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            font-size: 1rem;
-            margin-left: 1rem; /* Space from other nav items */
+            box-shadow: 0 6px 9px rgba(0, 0, 0, 0.1); /* Increased by 50% */
+            font-size: 1.5rem; /* Increased by 50% from 1rem */
+            margin-left: 1.5rem; /* Increased by 50% from 1rem */
         }
         #logout-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+            transform: translateY(-4.5px); /* Increased by 50% from -3px */
+            box-shadow: 0 12px 18px rgba(0, 0, 0, 0.2); /* Increased by 50% */
             background-image: linear-gradient(to right, #dc2626, #ef4444);
         }
         #logout-button:active {
             transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Increased by 50% */
         }
 
         /* NEW: Left Section Container (Desktop - Value Proposition) */
         .left-section-container {
             background: rgba(255, 255, 255, 0.1); /* White translucent */
             backdrop-filter: blur(8px); /* Subtle blur for glassy effect */
-            border-radius: 1.5rem; /* Subtle rounded corners */
+            border-radius: 2.1rem; /* Increased by 40% from 1.5rem */
             border: 1px solid rgba(255, 255, 255, 0.2); /* Faint white border */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Faint shadow */
-            padding: 1rem; /* Reduced padding for more compactness */
+            box-shadow: 0 5.6px 28px rgba(0, 0, 0, 0.2); /* Increased by 40% */
+            padding: 1.4rem; /* Increased by 40% from 1rem */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -857,10 +859,11 @@
         }
         @media (min-width: 768px) {
             .left-section-container {
-                width: 60%; /* Larger left section on desktop */
+                width: auto; /* Allow max-width to control */
+                max-width: 968px; /* Increased by 40% from 691.2px (60% of 1152px) */
                 margin-right: 2rem; /* Space between left and right sections */
                 margin-bottom: 0; /* No bottom margin on desktop */
-                padding: 1rem; /* Keep padding reduced for desktop */
+                padding: 1.4rem; /* Keep padding increased for desktop */
                 flex-grow: 1; /* Allow it to grow to match right card on desktop */
             }
         }
@@ -872,7 +875,7 @@
         }
         @media (min-width: 768px) {
             .right-section-container {
-                width: 40%; /* Smaller right section on desktop */
+                width: auto; /* Allow max-width on card to control */
             }
         }
 
@@ -892,7 +895,7 @@
         }
         @media (min-width: 768px) {
             .connect-you-title-outline {
-                font-size: 3.5rem; /* Increased for desktop */
+                font-size: 4.9rem; /* Increased by 40% from 3.5rem */
             }
         }
 
@@ -915,7 +918,7 @@
         /* Desktop font size for value-proposition-text */
         @media (min-width: 768px) {
             .value-proposition-text {
-                font-size: 28px; /* Increased to 28px for desktop */
+                font-size: 39.2px; /* Increased by 40% from 28px */
             }
         }
 
@@ -946,7 +949,9 @@
         }
         @media (min-width: 768px) {
             .btn-secondary {
-                font-size: 1.1rem;
+                font-size: 1.54rem; /* Increased by 40% from 1.1rem */
+                padding: 1.05rem 2.1rem; /* Increased by 40% from 0.75rem 1.5rem */
+                gap: 0.7rem; /* Increased by 40% from 0.5rem */
             }
         }
 
@@ -982,6 +987,18 @@
             height: 1.75rem;
             stroke-width: 2.5; /* Thicker arrow stroke */
         }
+        @media (min-width: 768px) {
+            #get-started-btn {
+                padding: 1.4rem 2.8rem; /* Increased by 40% from 1rem 2rem */
+                font-size: 1.75rem; /* Increased by 40% from 1.25rem */
+                gap: 1.05rem; /* Increased by 40% from 0.75rem */
+            }
+            #get-started-btn .lucide-icon {
+                width: 2.45rem; /* Increased by 40% from 1.75rem */
+                height: 2.45rem; /* Increased by 40% from 1.75rem */
+                stroke-width: 3.5; /* Increased by 40% from 2.5 */
+            }
+        }
 
         @keyframes buttonPulse {
             0% { transform: scale(1); }
@@ -1011,29 +1028,28 @@
             text-align: center;
             display: none; /* Hidden by default, will be shown by JS scroll */
         }
-        #about-us-section h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--indigo-800);
-            text-shadow:
-                1px 1px 0 #FFF, -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF; /* Solid white outline */
-            margin-bottom: 1.5rem;
-        }
-        #about-us-section p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-            color: black; /* Solid black font */
-        }
-        /* Inner white card for About Us content */
-        .about-us-content-card {
-            background: rgba(255, 255, 255, 0.9); /* Opaque white */
-            backdrop-filter: blur(5px); /* Blurs out content behind it */
-            border-radius: 1rem;
-            padding: 1.5rem;
-            color: black; /* Solid black font for content */
-            margin-top: 1rem; /* Space from heading */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        @media (min-width: 768px) {
+            #about-us-section {
+                border-radius: 2.25rem; /* Increased by 50% from 1.5rem */
+                padding: 1.5rem; /* Increased by 50% from 1rem */
+                margin: 3rem auto; /* Increased by 50% from 2rem */
+                max-width: 1350px; /* Increased by 50% from 900px */
+                box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2); /* Increased by 50% */
+            }
+            #about-us-section h2 {
+                font-size: 3.75rem; /* Increased by 50% from 2.5rem */
+                margin-bottom: 2.25rem; /* Increased by 50% from 1.5rem */
+            }
+            #about-us-section p {
+                font-size: 1.65rem; /* Increased by 50% from 1.1rem */
+                margin-bottom: 1.5rem; /* Increased by 50% from 1rem */
+            }
+            .about-us-content-card {
+                border-radius: 1.5rem; /* Increased by 50% from 1rem */
+                padding: 2.25rem; /* Increased by 50% from 1.5rem */
+                margin-top: 1.5rem; /* Increased by 50% from 1rem */
+                box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1); /* Increased by 50% */
+            }
         }
 
         /* Darkening Overlay for "Get Started" button click */
@@ -1104,7 +1120,7 @@
         footer {
             background: linear-gradient(to top, rgba(17, 24, 39, 0.95), rgba(31, 41, 55, 0.95)); /* Darker, subtle gradient */
             color: #e0e0e0; /* Lighter text for better contrast */
-            padding: 0.75rem 1rem; /* Drastically reduced padding for a much more compact footer */
+            padding: 23.5552px 1.5rem; /* Increased padding by 4mm (2mm top, 2mm bottom) */
             border-top: 3px solid var(--indigo-800); /* Stronger top border */
             box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.3); /* More prominent shadow */
         }
@@ -1112,42 +1128,42 @@
         .footer-content-wrapper {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: center; /* Centered horizontally */
             text-align: center;
-            gap: 0.5rem; /* Reduced spacing between main footer sections */
+            gap: 1.5rem; /* Spacing between main footer sections */
         }
 
         .footer-greeting {
-            font-size: 1rem; /* Reduced font size */
+            font-size: 1.5rem; /* Larger font size */
             font-weight: 700;
             color: #fff; /* White for emphasis */
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.4); /* Soft white glow */
-            margin-bottom: 0.1rem; /* Reduced space below greeting */
+            margin-bottom: 0.5rem; /* Space below greeting */
         }
 
         .footer-links-container {
             display: flex;
             flex-direction: column; /* Stack vertically on mobile */
-            gap: 0.5rem; /* Reduced space between links */
-            margin-bottom: 0.5rem; /* Reduced space below links */
+            gap: 1rem; /* Space between links */
+            margin-bottom: 1.5rem; /* Space below links */
         }
 
         @media (min-width: 640px) { /* sm breakpoint */
             .footer-links-container {
                 flex-direction: row; /* Horizontal on larger screens */
-                gap: 1rem; /* Reduced gap */
+                gap: 2rem;
             }
         }
 
         .footer-link {
             display: inline-flex;
             align-items: center;
-            font-size: 0.875rem; /* Reduced font size */
+            font-size: 1.1rem; /* Consistent font size */
             font-weight: 600;
             color: var(--logo-orange-original); /* Orange for links */
             transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.2s ease;
             text-decoration: none; /* No underline by default */
-            padding: 0.3rem 0.6rem; /* Reduced padding for hover effect */
+            padding: 0.5rem 1rem; /* Padding for hover effect */
             border-radius: 0.5rem;
             background: rgba(255, 255, 255, 0.05); /* Subtle background */
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -1164,7 +1180,7 @@
 
         .footer-link .lucide-icon {
             margin-right: 0.5rem;
-            font-size: 1rem; /* Reduced icon size */
+            font-size: 1.3rem; /* Icon size */
             color: #fff; /* White icon */
             transition: color 0.3s ease;
         }
@@ -1181,14 +1197,14 @@
             .footer-separator {
                 display: block; /* Show only on larger screens */
                 color: rgba(255, 255, 255, 0.3); /* Subtle white */
-                font-size: 1rem; /* Reduced font size */
+                font-size: 1.5rem;
             }
         }
 
         .footer-copyright {
-            font-size: 0.65rem; /* Reduced font size */
+            font-size: 0.85rem;
             color: #b0b0b0; /* Slightly darker grey */
-            margin-top: 0.5rem; /* Reduced space from links */
+            margin-top: 1rem; /* Space from links */
             line-height: 1.5;
         }
 
@@ -1249,7 +1265,7 @@
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify: center;
             gap: 0.75rem;
         }
         .custom-alert-modal-content p {
@@ -1282,8 +1298,8 @@
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-    <header class="w-full header-gradient shadow-md py-8 px-6 md:px-10 relative"> <!-- Increased py-6 to py-8 -->
-        <nav class="container mx-auto flex justify-between items-center max-w-7xl" aria-label="Main navigation"> <!-- Added max-w-7xl -->
+    <header class="w-full header-gradient shadow-md py-[23.5552px] px-6 md:px-10 relative">
+        <nav class="container mx-auto flex justify-between items-center max-w-[1900px]" aria-label="Main navigation">
             <div class="flex items-center space-x-1">
                 <div class="logo-container"> <img src="logo2.png" alt="G-Connect Logo" loading="lazy"> </div>
                 <div class="flex flex-col items-start leading-none">
@@ -1317,7 +1333,7 @@
     </header>
 
     <!-- Main Content Wrapper for Desktop Two-Column Layout -->
-    <main id="main-content-wrapper" class="flex-grow flex flex-col md:flex-row items-stretch justify-center p-4 md:p-12 max-w-7xl mx-auto w-full"> <!-- Changed p-8 to p-12 -->
+    <main id="main-content-wrapper" class="flex-grow flex flex-col md:flex-row items-stretch justify-center p-4 md:p-6 max-w-[1900px] mx-auto w-full md:gap-12">
         
         <!-- Left Section: Value Proposition and Horizontal Scroller -->
         <section class="left-section-container">
@@ -1361,12 +1377,12 @@
 
         <!-- Right Section: Find Your Perfect Job Form -->
         <section class="right-section-container">
-            <div id="job-form-card" class="card w-full max-w-md p-6 sm:p-8 md:p-10 text-center relative mx-auto">
+            <div id="job-form-card" class="card w-full max-w-md p-6 sm:p-8 md:p-[60px] text-center relative mx-auto md:max-w-[672px]">
                 <h2 id="main-opportunities-title" class="text-3xl sm:text-4xl font-extrabold mb-4 leading-tight opportunities-title-outline">
                     Find Your Job Matches
                 </h2>
                 
-                <div class="industry-toggle-container mb-6" role="tablist">
+                <div class="industry-toggle-container mb-9" role="tablist">
                     <button type="button" id="construction-tab" class="industry-toggle-button-segment" role="tab" aria-selected="true" aria-controls="construction-form-section">
                         Construction Industry
                     </button>
@@ -1375,13 +1391,13 @@
                     </button>
                 </div>
 
-                <form id="job-search-form" class="space-y-6">
-                    <div id="construction-form-section" class="space-y-6" role="tabpanel" aria-labelledby="construction-tab">
+                <form id="job-search-form" class="space-y-9">
+                    <div id="construction-form-section" class="space-y-9" role="tabpanel" aria-labelledby="construction-tab">
                         <div>
                             <label for="qualification-level-construction" class="block text-left text-indigo-800 text-base font-bold mb-2">
                                 Select Qualification Level:
                             </label>
-                            <select id="qualification-level-construction" name="qualification-level-construction" class="input-field appearance-none">
+                            <select id="qualification-level-construction" name="qualification-level-construction" class="input-field appearance-none md:px-[24px] md:py-[18px]">
                                 <option value="">-- Select Level --</option>
                                 <option value="certificate">Certificate</option>
                                 <option value="diploma">Diploma</option>
@@ -1395,7 +1411,7 @@
                             <label for="course-name-construction" class="block text-left text-indigo-800 text-base font-bold mb-2">
                                 Enter Your Course Name:
                             </label>
-                            <input type="text" id="course-name-construction" name="course-name-construction" placeholder="e.g., Civil Engineering, Construction Management" class="input-field">
+                            <input type="text" id="course-name-construction" name="course-name-construction" placeholder="e.g., Civil Engineering, Construction Management" class="input-field md:px-[24px] md:py-[18px]">
                             <div id="course-suggestions-construction" class="suggestions-container hidden"></div>
                         </div>
                         <button type="submit" class="btn-primary w-full">
@@ -1403,19 +1419,19 @@
                         </button>
                     </div>
 
-                    <div id="other-industry-form-section" class="space-y-6 hidden" role="tabpanel" aria-labelledby="other-industry-tab">
+                    <div id="other-industry-form-section" class="space-y-9 hidden" role="tabpanel" aria-labelledby="other-industry-tab">
                         <div>
                             <label for="other-industry-input" class="block text-left text-black text-base font-bold mb-2">
                                 Enter Your Industry:
                             </label>
-                            <input type="text" id="other-industry-input" name="other-industry-input" placeholder="e.g., Healthcare, IT, Education" class="input-field">
+                            <input type="text" id="other-industry-input" name="other-industry-input" placeholder="e.g., Healthcare, IT, Education" class="input-field md:px-[24px] md:py-[18px]">
                             <div id="industry-suggestions-other" class="suggestions-container hidden"></div>
                         </div>
                         <div>
                             <label for="qualification-level-other" class="block text-left text-black text-base font-bold mb-2">
                                 Select Qualification Level:
                             </label>
-                            <select id="qualification-level-other" name="qualification-level-other" class="input-field appearance-none">
+                            <select id="qualification-level-other" name="qualification-level-other" class="input-field appearance-none md:px-[24px] md:py-[18px]">
                                 <option value="">-- Select Level --</option>
                                 <option value="certificate">Certificate</option>
                                 <option value="diploma">Diploma</option>
@@ -1429,7 +1445,7 @@
                             <label for="course-name-other" class="block text-left text-black text-base font-bold mb-2">
                                 Enter Your Course Name:
                             </label>
-                            <input type="text" id="course-name-other" name="course-name-other" placeholder="e.g., Nursing, Software Development, Teaching" class="input-field">
+                            <input type="text" id="course-name-other" name="course-name-other" placeholder="e.g., Nursing, Software Development, Teaching" class="input-field md:px-[24px] md:py-[18px]">
                             <div id="course-suggestions-other" class="suggestions-container hidden"></div>
                         </div>
                         <button type="submit" class="btn-primary w-full">
@@ -1437,7 +1453,7 @@
                         </button>
                     </div>
                 </form>
-                <p class="text-center text-sm mt-6 text-black"> <!-- Changed to solid black -->
+                <p class="text-center text-lg mt-9 text-black">
                     Already have an account? <a href="#" id="main-form-signin-link" class="text-indigo-600 hover:text-indigo-800 underline font-semibold">Sign In</a>
                 </p>
             </div>
@@ -1536,7 +1552,7 @@
         </div>
     </div>
 
-    <footer class="w-full text-white py-4 px-4 md:px-8 mt-auto"> <!-- Reduced py- to py-4 -->
+    <footer class="w-full text-white py-[23.5552px] px-4 md:px-8 mt-auto">
         <div class="container mx-auto footer-content-wrapper">
             <p id="footer-greeting" class="footer-greeting">
                 Any challenge? We're here to help!
