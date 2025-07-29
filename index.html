@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kazi Connect - Opportunities Await!</title>
+    <title>G-Connect - Opportunities Await!</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
@@ -18,6 +18,7 @@
             --list-height: 0px; /* Will be set dynamically by JS for seamless scroll */
             --scroll-duration: 20s; /* Will be set dynamically by JS */
             --logo-rectangle-color: #D2691E; /* Color from logo2.png for rectangles */
+            --horizontal-scroll-duration: 40s; /* Duration for the horizontal logo scroll */
         }
 
         body {
@@ -27,7 +28,7 @@
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            min-height: 100vh;
+            min-height: 100vh; /* Ensure body takes full viewport height */
             display: flex;
             flex-direction: column;
             overflow-x: hidden; /* Prevent horizontal scroll on animations */
@@ -213,7 +214,7 @@
         }
 
         /* Header specific styling */
-        .header-text-outline { /* New class for Kazi Connect text */
+        .header-text-outline { /* New class for G-Connect text */
             color: var(--indigo-800); /* Keep original text color */
             text-shadow:
                 1px 1px 0 var(--logo-orange-original), -1px -1px 0 var(--logo-orange-original),
@@ -350,14 +351,16 @@
         label[for="signup-fullname"], /* Added for signup form */
         label[for="signup-mobile"], /* Added for signup form */
         label[for="signup-email"], /* Added for signup form */
-        label[for="signup-password"] /* Added for signup form */
+        label[for="signup-username"], /* Added for signup form */ /* Moved this label */
+        label[for="signup-password"]
         {
             text-shadow:
                 1px 1px 0 #FFF, -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, /* White outline */
                 0 0 10px rgba(255, 215, 0, 0.6), /* Softer Gold glow */
                 0 0 20px rgba(255, 165, 0, 0.3); /* Softer Orange halo */
-            font-size: 1rem; /* Default for mobile */
+            font-size: 1rem; /* Default for mobile (16px) */
             margin-bottom: 0.5rem; /* Added margin */
+            color: var(--indigo-800); /* Ensure indigo-800 color */
         }
         /* Desktop font size for labels */
         @media (min-width: 768px) {
@@ -369,9 +372,10 @@
             label[for="signup-fullname"], /* Added for signup form */
             label[for="signup-mobile"], /* Added for signup form */
             label[for="signup-email"], /* Added for signup form */
-            label[for="signup-password"] /* Added for signup form */
+            label[for="signup-username"], /* Added for signup form */ /* Moved this label */
+            label[for="signup-password"]
             {
-                font-size: 1.15rem; /* Increased for desktop */
+                font-size: 22px; /* Increased to 22px for desktop */
                 margin-bottom: 0.75rem; /* Increased margin for desktop */
             }
         }
@@ -420,8 +424,8 @@
             height: auto; /* Will be set by JS based on 2 lines + header/footer */
             overflow: hidden;
             position: relative; /* Crucial for positioning children */
-            margin-top: 0.390625rem; /* Increased by 25% from 0.3125rem */
-            margin-bottom: 0.390625rem; /* Increased by 25% from 0.3125rem */
+            margin-top: 0.1953125rem; /* Reduced by half from 0.390625rem */
+            margin-bottom: 2rem; /* Increased to 2rem as requested */
             background-color: rgba(20, 20, 20, 0.8); /* Darker, more opaque background for screen effect */
             border-radius: 0.29296875rem; /* Increased by 25% from 0.234375rem */
             box-shadow:
@@ -691,7 +695,7 @@
         .modal-content {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 1.5rem;
-            padding: 2rem;
+            padding: 2rem; /* Reduced padding for more compact form */
             width: 90%;
             max-width: 500px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
@@ -705,6 +709,32 @@
             transform: translateY(0);
             opacity: 1;
         }
+        /* Adjustments for signup form vertical size */
+        #signup-form {
+            padding-top: 0.5rem; /* Reduce top padding */
+            padding-bottom: 0.5rem; /* Reduce bottom padding */
+        }
+        #signup-form > div { /* Target direct children div (each input group) */
+            margin-bottom: 0.75rem; /* Reduce space between input groups */
+        }
+        #signup-form label {
+            font-size: 0.95rem; /* Slightly smaller label font */
+            margin-bottom: 0.25rem; /* Reduce margin below label */
+        }
+        #signup-form .input-field {
+            padding: 0.6rem 0.8rem; /* Reduce input field padding */
+            font-size: 0.9rem; /* Slightly smaller input font */
+        }
+        #signup-form .btn-primary {
+            padding: 0.6rem 1.2rem; /* Reduce button padding */
+            font-size: 0.95rem; /* Slightly smaller button font */
+            margin-top: 1rem; /* Adjust button margin-top */
+        }
+        #signup-error-message {
+            font-size: 0.85rem; /* Smaller error message font */
+            margin-top: 0.5rem; /* Adjust error message margin */
+        }
+
         .modal-close-button {
             position: absolute;
             top: 1rem;
@@ -806,52 +836,448 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* Styles for the User Entries Table (removed from this file, now in admin.html) */
-        /*
-        #user-entries-section {
+        /* NEW: Left Section Container (Desktop - Value Proposition) */
+        .left-section-container {
+            background: rgba(255, 255, 255, 0.1); /* White translucent */
+            backdrop-filter: blur(8px); /* Subtle blur for glassy effect */
+            border-radius: 1.5rem; /* Subtle rounded corners */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Faint white border */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Faint shadow */
+            padding: 1rem; /* Reduced padding for more compactness */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            color: #e0e0e0; /* Light text color */
+            width: 100%; /* Default to full width on mobile */
+            margin-bottom: 2rem; /* Space between sections on mobile */
+            flex-grow: 0; /* No longer grows to match right card by default on mobile */
+            flex-shrink: 0; /* Prevents shrinking if content is too large */
+            height: fit-content; /* Allow content to dictate height on mobile */
+        }
+        @media (min-width: 768px) {
+            .left-section-container {
+                width: 60%; /* Larger left section on desktop */
+                margin-right: 2rem; /* Space between left and right sections */
+                margin-bottom: 0; /* No bottom margin on desktop */
+                padding: 1rem; /* Keep padding reduced for desktop */
+                flex-grow: 1; /* Allow it to grow to match right card on desktop */
+            }
+        }
+
+        /* NEW: Right Section Container (Desktop - Job Form) */
+        .right-section-container {
+            width: 100%; /* Default to full width on mobile */
+            flex-grow: 1; /* Allow it to grow in flex container */
+        }
+        @media (min-width: 768px) {
+            .right-section-container {
+                width: 40%; /* Smaller right section on desktop */
+            }
+        }
+
+        /* Specific styling for "Let's Connect You!" text outline (Main Heading) */
+        .connect-you-title-outline {
+            text-shadow:
+                1px 1px 0 #FFF, -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, /* White outline */
+                0 0 10px rgba(255, 215, 0, 0.4), /* Subtle gold glow */
+                0 0 20px rgba(255, 165, 0, 0.2); /* Even softer orange glow */
+            
+            /* Animation for color shift */
+            animation: colorShift 9s infinite alternate, opportunitiesSmoothPulse 4s infinite alternate ease-in-out; /* Combined animations */
+            font-size: 2.5rem; /* Default for mobile */
+            font-weight: 800; /* Poppins Extra-Bold */
+            color: var(--indigo-800); /* Default color */
+            margin-bottom: 0.75rem; /* Reduced space by half from 1.5rem */
+        }
+        @media (min-width: 768px) {
+            .connect-you-title-outline {
+                font-size: 3.5rem; /* Increased for desktop */
+            }
+        }
+
+        /* Style for the "Connect with over 10K+ employers..." text */
+        .value-proposition-text {
+            font-weight: 800; /* Made bolder as requested */
+            color: var(--indigo-800);
+            text-shadow:
+                1px 1px 0 #FFF, -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, /* White outline */
+                0 0 10px rgba(255, 215, 0, 0.6), /* Softer Gold glow */
+                0 0 20px rgba(255, 165, 0, 0.3); /* Softer Orange halo */
+            margin-bottom: 0.75rem; /* Reduced space by half from 1.5rem */
+        }
+        /* Mobile font size for value-proposition-text */
+        @media (max-width: 767px) {
+            .value-proposition-text {
+                font-size: 18px; /* Original size for mobile */
+            }
+        }
+        /* Desktop font size for value-proposition-text */
+        @media (min-width: 768px) {
+            .value-proposition-text {
+                font-size: 28px; /* Increased to 28px for desktop */
+            }
+        }
+
+        /* NEW: Custom button for Get Started/Learn More */
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--indigo-800); /* Learn More in indigo-800 */
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+            box-shadow: 0 0 0 2px var(--indigo-800); /* Indigo outline */
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2), 0 0 0 3px var(--indigo-800);
+            background-color: var(--indigo-800);
+            color: white;
+        }
+        .btn-secondary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 2px var(--indigo-800);
+        }
+        @media (min-width: 768px) {
+            .btn-secondary {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Get Started Button specific styling */
+        #get-started-btn {
+            background-image: linear-gradient(to right, #6366f1, #8b5cf6); /* Gradient background */
+            color: white;
+            padding: 1rem 2rem; /* Increased padding for a bolder look */
+            border-radius: 9999px; /* Fully rounded pill shape */
+            font-weight: 700; /* Extra bold */
+            font-size: 1.25rem; /* Larger font size */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-image 0.3s ease;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem; /* More space for the arrow */
+            animation: buttonPulse 2s infinite alternate ease-in-out, lightningGlow 4s infinite alternate ease-in-out; /* Combined animations */
+        }
+        #get-started-btn:hover {
+            transform: translateY(-4px) scale(1.02); /* More pronounced lift and slight scale */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Even stronger shadow */
+            background-image: linear-gradient(to right, #8b5cf6, #6366f1); /* Reverse gradient on hover */
+            animation-play-state: paused; /* Pause animation on hover */
+        }
+        #get-started-btn:active {
+            transform: translateY(0) scale(0.98); /* Press effect */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-image: linear-gradient(to right, #6366f1, #8b5cf6);
+        }
+        #get-started-btn .lucide-icon {
+            width: 1.75rem; /* Larger arrow icon */
+            height: 1.75rem;
+            stroke-width: 2.5; /* Thicker arrow stroke */
+        }
+
+        @keyframes buttonPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes lightningGlow {
+            0%, 100% { box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); }
+            25% { box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 69, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5); } /* Orange-red dazzling glow */
+            50% { box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); }
+            75% { box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 69, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5); }
+        }
+
+        /* About Us Section (Placeholder) */
+        #about-us-section {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(5px);
             border-radius: 1.5rem;
-            padding: 2rem;
-            margin-top: 2rem;
+            padding: 1rem; /* Reduced padding */
+            margin: 2rem auto;
+            max-width: 900px;
+            width: 95%;
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             color: #e0e0e0;
-            overflow-x: auto;
+            text-align: center;
+            display: none; /* Hidden by default, will be shown by JS scroll */
+        }
+        #about-us-section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--indigo-800);
+            text-shadow:
+                1px 1px 0 #FFF, -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF; /* Solid white outline */
+            margin-bottom: 1.5rem;
+        }
+        #about-us-section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: black; /* Solid black font */
+        }
+        /* Inner white card for About Us content */
+        .about-us-content-card {
+            background: rgba(255, 255, 255, 0.9); /* Opaque white */
+            backdrop-filter: blur(5px); /* Blurs out content behind it */
+            border-radius: 1rem;
+            padding: 1.5rem;
+            color: black; /* Solid black font for content */
+            margin-top: 1rem; /* Space from heading */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        #user-entries-table {
+        /* Darkening Overlay for "Get Started" button click */
+        .darken-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 1.5rem;
-            color: #e0e0e0;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent */
+            z-index: 999; /* Below modal, above main content */
+            display: none; /* Hidden by default */
+            transition: opacity 0.3s ease-in-out;
+        }
+        .darken-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Input glow animation */
+        @keyframes inputGlow {
+            0% { box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(99, 102, 241, 0.8), 0 0 20px rgba(99, 102, 241, 0.6); }
+            100% { box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.4); }
+        }
+        .input-glow {
+            animation: inputGlow 1.5s infinite alternate;
+        }
+        /* Red glow for missing fields */
+        @keyframes inputErrorGlow {
+            0% { box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0.8), 0 0 20px rgba(239, 68, 68, 0.6); }
+            100% { box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.4); }
+        }
+        .input-error {
+            border-color: #ef4444 !important; /* Red border */
+            animation: inputErrorGlow 1.5s infinite alternate; /* Red glow */
+        }
+
+
+        /* Mobile Sign In button in header */
+        .header-mobile-signin-button {
+            background-image: linear-gradient(to right, #6366f1, #8b5cf6); /* Indigo gradient */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
             font-size: 0.9rem;
+            /* display: none; Removed, now visible by default */
+            margin-left: auto; /* Push to right */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .header-mobile-signin-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        @media (max-width: 767px) {
+            .header-mobile-signin-button {
+                /* Display is controlled by JS now, keep as is */
+            }
+            .header-mobile-signin-button + #mobile-menu-button {
+                margin-left: 0.75rem; /* Space between sign-in and menu button */
+            }
         }
 
-        #user-entries-table th,
-        #user-entries-table td {
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.75rem;
-            text-align: left;
-            vertical-align: top;
+        /* Footer Styling - Revamped */
+        footer {
+            background: linear-gradient(to top, rgba(17, 24, 39, 0.95), rgba(31, 41, 55, 0.95)); /* Darker, subtle gradient */
+            color: #e0e0e0; /* Lighter text for better contrast */
+            padding: 2.5rem 1.5rem; /* Increased padding */
+            border-top: 3px solid var(--indigo-800); /* Stronger top border */
+            box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.3); /* More prominent shadow */
         }
 
-        #user-entries-table th {
-            background-color: rgba(0, 0, 0, 0.5);
+        .footer-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1.5rem; /* Spacing between main footer sections */
+        }
+
+        .footer-greeting {
+            font-size: 1.5rem; /* Larger font size */
             font-weight: 700;
-            color: var(--digital-cyan);
-            text-transform: uppercase;
-            font-size: 0.8rem;
+            color: #fff; /* White for emphasis */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.4); /* Soft white glow */
+            margin-bottom: 0.5rem; /* Space below greeting */
         }
 
-        #user-entries-table tbody tr:nth-child(even) {
-            background-color: rgba(0, 0, 0, 0.2);
+        .footer-links-container {
+            display: flex;
+            flex-direction: column; /* Stack vertically on mobile */
+            gap: 1rem; /* Space between links */
+            margin-bottom: 1.5rem; /* Space below links */
         }
 
-        #user-entries-table tbody tr:hover {
-            background-color: rgba(0, 0, 0, 0.4);
+        @media (min-width: 640px) { /* sm breakpoint */
+            .footer-links-container {
+                flex-direction: row; /* Horizontal on larger screens */
+                gap: 2rem;
+            }
         }
-        */
+
+        .footer-link {
+            display: inline-flex;
+            align-items: center;
+            font-size: 1.1rem; /* Consistent font size */
+            font-weight: 600;
+            color: var(--logo-orange-original); /* Orange for links */
+            transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.2s ease;
+            text-decoration: none; /* No underline by default */
+            padding: 0.5rem 1rem; /* Padding for hover effect */
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.05); /* Subtle background */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-link:hover {
+            color: var(--indigo-500); /* Indigo on hover */
+            text-shadow: 0 0 10px rgba(99, 102, 241, 0.7); /* Stronger indigo glow */
+            transform: translateY(-3px); /* Lift effect */
+            background: rgba(255, 255, 255, 0.1); /* Slightly more opaque */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer-link .lucide-icon {
+            margin-right: 0.5rem;
+            font-size: 1.3rem; /* Icon size */
+            color: #fff; /* White icon */
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover .lucide-icon {
+            color: var(--indigo-500); /* Icon color matches text on hover */
+        }
+
+        .footer-separator {
+            display: none; /* Hidden by default */
+        }
+
+        @media (min-width: 640px) { /* sm breakpoint */
+            .footer-separator {
+                display: block; /* Show only on larger screens */
+                color: rgba(255, 255, 255, 0.3); /* Subtle white */
+                font-size: 1.5rem;
+            }
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: #b0b0b0; /* Slightly darker grey */
+            margin-top: 1rem; /* Space from links */
+            line-height: 1.5;
+        }
+
+        .footer-copyright a {
+            color: #b0b0b0;
+            text-decoration: underline;
+            transition: color 0.2s ease;
+        }
+
+        .footer-copyright a:hover {
+            color: #fff;
+        }
+
+        /* New custom alert modal styles */
+        .custom-alert-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Darker background than auth modal */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1003; /* Higher than auth modal */
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s linear;
+        }
+        .custom-alert-modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .custom-alert-modal-content {
+            background: #ffffff; /* White background */
+            border-radius: 1.5rem;
+            padding: 2rem;
+            width: 90%;
+            max-width: 400px; /* Slightly smaller for alerts */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+            position: relative;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+            color: #333;
+            text-align: center;
+            border: 2px solid var(--logo-orange-original); /* Orange border for warning */
+        }
+        .custom-alert-modal-overlay.active .custom-alert-modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .custom-alert-modal-content h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--logo-orange-original); /* Orange title */
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+        .custom-alert-modal-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        .custom-alert-modal-content button {
+            background-image: linear-gradient(to right, #6366f1, #8b5cf6);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .custom-alert-modal-content button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+        .custom-alert-countdown {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 0.5rem;
+        }
+
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -859,19 +1285,20 @@
     <header class="w-full header-gradient shadow-md py-4 px-6 md:px-10 relative">
         <nav class="container mx-auto flex justify-between items-center" aria-label="Main navigation">
             <div class="flex items-center space-x-1">
-                <div class="logo-container"> <img src="logo2.png" alt="Kazi Connect Logo" loading="lazy"> </div>
+                <div class="logo-container"> <img src="logo2.png" alt="G-Connect Logo" loading="lazy"> </div>
                 <div class="flex flex-col items-start leading-none">
-                    <span class="text-2xl font-extrabold header-text-outline">Kazi</span> <span class="text-sm font-semibold header-text-outline">Connect</span> </div>
+                    <span class="text-2xl font-extrabold header-text-outline">G-</span> <span class="text-sm font-semibold header-text-outline">Connect</span> </div>
             </div>
-            <ul class="hidden md:flex space-x-4">
-                <li><a href="#" class="nav-link">HOME</a></li>
-                <li><a href="#" class="nav-link">ABOUT</a></li>
+            <ul class="hidden md:flex space-x-4 items-center">
+                <li><a href="#main-content-wrapper" id="home-nav-link" class="nav-link">HOME</a></li>
+                <li><a href="#about-us-section" id="about-nav-link" class="nav-link">ABOUT</a></li>
                 <li><a href="#" class="nav-link">SERVICES</a></li>
                 <li><a href="#" class="nav-link">POST A JOB</a></li>
-                <li><a href="admin.html" class="nav-link">AUTHORIZED PERSONNEL</a></li> <!-- New button -->
-                <li><button id="logout-button" class="btn-primary">Logout</button></li>
+                <li><button id="header-signin-button" class="btn-primary">Sign In</button></li>
+                <li><button id="logout-button" class="btn-primary" style="display: none;">Logout</button></li>
             </ul>
-            <div class="md:hidden">
+            <div class="md:hidden flex items-center">
+                <button id="mobile-signin-button" class="header-mobile-signin-button">Sign In</button>
                 <button id="mobile-menu-button" class="text-white hover:text-gray-200 focus:outline-none p-2 rounded-md" aria-controls="mobile-nav-menu" aria-expanded="false">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -880,48 +1307,65 @@
             </div>
         </nav>
         <div id="mobile-nav-menu" class="mobile-nav-menu md:hidden">
-            <a href="#" class="block">HOME</a>
-            <a href="#" class="block">ABOUT</a>
+            <a href="#main-content-wrapper" id="mobile-home-nav-link" class="block">HOME</a>
+            <a href="#about-us-section" id="mobile-about-nav-link" class="block">ABOUT</a>
             <a href="#" class="block">SERVICES</a>
             <a href="#" class="block">POST A JOB</a>
-            <a href="admin.html" class="block">AUTHORIZED PERSONNEL</a> <!-- New button -->
-            <button id="mobile-logout-button" class="btn-primary w-full mt-4">Logout</button>
+            <!-- Mobile Sign In button removed from here, now in header -->
+            <button id="mobile-logout-button" class="btn-primary w-full mt-4" style="display: none;">Logout</button>
         </div>
     </header>
 
-    <main class="flex-grow flex items-center justify-center p-4 sm:p-6 md:p-8">
-        <div class="glass-strip-wrapper">
-            <div class="card w-full max-w-md p-6 sm:p-8 md:p-10 text-center relative">
-                <h1 id="main-opportunities-title" class="text-3xl sm:text-4xl font-extrabold mb-4 leading-tight opportunities-title-outline">
-                    Opportunities waiting for you!
-                </h1>
-                
-                <div class="mb-6">
-                    <div class="company-scroller-container">
-                        <div class="digital-header-text">
-                            OVER 10K EMPLOYERS
-                        </div>
-                        <div class="company-scroller-content-area">
-                            <div class="company-scroller-inner-wrapper" id="company-scroller-inner-wrapper">
-                                <div class="company-list-content" id="company-list-1">
-                                </div>
-                                <div class="company-list-content" id="company-list-2" aria-hidden="true">
-                                </div>
+    <!-- Main Content Wrapper for Desktop Two-Column Layout -->
+    <main id="main-content-wrapper" class="flex-grow flex flex-col md:flex-row items-stretch justify-center p-4 md:p-6 max-w-6xl mx-auto w-full">
+        
+        <!-- Left Section: Value Proposition and Horizontal Scroller -->
+        <section class="left-section-container">
+            <h1 class="font-extrabold connect-you-title-outline">Let's Connect You!</h1>
+            
+            <!-- Scan window (original design) -->
+            <div class="mb-2 w-full flex justify-center"> <!-- Reduced margin-bottom by half -->
+                <div class="company-scroller-container">
+                    <div class="digital-header-text">
+                        OVER 10K EMPLOYERS
+                    </div>
+                    <div class="company-scroller-content-area">
+                        <div class="company-scroller-inner-wrapper" id="company-scroller-inner-wrapper">
+                            <div class="company-list-content" id="company-list-1">
+                            </div>
+                            <div class="company-list-content" id="company-list-2" aria-hidden="true">
                             </div>
                         </div>
-                        <div class="digital-footer">
-                            <span class="lucide-icon" data-lucide="lock"></span> SSL SECURE
-                            <span class="digital-separator">|</span>
-                            <span class="lucide-icon" data-lucide="phone"></span> 24/7 SUPPORT
-                        </div>
+                    </div>
+                    <div class="digital-footer">
+                        <span class="lucide-icon" data-lucide="lock"></span> SSL SECURE
+                        <span class="digital-separator">|</span>
+                        <span class="lucide-icon" data-lucide="phone"></span> 24/7 SUPPORT
                     </div>
                 </div>
+            </div>
 
-                <!-- Moved "Already have an account? Sign In" link here -->
-                <p class="text-center text-sm mb-6 text-gray-700">
-                    Already have an account? <a href="#" id="main-form-signin-link" class="text-indigo-600 hover:text-indigo-800 underline font-semibold">Sign In</a>
-                </p>
+            <p class="max-w-xl value-proposition-text">
+                Connect with over 10K+ employers for FREE and find your dream job in construction industry and others. Trusted by Leading Companies.
+            </p>
 
+            <div class="flex flex-col sm:flex-row gap-4 mt-8 w-full justify-center"> <!-- Reduced margin-top -->
+                <button id="get-started-btn" class="text-xl px-8 py-3 rounded-full">
+                    Get Started <span data-lucide="arrow-right" class="w-6 h-6 ml-2"></span>
+                </button>
+                <button id="learn-more-btn" class="btn-secondary text-xl px-8 py-3 rounded-full">
+                    Learn More
+                </button>
+            </div>
+        </section>
+
+        <!-- Right Section: Find Your Perfect Job Form -->
+        <section class="right-section-container">
+            <div id="job-form-card" class="card w-full max-w-md p-6 sm:p-8 md:p-10 text-center relative mx-auto">
+                <h2 id="main-opportunities-title" class="text-3xl sm:text-4xl font-extrabold mb-4 leading-tight opportunities-title-outline">
+                    Find Your Job Matches
+                </h2>
+                
                 <div class="industry-toggle-container mb-6" role="tablist">
                     <button type="button" id="construction-tab" class="industry-toggle-button-segment" role="tab" aria-selected="true" aria-controls="construction-form-section">
                         Construction Industry
@@ -941,9 +1385,10 @@
                                 <option value="">-- Select Level --</option>
                                 <option value="certificate">Certificate</option>
                                 <option value="diploma">Diploma</option>
-                                <option value="technician">Technician</option>
                                 <option value="degree">Degree</option>
                                 <option value="higher-diploma">Higher Diploma</option>
+                                <option value="masters">Masters</option>
+                                <option value="phd">PhD</option>
                             </select>
                         </div>
                         <div class="relative">
@@ -974,9 +1419,10 @@
                                 <option value="">-- Select Level --</option>
                                 <option value="certificate">Certificate</option>
                                 <option value="diploma">Diploma</option>
-                                <option value="technician">Technician</option>
                                 <option value="degree">Degree</option>
                                 <option value="higher-diploma">Higher Diploma</option>
+                                <option value="masters">Masters</option>
+                                <option value="phd">PhD</option>
                             </select>
                         </div>
                         <div class="relative">
@@ -991,23 +1437,40 @@
                         </button>
                     </div>
                 </form>
+                <p class="text-center text-sm mt-6 text-black"> <!-- Changed to solid black -->
+                    Already have an account? <a href="#" id="main-form-signin-link" class="text-indigo-600 hover:text-indigo-800 underline font-semibold">Sign In</a>
+                </p>
             </div>
-        </div>
-
-        <section id="job-matches-section" class="w-full max-w-2xl mx-auto p-6 sm:p-8 md:p-10 mt-8 rounded-2xl hidden">
-            <h2 id="job-matches-title" class="text-3xl sm:text-4xl font-extrabold mb-6 text-center opportunities-title-outline">
-                Your Curated Job Matches!
-            </h2>
-            <div id="job-list" class="space-y-6">
-                </div>
         </section>
-
-        <!-- The "All User Entries" section has been moved to admin.html -->
     </main>
+
+    <!-- Job Matches Section -->
+    <section id="job-matches-section" class="w-full max-w-2xl mx-auto p-6 sm:p-8 md:p-10 mt-8 rounded-2xl hidden">
+        <h2 id="job-matches-title" class="text-3xl sm:text-4xl font-extrabold mb-6 text-center opportunities-title-outline">
+            Your Curated Job Matches!
+        </h2>
+        <div id="job-list" class="space-y-6">
+            </div>
+    </section>
+
+    <!-- About Us Section (Placeholder for Learn More) -->
+    <section id="about-us-section">
+        <h2 class="font-extrabold about-us-heading">About G-Connect</h2>
+        <div class="about-us-content-card">
+            <p>
+                G-Connect is dedicated to bridging the gap between talented job seekers and leading employers across various industries, with a special focus on construction. Our platform is designed to make your job search efficient, secure, and successful. We believe in empowering individuals to find their dream careers and helping companies discover the perfect talent.
+            </p>
+            <p>
+                With a vast network of over 10,000+ employers and 24/7 support, we are committed to providing a seamless experience. Your privacy and data security are our top priorities, ensured by robust SSL encryption. Join G-Connect today and take the next step towards your professional aspirations!
+            </p>
+        </div>
+    </section>
 
     <div id="loader-overlay" class="loader-overlay">
         <div class="spinner"></div>
     </div>
+
+    <div id="darken-overlay" class="darken-overlay"></div> <!-- New darkening overlay -->
 
     <div id="auth-modal-overlay" class="modal-overlay">
         <div class="modal-content">
@@ -1037,6 +1500,10 @@
                     <input type="email" id="signup-email" name="email" placeholder="you@example.com" class="input-field" required>
                 </div>
                 <div>
+                    <label for="signup-username" class="block text-left text-indigo-800 text-base font-bold mb-2">Username:</label>
+                    <input type="text" id="signup-username" name="username" placeholder="johndoe123" class="input-field" required>
+                </div>
+                <div>
                     <label for="signup-password" class="block text-left text-indigo-800 text-base font-bold mb-2">Password:</label>
                     <input type="password" id="signup-password" name="password" placeholder="Min 6 characters" class="input-field" required minlength="6">
                 </div>
@@ -1059,22 +1526,32 @@
         </div>
     </div>
 
-    <footer class="w-full bg-gray-800 bg-opacity-90 text-white py-6 px-4 md:px-8 text-center mt-auto">
-        <div class="container mx-auto">
-            <p id="footer-greeting" class="footer-text mb-4">
+    <!-- NEW: Custom Alert Modal HTML -->
+    <div id="custom-alert-modal-overlay" class="custom-alert-modal-overlay">
+        <div class="custom-alert-modal-content">
+            <h3><span data-lucide="alert-triangle" class="w-8 h-8 text-orange-500"></span> Alert!</h3>
+            <p id="custom-alert-message">This is a custom alert message.</p>
+            <div id="custom-alert-countdown" class="custom-alert-countdown hidden"></div>
+            <button id="custom-alert-close-button">Got it!</button>
+        </div>
+    </div>
+
+    <footer class="w-full text-white py-6 px-4 md:px-8 mt-auto">
+        <div class="container mx-auto footer-content-wrapper">
+            <p id="footer-greeting" class="footer-greeting">
                 Any challenge? We're here to help!
             </p>
-            <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
-                <a href="https://wa.me/254712345678" class="footer-link inline-flex items-center text-lg font-semibold" target="_blank" rel="noopener noreferrer">
-                    <span data-lucide="whatsapp" class="w-6 h-6 mr-2"></span> WhatsApp Support
+            <div class="footer-links-container">
+                <a href="https://wa.me/254712345678" class="footer-link" target="_blank" rel="noopener noreferrer">
+                    <span data-lucide="whatsapp" class="lucide-icon"></span> WhatsApp Support
                 </a>
-                <span class="text-gray-500 text-lg font-bold hidden sm:block">|</span>
-                <a href="mailto:support@kaziconnect.com" class="footer-link inline-flex items-center text-lg font-semibold">
-                    <span data-lucide="mail" class="w-6 h-6 mr-2"></span> Email Us
+                <span class="footer-separator">|</span>
+                <a href="mailto:support@g-connect.com" class="footer-link">
+                    <span data-lucide="mail" class="lucide-icon"></span> Email Us
                 </a>
             </div>
-            <p class="text-xs mt-4 text-gray-400">
-                &copy; <span id="current-year"></span> Kazi Connect. All rights reserved. Crafting futures, one connection at a time.
+            <p class="footer-copyright">
+                &copy; <span id="current-year"></span> G-Connect. <a href="admin.html">All rights reserved.</a> Crafting futures, one connection at a time.
             </p>
         </div>
     </footer>
@@ -1086,8 +1563,7 @@
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, signInWithCustomToken, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, where, onSnapshot, getDocs } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js"; // Added getDocs
 
-        // --- START OF NEW FIREBASE CONFIGURATION ---
-        // IMPORTANT: These values are from the new Firebase configuration you provided.
+        // --- START OF FIREBASE CONFIGURATION (RESTORED TO USER'S PREFERRED HARDCODED CONFIG) ---
         const firebaseConfig = {
             apiKey: "AIzaSyAxh6u9xe0kfd_dnMxUo4d7Ph0U0lBibF8",
             authDomain: "kaziconnectweb.firebaseapp.com",
@@ -1097,20 +1573,27 @@
             appId: "1:782241286494:web:14adc692c3a96ca08ee7cf",
             measurementId: "G-0PCWR2Z0SC"
         };
-        // --- END OF NEW FIREBASE CONFIGURATION ---
 
-        // Initialize Firebase with the NEW configuration
+        // Initialize Firebase with the RESTORED hardcoded configuration
         const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app); // Initialized analytics as requested
+        const analytics = getAnalytics(app);
         const db = getFirestore(app);
         const auth = getAuth(app);
+        // --- END OF FIREBASE CONFIGURATION ---
         
-        // Global variables for app ID and user ID
+        // Global variables for app ID
         // The __app_id variable is provided by the Canvas environment, use it for Firestore paths.
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
         let currentUserId = null; // Will be set after authentication
         let currentUserName = ''; // To store the user's name for personalization
         let currentFilteredJobs = []; // To store the jobs currently displayed for export
+
+        // CORRECTED: Initialize tempJobSearchData with default empty strings
+        let tempJobSearchData = {
+            qualification: '',
+            course: '',
+            industry: ''
+        };
 
         // DOM Elements
         const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -1134,7 +1617,7 @@
 
         const jobSearchForm = document.getElementById('job-search-form');
         const loaderOverlay = document.getElementById('loader-overlay');
-        const authModalOverlay = document.getElementById('auth-modal-overlay');
+        const authModalOverlay = document.getElementById('auth-modal-overlay'); // Corrected variable name
         const modalCloseButton = document.getElementById('modal-close-button');
         const modalTitle = document.getElementById('modal-title');
         const modalSignupTab = document.getElementById('modal-signup-tab');
@@ -1149,12 +1632,39 @@
         const jobList = document.getElementById('job-list');
         const logoutButton = document.getElementById('logout-button');
         const mobileLogoutButton = document.getElementById('mobile-logout-button');
-        // Removed userEntriesSection and userEntriesTableBody DOM elements as they are moved to admin.html
-        // const userEntriesSection = document.getElementById('user-entries-section');
-        // const userEntriesTableBody = document.querySelector('#user-entries-table tbody');
+        
+        // NEW DOM elements for the Home section
+        const homeNavLink = document.getElementById('home-nav-link');
+        const mobileHomeNavLink = document.getElementById('mobile-home-nav-link');
+        const getStartedBtn = document.getElementById('get-started-btn'); // New Get Started button
+        const learnMoreBtn = document.getElementById('learn-more-btn'); // New Learn More button
+        const jobFormCard = document.getElementById('job-form-card'); // The job form card itself
+        const aboutUsSection = document.getElementById('about-us-section'); // About Us section
+
+        // NEW: Sign In buttons in header/mobile menu
+        const headerSigninButton = document.getElementById('header-signin-button');
+        const mobileSigninButton = document.getElementById('mobile-signin-button');
+
+        // NEW: Main content wrapper for scrolling
+        const mainContentWrapper = document.getElementById('main-content-wrapper');
+        const darkenOverlay = document.getElementById('darken-overlay'); // Darkening overlay
+
+        // NEW: Custom Alert Modal elements
+        const customAlertModalOverlay = document.getElementById('custom-alert-modal-overlay');
+        const customAlertMessage = document.getElementById('custom-alert-message');
+        const customAlertCloseButton = document.getElementById('custom-alert-close-button');
+        const customAlertCountdown = document.getElementById('custom-alert-countdown'); // Countdown element
 
         let isConstructionMode = true; // Default state: In Construction
-        let tempJobSearchData = {}; // Temporarily store form data before signup/signin
+        let autoSubmitTimer = null; // To hold the countdown timer
+        let countdownInterval = null; // To hold the interval for updating countdown text
+
+        // Function to validate email format
+        function isValidEmail(email) {
+            // Basic regex for email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
 
         // Suggestion data
         const constructionCourses = [
@@ -1180,29 +1690,36 @@
             "Biomedical Engineering", "Environmental Science", "Culinary Arts"
         ];
 
-        // Company names for the scroller (unchanged as per instruction)
+        // Company names for the scroller (Prioritize construction related companies and agencies)
         const companyNames = [
-            "Epco Builders Ltd", "Seyani Brothers & Co. (K) Ltd", "Laxmanbhai Construction Ltd",
-            "Intex Construction", "Cementers Ltd", "Hayer Bishan Singh & Sons Ltd",
-            "Associated Construction Co (K) Ltd", "Parbat Siyani Construction Ltd",
-            "Put Sarajevo General Engineering Co", "Nyoro Construction Company Ltd",
-            "Sogea Satom Kenya", "Bechtel Corporation Kenya", "INTEGRUM", "Dancom Construction",
-            "Archistra Construction Company Ltd", "Aspax Construction Company",
             "Kenya Urban Roads Authority (KURA)",
             "Kenya National Highways Authority (KeNHA)",
             "Kenya Rural Roads Authority (KeRRA)",
-            "Safaricom PLC", "Equity Bank Group", "KCB Group PLC", "East African Breweries PLC",
-            "Co-operative Bank of Kenya", "Absa Bank Kenya PLC", "Standard Chartered Bank Kenya",
-            "Bamburi Cement PLC", "Kenya Power & Lighting Co. PLC", "Centum Investment Company PLC",
-            "Jubilee Holdings Ltd", "Britam Holdings PLC", "NCBA Group PLC", "Kenya Airways PLC",
-            "TotalEnergies Marketing Kenya PLC", "KenGen PLC", "Sanlam Kenya PLC",
-            "CIC Insurance Group PLC", "Liberty Kenya Holdings PLC", "Crown Paints Kenya PLC",
-            "Carbacid Investments PLC", "Longhorn Publishers PLC", "Nation Media Group PLC",
-            "Standard Group PLC", "Home Afrika Ltd", "Flame Tree Group Holdings Ltd",
-            "Kakuzi PLC", "Limuru Tea PLC", "Sasini PLC", "Eaagads Ltd"
+            "National Construction Authority (NCA)",
+            "Epco Builders Ltd",
+            "Seyani Brothers & Co. (K) Ltd",
+            "Laxmanbhai Construction Ltd",
+            "Intex Construction",
+            "Cementers Ltd",
+            "Hayer Bishan Singh & Sons Ltd",
+            "Associated Construction Co (K) Ltd",
+            "Parbat Siyani Construction Ltd",
+            "Put Sarajevo General Engineering Co",
+            "Nyoro Construction Company Ltd",
+            "Sogea Satom Kenya",
+            "Bechtel Corporation Kenya",
+            "INTEGRUM",
+            "Dancom Construction",
+            "Archistra Construction Company Ltd",
+            "Aspax Construction Company",
+            "Safaricom PLC",
+            "Equity Bank Group",
+            "KCB Group PLC",
+            "Absa Bank Kenya PLC",
+            "Other Prominent Companies" // Added for continuous loop with diverse names
         ];
 
-        // Simulated Job Data
+        // Simulated Job Data - UPDATED QUALIFICATION LEVELS
         const allJobs = [
             {
                 id: "job1",
@@ -1213,7 +1730,7 @@
                 date: "Wednesday, 23rd July 2025",
                 requirements: "Diploma in any of the following discipline: Civil Engineering, Building and Construction, or its equivalent qualification from a recognized institution.",
                 industry: "Construction",
-                qualification: "diploma",
+                qualification: "diploma", // Changed to diploma
                 course: "Building and Construction" // Specific course for filtering
             },
             {
@@ -1225,7 +1742,7 @@
                 date: "Wednesday, 23rd July 2025",
                 requirements: "Diploma in any of the following discipline: Building and Construction, Carpentry and joinery or its equivalent qualification from a recognized institution.",
                 industry: "Construction",
-                qualification: "diploma",
+                qualification: "diploma", // Changed to diploma
                 course: "Carpentry and Joinery" // Specific course for filtering
             },
             {
@@ -1237,7 +1754,7 @@
                 date: "Wednesday, 23rd July 2025",
                 requirements: "JOB TITLE PROFESSIONAL CARPENTER NATURE OF JOB FULL TIME INDUSTRY CONSTRUCTION SALARY USD 500- 700 ( FURNISHED ACCOMMODATION AND FOOD PROVIDED) JOB LOCATION DJIBOUTI: let go",
                 industry: "Construction",
-                qualification: "technician", // Assuming a professional carpenter might fit technician/diploma level
+                qualification: "certificate", // Changed to certificate
                 course: "Carpentry" // General carpentry
             },
             {
@@ -1249,19 +1766,19 @@
                 date: "Tuesday, 22nd July 2025",
                 requirements: "Degree in Civil Engineering. Fresh graduates encouraged to apply.",
                 industry: "Construction",
-                qualification: "degree",
+                qualification: "degree", // Changed to degree
                 course: "Civil Engineering"
             },
             {
                 id: "job5",
                 title: "Site Supervisor",
                 company: "Seyani Brothers & Co. (K) Ltd",
-                location: "Mombasa",
+                location: "Nairobi",
                 source: "LinkedIn",
                 date: "Monday, 21st July 2025",
                 requirements: "Diploma or Higher Diploma in Building Construction or related field. 3+ years experience.",
                 industry: "Construction",
-                qualification: "diploma",
+                qualification: "higher-diploma", // Changed to higher-diploma
                 course: "Building Construction"
             },
             {
@@ -1273,7 +1790,7 @@
                 date: "Friday, 18th July 2025",
                 requirements: "Certificate or Diploma in Quantity Surveying. Entry-level position.",
                 industry: "Construction",
-                qualification: "certificate",
+                qualification: "certificate", // Changed to certificate
                 course: "Quantity Surveying"
             },
             // Example jobs for 'Other Industry'
@@ -1286,7 +1803,7 @@
                 date: "Thursday, 24th July 2025",
                 requirements: "Currently pursuing a Degree in Computer Science, Software Engineering or related field.",
                 industry: "Information Technology",
-                qualification: "degree",
+                qualification: "degree", // Changed to degree
                 course: "Software Development"
             },
             {
@@ -1298,7 +1815,7 @@
                 date: "Wednesday, 23rd July 2025",
                 requirements: "Diploma in Nursing. Valid nursing license.",
                 industry: "Healthcare",
-                qualification: "diploma",
+                qualification: "diploma", // Changed to diploma
                 course: "Nursing"
             },
             {
@@ -1310,7 +1827,7 @@
                 date: "Tuesday, 22nd July 2025",
                 requirements: "Degree in Education (Mathematics). TSC registration.",
                 industry: "Education",
-                qualification: "degree",
+                qualification: "degree", // Changed to degree
                 course: "Teaching"
             },
             {
@@ -1322,7 +1839,7 @@
                 date: "Monday, 21st July 2025",
                 requirements: "Degree in Finance, Economics or Accounting. CPA (K) preferred.",
                 industry: "Finance",
-                qualification: "degree",
+                qualification: "degree", // Changed to degree
                 course: "Financial Analysis"
             }
         ];
@@ -1335,7 +1852,7 @@
 
             // Firebase Authentication Listener
             onAuthStateChanged(auth, async (user) => {
-                if (user) {
+                if (user && !user.isAnonymous) { // Check if user is signed in AND NOT anonymous
                     currentUserId = user.uid;
                     // User is signed in. Fetch user profile and pre-fill form/show jobs.
                     const userProfileRef = doc(db, `artifacts/${appId}/users/${currentUserId}/profiles`, currentUserId);
@@ -1343,7 +1860,7 @@
 
                     if (userProfileSnap.exists()) {
                         const userData = userProfileSnap.data();
-                        currentUserName = userData.fullName || ''; // Store user's full name
+                        currentUserName = userData.username || userData.fullName || ''; // Prioritize username, then full name
                         updatePersonalizedContent(currentUserName); // Update titles and footer
 
                         // Pre-fill job search form based on stored data
@@ -1370,13 +1887,17 @@
                     }
                     logoutButton.style.display = 'inline-block'; // Show logout for desktop
                     mobileLogoutButton.style.display = 'block'; // Show logout for mobile
+                    headerSigninButton.style.display = 'none'; // Hide Sign In button
+                    mobileSigninButton.style.display = 'none'; // Hide Mobile Sign In button
                 } else {
-                    // User is signed out
+                    // User is signed out OR is anonymous
                     currentUserId = null;
                     currentUserName = ''; // Clear user name
                     updatePersonalizedContent(currentUserName); // Reset titles and footer
                     logoutButton.style.display = 'none'; // Hide logout
                     mobileLogoutButton.style.display = 'none'; // Hide logout
+                    headerSigninButton.style.display = 'inline-block'; // Show Sign In button
+                    mobileSigninButton.style.display = 'inline-block'; // Show Mobile Sign In button
                     // Clear form fields and job matches if user logs out
                     qualificationLevelConstructionSelect.value = '';
                     courseNameConstructionInput.value = '';
@@ -1386,8 +1907,6 @@
                     jobList.innerHTML = '';
                     jobMatchesSection.style.display = 'none';
                 }
-                // Removed displayAllUserEntries() call from here as it's now in admin.html
-                // displayAllUserEntries();
             });
 
             // Initial custom token sign-in
@@ -1398,13 +1917,14 @@
                     .then(() => console.log("Signed in with custom token."))
                     .catch(error => console.error("Error signing in with custom token:", error));
             } else {
+                // If no initial token, sign in anonymously
                 signInAnonymously(auth)
                     .then(() => console.log("Signed in anonymously."))
                     .catch(error => console.error("Error signing in anonymously:", error));
             }
 
 
-            // Function to populate the company scroller
+            // Function to populate the company scroller (vertical one)
             function populateCompanyScroller() {
                 const companyList1 = document.getElementById('company-list-1');
                 const companyList2 = document.getElementById('company-list-2');
@@ -1562,7 +2082,7 @@
 
             // Hide mobile menu when clicking outside of it or the button
             document.addEventListener('click', function(event) {
-                if (!mobileNavMenu.contains(event.target) && !mobileMenuButton.contains(event.target)) {
+                if (!mobileNavMenu.contains(event.target) && !mobileMenuButton.contains(event.target) && !mobileSigninButton.contains(event.target)) {
                     mobileNavMenu.classList.remove('active');
                     mobileMenuButton.setAttribute('aria-expanded', 'false');
                 }
@@ -1591,40 +2111,68 @@
                 }
             });
 
+            // Function to clear input error highlights
+            function clearInputErrors() {
+                document.querySelectorAll('.input-error').forEach(el => {
+                    el.classList.remove('input-error');
+                });
+            }
+
             // Handle job search form submission
             jobSearchForm.addEventListener('submit', async function(event) {
                 event.preventDefault();
-                // No loader here, loader appears when auth modal forms are submitted.
+                clearInputErrors(); // Clear previous errors
 
                 let qualification = '';
                 let course = '';
                 let industry = '';
+                let missingFields = [];
 
                 if (isConstructionMode) {
                     qualification = qualificationLevelConstructionSelect.value;
                     course = courseNameConstructionInput.value.trim();
                     industry = 'Construction';
+
+                    if (!qualification) {
+                        missingFields.push(qualificationLevelConstructionSelect);
+                    }
+                    if (!course) {
+                        missingFields.push(courseNameConstructionInput);
+                    }
                 } else {
                     industry = otherIndustryInput.value.trim();
                     qualification = qualificationLevelOtherSelect.value;
                     course = courseNameOtherInput.value.trim();
-                    industry = otherIndustryInput.value.trim(); // Ensure industry is captured for 'Other'
+                    
+                    if (!industry) {
+                        missingFields.push(otherIndustryInput);
+                    }
+                    if (!qualification) {
+                        missingFields.push(qualificationLevelOtherSelect);
+                    }
+                    if (!course) {
+                        missingFields.push(courseNameOtherInput);
+                    }
                 }
 
                 tempJobSearchData = { qualification, course, industry };
 
-                // Check if user is authenticated
+                if (missingFields.length > 0) {
+                    missingFields.forEach(field => field.classList.add('input-error'));
+                    showCustomAlert("Please fill in all the highlighted fields to find your job matches.", true); // Pass true to show countdown
+                    return; // Stop submission
+                }
+
+                // If all required fields are filled, proceed
                 if (auth.currentUser && !auth.currentUser.isAnonymous) {
-                    // User is already signed in, proceed to display jobs
                     await saveJobSearchData(currentUserId, tempJobSearchData);
-                    await saveUserEntryToPublicCollection(currentUserId, currentUserName, auth.currentUser.email, tempJobSearchData); // Save to public collection
+                    // Pass currentUserName to saveUserEntryToPublicCollection
+                    await saveUserEntryToPublicCollection(currentUserId, currentUserName, currentUserName, auth.currentUser.email, tempJobSearchData);
                     displayJobMatches(qualification, course, industry);
-                    // Scroll to job matches section
                     setTimeout(() => {
                         jobMatchesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }, 500);
                 } else {
-                    // User is not signed in, show signup/signin modal
                     openAuthModal(''); 
                 }
             });
@@ -1639,20 +2187,29 @@
             }
 
             // Open Auth Modal
-            function openAuthModal(userNameForGreeting) {
+            function openAuthModal(userNameForGreeting, showSignInTab = false) {
                 modalTitle.textContent = userNameForGreeting ? `Welcome, ${userNameForGreeting}! Please sign up or sign in.` : `Your first time here? Sign up first!`;
                 authModalOverlay.classList.add('active');
-                modalSignupTab.classList.add('active');
-                modalSigninTab.classList.remove('active');
-                signupForm.classList.remove('hidden');
-                signinForm.classList.add('hidden');
+                if (showSignInTab) {
+                    modalSignupTab.classList.remove('active');
+                    modalSigninTab.classList.add('active');
+                    signupForm.classList.add('hidden');
+                    signinForm.classList.remove('hidden');
+                } else {
+                    modalSignupTab.classList.add('active');
+                    modalSigninTab.classList.remove('active');
+                    signupForm.classList.remove('hidden');
+                    signinForm.classList.add('hidden');
+                }
                 signupErrorMessage.classList.add('hidden');
                 signinErrorMessage.classList.add('hidden');
+                clearInputErrors(); // Clear errors when opening modal
             }
 
             // Close Auth Modal
             modalCloseButton.addEventListener('click', function() {
                 authModalOverlay.classList.remove('active');
+                clearInputErrors(); // Clear errors when closing modal
             });
 
             // Switch between Signup and Signin forms
@@ -1663,6 +2220,7 @@
                 signinForm.classList.add('hidden');
                 signupErrorMessage.classList.add('hidden');
                 signinErrorMessage.classList.add('hidden');
+                clearInputErrors(); // Clear errors when switching tabs
             });
 
             modalSigninTab.addEventListener('click', function() {
@@ -1672,37 +2230,137 @@
                 signinForm.classList.remove('hidden');
                 signupErrorMessage.classList.add('hidden');
                 signinErrorMessage.classList.add('hidden');
+                clearInputErrors(); // Clear errors when switching tabs
+            });
+
+            // NEW: Function to show custom alert modal
+            function showCustomAlert(message, showCountdown = false) {
+                customAlertMessage.textContent = message;
+                customAlertModalOverlay.classList.add('active');
+                lucide.createIcons(); // Re-render Lucide icons for the alert modal
+
+                if (showCountdown) {
+                    let timeLeft = 15;
+                    customAlertCountdown.textContent = `Auto-submitting in ${timeLeft} seconds...`;
+                    customAlertCountdown.classList.remove('hidden');
+                    
+                    // Clear any existing timers
+                    if (autoSubmitTimer) clearTimeout(autoSubmitTimer);
+                    if (countdownInterval) clearInterval(countdownInterval);
+
+                    countdownInterval = setInterval(() => {
+                        timeLeft--;
+                        customAlertCountdown.textContent = `Auto-submitting in ${timeLeft} seconds...`;
+                        if (timeLeft <= 0) {
+                            clearInterval(countdownInterval);
+                            customAlertCountdown.classList.add('hidden');
+                            customAlertModalOverlay.classList.remove('active'); // Close alert
+                            jobSearchForm.submit(); // Programmatically re-submit the form
+                        }
+                    }, 1000);
+
+                    // If user interacts with form fields, clear the auto-submit timer
+                    const formFields = jobSearchForm.querySelectorAll('input, select');
+                    formFields.forEach(field => {
+                        field.addEventListener('input', clearAutoSubmitTimer);
+                        field.addEventListener('change', clearAutoSubmitTimer);
+                    });
+                    jobSearchForm.addEventListener('submit', clearAutoSubmitTimer); // If user manually submits
+                } else {
+                    customAlertCountdown.classList.add('hidden');
+                    if (autoSubmitTimer) clearTimeout(autoSubmitTimer);
+                    if (countdownInterval) clearInterval(countdownInterval);
+                }
+            }
+
+            // NEW: Function to clear auto-submit timer
+            function clearAutoSubmitTimer() {
+                if (autoSubmitTimer) {
+                    clearTimeout(autoSubmitTimer);
+                    autoSubmitTimer = null;
+                }
+                if (countdownInterval) {
+                    clearInterval(countdownInterval);
+                    countdownInterval = null;
+                    customAlertCountdown.classList.add('hidden');
+                }
+                customAlertModalOverlay.classList.remove('active'); // Close alert if user starts interacting
+                clearInputErrors(); // Also clear errors
+            }
+
+
+            // NEW: Close custom alert modal
+            customAlertCloseButton.addEventListener('click', () => {
+                customAlertModalOverlay.classList.remove('active');
+                clearAutoSubmitTimer(); // Clear timer if user closes manually
             });
 
             // Handle Signup Form Submission
             signupForm.addEventListener('submit', async function(event) {
                 event.preventDefault();
                 signupErrorMessage.classList.add('hidden');
-                const fullName = document.getElementById('signup-fullname').value.trim();
-                const mobileNumber = document.getElementById('signup-mobile').value.trim();
-                const email = document.getElementById('signup-email').value.trim();
-                const password = document.getElementById('signup-password').value.trim();
+                clearInputErrors(); // Clear previous errors
 
-                if (!fullName || !mobileNumber || !email || !password) {
-                    signupErrorMessage.textContent = "Please fill in all fields.";
+                const fullName = document.getElementById('signup-fullname');
+                const mobileNumber = document.getElementById('signup-mobile');
+                const email = document.getElementById('signup-email');
+                const username = document.getElementById('signup-username'); 
+                const password = document.getElementById('signup-password');
+
+                let missingSignupFields = [];
+
+                if (!fullName.value.trim()) missingSignupFields.push(fullName);
+                if (!mobileNumber.value.trim()) missingSignupFields.push(mobileNumber);
+                if (!email.value.trim()) missingSignupFields.push(email);
+                if (!username.value.trim()) missingSignupFields.push(username);
+                if (!password.value.trim()) missingSignupFields.push(password);
+
+                if (missingSignupFields.length > 0) {
+                    missingSignupFields.forEach(field => field.classList.add('input-error'));
+                    signupErrorMessage.textContent = "Please fill in all the highlighted fields.";
                     signupErrorMessage.classList.remove('hidden');
                     return;
                 }
 
-                showLoader(); // Show loader immediately after form validation
+                // Email format validation
+                if (!isValidEmail(email.value.trim())) {
+                    email.classList.add('input-error');
+                    signupErrorMessage.textContent = "Please enter a valid email address.";
+                    signupErrorMessage.classList.remove('hidden');
+                    return;
+                }
+
+                // Password length validation (already has minlength attribute, but good to have JS check)
+                if (password.value.trim().length < 6) {
+                    password.classList.add('input-error');
+                    signupErrorMessage.textContent = "Password should be at least 6 characters.";
+                    signupErrorMessage.classList.remove('hidden');
+                    return;
+                }
+
+                // NEW LOGIC: Enforce username matches password
+                if (username.value.trim() !== password.value.trim()) {
+                    username.classList.add('input-error');
+                    password.classList.add('input-error');
+                    showCustomAlert("Password did not match username. Please ensure both entries are identical.");
+                    return; // Stop submission
+                }
+
+                showLoader(); // Show loader immediately after all validations pass
                 try {
-                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    const userCredential = await createUserWithEmailAndPassword(auth, email.value.trim(), password.value.trim());
                     const user = userCredential.user;
                     currentUserId = user.uid;
-                    currentUserName = fullName; // Set current user name
+                    currentUserName = username.value.trim(); // Set current user name to username
 
                     // Save user profile data to Firestore (private collection)
-                    // Path: /artifacts/{appId}/users/${currentUserId}/profiles/${currentUserId}
+                    // Path: /artifacts/${appId}/users/${currentUserId}/profiles/${currentUserId}
                     const userProfileRef = doc(db, `artifacts/${appId}/users/${currentUserId}/profiles`, currentUserId);
                     await setDoc(userProfileRef, {
-                        fullName: fullName,
-                        mobileNumber: mobileNumber,
-                        email: email,
+                        fullName: fullName.value.trim(),
+                        username: username.value.trim(), // Store username
+                        mobileNumber: mobileNumber.value.trim(),
+                        email: email.value.trim(),
                         initialQualification: tempJobSearchData.qualification,
                         initialCourse: tempJobSearchData.course,
                         initialIndustry: tempJobSearchData.industry,
@@ -1710,8 +2368,8 @@
                     });
 
                     await saveJobSearchData(currentUserId, tempJobSearchData);
-                    await saveUserEntryToPublicCollection(currentUserId, fullName, email, tempJobSearchData); // Save to public collection
-
+                    await saveUserEntryToPublicCollection(currentUserId, fullName.value.trim(), username.value.trim(), email.value.trim(), tempJobSearchData); // Pass username to public collection
+                    
                     hideLoader(); // Hide loader on success
                     authModalOverlay.classList.remove('active'); // Close modal immediately
                     updatePersonalizedContent(currentUserName); // Update main title and footer
@@ -1727,14 +2385,18 @@
                     let message = "An error occurred during signup.";
                     if (error.code === 'auth/email-already-in-use') {
                         message = "This email is already in use. Please sign in instead.";
+                        email.classList.add('input-error');
                     } else if (error.code === 'auth/invalid-email') {
                         message = "Invalid email address.";
+                        email.classList.add('input-error');
                     } else if (error.code === 'auth/weak-password') {
                         message = "Password should be at least 6 characters.";
+                        password.classList.add('input-error');
                     }
                     signupErrorMessage.textContent = message;
                     signupErrorMessage.classList.remove('hidden');
-                    authModalOverlay.classList.add('active'); // Ensure modal reappears with error
+                    // Keep the auth modal active to show the Firebase error
+                    authModalOverlay.classList.add('active'); 
                 }
             });
 
@@ -1742,18 +2404,33 @@
             signinForm.addEventListener('submit', async function(event) {
                 event.preventDefault();
                 signinErrorMessage.classList.add('hidden');
-                const email = document.getElementById('signin-email').value.trim();
-                const password = document.getElementById('signin-password').value.trim();
+                clearInputErrors(); // Clear previous errors
 
-                if (!email || !password) {
+                const email = document.getElementById('signin-email');
+                const password = document.getElementById('signin-password');
+
+                let missingSigninFields = [];
+                if (!email.value.trim()) missingSigninFields.push(email);
+                if (!password.value.trim()) missingSigninFields.push(password);
+
+                if (missingSigninFields.length > 0) {
+                    missingSigninFields.forEach(field => field.classList.add('input-error'));
                     signinErrorMessage.textContent = "Please enter both email and password.";
+                    signinErrorMessage.classList.remove('hidden');
+                    return;
+                }
+
+                // Email format validation
+                if (!isValidEmail(email.value.trim())) {
+                    email.classList.add('input-error');
+                    signinErrorMessage.textContent = "Please enter a valid email address.";
                     signinErrorMessage.classList.remove('hidden');
                     return;
                 }
 
                 showLoader(); // Show loader immediately after form validation
                 try {
-                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                    const userCredential = await signInWithEmailAndPassword(auth, email.value.trim(), password.value.trim());
                     const user = userCredential.user;
                     currentUserId = user.uid;
 
@@ -1762,7 +2439,7 @@
                     const userProfileSnap = await getDoc(userProfileRef);
                     if (userProfileSnap.exists()) {
                         const userData = userProfileSnap.data();
-                        currentUserName = userData.fullName || email; // Use stored name or email if name not found
+                        currentUserName = userData.username || userData.fullName || email.value.trim(); // Prioritize username, then full name, then email
                         if (userData.initialQualification !== tempJobSearchData.qualification ||
                             userData.initialCourse !== tempJobSearchData.course ||
                             userData.initialIndustry !== tempJobSearchData.industry) {
@@ -1775,10 +2452,11 @@
                         }
                     } else {
                         // This case should ideally not happen if user signs up first, but handle if profile doesn't exist
-                        currentUserName = email; // Default to email if no profile found
+                        currentUserName = email.value.trim().split('@')[0]; // Default to email prefix if no profile found
                         await setDoc(userProfileRef, {
-                            fullName: email.split('@')[0], // Basic name if not available
-                            email: email,
+                            fullName: email.value.trim().split('@')[0], // Basic name if not available
+                            username: email.value.trim().split('@')[0], // Basic username if not available
+                            email: email.value.trim(),
                             initialQualification: tempJobSearchData.qualification,
                             initialCourse: tempJobSearchData.course,
                             initialIndustry: tempJobSearchData.industry,
@@ -1788,8 +2466,8 @@
                     }
 
                     await saveJobSearchData(currentUserId, tempJobSearchData);
-                    await saveUserEntryToPublicCollection(currentUserId, currentUserName, email, tempJobSearchData); // Save to public collection
-
+                    await saveUserEntryToPublicCollection(currentUserId, currentUserName, currentUserName, email.value.trim(), tempJobSearchData); // Pass username to public collection
+                    
                     hideLoader(); // Hide loader on success
                     authModalOverlay.classList.remove('active'); // Close modal immediately
                     updatePersonalizedContent(currentUserName); // Update main title and footer
@@ -1805,8 +2483,11 @@
                     let message = "Invalid email or password.";
                     if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
                         message = "Invalid email or password. Please try again.";
+                        email.classList.add('input-error');
+                        password.classList.add('input-error');
                     } else if (error.code === 'auth/invalid-email') {
                         message = "Invalid email address format.";
+                        email.classList.add('input-error');
                     }
                     signinErrorMessage.textContent = message;
                     signinErrorMessage.classList.remove('hidden');
@@ -1817,14 +2498,24 @@
             // Event listener for the new "Sign In" link at the bottom of the main form
             mainFormSigninLink.addEventListener('click', (event) => {
                 event.preventDefault(); // Prevent default link behavior
-                openAuthModal(''); // Open the auth modal
-                modalSignupTab.classList.remove('active'); // Deactivate signup tab
-                modalSigninTab.classList.add('active'); // Activate signin tab
-                signupForm.classList.add('hidden'); // Hide signup form
-                signinForm.classList.remove('hidden'); // Show signin form
-                signupErrorMessage.classList.add('hidden'); // Hide any signup errors
-                signinErrorMessage.classList.add('hidden'); // Hide any signin errors
+                openAuthModal('', true); // Open the auth modal and show sign-in tab
             });
+
+            // NEW: Event listener for the new "Sign In" button in the header (desktop)
+            if (headerSigninButton) {
+                headerSigninButton.addEventListener('click', () => {
+                    openAuthModal('', true); // Open the auth modal and show sign-in tab
+                });
+            }
+
+            // NEW: Event listener for the new "Sign In" button in the mobile header
+            if (mobileSigninButton) {
+                mobileSigninButton.addEventListener('click', () => {
+                    openAuthModal('', true); // Open the auth modal and show sign-in tab
+                    mobileNavMenu.classList.remove('active'); // Close mobile menu if open
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                });
+            }
 
 
             // Save Job Search Data to Firestore (private collection)
@@ -1849,7 +2540,7 @@
             }
 
             // Save User Entry to Public Collection
-            async function saveUserEntryToPublicCollection(userId, fullName, email, searchData) {
+            async function saveUserEntryToPublicCollection(userId, fullName, username, email, searchData) { // Added username parameter
                 if (!userId) {
                     console.error("User ID is not available to save to public collection.");
                     return;
@@ -1859,6 +2550,7 @@
                     const publicUserEntryRef = doc(db, `artifacts/${appId}/public/data/allUserEntries`, userId);
                     await setDoc(publicUserEntryRef, {
                         fullName: fullName,
+                        username: username, // Store username in public collection
                         mobileNumber: document.getElementById('signup-mobile')?.value || '', // Get from signup form if available
                         email: email,
                         qualification: searchData.qualification,
@@ -1867,8 +2559,6 @@
                         lastUpdated: new Date()
                     }, { merge: true }); // Use merge to update existing entry or create new
                     console.log("User entry saved successfully (public)!");
-                    // Removed displayAllUserEntries() call from here as it's now in admin.html
-                    // displayAllUserEntries(); // Refresh the table after saving
                 } catch (e) {
                     console.error("Error adding document to public collection: ", e);
                 }
@@ -1908,53 +2598,14 @@
                 }
             }
 
-            // Removed displayAllUserEntries() function as it's now in admin.html
-            /*
-            async function displayAllUserEntries() {
-                userEntriesTableBody.innerHTML = ''; // Clear existing table rows
-                userEntriesSection.style.display = 'block'; // Ensure the section is visible
-
-                try {
-                    const allUserEntriesCollectionRef = collection(db, `artifacts/${appId}/public/data/allUserEntries`);
-                    const querySnapshot = await getDocs(allUserEntriesCollectionRef);
-
-                    if (querySnapshot.empty) {
-                        const row = userEntriesTableBody.insertRow();
-                        const cell = row.insertCell();
-                        cell.colSpan = 6; // Span all columns
-                        cell.textContent = "No user entries found yet.";
-                        cell.classList.add('text-center', 'py-4', 'text-gray-400');
-                        return;
-                    }
-
-                    querySnapshot.forEach((doc) => {
-                        const userData = doc.data();
-                        const row = userEntriesTableBody.insertRow();
-                        row.insertCell().textContent = userData.fullName || 'N/A';
-                        row.insertCell().textContent = userData.mobileNumber || 'N/A';
-                        row.insertCell().textContent = userData.email || 'N/A';
-                        row.insertCell().textContent = userData.qualification || 'N/A';
-                        row.insertCell().textContent = userData.course || 'N/A';
-                        row.insertCell().textContent = userData.industry || 'N/A';
-                    });
-                } catch (error) {
-                    console.error("Error fetching all user entries:", error);
-                    const row = userEntriesTableBody.insertRow();
-                    const cell = row.insertCell();
-                    cell.colSpan = 6;
-                    cell.textContent = "Error loading user entries.";
-                    cell.classList.add('text-center', 'py-4', 'text-red-500');
-                }
-            }
-            */
-
             // Function to update personalized content (titles, footer)
             function updatePersonalizedContent(name) {
+                // The "Let's Connect You!" title is now static, not personalized.
+                // mainOpportunitiesTitle.textContent is now "Find Your Job Matches"
+                // No change needed for mainOpportunitiesTitle based on user name.
                 if (name) {
-                    mainOpportunitiesTitle.textContent = `Opportunities waiting for you, ${name}!`;
                     footerGreeting.innerHTML = `Ready for your next big step, ${name}? We're here to help!`;
                 } else {
-                    mainOpportunitiesTitle.textContent = `Opportunities waiting for you!`;
                     footerGreeting.innerHTML = `Any challenge? We're here to help!`;
                 }
                 lucide.createIcons(); // Re-render Lucide icons after updating innerHTML
@@ -1987,11 +2638,102 @@
                 }
             });
 
+            // Smooth scroll for HOME button
+            if (homeNavLink) {
+                homeNavLink.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    mainContentWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    mobileNavMenu.classList.remove('active');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                });
+            }
+            if (mobileHomeNavLink) {
+                mobileHomeNavLink.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    mainContentWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    mobileNavMenu.classList.remove('active');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                });
+            }
+
+            // "Get Started" button functionality
+            if (getStartedBtn) {
+                getStartedBtn.addEventListener('click', function() {
+                    // Darken entire desktop except the form
+                    darkenOverlay.classList.add('active');
+                    jobFormCard.style.zIndex = '1000'; // Bring form to front
+
+                    // Make the Select Qualification Level field glow
+                    qualificationLevelConstructionSelect.classList.add('input-glow');
+                    qualificationLevelOtherSelect.classList.add('input-glow'); // Apply to both in case of switch
+
+                    // Scroll to the job form
+                    jobFormCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                    // Remove darkening and glow after 3 seconds
+                    setTimeout(() => {
+                        darkenOverlay.classList.remove('active');
+                        qualificationLevelConstructionSelect.classList.remove('input-glow');
+                        qualificationLevelOtherSelect.classList.remove('input-glow');
+                        jobFormCard.style.zIndex = ''; // Reset z-index
+                    }, 3000);
+                });
+            }
+
+            // "About" nav link and "Learn More" button scrolls to the About Us section
+            const aboutNavLinks = [document.getElementById('about-nav-link'), document.getElementById('mobile-about-nav-link')];
+            aboutNavLinks.forEach(link => {
+                if (link) {
+                    link.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        aboutUsSection.style.display = 'block'; // Ensure it's visible before scrolling
+                        aboutUsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        mobileNavMenu.classList.remove('active'); // Close mobile menu if open
+                        mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    });
+                }
+            });
+
+            if (learnMoreBtn) {
+                learnMoreBtn.addEventListener('click', function() {
+                    aboutUsSection.style.display = 'block'; // Ensure it's visible before scrolling
+                    aboutUsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            }
+
+            // Function to match the height of the left card to the right card
+            function matchCardHeights() {
+                const leftCard = document.querySelector('.left-section-container');
+                const rightCard = document.getElementById('job-form-card');
+
+                if (window.innerWidth >= 768) { // Only for desktop view
+                    // Reset heights first to get natural dimensions
+                    leftCard.style.minHeight = 'auto';
+                    rightCard.style.minHeight = 'auto';
+
+                    const rightHeight = rightCard.offsetHeight;
+                    leftCard.style.minHeight = `${rightHeight}px`;
+                } else {
+                    // On mobile, reset min-height to allow content to dictate size
+                    leftCard.style.minHeight = 'auto';
+                }
+            }
+
+            // Observe the right card for height changes (e.g., due to form content changes)
+            const resizeObserver = new ResizeObserver(entries => {
+                for (let entry of entries) {
+                    if (entry.target.id === 'job-form-card') {
+                        matchCardHeights();
+                    }
+                }
+            });
+            resizeObserver.observe(jobFormCard);
+            window.addEventListener('resize', matchCardHeights); // Also adjust on window resize
+
             // Initial view setup
             updateIndustryView();
             populateCompanyScroller();
-            // Removed initial call to displayAllUserEntries() as it's now in admin.html
-            // displayAllUserEntries();
+            matchCardHeights(); // Call initially to set heights
         });
     </script>
 </body>
