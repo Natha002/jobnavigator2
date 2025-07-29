@@ -3,75 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kazi Connect - Admin Panel</title>
+    <title>Kazi Connect - Admin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --logo-green: #00CC00;
-            --logo-orange-original: #D2691E;
-            --indigo-800: #3730a3;
-            --indigo-500: #6366f1;
-            --digital-cyan: #00FFFF;
-            --digital-green: #00FF00;
-            --logo-rectangle-color: #D2691E;
+            /* Branding Colors - adapted for a clean, professional look */
+            --primary-blue: #3b82f6; /* A strong blue for primary actions/highlights */
+            --secondary-purple: #8b5cf6; /* A complementary purple */
+            --dark-bg: #1a202c; /* Very dark background for overall page */
+            --card-bg: #2d3748; /* Slightly lighter dark background for sections/cards */
+            --text-light: #e2e8f0; /* Light gray for main text */
+            --text-muted: #a0aec0; /* Muted gray for secondary text */
+            --border-dark: #4a5568; /* Darker border for separation */
+            --accent-green: #10b981; /* Accent color for success/positive */
+            --accent-red: #ef4444; /* Accent color for errors/danger */
+            --accent-yellow: #facc15; /* Accent color for warnings */
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-image: url('background.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
+            background-color: var(--dark-bg); /* Solid dark background */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
-            color: #e0e0e0; /* Light text for dark background */
+            color: var(--text-light); /* Light text for contrast */
         }
 
-        h1, h2, .header-text-outline, .nav-link {
+        /* Headings and specific text elements use Poppins */
+        h1, h2, h3, .header-text-outline, .nav-link, .btn-primary {
             font-family: 'Poppins', sans-serif;
         }
 
-        .header-gradient {
-            background-image: linear-gradient(to right, rgba(135, 206, 235, 0.6), rgba(255, 192, 203, 0.6));
+        /* Header Styling */
+        header {
+            background-color: var(--card-bg); /* Darker header background */
+            border-bottom: 1px solid var(--border-dark);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         .logo-container {
             width: 42px;
             height: 42px;
-            background-color: rgba(255, 255, 255, 0.3);
+            background-color: var(--primary-blue); /* Solid color for logo container */
             border-radius: 0.5rem;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 0 0 1.5px var(--indigo-800);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            border: 2px solid var(--indigo-800);
+            border: 2px solid var(--primary-blue); /* Solid border */
         }
         .logo-container:hover {
             transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 0 0 2px var(--indigo-800);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
-        .logo-container img {
-            width: 85%;
-            height: 85%;
-            object-fit: contain;
+        .logo-container span { /* Using Lucide icon or text for logo */
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
 
         .header-text-outline {
-            color: var(--indigo-800);
-            text-shadow:
-                1px 1px 0 var(--logo-orange-original), -1px -1px 0 var(--logo-orange-original),
-                1px -1px 0 var(--logo-orange-original), -1px 1px 0 var(--logo-orange-original);
-            transition: color 0.3s ease-in-out;
+            color: var(--primary-blue); /* Primary blue for text */
+            text-shadow: 0 0 8px rgba(59, 130, 246, 0.6); /* Blue glow */
             font-weight: 700;
+            transition: color 0.3s ease-in-out;
         }
         .header-text-outline:hover {
-            color: var(--indigo-800);
+            color: var(--secondary-purple); /* Purple on hover */
+            text-shadow: 0 0 10px rgba(139, 92, 246, 0.8); /* Purple glow on hover */
         }
 
         .nav-link {
@@ -79,130 +84,360 @@
             padding: 0.5rem 1rem;
             border-radius: 0.5rem;
             background-color: transparent;
-            color: var(--indigo-800);
+            color: var(--text-light); /* Light text for nav links */
             font-size: 1rem;
             text-transform: uppercase;
-            text-shadow: none;
             font-weight: 600;
-            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
             display: inline-block;
-            border: 1px solid var(--logo-rectangle-color);
-            animation: navLinkGlow 5s infinite alternate;
-        }
-        .nav-link::after {
-            content: none;
+            border: 1px solid transparent; /* No initial border */
         }
         .nav-link:hover {
-            background-color: var(--logo-orange-original);
+            background-color: var(--primary-blue); /* Blue background on hover */
             color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-color: var(--logo-orange-original);
-            animation: none;
-        }
-
-        @keyframes navLinkGlow {
-            0%, 100% {
-                box-shadow: 0 0 0 rgba(255, 255, 255, 0);
-                border-color: var(--logo-rectangle-color);
-            }
-            50% {
-                box-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
-                border-color: rgba(255, 255, 255, 0.8);
-            }
         }
 
         @media (min-width: 768px) {
             .nav-link {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
         }
 
-        .opportunities-title-outline {
-            text-shadow:
-                1px 1px 0 #FFF, -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF,
-                0 0 10px rgba(255, 215, 0, 0.4),
-                0 0 20px rgba(255, 165, 0, 0.2);
-            animation: colorShift 9s infinite alternate, opportunitiesSmoothPulse 4s infinite alternate ease-in-out;
-            font-size: 2.25rem;
-            font-weight: 800;
+        .btn-primary {
+            background-image: linear-gradient(to right, var(--primary-blue), var(--secondary-purple));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-image 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            font-size: 1rem;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+            background-image: linear-gradient(to right, var(--secondary-purple), var(--primary-blue));
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        @keyframes colorShift {
-            0% { color: var(--indigo-800); }
-            50% { color: var(--logo-orange-original); }
-            100% { color: var(--indigo-800); }
+        /* Mobile navigation styling */
+        .mobile-nav-menu {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            max-width: 200px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-dark);
+            border-radius: 0.75rem;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            padding: 0.5rem 0;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            z-index: 20;
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        .mobile-nav-menu.active {
+            display: flex;
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .mobile-nav-menu a, .mobile-nav-menu button {
+            padding: 0.75rem 1.2rem;
+            text-align: right;
+            color: var(--text-light);
+            font-weight: 600;
+            transition: background-color 0.2s, color 0.2s;
+            border-radius: 0.5rem;
+            margin: 0.25rem 0.5rem;
+        }
+        .mobile-nav-menu a:hover, .mobile-nav-menu button:hover {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+        .mobile-nav-menu button.btn-primary {
+            background-image: linear-gradient(to right, var(--accent-red), #dc2626);
+            color: white;
+            border: none;
+            box-shadow: none;
+        }
+        .mobile-nav-menu button.btn-primary:hover {
+            background-image: linear-gradient(to right, #dc2626, var(--accent-red));
         }
 
-        @keyframes opportunitiesSmoothPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
+        /* Logout Button Styling */
+        #logout-button {
+            display: none;
+            background-image: linear-gradient(to right, var(--accent-red), #dc2626);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-image 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+            margin-left: 1rem;
+        }
+        #logout-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            background-image: linear-gradient(to right, #dc2626, var(--accent-red));
         }
 
-        @media (min-width: 768px) {
-            .opportunities-title-outline {
-                font-size: 3.5rem;
-            }
-        }
-
-        /* Styles for the User Entries Table */
-        #user-entries-section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
+        /* Main Content Sections */
+        .dashboard-section-card {
+            background-color: var(--card-bg); /* Card background for sections */
             border-radius: 1.5rem;
             padding: 2rem;
             margin-top: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            color: #e0e0e0;
-            overflow-x: auto; /* Enable horizontal scrolling for small screens */
+            border: 1px solid var(--border-dark);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            color: var(--text-light);
+            overflow-x: auto;
         }
 
+        .dashboard-section-card h2 {
+            color: var(--primary-blue);
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.5); /* Blue glow for title */
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Filter Controls Container Styling */
+        .filter-group-container {
+            background-color: #3b455a; /* Slightly lighter card for the filter group */
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem; /* Space between filter group and table */
+            border: 1px solid var(--border-dark);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .filter-controls {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+        }
+        @media (min-width: 768px) {
+            .filter-controls {
+                grid-template-columns: repeat(3, 1fr); /* 3 columns on desktop for better fit */
+            }
+        }
+        .filter-controls label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        .filter-controls input[type="text"],
+        .filter-controls input[type="date"],
+        .filter-controls select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-dark);
+            background-color: #4a5568; /* Slightly lighter input background */
+            color: var(--text-light);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .filter-controls input[type="text"]:focus,
+        .filter-controls input[type="date"]:focus,
+        .filter-controls select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+        .filter-controls select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23a0aec0'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3E%3Csvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+
+        /* Combined date inputs and buttons into a single row */
+        .filter-row-with-buttons {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid for dates and buttons */
+            align-items: flex-end; /* Align items to the bottom */
+            margin-top: 1rem; /* Space from previous filter row */
+        }
+        @media (min-width: 768px) {
+            .filter-row-with-buttons {
+                grid-template-columns: 1fr 1fr auto auto; /* Date, Date, Button, Button */
+            }
+        }
+        .filter-row-with-buttons .filter-buttons-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end; /* Align buttons to the right */
+            margin-top: 0; /* Override default margin */
+        }
+        .filter-row-with-buttons .btn-primary,
+        .filter-row-with-buttons .btn-secondary {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+            width: auto; /* Allow buttons to size naturally */
+        }
+
+        /* Table Styling */
         #user-entries-table {
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 1.5rem;
-            color: #e0e0e0;
-            font-size: 0.9rem;
+            border-collapse: separate; /* Use separate for rounded corners on cells */
+            border-spacing: 0; /* Remove default spacing */
+            margin-top: 1.5rem; /* Reduced margin to pull table up */
+            color: var(--text-light);
+            font-size: 0.95rem;
+            border-radius: 0.75rem; /* Rounded corners for the entire table */
+            overflow: hidden; /* Ensures inner content respects border-radius */
         }
 
         #user-entries-table th,
         #user-entries-table td {
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.75rem;
+            border: 1px solid var(--border-dark); /* Darker, subtle borders */
+            padding: 1rem 1.25rem; /* More padding for better readability */
             text-align: left;
-            vertical-align: top;
+            vertical-align: middle; /* Center content vertically */
         }
 
         #user-entries-table th {
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: var(--primary-blue); /* Solid blue header */
+            color: white;
             font-weight: 700;
-            color: var(--digital-cyan);
             text-transform: uppercase;
-            font-size: 0.8rem;
-            cursor: pointer; /* Indicate sortable */
-            position: relative;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            position: sticky; /* Make header sticky for scrolling tables */
+            top: 0;
+            z-index: 1;
+        }
+        /* Rounded corners for table header cells */
+        #user-entries-table thead tr:first-child th:first-child {
+            border-top-left-radius: 0.75rem;
+        }
+        #user-entries-table thead tr:first-child th:last-child {
+            border-top-right-radius: 0.75rem;
         }
 
-        #user-entries-table th .sort-indicator {
-            position: absolute;
-            right: 0.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 0.7em;
-            color: rgba(255, 255, 255, 0.5);
+        #user-entries-table tbody tr {
+            transition: background-color 0.2s ease;
         }
-        #user-entries-table th.asc .sort-indicator::after { content: ' ▲'; }
-        #user-entries-table th.desc .sort-indicator::after { content: ' ▼'; }
-
-
         #user-entries-table tbody tr:nth-child(even) {
-            background-color: rgba(0, 0, 0, 0.2);
+            background-color: #3b455a; /* Slightly lighter row for zebra striping */
+        }
+        #user-entries-table tbody tr:hover {
+            background-color: #4a5568; /* Clearer hover effect */
         }
 
-        #user-entries-table tbody tr:hover {
-            background-color: rgba(0, 0, 0, 0.4);
+        .delete-btn {
+            background-color: var(--accent-red);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
         }
+        .delete-btn:hover {
+            background-color: #dc2626;
+            transform: translateY(-1px);
+        }
+        .delete-btn svg {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        /* Chart container styling */
+        .chart-container {
+            background-color: #3b455a;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-dark);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            min-height: 300px; /* Ensure charts have space */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .chart-container canvas {
+            max-height: 400px;
+            width: 100% !important; /* Override Chart.js inline styles */
+            height: auto !important; /* Override Chart.js inline styles */
+        }
+        .chart-grid {
+            display: grid;
+            /* On larger screens, these will be 2 columns */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        /* Adjusted grid for 4 charts */
+        @media (min-width: 1024px) { /* large screens */
+            .chart-grid.four-charts-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns per row */
+            }
+        }
+        @media (max-width: 1023px) and (min-width: 768px) { /* tablets */
+            .chart-grid.four-charts-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns per row */
+            }
+        }
+        @media (max-width: 767px) { /* mobile */
+            .chart-grid.four-charts-grid { /* Fix for the red underline */
+                grid-template-columns: 1fr; /* 1 column per row */
+            }
+        }
+
+
+        /* Prediction Index and Recommendations */
+        .insight-card {
+            background-color: #3b455a;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid var(--border-dark);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .insight-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 0.75rem;
+        }
+        .insight-card p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+        .recommendations-list {
+            list-style: disc;
+            margin-left: 1.25rem;
+            color: var(--text-light);
+        }
+        .recommendations-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Highlighting for key numbers/words */
+        .highlight-green { color: var(--accent-green); font-weight: 700; }
+        .highlight-red { color: var(--accent-red); font-weight: 700; }
+        .highlight-yellow { color: var(--accent-yellow); font-weight: 700; }
+        .highlight-blue { color: var(--primary-blue); font-weight: 700; }
+        .highlight-purple { color: var(--secondary-purple); font-weight: 700; }
+
 
         /* Loader/Spinner styles */
         .loader-overlay {
@@ -211,11 +446,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.7); /* Darker overlay */
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 1002;
             visibility: hidden;
             opacity: 0;
             transition: visibility 0s, opacity 0.3s linear;
@@ -226,63 +461,73 @@
         }
         .spinner {
             border: 8px solid rgba(255, 255, 255, 0.3);
-            border-top: 8px solid #6366f1; /* Primary color */
+            border-top: 8px solid var(--primary-blue);
             border-radius: 50%;
             width: 60px;
             height: 60px;
             animation: spin 1s linear infinite;
+            z-index: 1001;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
-        .footer-text {
-            font-size: 0.875rem;
-            color: #ccc;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
-        }
-        @media (min-width: 768px) {
-            .footer-text {
-                font-size: 1.1rem;
-            }
-        }
-        .footer-link {
-            color: var(--logo-orange-original);
-            transition: color 0.2s ease, text-shadow 0.2s ease;
-            text-shadow: 0 0 3px rgba(255, 165, 0, 0.3);
-        }
-        .footer-link:hover {
-            color: var(--indigo-500);
-            text-shadow: 0 0 8px rgba(99, 102, 241, 0.6), 0 0 15px rgba(99, 102, 241, 0.4);
-        }
-
-        /* Styles for Delete Button */
-        .delete-btn {
-            background-color: #ef4444; /* Red */
-            color: white;
-            padding: 0.5rem 0.75rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            transition: background-color 0.2s ease, transform 0.2s ease;
-            display: inline-flex;
-            align-items: center;
+        /* Confirmation Modal */
+        .confirmation-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
             justify-content: center;
-            gap: 0.25rem;
-            font-size: 0.85rem;
+            align-items: center;
+            z-index: 1003; /* Higher than loader */
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s linear;
         }
-        .delete-btn:hover {
-            background-color: #dc2626; /* Darker red */
-            transform: translateY(-2px);
+        .confirmation-modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
         }
-        .delete-btn .lucide-icon {
-            width: 1rem;
-            height: 1rem;
+        .confirmation-modal-content {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 2rem;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            color: var(--text-light);
+            text-align: center;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        .confirmation-modal-overlay.active .confirmation-modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .confirmation-modal-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+        }
+        .confirmation-modal-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+        }
+        .confirmation-modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
         }
 
-        /* Modal styles (reused from index.html for consistency) */
-        .modal-overlay {
+        /* Login Modal Styles */
+        .login-modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -292,89 +537,83 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1001;
+            z-index: 1004;
             visibility: hidden;
             opacity: 0;
             transition: visibility 0s, opacity 0.3s linear;
         }
-        .modal-overlay.active {
+        .login-modal-overlay.active {
             visibility: visible;
             opacity: 1;
         }
-        .modal-content {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 1.5rem;
-            padding: 2rem;
+        .login-modal-content {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 2.5rem;
             width: 90%;
-            max-width: 500px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            position: relative;
-            transform: translateY(-20px);
+            max-width: 450px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            color: var(--text-light);
+            text-align: center;
+            transform: translateY(-30px);
             opacity: 0;
             transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-            color: #333; /* Dark text for modal content */
+            border: 1px solid var(--border-dark);
         }
-        .modal-overlay.active .modal-content {
+        .login-modal-overlay.active .login-modal-content {
             transform: translateY(0);
             opacity: 1;
         }
-        .modal-close-button {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #666;
-            transition: color 0.2s;
+        .login-modal-content h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary-blue);
         }
-        .modal-close-button:hover {
-            color: #333;
-        }
-        .btn-secondary {
-            background-color: #6b7280; /* Gray */
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.75rem;
-            font-weight: 600;
-            transition: background-color 0.2s ease;
-        }
-        .btn-secondary:hover {
-            background-color: #4b5563; /* Darker gray */
-        }
-
-        /* Input field styles for filters */
-        .filter-input {
-            border: 1px solid #d1d5db;
-            padding: 0.5rem 0.75rem;
-            border-radius: 0.5rem;
+        .login-modal-content input {
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.8);
-            color: #333;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-dark);
+            background-color: #4a5568;
+            color: var(--text-light);
+            font-size: 1rem;
         }
-        .filter-input:focus {
+        .login-modal-content input:focus {
             outline: none;
-            border-color: #6366f1;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+        .login-modal-content button {
+            width: 100%;
+            margin-top: 1rem;
+        }
+        .login-error-message {
+            color: var(--accent-red);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            min-height: 1.5rem; /* Reserve space to prevent layout shift */
         }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-    <header class="w-full header-gradient shadow-md py-4 px-6 md:px-10 relative">
+    <header class="w-full shadow-md py-4 px-6 md:px-10 relative">
         <nav class="container mx-auto flex justify-between items-center" aria-label="Main navigation">
             <div class="flex items-center space-x-1">
-                <div class="logo-container"> <img src="logo2.png" alt="Kazi Connect Logo" loading="lazy"> </div>
+                <div class="logo-container"> <span class="lucide-icon" data-lucide="briefcase"></span> </div>
                 <div class="flex flex-col items-start leading-none">
-                    <span class="text-2xl font-extrabold header-text-outline">Kazi</span> <span class="text-sm font-semibold header-text-outline">Connect</span> </div>
+                    <span class="text-2xl font-extrabold header-text-outline">Kazi</span> <span class="text-sm font-semibold header-text-outline">Connect</span>
+                </div>
             </div>
             <ul class="hidden md:flex space-x-4">
                 <li><a href="index.html" class="nav-link">HOME</a></li>
                 <li><a href="#" class="nav-link">ABOUT</a></li>
                 <li><a href="#" class="nav-link">SERVICES</a></li>
                 <li><a href="#" class="nav-link">POST A JOB</a></li>
-                <li><a href="admin.html" class="nav-link">AUTHORIZED PERSONNEL</a></li>
+                <li><a href="#" class="nav-link">AUTHORIZED PERSONNEL</a></li>
+                <li><button id="logout-button" class="btn-primary">Logout</button></li>
             </ul>
             <div class="md:hidden">
                 <button id="mobile-menu-button" class="text-white hover:text-gray-200 focus:outline-none p-2 rounded-md" aria-controls="mobile-nav-menu" aria-expanded="false">
@@ -389,94 +628,195 @@
             <a href="#" class="block">ABOUT</a>
             <a href="#" class="block">SERVICES</a>
             <a href="#" class="block">POST A JOB</a>
-            <a href="admin.html" class="block">AUTHORIZED PERSONNEL</a>
+            <a href="#" class="block">AUTHORIZED PERSONNEL</a>
+            <button id="mobile-logout-button" class="btn-primary w-full mt-4">Logout</button>
         </div>
     </header>
 
-    <main class="flex-grow flex items-center justify-center p-4 sm:p-6 md:p-8">
-        <!-- New Section for User Entries Table -->
-        <section id="user-entries-section" class="w-full max-w-4xl mx-auto p-6 sm:p-8 md:p-10 mt-8 rounded-2xl">
-            <h2 class="text-3xl sm:text-4xl font-extrabold mb-6 text-center opportunities-title-outline">
-                All User Entries
-            </h2>
+    <main class="flex-grow flex flex-col items-center justify-start p-4 sm:p-6 md:p-8">
+        <!-- Analytics and Data Visualizations Section -->
+        <section id="analytics-section" class="w-full max-w-6xl mx-auto dashboard-section-card">
+            <h2 class="text-3xl sm:text-4xl text-center">Dashboard Analytics</h2>
+            <div class="chart-grid four-charts-grid">
+                <!-- Combined Job Seeker Activity Index and Smart Recommendations Box -->
+                <div class="insight-card">
+                    <h3 class="text-center">Job Seeker Activity & Smart Recommendations</h3>
+                    <p class="text-center text-sm text-gray-400 mt-2">Overall Job Seeker Activity Index.</p>
+                    <p id="activity-index-text" class="text-2xl font-bold text-center mt-4">Loading...</p>
+                    
+                    <div class="flex flex-wrap gap-4 mb-4 justify-center mt-4">
+                        <div>
+                            <label for="recent-activity-time-range-select" class="block text-sm font-medium text-gray-300">Show active users in last:</label>
+                            <select id="recent-activity-time-range-select" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-600 focus:outline-none focus:ring-primary-blue focus:border-primary-blue sm:text-sm rounded-md bg-gray-700 text-white">
+                                <option value="0.5h">0.5 Hours</option>
+                                <option value="1h">1 Hour</option>
+                                <option value="3h" selected>3 Hours</option>
+                                <option value="12h">12 Hours</option>
+                                <option value="24h">24 Hours</option>
+                                <option value="7d">7 Days</option>
+                            </select>
+                        </div>
+                    </div>
 
-            <!-- Filter Controls -->
-            <div class="mb-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                <div>
-                    <label for="filter-search-input" class="block text-white text-sm font-bold mb-2">Search All:</label>
-                    <input type="text" id="filter-search-input" placeholder="Search by name, email..." class="filter-input">
+                    <h4 class="text-xl font-bold text-center mt-6 mb-4 text-primary-blue">Recommendations</h4>
+                    <ul id="recommendations-list" class="recommendations-list mt-4">
+                        <li>Loading recommendations...</li>
+                    </ul>
                 </div>
-                <div>
-                    <label for="filter-qualification" class="block text-white text-sm font-bold mb-2">Filter by Qualification:</label>
-                    <select id="filter-qualification" class="filter-input appearance-none">
-                        <option value="">All Qualifications</option>
-                        <option value="certificate">Certificate</option>
-                        <option value="diploma">Diploma</option>
-                        <option value="technician">Technician</option>
-                        <option value="degree">Degree</option>
-                        <option value="higher-diploma">Higher Diploma</option>
-                    </select>
+
+                <div class="chart-container">
+                    <h3>Job Seeker Activity Over Time</h3>
+                    <div class="flex flex-wrap gap-4 mb-4 justify-center">
+                        <div>
+                            <label for="activity-time-range-select" class="block text-sm font-medium text-gray-300">Time Range:</label>
+                            <select id="activity-time-range-select" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-600 focus:outline-none focus:ring-primary-blue focus:border-primary-blue sm:text-sm rounded-md bg-gray-700 text-white">
+                                <option value="6h">Last 6 Hours</option>
+                                <option value="12h">Last 12 Hours</option>
+                                <option value="24h">Last 24 Hours</option>
+                                <option value="7d">Last 7 Days</option>
+                                <option value="forever">Forever</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="activity-y-axis-max-select" class="block text-sm font-medium text-gray-300">Y-axis Max:</label>
+                            <select id="activity-y-axis-max-select" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-600 focus:outline-none focus:ring-primary-blue focus:border-primary-blue sm:text-sm rounded-md bg-gray-700 text-white">
+                                <option value="auto">Auto</option>
+                                <option value="50">50</option>
+                                <option value="1000">1000</option>
+                                <option value="10000">10000</option>
+                            </select>
+                        </div>
+                    </div>
+                    <canvas id="jobSeekerActivityChart"></canvas>
                 </div>
-                <div>
-                    <label for="filter-industry" class="block text-white text-sm font-bold mb-2">Filter by Industry:</label>
-                    <select id="filter-industry" class="filter-input appearance-none">
-                        <option value="">All Industries</option>
-                        <option value="Construction">Construction</option>
-                        <option value="Other (Non-Construction)">Other (Non-Construction)</option>
-                        <option value="Healthcare">Healthcare</option>
-                        <option value="Information Technology">Information Technology</option>
-                        <option value="Education">Education</option>
-                        <option value="Finance">Finance</option>
-                        <option value="Marketing">Marketing</option>
-                        <option value="Retail">Retail</option>
-                        <option value="Hospitality">Hospitality</option>
-                        <option value="Manufacturing">Manufacturing</option>
-                        <option value="Logistics">Logistics</option>
-                        <option value="Science">Science</option>
-                        <option value="Arts & Culture">Arts & Culture</option>
-                        <option value="Legal">Legal</option>
-                        <option value="Media">Media</option>
-                        <option value="Telecommunications">Telecommunications</option>
-                        <option value="Automotive">Automotive</option>
-                        <option value="Aerospace">Aerospace</option>
-                        <option value="Agriculture">Agriculture</option>
-                    </select>
+                <div class="chart-container">
+                    <h3>Users by Industry</h3>
+                    <canvas id="usersByIndustryChart"></canvas>
                 </div>
-                <div>
-                    <label for="filter-course-name" class="block text-white text-sm font-bold mb-2">Filter by Course:</label>
-                    <input type="text" id="filter-course-name" placeholder="e.g., Civil Engineering" class="filter-input">
+                <div class="chart-container">
+                    <h3>Users by Qualification</h3>
+                    <canvas id="usersByQualificationChart"></canvas>
                 </div>
-                <div>
-                    <label for="filter-from-date" class="block text-white text-sm font-bold mb-2">From Date:</label>
-                    <input type="date" id="filter-from-date" class="filter-input">
+                <div class="chart-container">
+                    <h3>Users by Qualification (Construction)</h3>
+                    <canvas id="usersByConstructionQualificationChart"></canvas>
                 </div>
-                <div>
-                    <label for="filter-to-date" class="block text-white text-sm font-bold mb-2">To Date:</label>
-                    <input type="date" id="filter-to-date" class="filter-input">
+
+                <!-- New: Predictive Market Trends Card -->
+                <div class="insight-card">
+                    <h3 class="text-center flex items-center justify-center">
+                        <span data-lucide="trending-up" class="w-6 h-6 mr-2 text-blue-400"></span> Predictive Market Trends
+                    </h3>
+                    <p class="text-center text-sm text-gray-400 mt-2">Future outlook based on current data.</p>
+                    <ul id="predictive-trends-list" class="recommendations-list mt-4">
+                        <li>Analyzing trends...</li>
+                    </ul>
+                    <p class="text-xs text-center text-gray-500 mt-4">
+                        *These are simplified predictions based on recent sign-up activity.
+                    </p>
+                </div>
+
+                <!-- New: Behavioral Anomaly Alerts Card -->
+                <div class="insight-card">
+                    <h3 class="text-center flex items-center justify-center">
+                        <span data-lucide="bell" class="w-6 h-6 mr-2 text-red-400"></span> Behavioral Anomaly Alerts
+                    </h3>
+                    <p class="text-center text-sm text-gray-400 mt-2">Unusual activity patterns detected.</p>
+                    <ul id="anomaly-alerts-list" class="recommendations-list mt-4">
+                        <li>Checking for anomalies...</li>
+                    </ul>
+                    <p class="text-xs text-center text-gray-500 mt-4">
+                        *Simplified detection: Flags unusual spikes/drops in very recent activity.
+                    </p>
+                </div>
+
+            </div>
+
+            
+        </section>
+
+        <!-- User Entries Table Section -->
+        <section id="user-entries-section" class="w-full max-w-6xl mx-auto dashboard-section-card">
+            <h2 class="text-3xl sm:text-4xl text-center">All User Entries</h2>
+
+            <div class="filter-group-container mt-8">
+                <div class="filter-controls">
+                    <div>
+                        <label for="search-all-input">Search All:</label>
+                        <input type="text" id="search-all-input" placeholder="Search all fields...">
+                    </div>
+                    <div>
+                        <label for="filter-qualification">Filter by Qualification:</label>
+                        <select id="filter-qualification">
+                            <option value="">All Qualifications</option>
+                            <option value="certificate">Certificate</option>
+                            <option value="diploma">Diploma</option>
+                            <option value="technician">Technician</option>
+                            <option value="degree">Degree</option>
+                            <option value="higher-diploma">Higher Diploma</option>
+                            <option value="masters">Masters</option>
+                            <option value="phd">PhD</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="filter-industry">Filter by Industry:</label>
+                        <select id="filter-industry">
+                            <option value="">All Industries</option>
+                            <option value="Construction">Construction</moption>
+                            <option value="Other (Non-Construction)">Other (Non-Construction)</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Information Technology">Information Technology</option>
+                            <option value="Education">Education</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Retail">Retail</option>
+                            <option value="Hospitality">Hospitality</option>
+                            <option value="Manufacturing">Manufacturing</option>
+                            <option value="Logistics">Logistics</option>
+                            <option value="Science">Science</option>
+                            <option value="Arts & Culture">Arts & Culture</option>
+                            <option value="Legal">Legal</option>
+                            <option value="Media">Media</option>
+                            <option value="Telecommunications">Telecommunications</option>
+                            <option value="Automotive">Automotive</option>
+                            <option value="Aerospace">Aerospace</option>
+                            <option value="Agriculture">Agriculture</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="filter-row-with-buttons">
+                    <div>
+                        <label for="filter-from-date">From Date:</label>
+                        <input type="date" id="filter-from-date">
+                    </div>
+                    <div>
+                        <label for="filter-to-date">To Date:</label>
+                        <input type="date" id="filter-to-date">
+                    </div>
+                    <div class="filter-buttons-group">
+                        <button id="clear-filters-btn" class="btn-secondary flex-1">Clear Filters</button>
+                        <button id="apply-filters-btn" class="btn-primary flex-1">Apply Filters</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Filter Action Buttons -->
-            <div class="mb-6 flex justify-center gap-4">
-                <button id="apply-filters-btn" class="btn-primary">Apply Filters</button>
-                <button id="clear-filters-btn" class="btn-secondary">Clear Filters</button>
-            </div>
-
-            <div class="overflow-x-auto">
+            <div class="overflow-x-auto mt-8">
                 <table id="user-entries-table">
                     <thead>
                         <tr>
-                            <th data-sort-by="fullName">Full Name <span class="sort-indicator"></span></th>
-                            <th data-sort-by="mobileNumber">Mobile Number <span class="sort-indicator"></span></th>
-                            <th data-sort-by="email">Email <span class="sort-indicator"></span></th>
-                            <th data-sort-by="qualification">Qualification Level <span class="sort-indicator"></span></th>
-                            <th data-sort-by="course">Course Name <span class="sort-indicator"></span></th>
-                            <th data-sort-by="industry">Industry <span class="sort-indicator"></span></th>
+                            <th>Full Name</th>
+                            <th>Mobile Number</th>
+                            <th>Email</th>
+                            <th>Username</th>
+                            <th>Qualification</th>
+                            <th>Course</th>
+                            <th>Industry</th>
+                            <th>Last Updated</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- User data will be populated here by JavaScript -->
+                        <!-- User entries will be loaded here by JavaScript -->
                     </tbody>
                 </table>
             </div>
@@ -487,31 +827,37 @@
         <div class="spinner"></div>
     </div>
 
-    <!-- Confirmation Modal -->
-    <div id="confirmation-modal-overlay" class="modal-overlay">
-        <div class="modal-content">
-            <button id="confirm-modal-close-button" class="modal-close-button" aria-label="Close modal">
-                <span data-lucide="x"></span>
-            </button>
-            <h2 id="confirmation-modal-title" class="text-2xl sm:text-3xl font-extrabold mb-6 text-center text-indigo-800">
-                Confirm Action
-            </h2>
-            <p id="confirmation-modal-message" class="text-center mb-8 text-lg text-gray-700">Are you sure you want to proceed?</p>
-            <div class="flex justify-center gap-4">
-                <button id="confirm-yes-button" class="btn-primary">Yes</button>
-                <button id="confirm-no-button" class="btn-secondary">No</button>
+    <!-- Confirmation Modal Structure -->
+    <div id="confirmation-modal-overlay" class="confirmation-modal-overlay">
+        <div class="confirmation-modal-content">
+            <h3>Confirm Deletion</h3>
+            <p>Are you sure you want to delete this user entry? This action cannot be undone.</p>
+            <div class="confirmation-modal-buttons">
+                <button id="cancel-delete-btn" class="btn-secondary">Cancel</button>
+                <button id="confirm-delete-btn" class="btn-primary bg-red-600 hover:bg-red-700">Delete</button>
             </div>
         </div>
     </div>
 
-    <footer class="w-full bg-gray-800 bg-opacity-90 text-white py-6 px-4 md:px-8 text-center mt-auto">
+    <!-- Admin Login Modal -->
+    <div id="login-modal-overlay" class="login-modal-overlay active">
+        <div class="login-modal-content">
+            <h3>Admin Login</h3>
+            <input type="email" id="login-email" placeholder="Admin Email" required>
+            <input type="password" id="login-password" placeholder="Password" required>
+            <p id="login-error-message" class="login-error-message"></p>
+            <button id="login-button" class="btn-primary">Login</button>
+        </div>
+    </div>
+
+    <footer class="w-full text-white py-6 px-4 md:px-8 text-center mt-auto">
         <div class="container mx-auto">
             <p id="footer-greeting" class="footer-text mb-4">
-                Any challenge? We're here to help!
+                Admin Panel.
             </p>
             <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
                 <a href="https://wa.me/254712345678" class="footer-link inline-flex items-center text-lg font-semibold" target="_blank" rel="noopener noreferrer">
-                    <span data-lucide="whatsapp" class="w-6 h-6 mr-2"></span> WhatsApp Support
+                    <span data-lucide="message-square" class="w-6 h-6 mr-2"></span> WhatsApp Support
                 </a>
                 <span class="text-gray-500 text-lg font-bold hidden sm:block">|</span>
                 <a href="mailto:support@kaziconnect.com" class="footer-link inline-flex items-center text-lg font-semibold">
@@ -525,14 +871,13 @@
     </footer>
 
     <script type="module">
-        // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-        import { getFirestore, collection, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+        import { getAuth, signOut, onAuthStateChanged, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+        import { getFirestore, collection, doc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-        // --- START OF FIREBASE CONFIGURATION ---
+        // Firebase configuration (should match your main app's config)
         const firebaseConfig = {
-            apiKey: "AIzaSyAxh6u9xe0kfd_dnMxUo4d7Ph0U0lBibF8",
+            apiKey: "AIzaSyAxh6u9xe0kfd_dnMxUo4d7Ph0U0lBibF8", // Use your actual API key here
             authDomain: "kaziconnectweb.firebaseapp.com",
             projectId: "kaziconnectweb",
             storageBucket: "kaziconnectweb.firebasestorage.app",
@@ -540,61 +885,696 @@
             appId: "1:782241286494:web:14adc692c3a96ca08ee7cf",
             measurementId: "G-0PCWR2Z0SC"
         };
-        // --- END OF FIREBASE CONFIGURATION ---
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
-        
-        // Global variables for app ID
+
+        // Helper to get CSS variable values for Chart.js - moved to global scope
+        const getCssVariable = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+        const var_primary_blue = getCssVariable('--primary-blue');
+        const var_secondary_purple = getCssVariable('--secondary-purple');
+        const var_dark_bg = getCssVariable('--dark-bg');
+        const var_card_bg = getCssVariable('--card-bg');
+        const var_text_light = getCssVariable('--text-light');
+        const var_text_muted = getCssVariable('--text-muted');
+        const var_border_dark = getCssVariable('--border-dark');
+        const var_accent_green = getCssVariable('--accent-green');
+        const var_accent_red = getCssVariable('--accent-red');
+        const var_accent_yellow = getCssVariable('--accent-yellow');
+
+        // Global variables for app ID and user ID
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        let currentUserId = null;
+        let allUsersData = []; // To store all fetched user data for client-side filtering
+
+        // Chart instances
+        let jobSeekerActivityChartInstance = null; // New chart instance
+        let usersByIndustryChartInstance = null;
+        let usersByQualificationChartInstance = null;
+        let usersByConstructionQualificationChartInstance = null;
 
         // DOM Elements
         const userEntriesTableBody = document.querySelector('#user-entries-table tbody');
         const loaderOverlay = document.getElementById('loader-overlay');
+        const logoutButton = document.getElementById('logout-button');
+        const mobileLogoutButton = document.getElementById('mobile-logout-button');
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileNavMenu = document.getElementById('mobile-nav-menu');
 
-        // Filter Elements
-        const filterSearchInput = document.getElementById('filter-search-input');
+        // Filter DOM Elements
+        const searchAllInput = document.getElementById('search-all-input');
         const filterQualificationSelect = document.getElementById('filter-qualification');
         const filterIndustrySelect = document.getElementById('filter-industry');
-        const filterCourseNameInput = document.getElementById('filter-course-name');
         const filterFromDateInput = document.getElementById('filter-from-date');
         const filterToDateInput = document.getElementById('filter-to-date');
-        const applyFiltersBtn = document.getElementById('apply-filters-btn'); // New Apply Filters button
-        const clearFiltersBtn = document.getElementById('clear-filters-btn'); // New Clear Filters button
-        const tableHeaders = document.querySelectorAll('#user-entries-table th[data-sort-by]');
+        const applyFiltersBtn = document.getElementById('apply-filters-btn');
+        const clearFiltersBtn = document.getElementById('clear-filters-btn');
+
+        // Analytics DOM Elements
+        const jobSeekerActivityChartCanvas = document.getElementById('jobSeekerActivityChart'); // New canvas
+        const usersByIndustryChartCanvas = document.getElementById('usersByIndustryChart');
+        const usersByQualificationChartCanvas = document.getElementById('usersByQualificationChart');
+        const usersByConstructionQualificationChartCanvas = document.getElementById('usersByConstructionQualificationChart');
+        const activityIndexText = document.getElementById('activity-index-text');
+        const recommendationsList = document.getElementById('recommendations-list');
+        const predictiveTrendsList = document.getElementById('predictive-trends-list'); // New
+        const anomalyAlertsList = document.getElementById('anomaly-alerts-list'); // New
+        const activityTimeRangeSelect = document.getElementById('activity-time-range-select'); // For main activity chart
+        const activityYAxisMaxSelect = document.getElementById('activity-y-axis-max-select'); // For main activity chart
+        const recentActivityTimeRangeSelect = document.getElementById('recent-activity-time-range-select'); // New dropdown
 
         // Confirmation Modal Elements
         const confirmationModalOverlay = document.getElementById('confirmation-modal-overlay');
-        const confirmModalCloseButton = document.getElementById('confirm-modal-close-button');
-        const confirmationModalTitle = document.getElementById('confirmation-modal-title');
-        const confirmationModalMessage = document.getElementById('confirmation-modal-message');
-        const confirmYesButton = document.getElementById('confirm-yes-button');
-        const confirmNoButton = document.getElementById('confirm-no-button');
+        const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
+        const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+        let userIdToDelete = null; // To store the ID of the user to be deleted
 
-        let currentConfirmCallback = null; // To store the callback for the confirmation modal
+        // Login Modal Elements
+        const loginModalOverlay = document.getElementById('login-modal-overlay');
+        const loginEmailInput = document.getElementById('login-email');
+        const loginPasswordInput = document.getElementById('login-password');
+        const loginButton = document.getElementById('login-button');
+        const loginErrorMessage = document.getElementById('login-error-message');
 
-        // State for filters and sorting
-        let currentFilters = {
-            search: '',
-            qualification: '',
-            industry: '',
-            courseName: '',
-            fromDate: '',
-            toDate: ''
-        };
-        let currentSort = {
-            column: null,
-            direction: 'asc'
-        };
+        // Firestore listener for real-time updates
+        let unsubscribeFromUserEntries = null;
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Lucide icons
             lucide.createIcons();
             document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Firebase Authentication Listener
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    currentUserId = user.uid;
+                    console.log("Admin user signed in:", user.email || "UID: " + user.uid);
+                    logoutButton.style.display = 'inline-block';
+                    mobileLogoutButton.style.display = 'block';
+                    loginModalOverlay.classList.remove('active'); // Hide login modal
+                    // Start real-time listener for user entries
+                    startUserEntriesListener();
+                } else {
+                    currentUserId = null;
+                    console.log("Admin user signed out or not authenticated. Showing login modal.");
+                    logoutButton.style.display = 'none';
+                    mobileLogoutButton.style.display = 'none';
+                    loginModalOverlay.classList.add('active'); // Show login modal
+                    userEntriesTableBody.innerHTML = ''; // Clear table if not authenticated
+                    const row = userEntriesTableBody.insertRow();
+                    const cell = row.insertCell();
+                    cell.colSpan = 9;
+                    cell.textContent = "Please sign in to view user entries.";
+                    cell.classList.add('text-center', 'py-4', 'text-red-500');
+                    // Clear charts and insights if logged out
+                    destroyCharts();
+                    activityIndexText.textContent = 'N/A';
+                    recommendationsList.innerHTML = '<li>Please sign in to view recommendations.</li>';
+                    predictiveTrendsList.innerHTML = '<li>Please sign in to view predictive trends.</li>';
+                    anomalyAlertsList.innerHTML = '<li>Please sign in to view anomaly alerts.</li>';
+                    // Stop real-time listener
+                    if (unsubscribeFromUserEntries) {
+                        unsubscribeFromUserEntries();
+                        unsubscribeFromUserEntries = null;
+                    }
+                }
+            });
+
+            // Function to start the real-time listener for user entries
+            function startUserEntriesListener() {
+                showLoader();
+                const allUserEntriesCollectionRef = collection(db, `artifacts/${appId}/public/data/allUserEntries`);
+                
+                // Detach previous listener if exists
+                if (unsubscribeFromUserEntries) {
+                    unsubscribeFromUserEntries();
+                }
+
+                unsubscribeFromUserEntries = onSnapshot(allUserEntriesCollectionRef, (querySnapshot) => {
+                    allUsersData = []; // Clear previous data
+                    querySnapshot.forEach((doc) => {
+                        const data = doc.data();
+                        data.id = doc.id; // Store the document ID for deletion
+                        // Ensure timestamps are Date objects
+                        data.lastUpdated = data.lastUpdated ? data.lastUpdated.toDate() : null;
+                        data.createdAt = data.createdAt ? data.createdAt.toDate() : null;
+                        allUsersData.push(data);
+                    });
+                    applyFiltersAndDisplay(); // Re-display table with new data
+                    updateDashboardAnalytics(allUsersData); // Re-render charts and insights
+                    hideLoader();
+                }, (error) => {
+                    console.error("Error listening to user entries:", error);
+                    userEntriesTableBody.innerHTML = '';
+                    const row = userEntriesTableBody.insertRow();
+                    const cell = row.insertCell();
+                    cell.colSpan = 9;
+                    cell.textContent = "Error loading user entries. Please check console for details.";
+                    cell.classList.add('text-center', 'py-4', 'text-red-500');
+                    hideLoader();
+                });
+            }
+
+            // Function to apply filters and display data
+            function applyFiltersAndDisplay() {
+                userEntriesTableBody.innerHTML = ''; // Clear previous rows
+
+                let filteredData = [...allUsersData]; // Start with a copy of all data
+
+                const searchTerm = searchAllInput.value.toLowerCase().trim();
+                const qualificationFilter = filterQualificationSelect.value.toLowerCase();
+                const industryFilter = filterIndustrySelect.value.toLowerCase();
+                const fromDate = filterFromDateInput.value ? new Date(filterFromDateInput.value) : null;
+                const toDate = filterToDateInput.value ? new Date(filterToDateInput.value) : null;
+
+                if (searchTerm) {
+                    filteredData = filteredData.filter(user =>
+                        (user.fullName && user.fullName.toLowerCase().includes(searchTerm)) ||
+                        (user.mobileNumber && user.mobileNumber.toLowerCase().includes(searchTerm)) ||
+                        (user.email && user.email.toLowerCase().includes(searchTerm)) ||
+                        (user.username && user.username.toLowerCase().includes(searchTerm)) ||
+                        (user.qualification && user.qualification.toLowerCase().includes(searchTerm)) ||
+                        (user.course && user.course.toLowerCase().includes(searchTerm)) ||
+                        (user.industry && user.industry.toLowerCase().includes(searchTerm))
+                    );
+                }
+
+                if (qualificationFilter) {
+                    filteredData = filteredData.filter(user =>
+                        user.qualification && user.qualification.toLowerCase() === qualificationFilter
+                    );
+                }
+
+                if (industryFilter) {
+                    if (industryFilter === 'construction') {
+                        filteredData = filteredData.filter(user =>
+                            user.industry && user.industry.toLowerCase() === 'construction'
+                        );
+                    } else if (industryFilter === 'other (non-construction)') {
+                        filteredData = filteredData.filter(user =>
+                            user.industry && user.industry.toLowerCase() !== 'construction'
+                        );
+                    } else {
+                        filteredData = filteredData.filter(user =>
+                            user.industry && user.industry.toLowerCase() === industryFilter
+                        );
+                    }
+                }
+
+                if (fromDate) {
+                    filteredData = filteredData.filter(user =>
+                        user.lastUpdated && user.lastUpdated >= fromDate
+                    );
+                }
+
+                if (toDate) {
+                    // Add one day to the toDate to include entries from that entire day
+                    const adjustedToDate = new Date(toDate);
+                    adjustedToDate.setDate(adjustedToDate.getDate() + 1);
+                    filteredData = filteredData.filter(user =>
+                        user.lastUpdated && user.lastUpdated < adjustedToDate
+                    );
+                }
+
+                // Sort by lastUpdated in descending order (most recent first)
+                filteredData.sort((a, b) => {
+                    const dateA = a.lastUpdated ? a.lastUpdated.getTime() : 0;
+                    const dateB = b.lastUpdated ? b.lastUpdated.getTime() : 0;
+                    return dateB - dateA; // Descending order
+                });
+
+
+                if (filteredData.length === 0) {
+                    const row = userEntriesTableBody.insertRow();
+                    const cell = row.insertCell();
+                    cell.colSpan = 9;
+                    cell.textContent = "No user entries found matching your filters.";
+                    cell.classList.add('text-center', 'py-4', 'text-gray-400');
+                    return;
+                }
+
+                filteredData.forEach((userData) => {
+                    const row = userEntriesTableBody.insertRow();
+                    row.insertCell().textContent = userData.fullName || 'N/A';
+                    row.insertCell().textContent = userData.mobileNumber || 'N/A';
+                    row.insertCell().textContent = userData.email || 'N/A';
+                    row.insertCell().textContent = userData.username || 'N/A';
+                    row.insertCell().textContent = userData.qualification || 'N/A';
+                    row.insertCell().textContent = userData.course || 'N/A';
+                    row.insertCell().textContent = userData.industry || 'N/A';
+                    row.insertCell().textContent = userData.lastUpdated ? userData.lastUpdated.toLocaleDateString() : 'N/A';
+                    
+                    const actionsCell = row.insertCell();
+                    const deleteButton = document.createElement('button');
+                    deleteButton.classList.add('delete-btn');
+                    deleteButton.innerHTML = `<span data-lucide="trash-2"></span> Delete`;
+                    deleteButton.dataset.userId = userData.id;
+                    deleteButton.addEventListener('click', function() {
+                        userIdToDelete = this.dataset.userId;
+                        confirmationModalOverlay.classList.add('active');
+                        lucide.createIcons();
+                    });
+                    actionsCell.appendChild(deleteButton);
+                });
+                lucide.createIcons();
+            }
+
+            // --- Chart and Analytics Functions ---
+
+            // Destroy existing chart instances to prevent memory leaks and conflicts
+            function destroyCharts() {
+                if (jobSeekerActivityChartInstance) jobSeekerActivityChartInstance.destroy();
+                if (usersByIndustryChartInstance) usersByIndustryChartInstance.destroy();
+                if (usersByQualificationChartInstance) usersByQualificationChartInstance.destroy();
+                if (usersByConstructionQualificationChartInstance) usersByConstructionQualificationChartInstance.destroy();
+            }
+
+            // Main function to update all dashboard analytics
+            function updateDashboardAnalytics(data) {
+                destroyCharts();
+
+                if (data.length === 0) {
+                    activityIndexText.textContent = 'No Data';
+                    recommendationsList.innerHTML = '<li>No data available for recommendations.</li>';
+                    predictiveTrendsList.innerHTML = '<li>No data available for predictive trends.</li>';
+                    anomalyAlertsList.innerHTML = '<li>No data available for anomaly alerts.</li>';
+                    return;
+                }
+
+                const now = new Date();
+
+                // 1. Job Seeker Activity Over Time (Line Graph)
+                const selectedActivityTimeRange = activityTimeRangeSelect.value;
+                const selectedActivityYAxisMax = activityYAxisMaxSelect.value;
+
+                let activityTimeThreshold;
+                let activityLabelFormat;
+                let activityUnit; // 'hour' or 'day' or 'month'
+                let activityIntervalMs;
+
+                if (selectedActivityTimeRange === '6h') {
+                    activityTimeThreshold = new Date(now.getTime() - (6 * 60 * 60 * 1000));
+                    activityLabelFormat = 'HH:00';
+                    activityUnit = 'hour';
+                    activityIntervalMs = 60 * 60 * 1000;
+                } else if (selectedActivityTimeRange === '12h') {
+                    activityTimeThreshold = new Date(now.getTime() - (12 * 60 * 60 * 1000));
+                    activityLabelFormat = 'HH:00';
+                    activityUnit = 'hour';
+                    activityIntervalMs = 60 * 60 * 1000;
+                } else if (selectedActivityTimeRange === '24h') {
+                    activityTimeThreshold = new Date(now.getTime() - (24 * 60 * 60 * 1000));
+                    activityLabelFormat = 'HH:00';
+                    activityUnit = 'hour';
+                    activityIntervalMs = 60 * 60 * 1000;
+                } else if (selectedActivityTimeRange === '7d') {
+                    activityTimeThreshold = new Date(now.getTime() - (7 * 24 * 60 * 60 * 1000));
+                    activityLabelFormat = 'MMM dd';
+                    activityUnit = 'day';
+                    activityIntervalMs = 24 * 60 * 60 * 1000;
+                } else { // 'forever'
+                    // Find the earliest lastUpdated date to set the threshold
+                    const earliestDate = data.reduce((minDate, user) => {
+                        if (user.lastUpdated && (!minDate || user.lastUpdated < minDate)) {
+                            return user.lastUpdated;
+                        }
+                        return minDate;
+                    }, null);
+                    activityTimeThreshold = earliestDate || new Date(now.getFullYear() - 1, 0, 1); // Default to Jan 1 of last year if no data
+                    activityLabelFormat = 'MMM yyyy';
+                    activityUnit = 'month';
+                    activityIntervalMs = null; // Handled by date manipulation
+                }
+
+                const activeUsersByInterval = data.reduce((acc, user) => {
+                    if (user.lastUpdated && user.lastUpdated >= activityTimeThreshold) {
+                        const date = user.lastUpdated;
+                        let label;
+                        if (activityUnit === 'hour') {
+                            label = `${date.getHours().toString().padStart(2, '0')}:00`;
+                        } else if (activityUnit === 'day') {
+                            label = date.toLocaleString('en-US', { month: 'short', day: 'numeric' });
+                        } else { // month
+                            label = date.toLocaleString('en-US', { month: 'short', year: 'numeric' });
+                        }
+                        acc[label] = (acc[label] || 0) + 1;
+                    }
+                    return acc;
+                }, {});
+
+                const activityLabels = [];
+                const activityDataPoints = [];
+                let currentActivityIntervalStart = new Date(activityTimeThreshold);
+                currentActivityIntervalStart.setMinutes(0, 0, 0);
+                currentActivityIntervalStart.setSeconds(0, 0);
+
+                if (activityUnit === 'day') {
+                    currentActivityIntervalStart.setHours(0, 0, 0, 0);
+                } else if (activityUnit === 'month') {
+                    currentActivityIntervalStart.setDate(1);
+                    currentActivityIntervalStart.setHours(0, 0, 0, 0);
+                }
+
+                while (currentActivityIntervalStart.getTime() <= now.getTime()) {
+                    let label;
+                    if (activityUnit === 'hour') {
+                        label = `${currentActivityIntervalStart.getHours().toString().padStart(2, '0')}:00`;
+                    } else if (activityUnit === 'day') {
+                        label = currentActivityIntervalStart.toLocaleString('en-US', { month: 'short', day: 'numeric' });
+                    } else { // month
+                        label = currentActivityIntervalStart.toLocaleString('en-US', { month: 'short', year: 'numeric' });
+                    }
+                    activityLabels.push(label);
+                    activityDataPoints.push(activeUsersByInterval[label] || 0);
+
+                    if (activityUnit === 'hour') {
+                        currentActivityIntervalStart = new Date(currentActivityIntervalStart.getTime() + activityIntervalMs);
+                    } else if (activityUnit === 'day') {
+                        currentActivityIntervalStart.setDate(currentActivityIntervalStart.getDate() + 1);
+                    } else { // month
+                        currentActivityIntervalStart.setMonth(currentActivityIntervalStart.getMonth() + 1);
+                    }
+                }
+
+                jobSeekerActivityChartInstance = new Chart(jobSeekerActivityChartCanvas, {
+                    type: 'line',
+                    data: {
+                        labels: activityLabels,
+                        datasets: [{
+                            label: 'Number of Active Job Seekers',
+                            data: activityDataPoints,
+                            borderColor: var_accent_green,
+                            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                            tension: 0.3,
+                            fill: true,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { labels: { color: var_text_light } } },
+                        scales: {
+                            x: {
+                                title: { display: true, text: 'Time', color: var_text_light },
+                                ticks: { color: var_text_muted },
+                                grid: { color: var_border_dark }
+                            },
+                            y: {
+                                title: { display: true, text: 'Number of Job Seekers', color: var_text_light },
+                                ticks: { color: var_text_muted },
+                                grid: { color: var_border_dark },
+                                beginAtZero: true,
+                                suggestedMax: selectedActivityYAxisMax === 'auto' ? (Math.max(...activityDataPoints) > 0 ? Math.max(...activityDataPoints) + 1 : 1) : parseInt(selectedActivityYAxisMax)
+                            }
+                        }
+                    }
+                });
+
+                // Calculate Recently Active Users in Last X Hours/Days (for the box)
+                const selectedRecentActivityTimeRange = recentActivityTimeRangeSelect.value;
+                let recentActivityThreshold;
+                let recentActivityLabel = "";
+                let durationMs;
+
+                if (selectedRecentActivityTimeRange.endsWith('h')) {
+                    const hours = parseFloat(selectedRecentActivityTimeRange.replace('h', ''));
+                    durationMs = hours * 60 * 60 * 1000;
+                    recentActivityLabel = `${hours} hours`;
+                } else if (selectedRecentActivityTimeRange.endsWith('d')) {
+                    const days = parseFloat(selectedRecentActivityTimeRange.replace('d', ''));
+                    durationMs = days * 24 * 60 * 60 * 1000;
+                    recentActivityLabel = `${days} days`;
+                }
+                recentActivityThreshold = new Date(now.getTime() - durationMs);
+                
+                const recentlyActiveCount = data.filter(user => user.lastUpdated && user.lastUpdated >= recentActivityThreshold).length;
+
+                // 2. Users by Industry
+                const usersByIndustry = data.reduce((acc, user) => {
+                    const industry = user.industry || 'Unknown';
+                    acc[industry] = (acc[industry] || 0) + 1;
+                    return acc;
+                }, {});
+                usersByIndustryChartInstance = new Chart(usersByIndustryChartCanvas, {
+                    type: 'bar',
+                    data: {
+                        labels: Object.keys(usersByIndustry),
+                        datasets: [{
+                            label: 'Number of Users',
+                            data: Object.values(usersByIndustry),
+                            backgroundColor: [
+                                var_primary_blue, var_secondary_purple, var_accent_green, '#facc15', '#ef4444',
+                                '#34d399', '#60a5fa', '#a78bfa', '#fbbf24', '#f87171'
+                            ],
+                            borderColor: var_border_dark,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { labels: { color: var_text_light } } },
+                        scales: {
+                            x: { ticks: { color: var_text_muted }, grid: { color: var_border_dark } },
+                            y: { ticks: { color: var_text_muted }, grid: { color: var_border_dark }, beginAtZero: true, suggestedMax: Math.max(...Object.values(usersByIndustry)) + 1 }
+                        }
+                    }
+                });
+
+                // 3. Users by Qualification
+                const usersByQualification = data.reduce((acc, user) => {
+                    const qualification = user.qualification || 'Unknown';
+                    acc[qualification] = (acc[qualification] || 0) + 1;
+                    return acc;
+                }, {});
+                usersByQualificationChartInstance = new Chart(usersByQualificationChartCanvas, {
+                    type: 'pie',
+                    data: {
+                        labels: Object.keys(usersByQualification),
+                        datasets: [{
+                            label: 'Users by Qualification',
+                            data: Object.values(usersByQualification),
+                            backgroundColor: [
+                                var_primary_blue, var_secondary_purple, var_accent_green, '#facc15', '#ef4444',
+                                '#34d399', '#60a5fa', '#a78bfa', '#fbbf24', '#f87171'
+                            ],
+                            borderColor: var_border_dark,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                labels: { color: var_text_light }
+                            }
+                        }
+                    }
+                });
+
+                // New: Users by Qualification (Construction Industry Only)
+                const constructionUsers = data.filter(user => user.industry && user.industry.toLowerCase() === 'construction');
+                const usersByConstructionQualification = constructionUsers.reduce((acc, user) => {
+                    const qualification = user.qualification || 'Unknown';
+                    acc[qualification] = (acc[qualification] || 0) + 1;
+                    return acc;
+                }, {});
+
+                usersByConstructionQualificationChartInstance = new Chart(usersByConstructionQualificationChartCanvas, {
+                    type: 'pie',
+                    data: {
+                        labels: Object.keys(usersByConstructionQualification),
+                        datasets: [{
+                            label: 'Users by Qualification (Construction)',
+                            data: Object.values(usersByConstructionQualification),
+                            backgroundColor: [
+                                '#4CAF50', '#2196F3', '#FFC107', '#9C27B0', '#FF5722', '#00BCD4'
+                            ],
+                            borderColor: var_border_dark,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                labels: { color: var_text_light }
+                            }
+                        }
+                    }
+                });
+
+
+                // 4. Job Seeker Activity Index (Conceptual Prediction Index)
+                const sixHoursAgo = new Date(now.getTime() - (6 * 60 * 60 * 1000));
+                const activeUsersCount = data.filter(user => user.lastUpdated && user.lastUpdated >= sixHoursAgo).length;
+                const totalUsers = data.length;
+                const activityPercentage = totalUsers > 0 ? ((activeUsersCount / totalUsers) * 100).toFixed(1) : 0;
+                
+                activityIndexText.innerHTML = `<span class="${activityPercentage >= 75 ? 'highlight-green' : (activityPercentage >= 50 ? 'highlight-yellow' : 'highlight-red')}">${activityPercentage}% Active</span>`;
+
+
+                // 5. Smart Recommendations
+                recommendationsList.innerHTML = '';
+                let recommendations = [];
+
+                // Add "Recently active users in last X hours/days" to recommendations
+                recommendations.push(`Recently active users in last <span class="highlight-blue">${recentActivityLabel}</span>: <span class="highlight-blue">${recentlyActiveCount}</span>.`);
+
+                const sortedIndustries = Object.entries(usersByIndustry).sort(([,a],[,b]) => b - a);
+                if (sortedIndustries.length > 0) {
+                    recommendations.push(`Top Industry: "<span class="highlight-purple">${sortedIndustries[0][0]}</span>" with <span class="highlight-blue">${sortedIndustries[0][1]}</span> users. Consider sourcing more jobs in this area.`);
+                }
+                if (sortedIndustries.length > 1) {
+                    const lowestIndustryEntry = sortedIndustries.filter(([name,]) => name.toLowerCase() !== 'unknown').pop();
+                    if (lowestIndustryEntry) {
+                        recommendations.push(`Lowest Industry: "<span class="highlight-purple">${lowestIndustryEntry[0]}</span>" with <span class="highlight-blue">${lowestIndustryEntry[1]}</span> users. Explore marketing initiatives to attract more users here.`);
+                    }
+                }
+
+                const sortedQualifications = Object.entries(usersByQualification).sort(([,a],[,b]) => b - a);
+                if (sortedQualifications.length > 0) {
+                    recommendations.push(`Most Common Qualification: "<span class="highlight-purple">${sortedQualifications[0][0]}</span>". Ensure sufficient job listings for this level.`);
+                }
+                
+                if (activityPercentage < 50) {
+                    recommendations.push(`Low Job Seeker Activity (<span class="highlight-red">${activityPercentage}% active in 6h</span>). Consider engagement campaigns or new job alerts.`);
+                } else if (activityPercentage >= 75) {
+                    recommendations.push(`High Job Seeker Activity (<span class="highlight-green">${activityPercentage}% active in 6h</span>). Capitalize on this by promoting new opportunities!`);
+                }
+
+                if (recommendations.length === 0) {
+                    recommendations.push('No specific recommendations at this moment. Data looks balanced!');
+                }
+
+                recommendations.forEach(rec => {
+                    const li = document.createElement('li');
+                    li.innerHTML = rec;
+                    recommendationsList.appendChild(li);
+                });
+
+                // --- Predictive Market Trends (Simplified) ---
+                predictiveTrendsList.innerHTML = '';
+                let predictiveTrends = [];
+                const sevenDaysAgo = new Date(now.getTime() - (7 * 24 * 60 * 60 * 1000));
+                const fourteenDaysAgo = new Date(now.getTime() - (14 * 24 * 60 * 60 * 1000));
+
+                const usersLast7Days = data.filter(user => user.createdAt && user.createdAt >= sevenDaysAgo).length;
+                const usersPrev7Days = data.filter(user => user.createdAt && user.createdAt >= fourteenDaysAgo && user.createdAt < sevenDaysAgo).length;
+
+                const growthRate = usersPrev7Days > 0 ? ((usersLast7Days - usersPrev7Days) / usersPrev7Days) * 100 : (usersLast7Days > 0 ? 100 : 0);
+
+                if (growthRate > 10) {
+                    predictiveTrends.push(`Overall user sign-ups are <span class="highlight-green">growing rapidly (${growthRate.toFixed(1)}%)</span> in the last week. Maintain momentum!`);
+                } else if (growthRate < -10) {
+                    predictiveTrends.push(`Overall user sign-ups are <span class="highlight-red">declining (${Math.abs(growthRate).toFixed(1)}%)</span> in the last week. Investigate acquisition channels.`);
+                } else {
+                    predictiveTrends.push(`Overall user sign-ups are <span class="highlight-yellow">stable (${growthRate.toFixed(1)}%)</span> in the last week.`);
+                }
+
+                // Industry-specific trends (simplified)
+                const industrySignUpsLast7Days = data.reduce((acc, user) => {
+                    if (user.createdAt && user.createdAt >= sevenDaysAgo) {
+                        const industry = user.industry || 'Unknown';
+                        acc[industry] = (acc[industry] || 0) + 1;
+                    }
+                    return acc;
+                }, {});
+
+                const industrySignUpsPrev7Days = data.reduce((acc, user) => {
+                    if (user.createdAt && user.createdAt >= fourteenDaysAgo && user.createdAt < sevenDaysAgo) {
+                        const industry = user.industry || 'Unknown';
+                        acc[industry] = (acc[industry] || 0) + 1;
+                    }
+                    return acc;
+                }, {});
+
+                for (const industry in industrySignUpsLast7Days) {
+                    const currentCount = industrySignUpsLast7Days[industry];
+                    const prevCount = industrySignUpsPrev7Days[industry] || 0;
+                    const industryGrowth = prevCount > 0 ? ((currentCount - prevCount) / prevCount) * 100 : (currentCount > 0 ? 100 : 0);
+
+                    if (industryGrowth > 20) {
+                        predictiveTrends.push(`"<span class="highlight-blue">${industry}</span>" sign-ups are <span class="highlight-green">surging (${industryGrowth.toFixed(1)}%)</span>. High potential for job placements.`);
+                    } else if (industryGrowth < -15 && currentCount < 5) { // Only flag decline if current count is low
+                        predictiveTrends.push(`"<span class="highlight-blue">${industry}</span>" sign-ups are <span class="highlight-red">decreasing (${Math.abs(industryGrowth).toFixed(1)}%)</span>. Consider targeted marketing.`);
+                    }
+                }
+
+                if (predictiveTrends.length === 0) {
+                    predictiveTrends.push('No specific predictive trends observed.');
+                }
+                predictiveTrends.forEach(trend => {
+                    const li = document.createElement('li');
+                    li.innerHTML = trend;
+                    predictiveTrendsList.appendChild(li);
+                });
+
+
+                // --- Behavioral Anomaly Alerts (Simplified) ---
+                anomalyAlertsList.innerHTML = '';
+                let anomalyAlerts = [];
+
+                // Anomaly 1: No recent activity for a short period despite existing users
+                if (recentlyActiveCount === 0 && totalUsers > 0 && selectedRecentActivityTimeRange === '0.5h') {
+                    anomalyAlerts.push(`<span class="highlight-red">Unusual:</span> No active users in the last 0.5 hours, despite ${totalUsers} total users. Potential inactivity or technical issue.`);
+                }
+
+                // Anomaly 2: Sudden, unusually high spike in activity (e.g., more than 50% of total users active in 0.5 hours)
+                const veryShortTermActivityPercentage = totalUsers > 0 ? ((recentlyActiveCount / totalUsers) * 100) : 0;
+                if (veryShortTermActivityPercentage > 50 && selectedRecentActivityTimeRange === '0.5h') {
+                    anomalyAlerts.push(`<span class="highlight-red">Alert:</span> Extremely high activity (${veryShortTermActivityPercentage.toFixed(1)}% active in 0.5h). May indicate bot activity or unusual event.`);
+                }
+
+                // Anomaly 3: Significant drop in new sign-ups compared to average
+                const averageSignUpsPerDayLast30Days = data.filter(user => user.createdAt && user.createdAt >= new Date(now.getTime() - (30 * 24 * 60 * 60 * 1000))).length / 30;
+                const signUpsLast7Days = data.filter(user => user.createdAt && user.createdAt >= sevenDaysAgo).length;
+                const averageSignUpsLast7Days = signUpsLast7Days / 7;
+
+                if (totalUsers > 0 && averageSignUpsPerDayLast30Days > 1 && averageSignUpsLast7Days < (averageSignUpsPerDayLast30Days * 0.5)) {
+                    anomalyAlerts.push(`<span class="highlight-yellow">Warning:</span> Recent sign-up rate has significantly dropped. Average last 7 days: ${averageSignUpsLast7Days.toFixed(1)}/day vs. Last 30 days: ${averageSignUpsPerDayLast30Days.toFixed(1)}/day.`);
+                }
+
+
+                if (anomalyAlerts.length === 0) {
+                    anomalyAlerts.push('No significant anomalies detected in recent activity.');
+                }
+
+                anomalyAlerts.forEach(alert => {
+                    const li = document.createElement('li');
+                    li.innerHTML = alert;
+                    anomalyAlertsList.appendChild(li);
+                });
+                lucide.createIcons(); // Re-create icons for newly added elements
+            }
+
+            // --- End Chart and Analytics Functions ---
+
+            // Event Listeners for filters
+            applyFiltersBtn.addEventListener('click', applyFiltersAndDisplay);
+            clearFiltersBtn.addEventListener('click', () => {
+                searchAllInput.value = '';
+                filterQualificationSelect.value = '';
+                filterIndustrySelect.value = '';
+                filterFromDateInput.value = '';
+                filterToDateInput.value = '';
+                applyFiltersAndDisplay();
+            });
+
+            searchAllInput.addEventListener('input', applyFiltersAndDisplay);
+            filterQualificationSelect.addEventListener('change', applyFiltersAndDisplay);
+            filterIndustrySelect.addEventListener('change', applyFiltersAndDisplay);
+            filterFromDateInput.addEventListener('change', applyFiltersAndDisplay);
+            filterToDateInput.addEventListener('change', applyFiltersAndDisplay);
+
+            // Event listeners for activity chart configuration selects
+            activityTimeRangeSelect.addEventListener('change', () => updateDashboardAnalytics(allUsersData));
+            activityYAxisMaxSelect.addEventListener('change', () => updateDashboardAnalytics(allUsersData));
+            recentActivityTimeRangeSelect.addEventListener('change', () => updateDashboardAnalytics(allUsersData));
+
 
             // Show/Hide Loader
             function showLoader() {
@@ -605,270 +1585,77 @@
                 loaderOverlay.classList.remove('active');
             }
 
-            // Open Confirmation Modal
-            function openConfirmationModal(message, onConfirm) {
-                confirmationModalMessage.textContent = message;
-                currentConfirmCallback = onConfirm;
-                confirmationModalOverlay.classList.add('active');
-            }
-
-            // Close Confirmation Modal
-            function closeConfirmationModal() {
+            // Confirmation Modal Event Listeners
+            cancelDeleteBtn.addEventListener('click', () => {
                 confirmationModalOverlay.classList.remove('active');
-                currentConfirmCallback = null;
-            }
-
-            confirmModalCloseButton.addEventListener('click', closeConfirmationModal);
-            confirmNoButton.addEventListener('click', closeConfirmationModal);
-            confirmYesButton.addEventListener('click', () => {
-                if (currentConfirmCallback) {
-                    currentConfirmCallback();
-                }
-                closeConfirmationModal();
+                userIdToDelete = null;
             });
 
-            // Function to delete a user entry
-            async function deleteUserEntry(docId) {
+            confirmDeleteBtn.addEventListener('click', async () => {
+                if (userIdToDelete) {
+                    confirmationModalOverlay.classList.remove('active');
+                    showLoader();
+                    try {
+                        const docRef = doc(db, `artifacts/${appId}/public/data/allUserEntries`, userIdToDelete);
+                        await deleteDoc(docRef);
+                        console.log("Document successfully deleted!");
+                        userIdToDelete = null;
+                    } catch (error) {
+                        console.error("Error removing document: ", error);
+                        hideLoader();
+                    }
+                }
+            });
+
+            // Login Modal Logic
+            loginButton.addEventListener('click', async () => {
+                const email = loginEmailInput.value;
+                const password = loginPasswordInput.value;
+                loginErrorMessage.textContent = ''; // Clear previous errors
+
+                if (!email || !password) {
+                    loginErrorMessage.textContent = 'Please enter both email and password.';
+                    return;
+                }
+
                 showLoader();
                 try {
-                    const docRef = doc(db, `artifacts/${appId}/public/data/allUserEntries`, docId);
-                    await deleteDoc(docRef);
-                    console.log("Document successfully deleted with ID:", docId);
-                    displayAllUserEntries(); // Refresh table after deletion
+                    await signInWithEmailAndPassword(auth, email, password);
+                    // onAuthStateChanged will handle hiding the modal and loading data
+                    console.log("Admin user signed in with email/password.");
                 } catch (error) {
-                    console.error("Error removing document: ", error);
-                    openConfirmationModal("Error deleting entry. Please try again.", () => {});
+                    console.error("Login error:", error.message);
+                    loginErrorMessage.textContent = 'Login failed: ' + error.message;
                 } finally {
                     hideLoader();
                 }
-            }
+            });
 
-            // Function to display all user entries in the table with filtering and sorting
-            async function displayAllUserEntries() {
-                userEntriesTableBody.innerHTML = ''; // Clear existing table rows
+
+            // Handle Logout
+            logoutButton.addEventListener('click', async () => {
                 showLoader();
-
                 try {
-                    const allUserEntriesCollectionRef = collection(db, `artifacts/${appId}/public/data/allUserEntries`);
-                    const querySnapshot = await getDocs(allUserEntriesCollectionRef);
-                    let allUserData = [];
-                    querySnapshot.forEach((doc) => {
-                        allUserData.push({ id: doc.id, ...doc.data() });
-                    });
-
-                    // Apply Filtering
-                    let filteredData = allUserData.filter(entry => {
-                        const searchLower = currentFilters.search.toLowerCase();
-                        const qualificationLower = currentFilters.qualification.toLowerCase();
-                        const industryFilter = currentFilters.industry;
-                        const courseNameLower = currentFilters.courseName.toLowerCase();
-                        const fromDate = currentFilters.fromDate ? new Date(currentFilters.fromDate) : null;
-                        const toDate = currentFilters.toDate ? new Date(currentFilters.toDate) : null;
-
-                        // General search filter
-                        const matchesSearch = searchLower === '' ||
-                            (entry.fullName && entry.fullName.toLowerCase().includes(searchLower)) ||
-                            (entry.email && entry.email.toLowerCase().includes(searchLower)) ||
-                            (entry.course && entry.course.toLowerCase().includes(searchLower)) ||
-                            (entry.industry && entry.industry.toLowerCase().includes(searchLower)) ||
-                            (entry.qualification && entry.qualification.toLowerCase().includes(searchLower));
-
-                        // Qualification filter
-                        const matchesQualification = qualificationLower === '' ||
-                                                    (entry.qualification && entry.qualification.toLowerCase() === qualificationLower);
-                        
-                        // Industry filter (including "Other (Non-Construction)")
-                        let matchesIndustry = true;
-                        if (industryFilter === 'Other (Non-Construction)') {
-                            matchesIndustry = entry.industry && entry.industry.toLowerCase() !== 'construction';
-                        } else if (industryFilter !== '') {
-                            matchesIndustry = entry.industry && entry.industry.toLowerCase() === industryFilter.toLowerCase();
-                        }
-
-                        // Course Name filter
-                        const matchesCourseName = courseNameLower === '' ||
-                                                  (entry.course && entry.course.toLowerCase().includes(courseNameLower));
-
-                        // Date filters (using lastUpdated)
-                        let matchesDate = true;
-                        if (entry.lastUpdated && entry.lastUpdated.toDate) {
-                            const entryDate = entry.lastUpdated.toDate();
-                            entryDate.setHours(0, 0, 0, 0); 
-
-                            if (fromDate) {
-                                fromDate.setHours(0, 0, 0, 0);
-                                matchesDate = matchesDate && (entryDate >= fromDate);
-                            }
-                            if (toDate) {
-                                toDate.setHours(23, 59, 59, 999);
-                                matchesDate = matchesDate && (entryDate <= toDate);
-                            }
-                        } else if (fromDate || toDate) {
-                            matchesDate = false;
-                        }
-
-                        return matchesSearch && matchesQualification && matchesIndustry && matchesCourseName && matchesDate;
-                    });
-
-                    // Apply Sorting
-                    if (currentSort.column) {
-                        filteredData.sort((a, b) => {
-                            const valA = a[currentSort.column] || '';
-                            const valB = b[currentSort.column] || '';
-
-                            if (typeof valA === 'string' && typeof valB === 'string') {
-                                return currentSort.direction === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
-                            }
-                            if (currentSort.column === 'lastUpdated' && a.lastUpdated && b.lastUpdated) {
-                                const dateA = a.lastUpdated.toDate().getTime();
-                                const dateB = b.lastUpdated.toDate().getTime();
-                                return currentSort.direction === 'asc' ? dateA - dateB : dateB - dateA;
-                            }
-                            if (valA < valB) return currentSort.direction === 'asc' ? -1 : 1;
-                            if (valA > valB) return currentSort.direction === 'asc' ? 1 : -1;
-                            return 0;
-                        });
-                    }
-
-                    if (filteredData.length === 0) {
-                        const row = userEntriesTableBody.insertRow();
-                        const cell = row.insertCell();
-                        cell.colSpan = 7;
-                        cell.textContent = "No user entries found matching your criteria.";
-                        cell.classList.add('text-center', 'py-4', 'text-gray-400');
-                    } else {
-                        filteredData.forEach((userData) => {
-                            const row = userEntriesTableBody.insertRow();
-                            row.insertCell().textContent = userData.fullName || 'N/A';
-                            row.insertCell().textContent = userData.mobileNumber || 'N/A';
-                            row.insertCell().textContent = userData.email || 'N/A';
-                            row.insertCell().textContent = userData.qualification || 'N/A';
-                            row.insertCell().textContent = userData.course || 'N/A';
-                            row.insertCell().textContent = userData.industry || 'N/A';
-
-                            const actionsCell = row.insertCell();
-                            const deleteButton = document.createElement('button');
-                            deleteButton.classList.add('delete-btn');
-                            deleteButton.setAttribute('data-id', userData.id);
-                            deleteButton.innerHTML = '<span data-lucide="trash-2"></span> Delete';
-                            deleteButton.addEventListener('click', () => {
-                                openConfirmationModal(`Are you sure you want to delete the entry for ${userData.fullName || userData.email}?`, () => deleteUserEntry(userData.id));
-                            });
-                            actionsCell.appendChild(deleteButton);
-                        });
-                        lucide.createIcons();
-                    }
+                    await signOut(auth);
+                    console.log("Admin user signed out successfully.");
+                    hideLoader();
                 } catch (error) {
-                    console.error("Error fetching all user entries:", error);
-                    const row = userEntriesTableBody.insertRow();
-                    const cell = row.insertCell();
-                    cell.colSpan = 7;
-                    cell.textContent = "Error loading user entries. Check console for details.";
-                    cell.classList.add('text-center', 'py-4', 'text-red-500');
-                } finally {
+                    console.error("Error signing out:", error);
                     hideLoader();
                 }
-            }
-
-            // Event Listeners for Filter Buttons
-            applyFiltersBtn.addEventListener('click', () => {
-                // Update currentFilters state from input values
-                currentFilters.search = filterSearchInput.value;
-                currentFilters.qualification = filterQualificationSelect.value;
-                currentFilters.industry = filterIndustrySelect.value;
-                currentFilters.courseName = filterCourseNameInput.value;
-                currentFilters.fromDate = filterFromDateInput.value;
-                currentFilters.toDate = filterToDateInput.value;
-                displayAllUserEntries(); // Apply filters and re-display
             });
 
-            clearFiltersBtn.addEventListener('click', () => {
-                // Reset filter input fields
-                filterSearchInput.value = '';
-                filterQualificationSelect.value = '';
-                filterIndustrySelect.value = '';
-                filterCourseNameInput.value = '';
-                filterFromDateInput.value = '';
-                filterToDateInput.value = '';
-
-                // Reset currentFilters state
-                currentFilters = {
-                    search: '',
-                    qualification: '',
-                    industry: '',
-                    courseName: '',
-                    fromDate: '',
-                    toDate: ''
-                };
-                displayAllUserEntries(); // Clear filters and re-display
-            });
-
-
-            // Event Listeners for Sorting
-            tableHeaders.forEach(header => {
-                header.addEventListener('click', () => {
-                    const sortByColumn = header.getAttribute('data-sort-by');
-                    if (currentSort.column === sortByColumn) {
-                        currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
-                    } else {
-                        // Reset previous sort indicator
-                        const prevSortedHeader = document.querySelector(`#user-entries-table th.asc, #user-entries-table th.desc`);
-                        if (prevSortedHeader) {
-                            prevSortedHeader.classList.remove('asc', 'desc');
-                        }
-                        currentSort.column = sortByColumn;
-                        currentSort.direction = 'asc';
-                    }
-                    // Update header class for visual indicator
-                    header.classList.remove('asc', 'desc'); // Remove existing classes
-                    header.classList.add(currentSort.direction);
-                    displayAllUserEntries();
-                });
-            });
-
-            // Firebase Authentication Listener for admin page
-            onAuthStateChanged(auth, async (user) => {
-                if (user) {
-                    console.log("Admin page: User is authenticated. Fetching data.");
-                    displayAllUserEntries();
-                } else {
-                    console.log("Admin page: User is not authenticated. Attempting anonymous sign-in to fetch public data.");
-                    const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-                    if (initialAuthToken) {
-                        signInWithCustomToken(auth, initialAuthToken)
-                            .then(() => {
-                                console.log("Admin page: Signed in with custom token.");
-                                displayAllUserEntries();
-                            })
-                            .catch(error => {
-                                console.error("Admin page: Error signing in with custom token:", error);
-                                signInAnonymously(auth)
-                                    .then(() => {
-                                        console.log("Admin page: Signed in anonymously.");
-                                        displayAllUserEntries();
-                                    })
-                                    .catch(anonError => {
-                                        console.error("Admin page: Error signing in anonymously:", anonError);
-                                        userEntriesTableBody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-red-500">
-                                            Could not load user data. Please ensure Firebase Authentication (Anonymous) is enabled.
-                                        </td></tr>`;
-                                        hideLoader();
-                                    });
-                            });
-                    } else {
-                        signInAnonymously(auth)
-                            .then(() => {
-                                console.log("Admin page: Signed in anonymously.");
-                                displayAllUserEntries();
-                            })
-                            .catch(anonError => {
-                                console.error("Admin page: Error signing in anonymously:", anonError);
-                                userEntriesTableBody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-red-500">
-                                    Could not load user data. Please ensure Firebase Authentication (Anonymous) is enabled.
-                                </td></tr>`;
-                                hideLoader();
-                            });
-                    }
+            mobileLogoutButton.addEventListener('click', async () => {
+                showLoader();
+                try {
+                    await signOut(auth);
+                    console.log("Admin user signed out successfully.");
+                    hideLoader();
+                    mobileNavMenu.classList.remove('active');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                } catch (error) {
+                    console.error("Error signing out:", error);
+                    hideLoader();
                 }
             });
 
