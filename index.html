@@ -124,8 +124,7 @@
         /* Desktop font size for buttons */
         @media (min-width: 768px) {
             .btn-primary {
-                font-size: 2.7rem; /* Increased by 50% from 1.8rem */
-                padding: 1.125rem 2.25rem; /* Increased by 50% from 0.75rem 1.5rem */
+                font-size: 1.2rem; /* Increased for desktop */
             }
         }
         
@@ -228,7 +227,7 @@
         }
         .nav-link {
             position: relative;
-            padding: 0.75rem 1.5rem; /* Increased by 50% from 0.5rem 1rem */
+            padding: 0.5rem 1rem; /* Added padding for the rectangle */
             border-radius: 0.5rem; /* Rounded corners for the rectangle */
             background-color: transparent; /* Start with transparent background */
             color: var(--indigo-800); /* Ensure nav links use indigo-800 */
@@ -267,7 +266,7 @@
         /* Desktop font size for nav links */
         @media (min-width: 768px) {
             .nav-link {
-                font-size: 2.7rem; /* Increased by 50% from 1.8rem */
+                font-size: 1.2rem; /* Increased for desktop */
             }
         }
 
@@ -280,7 +279,7 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            max-width: 320px; /* Keep original max-width for toggle for now */
+            max-width: 320px;
             margin-left: auto;
             margin-right: auto;
             box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
@@ -313,8 +312,7 @@
         /* Desktop font size for industry toggle buttons */
         @media (min-width: 768px) {
             .industry-toggle-button-segment {
-                font-size: 2.7rem; /* Increased by 50% from 1.8rem */
-                padding: 1.125rem 1.5rem; /* Increased by 50% from 0.75rem 1rem */
+                font-size: 1.2rem; /* Increased for desktop */
             }
         }
 
@@ -324,8 +322,8 @@
         }
         /* Logo specific styling for square shape */
         .logo-container { /* Renamed for clarity */
-            width: 63px; /* Increased by 50% from 42px */
-            height: 63px; /* Increased by 50% from 42px */
+            width: 42px; /* Increased by 7% from 39px (approx 41.73px) */
+            height: 42px; /* Increased by 7% from 39px (approx 41.73px) */
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 0.5rem; /* Standard rounded corners for a square */
             display: flex;
@@ -377,8 +375,8 @@
             label[for="signup-username"], /* Added for signup form */ /* Moved this label */
             label[for="signup-password"]
             {
-                font-size: 49.5px; /* Increased by 50% from 33px */
-                margin-bottom: 1.6875rem; /* Increased by 50% from 1.125rem */
+                font-size: 22px; /* Increased to 22px for desktop */
+                margin-bottom: 0.75rem; /* Increased margin for desktop */
             }
         }
 
@@ -417,7 +415,7 @@
         /* Desktop font size for opportunities title */
         @media (min-width: 768px) {
             .opportunities-title-outline {
-                font-size: 7.875rem; /* Increased by 50% from 5.25rem */
+                font-size: 3.5rem; /* Increased for desktop */
             }
         }
 
@@ -426,24 +424,24 @@
             height: auto; /* Will be set by JS based on 2 lines + header/footer */
             overflow: hidden;
             position: relative; /* Crucial for positioning children */
-            margin-top: 0.439453125rem; /* Increased by 50% from 0.29296875rem */
-            margin-bottom: 4.5rem; /* Increased by 50% from 3rem */
+            margin-top: 0.1953125rem; /* Reduced by half from 0.390625rem */
+            margin-bottom: 2rem; /* Increased to 2rem as requested */
             background-color: rgba(20, 20, 20, 0.8); /* Darker, more opaque background for screen effect */
-            border-radius: 0.6591796875rem; /* Increased by 50% from 0.439453125rem */
+            border-radius: 0.29296875rem; /* Increased by 25% from 0.234375rem */
             box-shadow:
-                inset 0 0 7.03125px rgba(0, 255, 255, 0.17578125), /* Increased glow by 50% */
-                0 0 8.7890625px rgba(0, 255, 255, 0.087890625); /* Increased glow by 50% */
-            border: 0.87890625px solid rgba(0, 255, 255, 0.263671875); /* Increased border by 50% */
+                inset 0 0 3.125px rgba(0, 255, 255, 0.078125), /* Increased glow by 25% */
+                0 0 3.90625px rgba(0, 255, 255, 0.0390625); /* Increased glow by 25% */
+            border: 0.390625px solid rgba(0, 255, 255, 0.1171875); /* Increased border by 25% */
             display: flex; /* Use flexbox to stack header, content area and footer */
             flex-direction: column;
-            max-width: 405px; /* Increased by 50% from 270px for desktop */
+            max-width: 151.2px; /* Reverted to previous size */
             margin-left: auto; /* Center the thinner window */
             margin-right: auto;
             /* Removed 3D transform for a flatter, more professional look */
 
             /* Responsive adjustments for desktop */
             @media (min-width: 768px) { /* md breakpoint */
-                max-width: 405px; /* Keep the same for desktop */
+                max-width: 216px; /* Reverted to previous size */
             }
         }
 
@@ -458,9 +456,9 @@
             background: repeating-linear-gradient(
                 to bottom,
                 transparent 0px,
-                transparent 0.87890625px, /* Increased by 50% from 0.5859375px */
-                rgba(0, 255, 255, 0.0263671875) 0.87890625px, /* Increased by 50% from 0.017578125 */
-                rgba(0, 255, 255, 0.0263671875) 1.7578125px /* Increased by 50% from 1.171875px */
+                transparent 0.390625px, /* Increased by 25% from 0.3125px */
+                rgba(0, 255, 255, 0.01171875) 0.390625px, /* Increased by 25% from 0.009375 */
+                rgba(0, 255, 255, 0.01171875) 0.78125px /* Increased by 25% from 0.625px */
             );
             pointer-events: none; /* Allow clicks to pass through */
             z-index: 1; /* Above content but below main text */
@@ -477,15 +475,15 @@
         .digital-header-text {
             background-color: rgba(0, 0, 0, 0.7); /* Dark background */
             color: var(--digital-green); /* Green digital text */
-            padding: 5.2734375px 8.7890625px; /* Increased by 50% from 3.515625px 5.859375px */
-            font-size: 1.125rem; /* Increased by 50% from 0.75rem */
+            padding: 2.34375px 3.90625px; /* Increased by 25% from 1.875px 3.125px */
+            font-size: 0.5rem; /* Increased from 0.375rem */
             font-weight: 600; /* Bold */
             text-align: center;
-            border-bottom: 0.87890625px solid rgba(0, 255, 0, 0.17578125); /* Increased by 50% from 0.5859375px 0.1171875 */
-            border-top-left-radius: 0.6591796875rem; /* Increased by 50% from 0.439453125rem */
-            border-top-right-radius: 0.6591796875rem; /* Increased by 50% from 0.439453125rem */
+            border-bottom: 0.390625px solid rgba(0, 255, 0, 0.078125); /* Increased by 25% from 0.3125px 0.0625 */
+            border-top-left-radius: 0.29296875rem; /* Increased by 25% from 0.234375rem */
+            border-top-right-radius: 0.29296875rem; /* Increased by 25% from 0.1875rem */
             text-shadow:
-                0 0 5.2734375px rgba(0, 255, 0, 0.52734375); /* Increased glow by 50% */
+                0 0 2.34375px rgba(0, 255, 0, 0.234375); /* Increased glow by 25% */
             animation: digitalHeaderGlowPulse 2.5s infinite alternate; /* Slower pulsing glow effect */
             white-space: nowrap; /* Keep on one line */
             overflow: hidden;
@@ -494,14 +492,14 @@
 
             /* Responsive adjustments for desktop */
             @media (min-width: 768px) { /* md breakpoint */
-                font-size: 1.575rem; /* Increased by 50% from 1.05rem */
-                padding: 7.03125px 13.18359375px; /* Increased by 50% from 4.6875px 8.7890625px */
+                font-size: 0.7rem; /* Increased from 0.515625rem */
+                padding: 3.125px 5.859375px; /* Increased by 25% from 2.5px 4.6875px */
             }
         }
 
         @keyframes digitalHeaderGlowPulse {
-            from { text-shadow: 0 0 5.2734375px rgba(0, 255, 0, 0.52734375); }
-            to { text-shadow: 0 0 8.7890625px rgba(0, 255, 0, 0.703125); }
+            from { text-shadow: 0 0 2.34375px rgba(0, 255, 0, 0.234375); }
+            to { text-shadow: 0 0 3.90625px rgba(0, 255, 0, 0.3125); }
         }
 
         /* New wrapper for the scrolling content area */
@@ -509,7 +507,7 @@
             flex-grow: 1; /* Allows it to take available space */
             position: relative; /* For absolute positioning of inner wrapper */
             overflow: hidden; /* Crucial for hiding parts of the scrolling list */
-            height: 42.1875px; /* Increased by 50% from 28.125px */
+            height: 18.75px; /* Increased by 25% from 15px */
             /* Desktop height adjustment will be handled by JS based on new font-size */
         }
 
@@ -528,27 +526,27 @@
 
         .company-list-content {
             /* This div contains one full set of company names */
-            padding-top: 4.39453125px; /* Increased by 50% from 2.9296875px */
-            padding-bottom: 4.39453125px; /* Increased by 50% from 2.9296875px */
+            padding-top: 1.953125px; /* Increased by 25% from 1.5625px */
+            padding-bottom: 1.953125px; /* Increased by 25% from 1.5625px */
         }
 
         .company-list-item {
-            padding: 0.2197265625rem 0; /* Increased by 50% from 0.146484375rem */
-            font-size: 0.759375rem; /* Increased by 50% from 0.50625rem */
-            line-height: 1.0125; /* Increased by 50% from 0.675 */
+            padding: 0.09765625rem 0; /* Increased by 25% from 0.078125rem */
+            font-size: 0.3375rem; /* Font size remains the same as per request */
+            line-height: 0.45; /* Line height remains the same as per request */
             font-weight: 600; /* Bolder for digital display */
             color: var(--digital-cyan); /* Bright cyan for digital text */
             text-align: center;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            text-shadow: 0 0 3.515625px rgba(0, 255, 255, 0.439453125); /* Increased by 50% from 2.34375px 0.29296875 */
+            text-shadow: 0 0 1.5625px rgba(0, 255, 255, 0.1953125); /* Increased by 25% from 1.25px 0.15625 */
             animation: textFlicker 6s infinite alternate; /* Slower, more subtle flicker for each name */
 
             /* Responsive adjustments for desktop */
             @media (min-width: 768px) { /* md breakpoint */
-                font-size: 1.0125rem; /* Increased by 50% from 0.675rem */
-                line-height: 1.18125; /* Increased by 50% from 0.7875 */
+                font-size: 0.45rem; /* Font size remains the same as per request */
+                line-height: 0.525; /* Line height remains the same as per request */
             }
         }
 
@@ -564,38 +562,38 @@
         .digital-footer {
             background-color: rgba(0, 0, 0, 0.7); /* Dark background */
             color: var(--digital-green); /* Green digital text */
-            padding: 7.03125px 8.7890625px; /* Increased by 50% from 4.6875px 5.859375px */
-            font-size: 1.125rem; /* Increased by 50% from 0.75rem */
+            padding: 3.125px 3.90625px; /* Increased by 25% from 2.5px 3.125px */
+            font-size: 0.5rem; /* Increased from 0.375rem */
             font-weight: 600;
-            border-top: 0.87890625px solid rgba(0, 255, 0, 0.17578125); /* Increased by 50% from 0.5859375px 0.1171875 */
-            border-bottom-left-radius: 0.6591796875rem; /* Increased by 50% from 0.439453125rem */
-            border-bottom-right-radius: 0.6591796875rem; /* Increased by 50% from 0.439453125rem */
+            border-top: 0.390625px solid rgba(0, 255, 0, 0.078125); /* Increased by 25% from 0.3125px 0.0625 */
+            border-bottom-left-radius: 0.29296875rem; /* Increased by 25% from 0.234375rem */
+            border-bottom-right-radius: 0.29296875rem; /* Increased by 25% from 0.1875rem */
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 0.6591796875rem; /* Increased by 50% from 0.439453125rem */
-            text-shadow: 0 0 3.515625px rgba(0, 255, 0, 0.3515625); /* Increased by 50% from 2.34375px 0.234375 */
+            gap: 0.29296875rem; /* Increased by 25% from 0.234375rem */
+            text-shadow: 0 0 1.5625px rgba(0, 255, 0, 0.15625); /* Increased by 25% from 1.25px 0.125 */
             animation: digitalFooterGlow 3.5s infinite alternate; /* Slower animation */
             text-transform: uppercase; /* All caps */
 
             /* Responsive adjustments for desktop */
             @media (min-width: 768px) { /* md breakpoint */
-                font-size: 1.575rem; /* Increased by 50% from 1.05rem */
+                font-size: 0.7rem; /* Increased from 0.46875rem */
             }
         }
 
         @keyframes digitalFooterGlow {
-            from { text-shadow: 0 0 3.515625px rgba(0, 255, 0, 0.3515625); }
-            to { text-shadow: 0 0 7.03125px rgba(0, 255, 0, 0.52734375); }
+            from { text-shadow: 0 0 1.5625px rgba(0, 255, 0, 0.15625); }
+            to { text-shadow: 0 0 3.125px rgba(0, 255, 0, 0.234375); }
         }
 
         .digital-icon {
-            font-size: 1.575rem; /* Increased by 50% from 1.05rem */
+            font-size: 0.7rem; /* Increased from 0.46875rem */
             vertical-align: middle;
         }
 
         .digital-separator {
-            color: rgba(0, 255, 0, 0.3515625); /* Increased by 50% from 0.234375 */
+            color: rgba(0, 255, 0, 0.15625); /* Increased by 25% from 0.125 */
             font-weight: 300;
         }
 
@@ -608,7 +606,7 @@
         }
         @media (min-width: 768px) {
             .footer-text {
-                font-size: 1.1rem; /* Keep as is, already good */
+                font-size: 1.1rem; /* Increased for desktop from 1rem */
             }
         }
         .footer-link {
@@ -697,12 +695,12 @@
         .modal-content {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 1.5rem;
-            padding: 4.5rem; /* Increased by 50% from 3rem */
+            padding: 2rem; /* Reduced padding for more compact form */
             width: 90%;
-            max-width: 1125px; /* Increased by 50% from 750px */
-            box-shadow: 0 22.5px 56.25px rgba(0, 0, 0, 0.3); /* Increased by 50% */
+            max-width: 500px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             position: relative;
-            transform: translateY(-45px); /* Increased by 50% from -30px */
+            transform: translateY(-20px);
             opacity: 0;
             transition: transform 0.3s ease-out, opacity 0.3s ease-out;
             color: #333; /* Dark text for modal content */
@@ -713,37 +711,37 @@
         }
         /* Adjustments for signup form vertical size */
         #signup-form {
-            padding-top: 1.125rem; /* Increased by 50% from 0.75rem */
-            padding-bottom: 1.125rem; /* Increased by 50% from 0.75rem */
+            padding-top: 0.5rem; /* Reduce top padding */
+            padding-bottom: 0.5rem; /* Reduce bottom padding */
         }
         #signup-form > div { /* Target direct children div (each input group) */
-            margin-bottom: 1.6875rem; /* Increased by 50% from 1.125rem */
+            margin-bottom: 0.75rem; /* Reduce space between input groups */
         }
         #signup-form label {
-            font-size: 2.1375rem; /* Increased by 50% from 1.425rem */
-            margin-bottom: 0.5625rem; /* Increased by 50% from 0.375rem */
+            font-size: 0.95rem; /* Slightly smaller label font */
+            margin-bottom: 0.25rem; /* Reduce margin below label */
         }
         #signup-form .input-field {
-            padding: 1.35rem 1.8rem; /* Increased by 50% from 0.9rem 1.2rem */
-            font-size: 2.025rem; /* Increased by 50% from 1.35rem */
+            padding: 0.6rem 0.8rem; /* Reduce input field padding */
+            font-size: 0.9rem; /* Slightly smaller input font */
         }
         #signup-form .btn-primary {
-            padding: 1.35rem 2.7rem; /* Increased by 50% from 0.9rem 1.8rem */
-            font-size: 2.1375rem; /* Increased by 50% from 1.425rem */
-            margin-top: 2.25rem; /* Increased by 50% from 1.5rem */
+            padding: 0.6rem 1.2rem; /* Reduce button padding */
+            font-size: 0.95rem; /* Slightly smaller button font */
+            margin-top: 1rem; /* Adjust button margin-top */
         }
         #signup-error-message {
-            font-size: 1.9125rem; /* Increased by 50% from 1.275rem */
-            margin-top: 1.125rem; /* Increased by 50% from 0.75rem */
+            font-size: 0.85rem; /* Smaller error message font */
+            margin-top: 0.5rem; /* Adjust error message margin */
         }
 
         .modal-close-button {
             position: absolute;
-            top: 2.25rem; /* Increased by 50% from 1.5rem */
-            right: 2.25rem; /* Increased by 50% from 1.5rem */
+            top: 1rem;
+            right: 1rem;
             background: none;
             border: none;
-            font-size: 3.375rem; /* Increased by 50% from 2.25rem */
+            font-size: 1.5rem;
             cursor: pointer;
             color: #666;
             transition: color 0.2s;
@@ -754,9 +752,9 @@
         .modal-toggle-button {
             background-color: #e5e7eb;
             border-radius: 9999px;
-            padding: 1.125rem 2.25rem; /* Increased by 50% from 0.75rem 1.5rem */
+            padding: 0.5rem 1rem;
             font-weight: 600;
-            font-size: 2.025rem; /* Increased by 50% from 1.35rem */
+            font-size: 0.9rem;
             transition: all 0.3s ease-in-out;
             cursor: pointer;
             text-align: center;
@@ -766,45 +764,45 @@
         .modal-toggle-button.active {
             background-image: linear-gradient(to right, #6366f1, #8b5cf6);
             color: white;
-            box-shadow: 0 4.5px 9px rgba(0, 0, 0, 0.1); /* Increased by 50% */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         /* Job Matches Section Styles */
         #job-matches-section {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(5px);
-            border-radius: 2.25rem; /* Increased by 50% from 1.5rem */
-            padding: 4.5rem; /* Increased by 50% from 3rem */
-            margin-top: 4.5rem; /* Increased by 50% from 3rem */
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-top: 2rem;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 18px 72px rgba(0, 0, 0, 0.2); /* Increased by 50% */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             color: #e0e0e0;
             display: none; /* Hidden by default */
         }
         .job-card {
             background: rgba(0, 0, 0, 0.4);
-            border-radius: 2.25rem; /* Increased by 50% from 1.5rem */
-            padding: 3.375rem; /* Increased by 50% from 2.25rem */
-            margin-bottom: 3.375rem; /* Increased by 50% from 2.25rem */
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 9px 33.75px rgba(0, 0, 0, 0.2); /* Increased by 50% */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .job-card:hover {
-            transform: translateY(-11.25px); /* Increased by 50% from -7.5px */
-            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.3); /* Increased by 50% */
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
         .job-card h3 {
             font-family: 'Poppins', sans-serif;
-            font-size: 3.375rem; /* Increased by 50% from 2.25rem */
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--digital-cyan); /* Bright cyan for job titles */
-            margin-bottom: 1.125rem; /* Increased by 50% from 0.75rem */
+            margin-bottom: 0.5rem;
         }
         .job-card p {
-            font-size: 2.25rem; /* Increased by 50% from 1.5rem */
+            font-size: 1rem;
             color: #c0c0c0;
-            margin-bottom: 1.125rem; /* Increased by 50% from 0.75rem */
+            margin-bottom: 0.5rem;
         }
         .job-card a {
             color: var(--logo-orange-original);
@@ -820,50 +818,49 @@
             display: none; /* Hidden by default */
             background-image: linear-gradient(to right, #ef4444, #dc2626); /* Red gradient */
             color: white;
-            padding: 1.6875rem 3.375rem; /* Increased by 50% from 1.125rem 2.25rem */
-            border-radius: 1.6875rem; /* Increased by 50% from 1.125rem */
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
             font-weight: 600;
             transition: transform 0.2s ease, box-shadow 0.2s ease, background-image 0.3s ease;
-            box-shadow: 0 9px 13.5px rgba(0, 0, 0, 0.1); /* Increased by 50% */
-            font-size: 2.25rem; /* Increased by 50% from 1.5rem */
-            margin-left: 2.25rem; /* Increased by 50% from 1.5rem */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+            margin-left: 1rem; /* Space from other nav items */
         }
         #logout-button:hover {
-            transform: translateY(-6.75px); /* Increased by 50% from -4.5px */
-            box-shadow: 0 18px 27px rgba(0, 0, 0, 0.2); /* Increased by 50% */
+            transform: translateY(-3px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
             background-image: linear-gradient(to right, #dc2626, #ef4444);
         }
         #logout-button:active {
             transform: translateY(0);
-            box-shadow: 0 4.5px 9px rgba(0, 0, 0, 0.1); /* Increased by 50% */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         /* NEW: Left Section Container (Desktop - Value Proposition) */
         .left-section-container {
             background: rgba(255, 255, 255, 0.1); /* White translucent */
             backdrop-filter: blur(8px); /* Subtle blur for glassy effect */
-            border-radius: 3.15rem; /* Increased by 40% from 2.25rem */
+            border-radius: 1.5rem; /* Subtle rounded corners */
             border: 1px solid rgba(255, 255, 255, 0.2); /* Faint white border */
-            box-shadow: 0 8.4px 42px rgba(0, 0, 0, 0.2); /* Increased by 40% */
-            padding: 2.1rem; /* Increased by 40% from 1.5rem */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Faint shadow */
+            padding: 1rem; /* Reduced padding for more compactness */
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             color: #e0e0e0; /* Light text color */
             width: 100%; /* Default to full width on mobile */
-            margin-bottom: 3rem; /* Keep as is for mobile */
+            margin-bottom: 2rem; /* Space between sections on mobile */
             flex-grow: 0; /* No longer grows to match right card by default on mobile */
             flex-shrink: 0; /* Prevents shrinking if content is too large */
             height: fit-content; /* Allow content to dictate height on mobile */
         }
         @media (min-width: 768px) {
             .left-section-container {
-                width: auto; /* Allow max-width to control */
-                max-width: 1176px; /* Increased by 40% from 840px (60% of 1400px) */
-                margin-right: 3rem; /* Keep as is for desktop gap */
+                width: 60%; /* Larger left section on desktop */
+                margin-right: 2rem; /* Space between left and right sections */
                 margin-bottom: 0; /* No bottom margin on desktop */
-                padding: 2.1rem; /* Keep padding increased for desktop */
+                padding: 1rem; /* Keep padding reduced for desktop */
                 flex-grow: 1; /* Allow it to grow to match right card on desktop */
             }
         }
@@ -875,7 +872,7 @@
         }
         @media (min-width: 768px) {
             .right-section-container {
-                width: auto; /* Allow max-width on card to control */
+                width: 40%; /* Smaller right section on desktop */
             }
         }
 
@@ -888,14 +885,14 @@
             
             /* Animation for color shift */
             animation: colorShift 9s infinite alternate, opportunitiesSmoothPulse 4s infinite alternate ease-in-out; /* Combined animations */
-            font-size: 3.75rem; /* Default for mobile */
+            font-size: 2.5rem; /* Default for mobile */
             font-weight: 800; /* Poppins Extra-Bold */
             color: var(--indigo-800); /* Default color */
-            margin-bottom: 1.125rem; /* Keep as is for mobile */
+            margin-bottom: 0.75rem; /* Reduced space by half from 1.5rem */
         }
         @media (min-width: 768px) {
             .connect-you-title-outline {
-                font-size: 7.875rem; /* Increased by 50% from 5.25rem */
+                font-size: 3.5rem; /* Increased for desktop */
             }
         }
 
@@ -907,7 +904,7 @@
                 1px 1px 0 #FFF, -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, /* White outline */
                 0 0 10px rgba(255, 215, 0, 0.6), /* Softer Gold glow */
                 0 0 20px rgba(255, 165, 0, 0.3); /* Softer Orange halo */
-            margin-bottom: 1.125rem; /* Keep as is for mobile */
+            margin-bottom: 0.75rem; /* Reduced space by half from 1.5rem */
         }
         /* Mobile font size for value-proposition-text */
         @media (max-width: 767px) {
@@ -918,7 +915,7 @@
         /* Desktop font size for value-proposition-text */
         @media (min-width: 768px) {
             .value-proposition-text {
-                font-size: 58.8px; /* Increased by 40% from 42px */
+                font-size: 28px; /* Increased to 28px for desktop */
             }
         }
 
@@ -926,32 +923,30 @@
         .btn-secondary {
             background-color: transparent;
             color: var(--indigo-800); /* Learn More in indigo-800 */
-            padding: 1.125rem 2.25rem; /* Increased by 50% from 0.75rem 1.5rem */
-            border-radius: 1.125rem; /* Increased by 50% from 0.75rem */
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
             font-weight: 600;
             transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease;
-            box-shadow: 0 0 0 3px var(--indigo-800); /* Increased by 50% from 2px */
-            font-size: 1.5rem; /* Increased by 50% from 1rem */
+            box-shadow: 0 0 0 2px var(--indigo-800); /* Indigo outline */
+            font-size: 1rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.75rem; /* Increased by 50% from 0.5rem */
+            gap: 0.5rem;
         }
         .btn-secondary:hover {
-            transform: translateY(-4.5px); /* Increased by 50% from -3px */
-            box-shadow: 0 12px 18px rgba(0, 0, 0, 0.2), 0 0 0 4.5px var(--indigo-800); /* Increased by 50% */
+            transform: translateY(-3px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2), 0 0 0 3px var(--indigo-800);
             background-color: var(--indigo-800);
             color: white;
         }
         .btn-secondary:active {
             transform: translateY(0);
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 0 0 3px var(--indigo-800); /* Increased by 50% */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 2px var(--indigo-800);
         }
         @media (min-width: 768px) {
             .btn-secondary {
-                font-size: 2.31rem; /* Increased by 40% from 1.65rem */
-                padding: 1.575rem 3.15rem; /* Increased by 40% from 1.125rem 2.25rem */
-                gap: 1.05rem; /* Increased by 40% from 0.75rem */
+                font-size: 1.1rem;
             }
         }
 
@@ -959,45 +954,33 @@
         #get-started-btn {
             background-image: linear-gradient(to right, #6366f1, #8b5cf6); /* Gradient background */
             color: white;
-            padding: 1.5rem 3rem; /* Keep as is for mobile */
+            padding: 1rem 2rem; /* Increased padding for a bolder look */
             border-radius: 9999px; /* Fully rounded pill shape */
             font-weight: 700; /* Extra bold */
-            font-size: 1.875rem; /* Keep as is for mobile */
+            font-size: 1.25rem; /* Larger font size */
             transition: transform 0.3s ease, box-shadow 0.3s ease, background-image 0.3s ease;
-            box-shadow: 0 9px 18px rgba(0, 0, 0, 0.2); /* Keep as is for mobile */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow */
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 1.125rem; /* Keep as is for mobile */
+            gap: 0.75rem; /* More space for the arrow */
             animation: buttonPulse 2s infinite alternate ease-in-out, lightningGlow 4s infinite alternate ease-in-out; /* Combined animations */
         }
         #get-started-btn:hover {
-            transform: translateY(-6px) scale(1.02); /* Keep as is for mobile */
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Keep as is for mobile */
+            transform: translateY(-4px) scale(1.02); /* More pronounced lift and slight scale */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Even stronger shadow */
             background-image: linear-gradient(to right, #8b5cf6, #6366f1); /* Reverse gradient on hover */
             animation-play-state: paused; /* Pause animation on hover */
         }
         #get-started-btn:active {
-            transform: translateY(0) scale(0.98); /* Keep as is for mobile */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Keep as is for mobile */
+            transform: translateY(0) scale(0.98); /* Press effect */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             background-image: linear-gradient(to right, #6366f1, #8b5cf6);
         }
         #get-started-btn .lucide-icon {
-            width: 2.625rem; /* Keep as is for mobile */
-            height: 2.625rem; /* Keep as is for mobile */
-            stroke-width: 3.75; /* Keep as is for mobile */
-        }
-        @media (min-width: 768px) {
-            #get-started-btn {
-                padding: 2.1rem 4.2rem; /* Increased by 40% from 1.5rem 3rem */
-                font-size: 2.625rem; /* Increased by 40% from 1.875rem */
-                gap: 1.575rem; /* Increased by 40% from 1.125rem */
-            }
-            #get-started-btn .lucide-icon {
-                width: 3.675rem; /* Increased by 40% from 2.625rem */
-                height: 3.675rem; /* Increased by 40% from 2.625rem */
-                stroke-width: 5.25; /* Increased by 40% from 3.75 */
-            }
+            width: 1.75rem; /* Larger arrow icon */
+            height: 1.75rem;
+            stroke-width: 2.5; /* Thicker arrow stroke */
         }
 
         @keyframes buttonPulse {
@@ -1007,49 +990,50 @@
         }
 
         @keyframes lightningGlow {
-            0%, 100% { box-shadow: 0 9px 18px rgba(0, 0, 0, 0.2); } /* Keep as is for mobile */
-            25% { box-shadow: 0 9px 18px rgba(0, 0, 0, 0.2), 0 0 22.5px rgba(255, 69, 0, 0.7), 0 0 45px rgba(255, 0, 0, 0.5); } /* Keep as is for mobile */
-            50% { box-shadow: 0 9px 18px rgba(0, 0, 0, 0.2); } /* Keep as is for mobile */
-            75% { box-shadow: 0 9px 18px rgba(0, 0, 0, 0.2), 0 0 22.5px rgba(255, 69, 0, 0.7), 0 0 45px rgba(255, 0, 0, 0.5); } /* Keep as is for mobile */
+            0%, 100% { box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); }
+            25% { box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 69, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5); } /* Orange-red dazzling glow */
+            50% { box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); }
+            75% { box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 69, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5); }
         }
 
         /* About Us Section (Placeholder) */
         #about-us-section {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(5px);
-            border-radius: 2.25rem; /* Keep as is for mobile */
-            padding: 1.5rem; /* Keep as is for mobile */
-            margin: 3rem auto; /* Keep as is for mobile */
-            max-width: 1350px; /* Keep as is for mobile */
+            border-radius: 1.5rem;
+            padding: 1rem; /* Reduced padding */
+            margin: 2rem auto;
+            max-width: 900px;
             width: 95%;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2); /* Keep as is for mobile */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             color: #e0e0e0;
             text-align: center;
             display: none; /* Hidden by default, will be shown by JS scroll */
         }
-        @media (min-width: 768px) {
-            #about-us-section {
-                border-radius: 3.375rem; /* Increased by 50% from 2.25rem */
-                padding: 2.25rem; /* Increased by 50% from 1.5rem */
-                margin: 4.5rem auto; /* Increased by 50% from 3rem */
-                max-width: 2025px; /* Increased by 50% from 1350px */
-                box-shadow: 0 18px 72px rgba(0, 0, 0, 0.2); /* Increased by 50% */
-            }
-            #about-us-section h2 {
-                font-size: 5.625rem; /* Increased by 50% from 3.75rem */
-                margin-bottom: 3.375rem; /* Increased by 50% from 2.25rem */
-            }
-            #about-us-section p {
-                font-size: 2.475rem; /* Increased by 50% from 1.65rem */
-                margin-bottom: 2.25rem; /* Increased by 50% from 1.5rem */
-            }
-            .about-us-content-card {
-                border-radius: 2.25rem; /* Increased by 50% from 1.5rem */
-                padding: 3.375rem; /* Increased by 50% from 2.25rem */
-                margin-top: 2.25rem; /* Increased by 50% from 1.5rem */
-                box-shadow: 0 4.5px 22.5px rgba(0, 0, 0, 0.1); /* Increased by 50% */
-            }
+        #about-us-section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--indigo-800);
+            text-shadow:
+                1px 1px 0 #FFF, -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF; /* Solid white outline */
+            margin-bottom: 1.5rem;
+        }
+        #about-us-section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: black; /* Solid black font */
+        }
+        /* Inner white card for About Us content */
+        .about-us-content-card {
+            background: rgba(255, 255, 255, 0.9); /* Opaque white */
+            backdrop-filter: blur(5px); /* Blurs out content behind it */
+            border-radius: 1rem;
+            padding: 1.5rem;
+            color: black; /* Solid black font for content */
+            margin-top: 1rem; /* Space from heading */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         /* Darkening Overlay for "Get Started" button click */
@@ -1071,18 +1055,18 @@
 
         /* Input glow animation */
         @keyframes inputGlow {
-            0% { box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.4); } /* Keep as is */
-            50% { box-shadow: 0 0 0 12px rgba(99, 102, 241, 0.8), 0 0 30px rgba(99, 102, 241, 0.6); } /* Keep as is */
-            100% { box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.4); } /* Keep as is */
+            0% { box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(99, 102, 241, 0.8), 0 0 20px rgba(99, 102, 241, 0.6); }
+            100% { box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.4); }
         }
         .input-glow {
             animation: inputGlow 1.5s infinite alternate;
         }
         /* Red glow for missing fields */
         @keyframes inputErrorGlow {
-            0% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.4); } /* Keep as is */
-            50% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0.8), 0 0 30px rgba(239, 68, 68, 0.6); } /* Keep as is */
-            100% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.4); } /* Keep as is */
+            0% { box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0.8), 0 0 20px rgba(239, 68, 68, 0.6); }
+            100% { box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.4); }
         }
         .input-error {
             border-color: #ef4444 !important; /* Red border */
@@ -1094,25 +1078,25 @@
         .header-mobile-signin-button {
             background-image: linear-gradient(to right, #6366f1, #8b5cf6); /* Indigo gradient */
             color: white;
-            padding: 0.75rem 1.5rem; /* Keep as is */
-            border-radius: 0.75rem; /* Keep as is */
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
             font-weight: 600;
-            font-size: 1.35rem; /* Keep as is */
+            font-size: 0.9rem;
             /* display: none; Removed, now visible by default */
             margin-left: auto; /* Push to right */
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Keep as is */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .header-mobile-signin-button:hover {
-            transform: translateY(-3px); /* Keep as is */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Keep as is */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         @media (max-width: 767px) {
             .header-mobile-signin-button {
                 /* Display is controlled by JS now, keep as is */
             }
             .header-mobile-signin-button + #mobile-menu-button {
-                margin-left: 1.125rem; /* Keep as is */
+                margin-left: 0.75rem; /* Space between sign-in and menu button */
             }
         }
 
@@ -1120,9 +1104,9 @@
         footer {
             background: linear-gradient(to top, rgba(17, 24, 39, 0.95), rgba(31, 41, 55, 0.95)); /* Darker, subtle gradient */
             color: #e0e0e0; /* Lighter text for better contrast */
-            padding: 0.25rem 0.75rem; /* Reduced py-2 to py-1 (0.25rem) */
-            border-top: 4.5px solid var(--indigo-800); /* Keep as is */
-            box-shadow: 0 -12px 30px rgba(0, 0, 0, 0.3); /* Keep as is */
+            padding: 0.75rem 1rem; /* Drastically reduced padding for a much more compact footer */
+            border-top: 3px solid var(--indigo-800); /* Stronger top border */
+            box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.3); /* More prominent shadow */
         }
 
         .footer-content-wrapper {
@@ -1130,57 +1114,57 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            gap: 0.75rem; /* Keep as is */
+            gap: 0.5rem; /* Reduced spacing between main footer sections */
         }
 
         .footer-greeting {
-            font-size: 1.25rem; /* Keep as is */
+            font-size: 1rem; /* Reduced font size */
             font-weight: 700;
             color: #fff; /* White for emphasis */
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.4); /* Keep as is */
-            margin-bottom: 0.15rem; /* Keep as is */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.4); /* Soft white glow */
+            margin-bottom: 0.1rem; /* Reduced space below greeting */
         }
 
         .footer-links-container {
             display: flex;
             flex-direction: column; /* Stack vertically on mobile */
-            gap: 0.75rem; /* Keep as is */
-            margin-bottom: 0.75rem; /* Keep as is */
+            gap: 0.5rem; /* Reduced space between links */
+            margin-bottom: 0.5rem; /* Reduced space below links */
         }
 
         @media (min-width: 640px) { /* sm breakpoint */
             .footer-links-container {
                 flex-direction: row; /* Horizontal on larger screens */
-                gap: 1.5rem; /* Keep as is */
+                gap: 1rem; /* Reduced gap */
             }
         }
 
         .footer-link {
             display: inline-flex;
             align-items: center;
-            font-size: 1.125rem; /* Keep as is */
+            font-size: 0.875rem; /* Reduced font size */
             font-weight: 600;
             color: var(--logo-orange-original); /* Orange for links */
             transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.2s ease;
             text-decoration: none; /* No underline by default */
-            padding: 0.45rem 0.9rem; /* Keep as is */
-            border-radius: 0.75rem; /* Keep as is */
+            padding: 0.3rem 0.6rem; /* Reduced padding for hover effect */
+            border-radius: 0.5rem;
             background: rgba(255, 255, 255, 0.05); /* Subtle background */
-            box-shadow: 0 3px 7.5px rgba(0, 0, 0, 0.2); /* Keep as is */
-            border: 1.5px solid rgba(255, 255, 255, 0.1); /* Keep as is */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer-link:hover {
             color: var(--indigo-500); /* Indigo on hover */
-            text-shadow: 0 0 15px rgba(99, 102, 241, 0.7); /* Keep as is */
-            transform: translateY(-4.5px); /* Keep as is */
+            text-shadow: 0 0 10px rgba(99, 102, 241, 0.7); /* Stronger indigo glow */
+            transform: translateY(-3px); /* Lift effect */
             background: rgba(255, 255, 255, 0.1); /* Slightly more opaque */
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Keep as is */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         .footer-link .lucide-icon {
-            margin-right: 0.75rem; /* Keep as is */
-            font-size: 1.5rem; /* Keep as is */
+            margin-right: 0.5rem;
+            font-size: 1rem; /* Reduced icon size */
             color: #fff; /* White icon */
             transition: color 0.3s ease;
         }
@@ -1197,14 +1181,14 @@
             .footer-separator {
                 display: block; /* Show only on larger screens */
                 color: rgba(255, 255, 255, 0.3); /* Subtle white */
-                font-size: 1.5rem; /* Keep as is */
+                font-size: 1rem; /* Reduced font size */
             }
         }
 
         .footer-copyright {
-            font-size: 0.975rem; /* Keep as is */
+            font-size: 0.65rem; /* Reduced font size */
             color: #b0b0b0; /* Slightly darker grey */
-            margin-top: 1.125rem; /* Keep as is */
+            margin-top: 0.5rem; /* Reduced space from links */
             line-height: 1.5;
         }
 
@@ -1240,18 +1224,18 @@
         }
         .custom-alert-modal-content {
             background: #ffffff; /* White background */
-            border-radius: 2.25rem; /* Keep as is */
-            padding: 3rem; /* Keep as is */
+            border-radius: 1.5rem;
+            padding: 2rem;
             width: 90%;
-            max-width: 600px; /* Keep as is */
-            box-shadow: 0 15px 37.5px rgba(0, 0, 0, 0.4); /* Keep as is */
+            max-width: 400px; /* Slightly smaller for alerts */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); /* Stronger shadow */
             position: relative;
-            transform: translateY(-30px); /* Keep as is */
+            transform: translateY(-20px);
             opacity: 0;
             transition: transform 0.3s ease-out, opacity 0.3s ease-out;
             color: #333;
             text-align: center;
-            border: 3px solid var(--logo-orange-original); /* Keep as is */
+            border: 2px solid var(--logo-orange-original); /* Orange border for warning */
         }
         .custom-alert-modal-overlay.active .custom-alert-modal-content {
             transform: translateY(0);
@@ -1259,55 +1243,53 @@
         }
         .custom-alert-modal-content h3 {
             font-family: 'Poppins', sans-serif;
-            font-size: 2.625rem; /* Keep as is */
+            font-size: 1.75rem;
             font-weight: 700;
             color: var(--logo-orange-original); /* Orange title */
-            margin-bottom: 1.5rem; /* Keep as is */
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1.125rem; /* Keep as is */
+            gap: 0.75rem;
         }
         .custom-alert-modal-content p {
-            font-size: 1.65rem; /* Keep as is */
-            margin-bottom: 2.25rem; /* Keep as is */
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
             color: #555;
         }
         .custom-alert-modal-content button {
             background-image: linear-gradient(to right, #6366f1, #8b5cf6);
             color: white;
-            padding: 1.125rem 2.25rem; /* Keep as is */
-            border-radius: 1.125rem; /* Keep as is */
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
             font-weight: 600;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 6px 9px rgba(0, 0, 0, 0.1); /* Keep as is */
-            font-size: 1.5rem; /* Keep as is */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
             cursor: pointer;
         }
         .custom-alert-modal-content button:hover {
-            transform: translateY(-3px); /* Keep as is */
-            box-shadow: 0 9px 15px rgba(0, 0, 0, 0.2); /* Keep as is */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
         }
         .custom-alert-countdown {
-            font-size: 1.35rem; /* Keep as is */
+            font-size: 0.9rem;
             color: #888;
-            margin-top: 0.75rem; /* Keep as is */
+            margin-top: 0.5rem;
         }
 
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-    <header class="w-full header-gradient shadow-md py-8 px-6 md:px-10 relative"> <!-- Reduced py-12 to py-8 -->
-        <nav class="container mx-auto flex justify-between items-center max-w-[2200px]" aria-label="Main navigation"> <!-- Increased max-w-[1400px] to max-w-[2200px] -->
+    <header class="w-full header-gradient shadow-md py-8 px-6 md:px-10 relative"> <!-- Increased py-6 to py-8 -->
+        <nav class="container mx-auto flex justify-between items-center max-w-7xl" aria-label="Main navigation"> <!-- Added max-w-7xl -->
             <div class="flex items-center space-x-1">
                 <div class="logo-container"> <img src="logo2.png" alt="G-Connect Logo" loading="lazy"> </div>
                 <div class="flex flex-col items-start leading-none">
-                    <span class="text-3xl font-extrabold header-text-outline">G-</span>
-                    <span class="text-xl font-semibold header-text-outline">Connect</span>
-                </div>
+                    <span class="text-2xl font-extrabold header-text-outline">G-</span> <span class="text-sm font-semibold header-text-outline">Connect</span> </div>
             </div>
-            <ul class="hidden md:flex space-x-12 items-center"> <!-- Increased space-x-6 to space-x-12 -->
+            <ul class="hidden md:flex space-x-4 items-center">
                 <li><a href="#main-content-wrapper" id="home-nav-link" class="nav-link">HOME</a></li>
                 <li><a href="#about-us-section" id="about-nav-link" class="nav-link">ABOUT</a></li>
                 <li><a href="#" class="nav-link">SERVICES</a></li>
@@ -1317,8 +1299,8 @@
             </ul>
             <div class="md:hidden flex items-center">
                 <button id="mobile-signin-button" class="header-mobile-signin-button">Sign In</button>
-                <button id="mobile-menu-button" class="text-white hover:text-gray-200 focus:outline-none p-3 rounded-md" aria-controls="mobile-nav-menu" aria-expanded="false">
-                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <button id="mobile-menu-button" class="text-white hover:text-gray-200 focus:outline-none p-2 rounded-md" aria-controls="mobile-nav-menu" aria-expanded="false">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
@@ -1330,19 +1312,19 @@
             <a href="#" class="block">SERVICES</a>
             <a href="#" class="block">POST A JOB</a>
             <!-- Mobile Sign In button removed from here, now in header -->
-            <button id="mobile-logout-button" class="btn-primary w-full mt-6">Logout</button>
+            <button id="mobile-logout-button" class="btn-primary w-full mt-4" style="display: none;">Logout</button>
         </div>
     </header>
 
     <!-- Main Content Wrapper for Desktop Two-Column Layout -->
-    <main id="main-content-wrapper" class="flex-grow flex flex-col md:flex-row items-stretch justify-center p-4 md:p-20 max-w-[2200px] mx-auto w-full md:gap-12"> <!-- Increased max-w-[1400px] to max-w-[2200px] and added md:gap-12 -->
+    <main id="main-content-wrapper" class="flex-grow flex flex-col md:flex-row items-stretch justify-center p-4 md:p-12 max-w-7xl mx-auto w-full"> <!-- Changed p-8 to p-12 -->
         
         <!-- Left Section: Value Proposition and Horizontal Scroller -->
         <section class="left-section-container">
             <h1 class="font-extrabold connect-you-title-outline">Let's Connect You!</h1>
             
             <!-- Scan window (original design) -->
-            <div class="mb-3 w-full flex justify-center">
+            <div class="mb-2 w-full flex justify-center"> <!-- Reduced margin-bottom by half -->
                 <div class="company-scroller-container">
                     <div class="digital-header-text">
                         OVER 10K EMPLOYERS
@@ -1367,7 +1349,7 @@
                 Connect with over 10K+ employers for FREE and find your dream job in construction industry and others. Trusted by Leading Companies.
             </p>
 
-            <div class="flex flex-col sm:flex-row gap-6 mt-12 w-full justify-center">
+            <div class="flex flex-col sm:flex-row gap-4 mt-8 w-full justify-center"> <!-- Reduced margin-top -->
                 <button id="get-started-btn" class="text-xl px-8 py-3 rounded-full">
                     Get Started <span data-lucide="arrow-right" class="w-6 h-6 ml-2"></span>
                 </button>
@@ -1379,12 +1361,12 @@
 
         <!-- Right Section: Find Your Perfect Job Form -->
         <section class="right-section-container">
-            <div id="job-form-card" class="card w-full max-w-[672px] p-9 sm:p-12 md:p-[54px] text-center relative mx-auto md:max-w-[1008px]"> <!-- Increased md:p-14 to md:p-[54px] and added md:max-w-[1008px] -->
-                <h2 id="main-opportunities-title" class="text-4xl sm:text-5xl font-extrabold mb-6 leading-tight opportunities-title-outline">
+            <div id="job-form-card" class="card w-full max-w-md p-6 sm:p-8 md:p-10 text-center relative mx-auto">
+                <h2 id="main-opportunities-title" class="text-3xl sm:text-4xl font-extrabold mb-4 leading-tight opportunities-title-outline">
                     Find Your Job Matches
                 </h2>
                 
-                <div class="industry-toggle-container mb-9" role="tablist">
+                <div class="industry-toggle-container mb-6" role="tablist">
                     <button type="button" id="construction-tab" class="industry-toggle-button-segment" role="tab" aria-selected="true" aria-controls="construction-form-section">
                         Construction Industry
                     </button>
@@ -1393,13 +1375,13 @@
                     </button>
                 </div>
 
-                <form id="job-search-form" class="space-y-9">
-                    <div id="construction-form-section" class="space-y-9" role="tabpanel" aria-labelledby="construction-tab">
+                <form id="job-search-form" class="space-y-6">
+                    <div id="construction-form-section" class="space-y-6" role="tabpanel" aria-labelledby="construction-tab">
                         <div>
-                            <label for="qualification-level-construction" class="block text-left text-indigo-800 text-xl font-bold mb-3">
+                            <label for="qualification-level-construction" class="block text-left text-indigo-800 text-base font-bold mb-2">
                                 Select Qualification Level:
                             </label>
-                            <select id="qualification-level-construction" name="qualification-level-construction" class="input-field appearance-none md:px-6 md:py-[18px]"> <!-- Increased padding -->
+                            <select id="qualification-level-construction" name="qualification-level-construction" class="input-field appearance-none">
                                 <option value="">-- Select Level --</option>
                                 <option value="certificate">Certificate</option>
                                 <option value="diploma">Diploma</option>
@@ -1410,10 +1392,10 @@
                             </select>
                         </div>
                         <div class="relative">
-                            <label for="course-name-construction" class="block text-left text-indigo-800 text-xl font-bold mb-3">
+                            <label for="course-name-construction" class="block text-left text-indigo-800 text-base font-bold mb-2">
                                 Enter Your Course Name:
                             </label>
-                            <input type="text" id="course-name-construction" name="course-name-construction" placeholder="e.g., Civil Engineering, Construction Management" class="input-field md:px-6 md:py-[18px]"> <!-- Increased padding -->
+                            <input type="text" id="course-name-construction" name="course-name-construction" placeholder="e.g., Civil Engineering, Construction Management" class="input-field">
                             <div id="course-suggestions-construction" class="suggestions-container hidden"></div>
                         </div>
                         <button type="submit" class="btn-primary w-full">
@@ -1421,19 +1403,19 @@
                         </button>
                     </div>
 
-                    <div id="other-industry-form-section" class="space-y-9 hidden" role="tabpanel" aria-labelledby="other-industry-tab">
+                    <div id="other-industry-form-section" class="space-y-6 hidden" role="tabpanel" aria-labelledby="other-industry-tab">
                         <div>
-                            <label for="other-industry-input" class="block text-left text-black text-xl font-bold mb-3">
+                            <label for="other-industry-input" class="block text-left text-black text-base font-bold mb-2">
                                 Enter Your Industry:
                             </label>
-                            <input type="text" id="other-industry-input" name="other-industry-input" placeholder="e.g., Healthcare, IT, Education" class="input-field md:px-6 md:py-[18px]"> <!-- Increased padding -->
+                            <input type="text" id="other-industry-input" name="other-industry-input" placeholder="e.g., Healthcare, IT, Education" class="input-field">
                             <div id="industry-suggestions-other" class="suggestions-container hidden"></div>
                         </div>
                         <div>
-                            <label for="qualification-level-other" class="block text-left text-black text-xl font-bold mb-3">
+                            <label for="qualification-level-other" class="block text-left text-black text-base font-bold mb-2">
                                 Select Qualification Level:
                             </label>
-                            <select id="qualification-level-other" name="qualification-level-other" class="input-field appearance-none md:px-6 md:py-[18px]"> <!-- Increased padding -->
+                            <select id="qualification-level-other" name="qualification-level-other" class="input-field appearance-none">
                                 <option value="">-- Select Level --</option>
                                 <option value="certificate">Certificate</option>
                                 <option value="diploma">Diploma</option>
@@ -1444,10 +1426,10 @@
                             </select>
                         </div>
                         <div class="relative">
-                            <label for="course-name-other" class="block text-left text-black text-xl font-bold mb-3">
+                            <label for="course-name-other" class="block text-left text-black text-base font-bold mb-2">
                                 Enter Your Course Name:
                             </label>
-                            <input type="text" id="course-name-other" name="course-name-other" placeholder="e.g., Nursing, Software Development, Teaching" class="input-field md:px-6 md:py-[18px]"> <!-- Increased padding -->
+                            <input type="text" id="course-name-other" name="course-name-other" placeholder="e.g., Nursing, Software Development, Teaching" class="input-field">
                             <div id="course-suggestions-other" class="suggestions-container hidden"></div>
                         </div>
                         <button type="submit" class="btn-primary w-full">
@@ -1455,7 +1437,7 @@
                         </button>
                     </div>
                 </form>
-                <p class="text-center text-lg mt-9 text-black">
+                <p class="text-center text-sm mt-6 text-black"> <!-- Changed to solid black -->
                     Already have an account? <a href="#" id="main-form-signin-link" class="text-indigo-600 hover:text-indigo-800 underline font-semibold">Sign In</a>
                 </p>
             </div>
@@ -1463,11 +1445,11 @@
     </main>
 
     <!-- Job Matches Section -->
-    <section id="job-matches-section" class="w-full max-w-[900px] mx-auto p-9 sm:p-12 md:p-[72px] mt-12 rounded-2xl hidden md:max-w-[1350px]"> <!-- Increased md:p-15 to md:p-[72px] and added md:max-w-[1350px] -->
-        <h2 id="job-matches-title" class="text-4xl sm:text-5xl font-extrabold mb-9 text-center opportunities-title-outline">
+    <section id="job-matches-section" class="w-full max-w-2xl mx-auto p-6 sm:p-8 md:p-10 mt-8 rounded-2xl hidden">
+        <h2 id="job-matches-title" class="text-3xl sm:text-4xl font-extrabold mb-6 text-center opportunities-title-outline">
             Your Curated Job Matches!
         </h2>
-        <div id="job-list" class="space-y-9">
+        <div id="job-list" class="space-y-6">
             </div>
     </section>
 
@@ -1495,51 +1477,51 @@
             <button id="modal-close-button" class="modal-close-button" aria-label="Close modal">
                 <span data-lucide="x"></span>
             </button>
-            <h2 id="modal-title" class="text-3xl sm:text-4xl font-extrabold mb-9 text-center text-indigo-800">
+            <h2 id="modal-title" class="text-2xl sm:text-3xl font-extrabold mb-6 text-center text-indigo-800">
                 Your first time here? Sign up first!
             </h2>
 
-            <div class="flex justify-center gap-6 mb-9">
+            <div class="flex justify-center gap-4 mb-6">
                 <button type="button" id="modal-signup-tab" class="modal-toggle-button active">Sign Up</button>
                 <button type="button" id="modal-signin-tab" class="modal-toggle-button">Sign In</button>
             </div>
 
-            <form id="signup-form" class="space-y-6">
+            <form id="signup-form" class="space-y-4">
                 <div>
-                    <label for="signup-fullname" class="block text-left text-indigo-800 text-xl font-bold mb-3">Full Name:</label>
-                    <input type="text" id="signup-fullname" name="fullname" placeholder="John Doe" class="input-field px-4 py-3" required>
+                    <label for="signup-fullname" class="block text-left text-indigo-800 text-base font-bold mb-2">Full Name:</label>
+                    <input type="text" id="signup-fullname" name="fullname" placeholder="John Doe" class="input-field" required>
                 </div>
                 <div>
-                    <label for="signup-mobile" class="block text-left text-indigo-800 text-xl font-bold mb-3">Mobile Phone Number:</label>
-                    <input type="tel" id="signup-mobile" name="mobile" placeholder="+2547XXXXXXXX" class="input-field px-4 py-3" required>
+                    <label for="signup-mobile" class="block text-left text-indigo-800 text-base font-bold mb-2">Mobile Phone Number:</label>
+                    <input type="tel" id="signup-mobile" name="mobile" placeholder="+2547XXXXXXXX" class="input-field" required>
                 </div>
                 <div>
-                    <label for="signup-email" class="block text-left text-indigo-800 text-xl font-bold mb-3">Email:</label>
-                    <input type="email" id="signup-email" name="email" placeholder="you@example.com" class="input-field px-4 py-3" required>
+                    <label for="signup-email" class="block text-left text-indigo-800 text-base font-bold mb-2">Email:</label>
+                    <input type="email" id="signup-email" name="email" placeholder="you@example.com" class="input-field" required>
                 </div>
                 <div>
-                    <label for="signup-username" class="block text-left text-indigo-800 text-xl font-bold mb-3">Username:</label>
-                    <input type="text" id="signup-username" name="username" placeholder="johndoe123" class="input-field px-4 py-3" required>
+                    <label for="signup-username" class="block text-left text-indigo-800 text-base font-bold mb-2">Username:</label>
+                    <input type="text" id="signup-username" name="username" placeholder="johndoe123" class="input-field" required>
                 </div>
                 <div>
-                    <label for="signup-password" class="block text-left text-indigo-800 text-xl font-bold mb-3">Password:</label>
-                    <input type="password" id="signup-password" name="password" placeholder="Min 6 characters" class="input-field px-4 py-3" required minlength="6">
+                    <label for="signup-password" class="block text-left text-indigo-800 text-base font-bold mb-2">Password:</label>
+                    <input type="password" id="signup-password" name="password" placeholder="Min 6 characters" class="input-field" required minlength="6">
                 </div>
                 <button type="submit" class="btn-primary w-full">Sign Up</button>
-                <p id="signup-error-message" class="text-base mt-3 text-center hidden"></p>
+                <p id="signup-error-message" class="text-red-500 text-sm mt-2 text-center hidden"></p>
             </form>
 
-            <form id="signin-form" class="space-y-6 hidden">
+            <form id="signin-form" class="space-y-4 hidden">
                 <div>
-                    <label for="signin-email" class="block text-left text-indigo-800 text-xl font-bold mb-3">Email:</label>
-                    <input type="email" id="signin-email" name="email" placeholder="you@example.com" class="input-field px-4 py-3" required>
+                    <label for="signin-email" class="block text-left text-indigo-800 text-base font-bold mb-2">Email:</label>
+                    <input type="email" id="signin-email" name="email" placeholder="you@example.com" class="input-field" required>
                 </div>
                 <div>
-                    <label for="signin-password" class="block text-left text-indigo-800 text-xl font-bold mb-3">Password:</label>
-                    <input type="password" id="signin-password" name="password" placeholder="Your password" class="input-field px-4 py-3" required>
+                    <label for="signin-password" class="block text-left text-indigo-800 text-base font-bold mb-2">Password:</label>
+                    <input type="password" id="signin-password" name="password" placeholder="Your password" class="input-field" required>
                 </div>
                 <button type="submit" class="btn-primary w-full">Sign In</button>
-                <p id="signin-error-message" class="text-base mt-3 text-center hidden"></p>
+                <p id="signin-error-message" class="text-red-500 text-sm mt-2 text-center hidden"></p>
             </form>
         </div>
     </div>
@@ -1547,14 +1529,14 @@
     <!-- NEW: Custom Alert Modal HTML -->
     <div id="custom-alert-modal-overlay" class="custom-alert-modal-overlay">
         <div class="custom-alert-modal-content">
-            <h3><span data-lucide="alert-triangle" class="w-12 h-12 text-orange-500"></span> Alert!</h3>
+            <h3><span data-lucide="alert-triangle" class="w-8 h-8 text-orange-500"></span> Alert!</h3>
             <p id="custom-alert-message">This is a custom alert message.</p>
             <div id="custom-alert-countdown" class="custom-alert-countdown hidden"></div>
             <button id="custom-alert-close-button">Got it!</button>
         </div>
     </div>
 
-    <footer class="w-full text-white py-1 px-4 md:px-8 mt-auto"> <!-- Reduced py-2 to py-1 -->
+    <footer class="w-full text-white py-4 px-4 md:px-8 mt-auto"> <!-- Reduced py- to py-4 -->
         <div class="container mx-auto footer-content-wrapper">
             <p id="footer-greeting" class="footer-greeting">
                 Any challenge? We're here to help!
