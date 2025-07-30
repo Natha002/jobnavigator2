@@ -1400,7 +1400,7 @@
             justify-content: center;
             align-items: center;
             overflow: hidden; /* Ensure logos don't overflow */
-            position: relative;
+            position: relative; /* Ensure absolute positioning works for children */
             flex-shrink: 0; /* Prevent shrinking below its size */
             flex-grow: 0;
         }
@@ -1409,13 +1409,19 @@
             width: 100%; /* Stretch to fit */
             height: 100%; /* Stretch to fit */
             object-fit: cover; /* Cover the whole area */
-            opacity: 1;
-            transition: opacity 1s ease-in-out; /* Seamless morph over 1 second */
             position: absolute; /* Allow precise positioning for fade effect */
+            top: 0;
+            left: 0;
+            transition: opacity 1s ease-in-out; /* Smooth transition for opacity */
         }
 
-        .logo-blinker-window img.hidden-logo {
+        .logo-blinker-window img.current-logo {
+            opacity: 1;
+            z-index: 2; /* Ensure it's on top initially */
+        }
+        .logo-blinker-window img.next-logo {
             opacity: 0;
+            z-index: 1; /* Behind the current logo */
         }
 
         /* Company Scroller adjustments for mobile within the blinker container */
@@ -1482,7 +1488,7 @@
     </header>
 
     <!-- Main Content Wrapper for Desktop Two-Column Layout -->
-    <main id="main-content-wrapper" class="flex-grow flex flex-col md:flex-row items-stretch justify-center p-4 md:px-9 md:py-6 max-w-[1900px] mx-auto w-full md:gap-0 md:pt-24">
+    <main id="main-content-wrapper" class="flex-grow flex flex-col md:flex-row items-stretch justify-center p-4 md:px-9 md:py-6 max-w-[1900px] mx-auto w-full md:gap-0 md:pt-24 md:-ml-28">
         
         <!-- Left Section: Value Proposition and Horizontal Scroller -->
         <section class="left-section-container">
@@ -1491,8 +1497,9 @@
             <!-- NEW: Container for the company scroller and the two blinking logo windows -->
             <div class="logo-blinker-container">
                 <!-- Left Blinking Logo Window -->
-                <div class="logo-blinker-window">
-                    <img id="blinker-logo-left" src="11.png" alt="Company Logo 1" loading="lazy">
+                <div class="logo-blinker-window" id="blinker-window-left">
+                    <img class="current-logo" src="11.png" alt="Company Logo Current" loading="lazy">
+                    <img class="next-logo" src="14.png" alt="Company Logo Next" loading="lazy">
                 </div>
 
                 <!-- Scan window (original design) -->
@@ -1516,8 +1523,9 @@
                 </div>
 
                 <!-- Right Blinking Logo Window -->
-                <div class="logo-blinker-window">
-                    <img id="blinker-logo-right" src="14.png" alt="Company Logo 2" loading="lazy">
+                <div class="logo-blinker-window" id="blinker-window-right">
+                    <img class="current-logo" src="14.png" alt="Company Logo Current" loading="lazy">
+                    <img class="next-logo" src="11.png" alt="Company Logo Next" loading="lazy">
                 </div>
             </div>
 
@@ -1768,7 +1776,7 @@
         let currentUserName = ''; // To store the user's name for personalization
         let currentFilteredJobs = []; // To store the jobs currently displayed for export
 
-        // CORRECTED: Initialize tempJobSearchData with default empty strings
+        // Initialize tempJobSearchData with default empty strings
         let tempJobSearchData = {
             qualification: '',
             course: '',
@@ -1836,9 +1844,14 @@
         const customAlertCloseButton = document.getElementById('custom-alert-close-button');
         const customAlertCountdown = document.getElementById('custom-alert-countdown'); // Countdown element
 
-        // NEW: Blinking Logo elements
-        const blinkerLogoLeft = document.getElementById('blinker-logo-left');
-        const blinkerLogoRight = document.getElementById('blinker-logo-right');
+        // NEW: Blinking Logo elements (now with current and next images)
+        const blinkerWindowLeft = document.getElementById('blinker-window-left');
+        const blinkerLogoLeftCurrent = blinkerWindowLeft.querySelector('.current-logo');
+        const blinkerLogoLeftNext = blinkerWindowLeft.querySelector('.next-logo');
+
+        const blinkerWindowRight = document.getElementById('blinker-window-right');
+        const blinkerLogoRightCurrent = blinkerWindowRight.querySelector('.current-logo');
+        const blinkerLogoRightNext = blinkerWindowRight.querySelector('.next-logo');
 
         // Removed duplicate declaration of isConstructionMode
         let isConstructionMode = true; // Default state: In Construction
@@ -1904,131 +1917,6 @@
             "KCB Group PLC",
             "Absa Bank Kenya PLC",
             "Other Prominent Companies" // Added for continuous loop with diverse names
-        ];
-
-        // Simulated Job Data - UPDATED QUALIFICATION LEVELS
-        const allJobs = [
-            {
-                id: "job1",
-                title: "Youth Polytechnic Instructor III (Building and Construction Technology)",
-                company: "Turkana County Government",
-                location: "Turkana County",
-                source: "Myjobmag",
-                date: "Wednesday, 23rd July 2025",
-                requirements: "Diploma in any of the following discipline: Civil Engineering, Building and Construction, or its equivalent qualification from a recognized institution.",
-                industry: "Construction",
-                qualification: "diploma", // Changed to diploma
-                course: "Building and Construction" // Specific course for filtering
-            },
-            {
-                id: "job2",
-                title: "Youth Polytechnic Instructor III (Carpentry and Joinery) - 2 Posts",
-                company: "Turkana County Government",
-                location: "Turkana County",
-                source: "Myjobmag",
-                date: "Wednesday, 23rd July 2025",
-                requirements: "Diploma in any of the following discipline: Building and Construction, Carpentry and joinery or its equivalent qualification from a recognized institution.",
-                industry: "Construction",
-                qualification: "diploma", // Changed to diploma
-                course: "Carpentry and Joinery" // Specific course for filtering
-            },
-            {
-                id: "job3",
-                title: "PROFESSIONAL CARPENTER",
-                company: "OTHER JOBS", // This seems like a placeholder, keep as is.
-                location: "Djibouti",
-                source: "Jobsinkenya",
-                date: "Wednesday, 23rd July 2025",
-                requirements: "JOB TITLE PROFESSIONAL CARPENTER NATURE OF JOB FULL TIME INDUSTRY CONSTRUCTION SALARY USD 500- 700 ( FURNISHED ACCOMMODATION AND FOOD PROVIDED) JOB LOCATION DJIBOUTI: let go",
-                industry: "Construction",
-                qualification: "certificate", // Changed to certificate
-                course: "Carpentry" // General carpentry
-            },
-            {
-                id: "job4",
-                title: "Junior Civil Engineer",
-                company: "Epco Builders Ltd",
-                location: "Nairobi",
-                source: "Company Website",
-                date: "Tuesday, 22nd July 2025",
-                requirements: "Degree in Civil Engineering. Fresh graduates encouraged to apply.",
-                industry: "Construction",
-                qualification: "degree", // Changed to degree
-                course: "Civil Engineering"
-            },
-            {
-                id: "job5",
-                title: "Site Supervisor",
-                company: "Seyani Brothers & Co. (K) Ltd",
-                location: "Nairobi",
-                source: "LinkedIn",
-                date: "Monday, 21st July 2025",
-                requirements: "Diploma or Higher Diploma in Building Construction or related field. 3+ years experience.",
-                industry: "Construction",
-                qualification: "higher-diploma", // Changed to higher-diploma
-                course: "Building Construction"
-            },
-            {
-                id: "job6",
-                title: "Quantity Surveyor Assistant",
-                company: "Laxmanbhai Construction Ltd",
-                location: "Kisumu",
-                source: "Career Portal",
-                date: "Friday, 18th July 2025",
-                requirements: "Certificate or Diploma in Quantity Surveying. Entry-level position.",
-                industry: "Construction",
-                qualification: "certificate", // Changed to certificate
-                course: "Quantity Surveying"
-            },
-            // Example jobs for 'Other Industry'
-            {
-                id: "job7",
-                title: "Software Developer Intern",
-                company: "Safaricom PLC",
-                location: "Nairobi",
-                source: "Safaricom Careers",
-                date: "Thursday, 24th July 2025",
-                requirements: "Currently pursuing a Degree in Computer Science, Software Engineering or related field.",
-                industry: "Information Technology",
-                qualification: "degree", // Changed to degree
-                course: "Software Development"
-            },
-            {
-                id: "job8",
-                title: "Registered Nurse",
-                company: "Aga Khan University Hospital",
-                location: "Nairobi",
-                source: "Hospital Website",
-                date: "Wednesday, 23rd July 2025",
-                requirements: "Diploma in Nursing. Valid nursing license.",
-                industry: "Healthcare",
-                qualification: "diploma", // Changed to diploma
-                course: "Nursing"
-            },
-            {
-                id: "job9",
-                title: "High School Teacher (Mathematics)",
-                company: "Brookhouse School",
-                location: "Nairobi",
-                source: "School Portal",
-                date: "Tuesday, 22nd July 2025",
-                requirements: "Degree in Education (Mathematics). TSC registration.",
-                industry: "Education",
-                qualification: "degree", // Changed to degree
-                course: "Teaching"
-            },
-            {
-                id: "job10",
-                title: "Financial Analyst",
-                company: "Equity Bank Group",
-                location: "Nairobi",
-                source: "Bank Careers",
-                date: "Monday, 21st July 2025",
-                requirements: "Degree in Finance, Economics or Accounting. CPA (K) preferred.",
-                industry: "Finance",
-                qualification: "degree", // Changed to degree
-                course: "Financial Analysis"
-            }
         ];
 
         // Logo files from the provided image
@@ -2954,29 +2842,47 @@
             resizeObserver.observe(jobFormCard); // Observe the job form card
             window.addEventListener('resize', matchCardHeights); // Also adjust on window resize
 
-            // NEW: Blinking Logo functionality
+            // NEW: Blinking Logo functionality (Cross-fade between two images)
             function startLogoBlinker() {
                 if (logoBlinkerInterval) clearInterval(logoBlinkerInterval); // Clear any existing interval
 
+                // Set initial logos for both current and next images
+                blinkerLogoLeftCurrent.src = allLogosForBlinker[0];
+                blinkerLogoRightCurrent.src = allLogosForBlinker[0];
+                blinkerLogoLeftNext.src = allLogosForBlinker[1]; // Preload next logo
+                blinkerLogoRightNext.src = allLogosForBlinker[1]; // Preload next logo
+
                 logoBlinkerInterval = setInterval(() => {
-                    // Hide current logos (fade out)
-                    blinkerLogoLeft.classList.add('hidden-logo');
-                    blinkerLogoRight.classList.add('hidden-logo');
+                    // Move to the next logo index
+                    currentLogoIndex = (currentLogoIndex + 1) % allLogosForBlinker.length;
+                    const nextLogoSrc = allLogosForBlinker[currentLogoIndex];
 
+                    // Set the source of the 'next' images
+                    blinkerLogoLeftNext.src = nextLogoSrc;
+                    blinkerLogoRightNext.src = nextLogoSrc;
+
+                    // Start the fade-in of the next logo and fade-out of the current logo
+                    // Use a small delay to ensure src change is registered before transition starts
                     setTimeout(() => {
-                        // Move to the next logo
-                        currentLogoIndex = (currentLogoIndex + 1) % allLogosForBlinker.length;
-                        const nextLogo = allLogosForBlinker[currentLogoIndex];
+                        blinkerLogoLeftNext.style.opacity = 1;
+                        blinkerLogoLeftCurrent.style.opacity = 0;
+                        blinkerLogoRightNext.style.opacity = 1;
+                        blinkerLogoRightCurrent.style.opacity = 0;
+                    }, 50); // Small delay to ensure browser registers src change before applying transition
 
-                        // Set new logo source for both windows
-                        blinkerLogoLeft.src = nextLogo;
-                        blinkerLogoRight.src = nextLogo;
+                    // After the transition completes (1 second)
+                    setTimeout(() => {
+                        // Update the 'current' logo's src to be the new one
+                        blinkerLogoLeftCurrent.src = nextLogoSrc;
+                        blinkerLogoRightCurrent.src = nextLogoSrc;
 
-                        // Show new logos (fade in)
-                        blinkerLogoLeft.classList.remove('hidden-logo');
-                        blinkerLogoRight.classList.remove('hidden-logo');
-                    }, 1000); // Wait for 1 second (half of the 2-second interval) for fade out before changing and fading in
-                }, 2000); // Change every 2 seconds (2000ms)
+                        // Reset opacities for the next cycle
+                        blinkerLogoLeftCurrent.style.opacity = 1;
+                        blinkerLogoLeftNext.style.opacity = 0;
+                        blinkerLogoRightCurrent.style.opacity = 1;
+                        blinkerLogoRightNext.style.opacity = 0;
+                    }, 1050); // 1 second for transition + 50ms initial delay
+                }, 2000); // Total interval for each full cycle (2 seconds)
             }
 
             // Initial view setup
@@ -2988,4 +2894,3 @@
     </script>
 </body>
 </html>
-
