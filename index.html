@@ -68,6 +68,12 @@
         #job-form-card {
             background: rgba(55, 48, 163, 0.15); /* Light translucent indigo-800 */
             backdrop-filter: blur(8px); /* Clear screen effect */
+            /* NEW: Glossy outline effect */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), /* Existing shadow */
+                        0 0 0 3px var(--indigo-800), /* First indigo outline */
+                        0 0 0 6px rgba(55, 48, 163, 0.5), /* Second indigo outline (semi-transparent) */
+                        0 0 20px rgba(0, 255, 255, 0.6), /* Outer glossy cyan glow */
+                        inset 0 0 15px rgba(0, 255, 255, 0.4); /* Inner glossy cyan sheen */
         }
 
 
@@ -939,6 +945,13 @@
             text-shadow: none; /* Removed text shadow */
             margin-bottom: 0; /* Removed margin-bottom, now handled by wrapper */
         }
+        /* Style for underlined words within value-proposition-text */
+        .value-proposition-text .underlined-word {
+            text-decoration-line: underline;
+            text-decoration-color: var(--digital-cyan); /* Cyan underline */
+            text-underline-offset: 4px; /* Space between text and underline */
+            font-weight: 900; /* Make them extra bold */
+        }
         /* Mobile font size for value-proposition-text */
         @media (max-width: 767px) {
             .value-proposition-text {
@@ -1532,7 +1545,7 @@
             <!-- NEW: Wrapper for the value proposition text with its own background -->
             <div class="value-prop-background-wrapper">
                 <p class="max-w-xl value-proposition-text">
-                    Connect with over 10K+ employers for FREE and find your dream job in construction and other industries. Trusted by Leading Companies.
+                    Connect with over 10K+ employers for <span class="underlined-word">FREE</span> and find your dream job in construction and other industries. <span class="underlined-word">Trusted</span> by Leading Companies.
                 </p>
             </div>
 
