@@ -870,7 +870,7 @@
 
         /* NEW: Left Section Container (Desktop - Value Proposition) */
         .left-section-container {
-            background: rgba(255, 255, 255, 0.1); /* White translucent */
+            background: rgba(55, 48, 163, 0.15); /* Light translucent indigo-800 */
             backdrop-filter: blur(8px); /* Subtle blur for glassy effect */
             border-radius: 2.1rem; /* Increased by 40% from 1.5rem */
             border: 1px solid rgba(255, 255, 255, 0.2); /* Faint white border */
@@ -934,12 +934,9 @@
         /* Style for the "Connect with over 10K+ employers..." text */
         .value-proposition-text {
             font-weight: 800; /* Made bolder as requested */
-            color: var(--indigo-800);
-            text-shadow:
-                1px 1px 0 #FFF, -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, /* White outline */
-                0 0 10px rgba(255, 215, 0, 0.6), /* Softer Gold glow */
-                0 0 20px rgba(255, 165, 0, 0.3); /* Softer Orange halo */
-            margin-bottom: 0.6138rem; /* Reduced by 7% from 0.66rem */
+            color: #FFF; /* Very white color */
+            text-shadow: none; /* Removed text shadow */
+            margin-bottom: 0; /* Removed margin-bottom, now handled by wrapper */
         }
         /* Mobile font size for value-proposition-text */
         @media (max-width: 767px) {
@@ -953,6 +950,26 @@
                 font-size: 32.08128px; /* Reduced by 7% from 34.496px */
             }
         }
+
+        /* NEW: Wrapper for the value proposition text with its own background */
+        .value-prop-background-wrapper {
+            background: rgba(55, 48, 163, 0.4); /* Translucent indigo-800 */
+            backdrop-filter: blur(5px); /* Clear screen effect */
+            border-radius: 1rem; /* Rounded corners */
+            padding: 0.8rem 1.2rem; /* Adjusted padding to fit text */
+            margin-bottom: 0.6138rem; /* Reduced by 7% from 0.66rem, now on the wrapper */
+            width: fit-content; /* Fit content horizontally */
+            max-width: 100%; /* Ensure it doesn't overflow */
+            display: inline-block; /* Allows padding and background to wrap content tightly */
+        }
+        /* Desktop adjustments for value-prop-background-wrapper */
+        @media (min-width: 768px) {
+            .value-prop-background-wrapper {
+                padding: 1.2rem 1.8rem; /* Larger padding for desktop */
+                margin-bottom: 0.9207rem; /* Reduced by 7% from 0.99rem */
+            }
+        }
+
 
         /* NEW: Custom button for Get Started/Learn More */
         .btn-secondary {
@@ -1425,9 +1442,12 @@
                 </div>
             </div>
 
-            <p class="max-w-xl value-proposition-text">
-                Connect with over 10K+ employers for FREE and find your dream job in construction and other industries. Trusted by Leading Companies.
-            </p>
+            <!-- NEW: Wrapper for the value proposition text with its own background -->
+            <div class="value-prop-background-wrapper">
+                <p class="max-w-xl value-proposition-text">
+                    Connect with over 10K+ employers for FREE and find your dream job in construction and other industries. Trusted by Leading Companies.
+                </p>
+            </div>
 
             <div class="flex flex-col sm:flex-row gap-4 mt-8 w-full justify-center"> <!-- Reduced margin-top -->
                 <button id="get-started-btn" class="text-xl px-8 py-3 rounded-full">
@@ -1536,7 +1556,7 @@
 
     <!-- About Us Section (Placeholder for Learn More) -->
     <section id="about-us-section">
-        <h2 class="font-extrabold about-us-heading about-us-heading-styled">About G-Connect</h2>
+        <h2 class="font-extrabold about-us-heading about-us-heading-styled">About G-CONNECT</h2>
         <div class="about-us-content-placard">
             <p>
                 G-CONNECT is dedicated to bridging the gap between talented job seekers and leading employers across various industries, with a special focus on construction. Our platform is designed to make your job search efficient, secure, and successful. We believe in empowering individuals to find their dream careers and helping companies discover the perfect talent.
@@ -2654,7 +2674,7 @@
                 const filteredJobs = allJobs.filter(job => {
                     const matchesQualification = qualification ? job.qualification === qualification : true;
                     const matchesCourse = course ? job.course.toLowerCase().includes(course.toLowerCase()) : true;
-                    const matchesIndustry = industry ? job.industry === industry : true;
+                    const matchesIndustry = industry ? job.industry.toLowerCase().includes(industry.toLowerCase()) : true; // Changed to includes for broader match
 
                     return matchesQualification && matchesCourse && matchesIndustry;
                 });
