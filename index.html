@@ -432,7 +432,8 @@
         /* Desktop font size for opportunities title (Find Your Job Matches) */
         @media (min-width: 768px) {
             .opportunities-title-outline {
-                font-size: 4.9rem; /* Now explicitly matching connect-you-title-outline */
+                font-size: 4.2rem; /* Adjusted to make it occupy 2 lines */
+                line-height: 1.2; /* Adjusted for better line spacing */
             }
         }
 
@@ -860,7 +861,7 @@
             border-radius: 2.1rem; /* Increased by 40% from 1.5rem */
             border: 1px solid rgba(255, 255, 255, 0.2); /* Faint white border */
             box-shadow: 0 5.6px 28px rgba(0, 0, 0, 0.2); /* Increased by 40% */
-            padding: 1.4rem; /* Increased by 40% from 1rem */
+            padding: 1.4rem; /* Default padding for mobile */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -876,9 +877,11 @@
             .left-section-container {
                 width: auto; /* Allow max-width to control */
                 max-width: 819.3152px; /* Reduced by 8% from 890.56px for desktop */
-                /* margin-right: 2rem; Handled by gap on main-content-wrapper */
                 margin-bottom: 0; /* No bottom margin on desktop */
-                padding: 1.4rem; /* Keep padding increased for desktop */
+                padding-top: 1.0875rem; /* Reduced by approx 5mm */
+                padding-bottom: 1.0875rem; /* Reduced by approx 5mm */
+                padding-left: 1.4rem; /* Keep horizontal padding */
+                padding-right: 1.4rem; /* Keep horizontal padding */
                 flex-grow: 1; /* Allow it to grow to match right card on desktop */
             }
         }
@@ -1367,7 +1370,7 @@
     </header>
 
     <!-- Main Content Wrapper for Desktop Two-Column Layout -->
-    <main id="main-content-wrapper" class="flex-grow flex flex-col md:flex-row items-stretch justify-center p-4 md:p-6 max-w-[1900px] mx-auto w-full md:gap-12 md:pt-24">
+    <main id="main-content-wrapper" class="flex-grow flex flex-col md:flex-row items-stretch justify-center p-4 md:p-6 max-w-[1900px] mx-auto w-full md:gap-6 md:pt-24">
         
         <!-- Left Section: Value Proposition and Horizontal Scroller -->
         <section class="left-section-container">
@@ -1411,7 +1414,7 @@
 
         <!-- Right Section: Find Your Perfect Job Form -->
         <section class="right-section-container">
-            <div id="job-form-card" class="card w-full max-w-md p-6 sm:p-8 md:p-[60px] text-center relative mx-auto md:max-w-[618.24px]">
+            <div id="job-form-card" class="card w-full max-w-md p-6 sm:p-8 md:pt-[55px] md:pb-[55px] md:px-[60px] text-center relative mx-auto md:max-w-[618.24px]">
                 <!-- Removed conflicting Tailwind classes to allow custom CSS to control font size -->
                 <h2 id="main-opportunities-title" class="font-extrabold mb-4 leading-tight opportunities-title-outline">
                     Find Your Job Matches
@@ -1489,7 +1492,7 @@
                     </div>
                 </form>
                 <p class="text-center text-lg mt-9 text-black font-bold">
-                    Already have an account? <a href="#" id="main-form-signin-link" class="text-indigo-600 hover:text-indigo-800 underline font-semibold">Sign In</a>
+                    Already have an account? <a href="#" id="main-form-signin-link" class="text-indigo-600 hover:text-indigo-800 underline font-semibold"><b>Sign In</b></a>
                 </p>
             </div>
         </section>
@@ -1506,7 +1509,7 @@
 
     <!-- About Us Section (Placeholder for Learn More) -->
     <section id="about-us-section">
-        <h2 class="font-extrabold about-us-heading">About G-Connect</h2>
+        <h2 class="font-extrabold about-us-heading about-us-heading-styled">About G-Connect</h2>
         <div class="about-us-content-placard">
             <p>
                 G-Connect is dedicated to bridging the gap between talented job seekers and leading employers across various industries, with a special focus on construction. Our platform is designed to make your job search efficient, secure, and successful. We believe in empowering individuals to find their dream careers and helping companies discover the perfect talent.
