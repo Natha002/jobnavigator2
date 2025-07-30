@@ -50,6 +50,7 @@
 
         /* Custom styling for better visual appeal and responsiveness */
         .card {
+            /* REVERTED: background and backdrop-filter for .card (job-form-card) will be set directly on #job-form-card */
             background: transparent; /* Removed transparency */
             backdrop-filter: none; /* Removed blur */
             border-radius: 1.5rem; /* More rounded corners */
@@ -63,6 +64,12 @@
             color: #e0e0e0; /* Light text color for dark background */
             margin: 0; /* Ensure no conflicting margins from parent centering */
         }
+        /* Specific styling for the job form card */
+        #job-form-card {
+            background: rgba(55, 48, 163, 0.15); /* Light translucent indigo-800 */
+            backdrop-filter: blur(8px); /* Clear screen effect */
+        }
+
 
         @keyframes fadeInScale {
             from {
@@ -870,7 +877,7 @@
 
         /* NEW: Left Section Container (Desktop - Value Proposition) */
         .left-section-container {
-            background: rgba(55, 48, 163, 0.15); /* Light translucent indigo-800 */
+            background: rgba(255, 255, 255, 0.1); /* Reverted to translucent white */
             backdrop-filter: blur(8px); /* Subtle blur for glassy effect */
             border-radius: 2.1rem; /* Increased by 40% from 1.5rem */
             border: 1px solid rgba(255, 255, 255, 0.2); /* Faint white border */
