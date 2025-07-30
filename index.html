@@ -326,9 +326,9 @@
                 font-size: 1.8rem; /* Increased by 50% from 1.2rem */
                 padding: 1.125rem 1.5rem; /* Increased by 50% from 0.75rem 1rem */
             }
-            /* Increased max-width for desktop to ensure text is not cut off */
+            /* Adjusted max-width for desktop to ensure text is not cut off with shorter labels */
             .industry-toggle-container {
-                max-width: 650px; /* Adjusted for full text visibility */
+                max-width: 400px; /* Adjusted for full text visibility with shorter labels */
             }
         }
 
@@ -1279,7 +1279,7 @@
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
-            justify: center;
+            justify-content: center;
             gap: 0.75rem;
         }
         .custom-alert-modal-content p {
@@ -1399,10 +1399,10 @@
                 
                 <div class="industry-toggle-container mb-9" role="tablist">
                     <button type="button" id="construction-tab" class="industry-toggle-button-segment" role="tab" aria-selected="true" aria-controls="construction-form-section">
-                        Construction Industry
+                        Construction
                     </button>
                     <button type="button" id="other-industry-tab" class="industry-toggle-button-segment" role="tab" aria-selected="false" aria-controls="other-industry-form-section">
-                        Other Industry
+                        Other
                     </button>
                 </div>
 
