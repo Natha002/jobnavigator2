@@ -1382,6 +1382,55 @@
             margin-top: 0.4092rem; /* Reduced by 7% from 0.44rem */
         }
 
+        /* NEW: Styles for the blinking logo windows */
+        .logo-blinker-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem; /* Space between the scroller and blinkers */
+            width: 100%; /* Take full width of parent */
+            margin-bottom: 2.29152rem; /* Match scroller's bottom margin for alignment */
+
+            /* Hide on mobile, show on medium screens and up */
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .logo-blinker-container {
+                display: flex; /* Show on desktop */
+                margin-bottom: 2.464rem; /* Adjusted for desktop */
+            }
+        }
+
+        .logo-blinker-window {
+            width: 80px; /* Small square size */
+            height: 80px; /* Small square size */
+            background: rgba(255, 255, 255, 0.08); /* Very light translucent background */
+            backdrop-filter: blur(4px); /* Subtle clear screen effect */
+            border-radius: 0.75rem; /* Rounded corners */
+            border: 4px solid var(--indigo-800); /* Thick indigo-800 outline */
+            box-shadow: 0 0 15px rgba(55, 48, 163, 0.4), /* Indigo glow */
+                        0 0 25px rgba(55, 48, 163, 0.2); /* Wider indigo glow */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Ensure logos don't overflow */
+            position: relative;
+        }
+
+        .logo-blinker-window img {
+            width: 80%; /* Adjust logo size within the window */
+            height: 80%;
+            object-fit: contain;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out; /* Smooth fade for blinking */
+            position: absolute; /* Allow precise positioning for fade effect */
+        }
+
+        .logo-blinker-window img.hidden-logo {
+            opacity: 0;
+        }
+
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -1427,8 +1476,14 @@
         <section class="left-section-container">
             <h1 class="font-extrabold connect-you-title-outline">Let's Connect You!</h1>
             
-            <!-- Scan window (original design) -->
-            <div class="mb-2 w-full flex justify-center"> <!-- Reduced margin-bottom by half -->
+            <!-- NEW: Container for the company scroller and the two blinking logo windows -->
+            <div class="logo-blinker-container">
+                <!-- Left Blinking Logo Window -->
+                <div class="logo-blinker-window">
+                    <img id="blinker-logo-left" src="11.png" alt="Company Logo 1" loading="lazy">
+                </div>
+
+                <!-- Scan window (original design) -->
                 <div class="company-scroller-container">
                     <div class="digital-header-text">
                         OVER 10K EMPLOYERS
@@ -1446,6 +1501,11 @@
                         <span class="digital-separator">|</span>
                         <span class="lucide-icon" data-lucide="phone"></span> 24/7 SUPPORT
                     </div>
+                </div>
+
+                <!-- Right Blinking Logo Window -->
+                <div class="logo-blinker-window">
+                    <img id="blinker-logo-right" src="14.png" alt="Company Logo 2" loading="lazy">
                 </div>
             </div>
 
@@ -1764,9 +1824,14 @@
         const customAlertCloseButton = document.getElementById('custom-alert-close-button');
         const customAlertCountdown = document.getElementById('custom-alert-countdown'); // Countdown element
 
+        // NEW: Blinking Logo elements
+        const blinkerLogoLeft = document.getElementById('blinker-logo-left');
+        const blinkerLogoRight = document.getElementById('blinker-logo-right');
+
         let isConstructionMode = true; // Default state: In Construction
         let autoSubmitTimer = null; // To hold the countdown timer
         let countdownInterval = null; // To hold the interval for updating countdown text
+        let logoBlinkerInterval = null; // To hold the interval for logo blinking
 
         // Function to validate email format
         function isValidEmail(email) {
@@ -1952,6 +2017,17 @@
                 course: "Financial Analysis"
             }
         ];
+
+        // Logo pairs for blinking windows (prioritizing construction-related)
+        const logoPairs = [
+            ['11.png', '14.png'], // KeNHA, NCA
+            ['19.png', '26.png'], // Nyoro Construction, Laxmanbhai Construction
+            ['17.png', '21.png'], // Architeck, Briztap
+            ['18.png', '28.png'], // Roton, Murela Builders
+            ['12.png', '13.png'], // KeRRA, KURA
+            ['2.png', '29.png'] // TATU CITY, TONONOKA GROUP
+        ];
+        let currentLogoPairIndex = 0;
 
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -2845,10 +2921,34 @@
             resizeObserver.observe(jobFormCard); // Observe the job form card
             window.addEventListener('resize', matchCardHeights); // Also adjust on window resize
 
+            // NEW: Blinking Logo functionality
+            function startLogoBlinker() {
+                if (logoBlinkerInterval) clearInterval(logoBlinkerInterval); // Clear any existing interval
+
+                logoBlinkerInterval = setInterval(() => {
+                    // Fade out current logos
+                    blinkerLogoLeft.classList.add('hidden-logo');
+                    blinkerLogoRight.classList.add('hidden-logo');
+
+                    setTimeout(() => {
+                        // Change image sources
+                        currentLogoPairIndex = (currentLogoPairIndex + 1) % logoPairs.length;
+                        const [leftLogo, rightLogo] = logoPairs[currentLogoPairIndex];
+                        blinkerLogoLeft.src = leftLogo;
+                        blinkerLogoRight.src = rightLogo;
+
+                        // Fade in new logos
+                        blinkerLogoLeft.classList.remove('hidden-logo');
+                        blinkerLogoRight.classList.remove('hidden-logo');
+                    }, 500); // Half of the interval for fade out, then change, then fade in
+                }, 1000); // Change every 1 second (1000ms)
+            }
+
             // Initial view setup
             updateIndustryView();
             populateCompanyScroller();
             matchCardHeights(); // Call initially to set heights
+            startLogoBlinker(); // Start the blinking logos
         });
     </script>
 </body>
