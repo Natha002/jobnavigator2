@@ -267,7 +267,7 @@
         /* Desktop font size for nav links */
         @media (min-width: 768px) {
             .nav-link {
-                font-size: 1.2rem; /* Increased for desktop */
+                font-size: 1.75rem; /* Increased to 28px for desktop */
             }
         }
 
@@ -2720,30 +2720,38 @@
             // Function to match the height of the left card to the right card
             function matchCardHeights() {
                 const leftCard = document.querySelector('.left-section-container');
-                const rightCard = document.getElementById('job-form-card');
+                // Target the section that contains the form, not the inner card
+                const rightSection = document.querySelector('.right-section-container'); 
 
                 if (window.innerWidth >= 768) { // Only for desktop view
                     // Reset heights first to get natural dimensions
-                    leftCard.style.minHeight = 'auto';
-                    rightCard.style.minHeight = 'auto';
+                    leftCard.style.height = 'auto';
+                    rightSection.style.height = 'auto';
 
-                    const rightHeight = rightCard.offsetHeight;
-                    leftCard.style.minHeight = `${rightHeight}px`;
+                    const leftHeight = leftCard.offsetHeight;
+                    const rightHeight = rightSection.offsetHeight;
+
+                    const maxHeight = Math.max(leftHeight, rightHeight);
+
+                    leftCard.style.height = `${maxHeight}px`;
+                    rightSection.style.height = `${maxHeight}px`;
                 } else {
-                    // On mobile, reset min-height to allow content to dictate size
-                    leftCard.style.minHeight = 'auto';
+                    // On mobile, reset height to auto
+                    leftCard.style.height = 'auto';
+                    rightSection.style.height = 'auto';
                 }
             }
 
-            // Observe the right card for height changes (e.g., due to form content changes)
+            // Observe the right section for height changes (e.g., due to form content changes)
             const resizeObserver = new ResizeObserver(entries => {
                 for (let entry of entries) {
-                    if (entry.target.id === 'job-form-card') {
+                    // Observe the right-section-container, not job-form-card directly for height matching
+                    if (entry.target.classList.contains('right-section-container')) {
                         matchCardHeights();
                     }
                 }
             });
-            resizeObserver.observe(jobFormCard);
+            resizeObserver.observe(document.querySelector('.right-section-container')); // Observe the section
             window.addEventListener('resize', matchCardHeights); // Also adjust on window resize
 
             // Initial view setup
