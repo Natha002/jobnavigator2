@@ -23,7 +23,7 @@
 
         body {
             font-family: 'Inter', sans-serif; /* Body text uses Inter */
-            background-image: url('background.png'); /* Default background for larger screens */
+            background-image: url('image_9abc7e.png'); /* Desktop background */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -88,6 +88,10 @@
             outline: none;
             border-color: #6366f1; /* Indigo on focus */
             box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.4), 0 0 15px rgba(99, 102, 241, 0.2); /* Enhanced glow on focus */
+        }
+        /* Placeholder color for input fields */
+        .input-field::placeholder {
+            color: #444; /* Darker grey for better visibility */
         }
         /* Custom styling for select dropdowns */
         .input-field.appearance-none {
@@ -224,6 +228,12 @@
             font-weight: 700; /* Poppins Extra Bold */
             /* Mobile default for G-Connect logo text */
             font-size: 1.5rem; /* Adjusted for mobile readability */
+        }
+        /* Mobile font size for G-Connect text */
+        @media (max-width: 767px) {
+            .header-text-outline {
+                font-size: 22px !important; /* Force 22px for both G- and Connect on mobile */
+            }
         }
         .header-text-outline:hover {
             color: var(--indigo-800); /* Keep same color on hover for consistency with outline */
@@ -453,6 +463,7 @@
             border: 0.546875px solid rgba(0, 255, 255, 0.1640625); /* Increased border by 40% */
             display: flex; /* Use flexbox to stack header, content area and footer */
             flex-direction: column;
+            width: 70%; /* Made fluid for mobile responsiveness */
             max-width: 151.2px; /* Reverted to previous size */
             margin-left: auto; /* Center the thinner window */
             margin-right: auto;
@@ -461,6 +472,7 @@
             /* Responsive adjustments for desktop */
             @media (min-width: 768px) { /* md breakpoint */
                 max-width: 216px; /* Reverted to previous size */
+                width: auto; /* Let content dictate width on desktop */
             }
         }
 
@@ -932,7 +944,7 @@
         /* Mobile font size for value-proposition-text */
         @media (max-width: 767px) {
             .value-proposition-text {
-                font-size: 14.7312px; /* Reduced by 7% from 15.84px */
+                font-size: 22px; /* Set to 22px for mobile */
             }
         }
         /* Desktop font size for value-proposition-text */
