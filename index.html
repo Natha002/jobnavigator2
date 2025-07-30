@@ -68,12 +68,10 @@
         #job-form-card {
             background: rgba(55, 48, 163, 0.15); /* Light translucent indigo-800 */
             backdrop-filter: blur(8px); /* Clear screen effect */
-            /* NEW: Glossy outline effect */
+            /* Retain original shadows, removed cyan ones */
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), /* Existing shadow */
                         0 0 0 3px var(--indigo-800), /* First indigo outline */
-                        0 0 0 6px rgba(55, 48, 163, 0.5), /* Second indigo outline (semi-transparent) */
-                        0 0 20px rgba(0, 255, 255, 0.6), /* Outer glossy cyan glow */
-                        inset 0 0 15px rgba(0, 255, 255, 0.4); /* Inner glossy cyan sheen */
+                        0 0 0 6px rgba(55, 48, 163, 0.5); /* Second indigo outline (semi-transparent) */
         }
 
 
@@ -881,7 +879,9 @@
             backdrop-filter: blur(8px); /* Subtle blur for glassy effect */
             border-radius: 2.1rem; /* Increased by 40% from 1.5rem */
             border: 1px solid rgba(255, 255, 255, 0.2); /* Faint white border */
-            box-shadow: 0 5.6px 28px rgba(0, 0, 0, 0.2); /* Increased by 40% */
+            box-shadow: 0 5.6px 28px rgba(0, 0, 0, 0.2), /* Original shadow */
+                        0 0 20px rgba(0, 255, 255, 0.6), /* Outer glossy cyan glow */
+                        inset 0 0 15px rgba(0, 255, 255, 0.4); /* Inner glossy cyan sheen */
             padding: 1.14576rem; /* Reduced by 7% from 1.232rem */
             display: flex;
             flex-direction: column;
