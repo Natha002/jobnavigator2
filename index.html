@@ -37,7 +37,7 @@
         /* Mobile specific background adjustments */
         @media (max-width: 767px) { /* Targets screens up to 767px wide (typical mobile) */
             body {
-                background-image: url('background3.png'); /* New background image for mobile */
+                background-image: url('image_9a4fc0.png'); /* New background image for mobile */
                 background-size: cover; /* Ensure it covers the mobile screen */
                 background-position: center; /* Keep background image centered vertically and horizontally */
             }
@@ -150,7 +150,7 @@
             cursor: pointer;
             text-align: left;
             font-size: 0.9rem;
-            color: #000000;
+            color: #333; /* Changed to match input field text color */
         }
         .suggestion-item:hover {
             background-color: #f3f4f6;
@@ -630,8 +630,9 @@
         }
         .footer-link {
             color: var(--logo-orange-original);
-            transition: color 0.2s ease, text-shadow 0.2s ease; /* Added text-shadow transition */
+            transition: color 0.2s ease, text-shadow 0.2s ease, transform 0.2s ease; /* Added text-shadow transition */
             text-shadow: 0 0 3px rgba(255, 165, 0, 0.3); /* Subtle orange glow */
+            text-decoration: none; /* No underline by default */
         }
         .footer-link:hover {
             color: var(--indigo-500);
@@ -1252,13 +1253,21 @@
         }
 
         .footer-copyright a {
-            color: #b0b0b0;
-            text-decoration: underline;
+            color: #b0b0b0; /* Inherit color or set a subtle one */
+            text-decoration: none; /* No underline */
+            cursor: pointer; /* Indicate it's clickable */
             transition: color 0.2s ease;
         }
 
         .footer-copyright a:hover {
             color: #fff;
+        }
+
+        /* Style for the hidden link character 'A' */
+        .footer-copyright a .hidden-link-char {
+            color: inherit; /* Ensure it inherits the parent's color */
+            text-decoration: none; /* No underline */
+            /* Any other styling to make it blend in, e.g., font-weight: normal; */
         }
 
         /* New custom alert modal styles */
@@ -1344,7 +1353,7 @@
     <header class="w-full header-gradient shadow-md py-[23.5552px] px-6 md:px-10 relative">
         <nav class="container mx-auto flex justify-between items-center max-w-[1900px]" aria-label="Main navigation">
             <div class="flex items-center space-x-1">
-                <div class="logo-container"> <img src="logo2.png" alt="G-Connect Logo" loading="lazy"> </div>
+                <div class="logo-container"> <img src="image_a863ff.jpg" alt="G-Connect Logo" loading="lazy"> </div>
                 <div class="flex flex-col items-start leading-none">
                     <span class="font-extrabold header-text-outline">G-</span> <span class="font-semibold header-text-outline">Connect</span> </div>
             </div>
@@ -1596,14 +1605,14 @@
         </div>
     </div>
 
-    <footer class="w-full text-white py-[23.5552px] px-4 md:px-8 mt-auto">
+    <footer class="w-full text-white py-[4.8px] px-4 md:px-8 mt-auto">
         <div class="container mx-auto footer-content-wrapper">
             <p id="footer-greeting" class="footer-greeting">
                 Any challenge? We're here to help!
             </p>
             <div class="footer-links-container">
                 <a href="https://wa.me/254712345678" class="footer-link" target="_blank" rel="noopener noreferrer">
-                    <span data-lucide="whatsapp" class="lucide-icon"></span> WhatsApp Support
+                    <span data-lucide="message-circle" class="lucide-icon text-green-500"></span> WhatsApp Support
                 </a>
                 <span class="footer-separator">|</span>
                 <a href="mailto:support@g-connect.com" class="footer-link">
@@ -1611,7 +1620,7 @@
                 </a>
             </div>
             <p class="footer-copyright">
-                &copy; <span id="current-year"></span> G-Connect. <a href="admin.html">All rights reserved.</a> Crafting futures, one connection at a time.
+                &copy; <span id="current-year"></span> G-Connect. <a href="admin.html"><span class="hidden-link-char">A</span>ll rights reserved.</a> Crafting futures, one connection at a time.
             </p>
         </div>
     </footer>
@@ -1625,7 +1634,7 @@
 
         // --- START OF FIREBASE CONFIGURATION (RESTORED TO USER'S PREFERRED HARDCODED CONFIG) ---
         const firebaseConfig = {
-            apiKey: "AIzaSyAxh6u9xe0kfd_dnMxUo4d7Ph0U0lBibF8",
+            apiKey: "AIzaSyAxh6u9xe0kfd_dnMxUo4d7Ph0U0lBibF2",
             authDomain: "kaziconnectweb.firebaseapp.com",
             projectId: "kaziconnectweb",
             storageBucket: "kaziconnectweb.firebasestorage.app",
