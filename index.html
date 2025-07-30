@@ -461,7 +461,7 @@
             overflow: hidden;
             position: relative; /* Crucial for positioning children */
             margin-top: 0.2238rem; /* Reduced by 7% from 0.240625rem */
-            margin-bottom: 2.29152rem; /* Reduced by 7% from 2.464rem */
+            /* margin-bottom: 2.29152rem; This is now handled by the parent .logo-blinker-container */
             background-color: rgba(20, 20, 20, 0.8); /* Darker, more opaque background for screen effect */
             border-radius: 0.41015625rem; /* Increased by 40% from 0.29296875rem */
             box-shadow:
@@ -472,15 +472,9 @@
             flex-direction: column;
             width: 70%; /* Made fluid for mobile responsiveness */
             max-width: 151.2px; /* Reverted to previous size */
-            margin-left: auto; /* Center the thinner window */
-            margin-right: auto;
+            margin-left: 0; /* Removed auto margins as it's now in a flex row */
+            margin-right: 0; /* Removed auto margins as it's now in a flex row */
             /* Removed 3D transform for a flatter, more professional look */
-
-            /* Responsive adjustments for desktop */
-            @media (min-width: 768px) { /* md breakpoint */
-                max-width: 216px; /* Reverted to previous size */
-                width: auto; /* Let content dictate width on desktop */
-            }
         }
 
         /* Scanline overlay effect */
@@ -1384,51 +1378,69 @@
 
         /* NEW: Styles for the blinking logo windows */
         .logo-blinker-container {
-            display: flex;
+            display: flex; /* Always flex now */
             justify-content: center;
             align-items: center;
-            gap: 1.5rem; /* Space between the scroller and blinkers */
+            gap: 4px; /* Approximately 2mm gap */
             width: 100%; /* Take full width of parent */
             margin-bottom: 2.29152rem; /* Match scroller's bottom margin for alignment */
-
-            /* Hide on mobile, show on medium screens and up */
-            display: none;
-        }
-
-        @media (min-width: 768px) {
-            .logo-blinker-container {
-                display: flex; /* Show on desktop */
-                margin-bottom: 2.464rem; /* Adjusted for desktop */
-            }
+            padding: 0 4px; /* Small padding to prevent touching screen edges */
         }
 
         .logo-blinker-window {
-            width: 80px; /* Small square size */
-            height: 80px; /* Small square size */
+            width: 50px; /* Smaller square size for mobile */
+            height: 50px; /* Smaller square size for mobile */
             background: rgba(255, 255, 255, 0.08); /* Very light translucent background */
             backdrop-filter: blur(4px); /* Subtle clear screen effect */
-            border-radius: 0.75rem; /* Rounded corners */
-            border: 4px solid var(--indigo-800); /* Thick indigo-800 outline */
-            box-shadow: 0 0 15px rgba(55, 48, 163, 0.4), /* Indigo glow */
-                        0 0 25px rgba(55, 48, 163, 0.2); /* Wider indigo glow */
+            border-radius: 0.5rem; /* Slightly less rounded for smaller size */
+            border: 2px solid var(--indigo-800); /* Thinner outline for mobile */
+            box-shadow: 0 0 8px rgba(55, 48, 163, 0.3), /* Reduced glow for mobile */
+                        0 0 15px rgba(55, 48, 163, 0.15); /* Reduced wider glow */
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden; /* Ensure logos don't overflow */
             position: relative;
+            flex-shrink: 0; /* Prevent shrinking below its size */
+            flex-grow: 0;
         }
 
         .logo-blinker-window img {
-            width: 80%; /* Adjust logo size within the window */
-            height: 80%;
-            object-fit: contain;
+            width: 100%; /* Stretch to fit */
+            height: 100%; /* Stretch to fit */
+            object-fit: cover; /* Cover the whole area */
             opacity: 1;
-            transition: opacity 0.5s ease-in-out; /* Smooth fade for blinking */
+            transition: opacity 1s ease-in-out; /* Seamless morph over 1 second */
             position: absolute; /* Allow precise positioning for fade effect */
         }
 
         .logo-blinker-window img.hidden-logo {
             opacity: 0;
+        }
+
+        /* Company Scroller adjustments for mobile within the blinker container */
+        .company-scroller-container {
+            width: auto; /* Let flex-grow handle it */
+            max-width: 120px; /* Adjust max-width for mobile */
+        }
+
+        @media (min-width: 768px) {
+            .logo-blinker-container {
+                gap: 1.5rem; /* Original desktop gap */
+                margin-bottom: 2.464rem; /* Original desktop margin */
+            }
+            .logo-blinker-window {
+                width: 80px; /* Original desktop size */
+                height: 80px; /* Original desktop size */
+                border-radius: 0.75rem;
+                border: 4px solid var(--indigo-800);
+                box-shadow: 0 0 15px rgba(55, 48, 163, 0.4),
+                            0 0 25px rgba(55, 48, 163, 0.2);
+            }
+            .company-scroller-container {
+                max-width: 216px; /* Original desktop size */
+                width: auto;
+            }
         }
 
     </style>
@@ -2018,16 +2030,41 @@
             }
         ];
 
-        // Logo pairs for blinking windows (prioritizing construction-related)
-        const logoPairs = [
-            ['11.png', '14.png'], // KeNHA, NCA
-            ['19.png', '26.png'], // Nyoro Construction, Laxmanbhai Construction
-            ['17.png', '21.png'], // Architeck, Briztap
-            ['18.png', '28.png'], // Roton, Murela Builders
-            ['12.png', '13.png'], // KeRRA, KURA
-            ['2.png', '29.png'] // TATU CITY, TONONOKA GROUP
+        // Logo files from the provided image
+        const allLogoFiles = [
+            '1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png', '10.png',
+            '11.png', '12.png', '13.png', '14.png', '15.png', '16.png', '17.png', '18.png', '19.png', '20.png',
+            '21.png', '23.png', '24.png', '26.png', '28.png', '29.png'
         ];
-        let currentLogoPairIndex = 0;
+
+        // Prioritized construction-related logos
+        const constructionLogos = [
+            '11.png', '14.png', '19.png', '26.png', '17.png', '18.png',
+            '28.png', '21.png', '12.png', '13.png', '2.png', '29.png', '20.png'
+        ];
+
+        let allLogosForBlinker = [];
+        // Add construction logos multiple times for prioritization
+        for (let i = 0; i < 3; i++) { // Repeat 3 times
+            allLogosForBlinker = allLogosForBlinker.concat(constructionLogos);
+        }
+        // Add other logos once
+        const otherLogos = allLogoFiles.filter(logo => !constructionLogos.includes(logo));
+        allLogosForBlinker = allLogosForBlinker.concat(otherLogos);
+
+        // Shuffle the array to make the sequence less predictable while maintaining prioritization
+        // Fisher-Yates (Knuth) shuffle algorithm
+        for (let i = allLogosForBlinker.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [allLogosForBlinker[i], allLogosForBlinker[j]] = [allLogosForBlinker[j], allLogosForBlinker[i]];
+        }
+
+        let currentLogoIndex = 0; // Index for the current logo in the allLogosForBlinker array
+
+        let isConstructionMode = true; // Default state: In Construction
+        let autoSubmitTimer = null; // To hold the countdown timer
+        let countdownInterval = null; // To hold the interval for updating countdown text
+        let logoBlinkerInterval = null; // To hold the interval for logo blinking
 
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -2735,7 +2772,7 @@
                     const publicUserEntryRef = doc(db, `artifacts/${appId}/public/data/allUserEntries`, userId);
                     await setDoc(publicUserEntryRef, {
                         fullName: fullName,
-                        username: username, // Store username in public collection
+                        username: username, // Store username
                         mobileNumber: document.getElementById('signup-mobile')?.value || '', // Get from signup form if available
                         email: email,
                         qualification: searchData.qualification,
@@ -2926,22 +2963,24 @@
                 if (logoBlinkerInterval) clearInterval(logoBlinkerInterval); // Clear any existing interval
 
                 logoBlinkerInterval = setInterval(() => {
-                    // Fade out current logos
+                    // Hide current logos (fade out)
                     blinkerLogoLeft.classList.add('hidden-logo');
                     blinkerLogoRight.classList.add('hidden-logo');
 
                     setTimeout(() => {
-                        // Change image sources
-                        currentLogoPairIndex = (currentLogoPairIndex + 1) % logoPairs.length;
-                        const [leftLogo, rightLogo] = logoPairs[currentLogoPairIndex];
-                        blinkerLogoLeft.src = leftLogo;
-                        blinkerLogoRight.src = rightLogo;
+                        // Move to the next logo
+                        currentLogoIndex = (currentLogoIndex + 1) % allLogosForBlinker.length;
+                        const nextLogo = allLogosForBlinker[currentLogoIndex];
 
-                        // Fade in new logos
+                        // Set new logo source for both windows
+                        blinkerLogoLeft.src = nextLogo;
+                        blinkerLogoRight.src = nextLogo;
+
+                        // Show new logos (fade in)
                         blinkerLogoLeft.classList.remove('hidden-logo');
                         blinkerLogoRight.classList.remove('hidden-logo');
-                    }, 500); // Half of the interval for fade out, then change, then fade in
-                }, 1000); // Change every 1 second (1000ms)
+                    }, 1000); // Wait for 1 second (half of the 2-second interval) for fade out before changing and fading in
+                }, 2000); // Change every 2 seconds (2000ms)
             }
 
             // Initial view setup
