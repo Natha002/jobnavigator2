@@ -222,6 +222,8 @@
                 1px -1px 0 var(--logo-orange-original), -1px 1px 0 var(--logo-orange-original); /* Logo orange outline */
             transition: color 0.3s ease-in-out;
             font-weight: 700; /* Poppins Extra Bold */
+            /* Mobile default for G-Connect logo text */
+            font-size: 1.5rem; /* Adjusted for mobile readability */
         }
         .header-text-outline:hover {
             color: var(--indigo-800); /* Keep same color on hover for consistency with outline */
@@ -331,8 +333,8 @@
         }
         /* Logo specific styling for square shape */
         .logo-container { /* Renamed for clarity */
-            width: 42px; /* Increased by 7% from 39px (approx 41.73px) */
-            height: 42px; /* Increased by 7% from 39px (approx 41.73px) */
+            width: 60px; /* Increased from 42px */
+            height: 60px; /* Increased from 42px */
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 0.5rem; /* Standard rounded corners for a square */
             display: flex;
@@ -347,8 +349,8 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 0 0 2px var(--indigo-800); /* Adjusted outline on hover */
         }
         .logo-container img {
-            width: 85%; /* Reverted to previous size */
-            height: 85%; /* Reverted to previous size */
+            width: 85%; /* Keep at 85% for proportionality */
+            height: 85%; /* Keep at 85% for proportionality */
             object-fit: contain;
         }
         /* Fiery text shadow for distinct elements - now more of a gold/orange glow */
@@ -868,7 +870,7 @@
             .left-section-container {
                 width: auto; /* Allow max-width to control */
                 max-width: 890.56px; /* Reduced by 8% from 968px for desktop */
-                margin-right: 2rem; /* Space between left and right sections */
+                /* margin-right: 2rem; Handled by gap on main-content-wrapper */
                 margin-bottom: 0; /* No bottom margin on desktop */
                 padding: 1.4rem; /* Keep padding increased for desktop */
                 flex-grow: 1; /* Allow it to grow to match right card on desktop */
@@ -1308,9 +1310,9 @@
     <header class="w-full header-gradient shadow-md py-[23.5552px] px-6 md:px-10 relative">
         <nav class="container mx-auto flex justify-between items-center max-w-[1900px]" aria-label="Main navigation">
             <div class="flex items-center space-x-1">
-                <div class="logo-container"> <img src="logo2.png" alt="G-Connect Logo" loading="lazy"> </div>
+                <div class="logo-container"> <img src="image_9abc7e.png" alt="G-Connect Logo" loading="lazy"> </div>
                 <div class="flex flex-col items-start leading-none">
-                    <span class="text-2xl font-extrabold header-text-outline">G-</span> <span class="text-sm font-semibold header-text-outline">Connect</span> </div>
+                    <span class="font-extrabold header-text-outline">G-</span> <span class="font-semibold header-text-outline">Connect</span> </div>
             </div>
             <ul class="hidden md:flex space-x-4 items-center">
                 <li><a href="#main-content-wrapper" id="home-nav-link" class="nav-link">HOME</a></li>
@@ -1661,8 +1663,8 @@
         const mobileHomeNavLink = document.getElementById('mobile-home-nav-link');
         const getStartedBtn = document.getElementById('get-started-btn'); // New Get Started button
         const learnMoreBtn = document.getElementById('learn-more-btn'); // New Learn More button
+        const leftSectionContainer = document.querySelector('.left-section-container'); // The white card
         const jobFormCard = document.getElementById('job-form-card'); // The job form card itself
-        const aboutUsSection = document.getElementById('about-us-section'); // About Us section
 
         // NEW: Sign In buttons in header/mobile menu
         const headerSigninButton = document.getElementById('header-signin-button');
@@ -1671,6 +1673,7 @@
         // NEW: Main content wrapper for scrolling
         const mainContentWrapper = document.getElementById('main-content-wrapper');
         const darkenOverlay = document.getElementById('darken-overlay'); // Darkening overlay
+        const aboutUsSection = document.getElementById('about-us-section'); // About Us section
 
         // NEW: Custom Alert Modal elements
         const customAlertModalOverlay = document.getElementById('custom-alert-modal-overlay');
@@ -2724,43 +2727,39 @@
                 });
             }
 
-            // Function to match the height of the left card to the right card
+            // Function to match the height of the left card to the right form card
             function matchCardHeights() {
-                const leftCard = document.querySelector('.left-section-container');
-                // Target the section that contains the form, not the inner card
-                const rightSection = document.querySelector('.right-section-container'); 
-
                 if (window.innerWidth >= 768) { // Only for desktop view
                     // Reset heights first to get natural dimensions
-                    leftCard.style.height = 'auto';
-                    rightSection.style.height = 'auto';
+                    leftSectionContainer.style.height = 'auto';
+                    jobFormCard.style.height = 'auto';
 
-                    const leftHeight = leftCard.offsetHeight;
-                    const rightHeight = rightSection.offsetHeight;
+                    const leftHeight = leftSectionContainer.offsetHeight;
+                    const rightHeight = jobFormCard.offsetHeight;
 
                     const maxHeight = Math.max(leftHeight, rightHeight);
 
-                    leftCard.style.height = `${maxHeight}px`;
-                    rightSection.style.height = `${maxHeight}px`;
-                    console.log(`Desktop: Left Height: ${leftHeight}, Right Height: ${rightHeight}, Max Height: ${maxHeight}`);
+                    leftSectionContainer.style.height = `${maxHeight}px`;
+                    jobFormCard.style.height = `${maxHeight}px`;
+                    console.log(`Desktop: Left Card Height: ${leftHeight}, Right Form Card Height: ${rightHeight}, Max Height: ${maxHeight}`);
                 } else {
                     // On mobile, reset height to auto
-                    leftCard.style.height = 'auto';
-                    rightSection.style.height = 'auto';
+                    leftSectionContainer.style.height = 'auto';
+                    jobFormCard.style.height = 'auto';
                     console.log(`Mobile: Heights reset to auto.`);
                 }
             }
 
-            // Observe the right section for height changes (e.g., due to form content changes)
+            // Observe the job form card for height changes (e.g., due to form content changes)
             const resizeObserver = new ResizeObserver(entries => {
                 for (let entry of entries) {
-                    // Observe the right-section-container, not job-form-card directly for height matching
-                    if (entry.target.classList.contains('right-section-container')) {
+                    // Observe the job-form-card for height matching
+                    if (entry.target.id === 'job-form-card') {
                         matchCardHeights();
                     }
                 }
             });
-            resizeObserver.observe(document.querySelector('.right-section-container')); // Observe the section
+            resizeObserver.observe(jobFormCard); // Observe the job form card
             window.addEventListener('resize', matchCardHeights); // Also adjust on window resize
 
             // Initial view setup
