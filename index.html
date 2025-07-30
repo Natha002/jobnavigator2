@@ -312,6 +312,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            white-space: nowrap; /* Prevent text wrapping */
         }
 
         .industry-toggle-button-segment.active {
@@ -324,6 +325,10 @@
             .industry-toggle-button-segment {
                 font-size: 1.8rem; /* Increased by 50% from 1.2rem */
                 padding: 1.125rem 1.5rem; /* Increased by 50% from 0.75rem 1rem */
+            }
+            /* Increased max-width for desktop to ensure text is not cut off */
+            .industry-toggle-container {
+                max-width: 650px; /* Adjusted for full text visibility */
             }
         }
 
@@ -400,7 +405,7 @@
             
             /* Animation for color shift */
             animation: colorShift 9s infinite alternate, opportunitiesSmoothPulse 4s infinite alternate ease-in-out; /* Combined animations */
-            font-size: 2.25rem; /* Default for mobile */
+            font-size: 2.5rem; /* Default for mobile */
             font-weight: 800; /* Poppins Extra-Bold */
         }
 
@@ -423,10 +428,10 @@
             }
         }
 
-        /* Desktop font size for opportunities title */
+        /* Desktop font size for opportunities title (Find Your Job Matches) */
         @media (min-width: 768px) {
             .opportunities-title-outline {
-                font-size: 4.9rem; /* Changed to match connect-you-title-outline */
+                font-size: 4.9rem; /* Now explicitly matching connect-you-title-outline */
             }
         }
 
@@ -1387,7 +1392,8 @@
         <!-- Right Section: Find Your Perfect Job Form -->
         <section class="right-section-container">
             <div id="job-form-card" class="card w-full max-w-md p-6 sm:p-8 md:p-[60px] text-center relative mx-auto md:max-w-[672px]">
-                <h2 id="main-opportunities-title" class="text-3xl sm:text-4xl font-extrabold mb-4 leading-tight opportunities-title-outline">
+                <!-- Removed conflicting Tailwind classes to allow custom CSS to control font size -->
+                <h2 id="main-opportunities-title" class="font-extrabold mb-4 leading-tight opportunities-title-outline">
                     Find Your Job Matches
                 </h2>
                 
