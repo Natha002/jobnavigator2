@@ -1840,6 +1840,7 @@
         const blinkerLogoLeft = document.getElementById('blinker-logo-left');
         const blinkerLogoRight = document.getElementById('blinker-logo-right');
 
+        // Removed duplicate declaration of isConstructionMode
         let isConstructionMode = true; // Default state: In Construction
         let autoSubmitTimer = null; // To hold the countdown timer
         let countdownInterval = null; // To hold the interval for updating countdown text
@@ -2060,11 +2061,6 @@
         }
 
         let currentLogoIndex = 0; // Index for the current logo in the allLogosForBlinker array
-
-        let isConstructionMode = true; // Default state: In Construction
-        let autoSubmitTimer = null; // To hold the countdown timer
-        let countdownInterval = null; // To hold the interval for updating countdown text
-        let logoBlinkerInterval = null; // To hold the interval for logo blinking
 
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -2992,3 +2988,4 @@
     </script>
 </body>
 </html>
+
