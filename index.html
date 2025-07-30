@@ -27,7 +27,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-attachment: fixed;
+            background-attachment: fixed; /* Keep background static on scroll */
             min-height: 100vh; /* Ensure body takes full viewport height */
             display: flex;
             flex-direction: column;
@@ -50,7 +50,6 @@
 
         /* Custom styling for better visual appeal and responsiveness */
         .card {
-            /* REVERTED: background and backdrop-filter for .card (job-form-card) will be set directly on #job-form-card */
             background: transparent; /* Removed transparency */
             backdrop-filter: none; /* Removed blur */
             border-radius: 1.5rem; /* More rounded corners */
@@ -64,16 +63,25 @@
             color: #e0e0e0; /* Light text color for dark background */
             margin: 0; /* Ensure no conflicting margins from parent centering */
         }
-        /* Specific styling for the job form card */
+        /* Specific styling for the job form card (right card) */
         #job-form-card {
             background: rgba(55, 48, 163, 0.15); /* Light translucent indigo-800 */
-            backdrop-filter: blur(8px); /* Clear screen effect */
-            /* Retain original shadows, removed cyan ones */
+            backdrop-filter: blur(8px); /* Clear screen effect (desktop default) */
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), /* Existing shadow */
                         0 0 0 3px var(--indigo-800), /* First indigo outline */
                         0 0 0 6px rgba(55, 48, 163, 0.5); /* Second indigo outline (semi-transparent) */
         }
 
+        /* Mobile-specific overrides for #job-form-card (right card) */
+        @media (max-width: 767px) {
+            #job-form-card {
+                backdrop-filter: none; /* Remove frost effect on mobile */
+                background: rgba(55, 48, 163, 0.4); /* Slightly more opaque without blur */
+                /* Reduce vertical padding by 9% */
+                padding-top: calc(2.4552rem * 0.91);
+                padding-bottom: calc(2.4552rem * 0.91);
+            }
+        }
 
         @keyframes fadeInScale {
             from {
@@ -230,6 +238,18 @@
         }
 
         /* Header specific styling */
+        header {
+            padding-top: 23.5552px; /* Desktop default */
+            padding-bottom: 23.5552px; /* Desktop default */
+        }
+        @media (max-width: 767px) {
+            header {
+                /* Reduce vertical height by 4mm (approx 4px) */
+                padding-top: calc(23.5552px - 4px);
+                padding-bottom: calc(23.5552px - 4px);
+            }
+        }
+
         .header-text-outline { /* New class for G-Connect text */
             color: var(--indigo-800); /* Keep original text color */
             text-shadow:
@@ -381,6 +401,14 @@
             height: 85%; /* Keep at 85% for proportionality */
             object-fit: contain;
         }
+        /* Mobile-specific override for logo container size */
+        @media (max-width: 767px) {
+            .logo-container {
+                width: calc(60px * 0.9); /* Reduce by 10% */
+                height: calc(60px * 0.9); /* Reduce by 10% */
+            }
+        }
+
         /* Fiery text shadow for distinct elements - now more of a gold/orange glow */
         label[for="qualification-level-construction"],
         label[for="course-name-construction"],
@@ -400,6 +428,15 @@
             font-size: 0.8184rem; /* Reduced by 7% from 0.88rem */
             margin-bottom: 0.4092rem; /* Reduced by 7% from 0.44rem */
             color: var(--indigo-800); /* Ensure indigo-800 color */
+        }
+        /* Mobile-specific override for label font size */
+        @media (max-width: 767px) {
+            label[for="qualification-level-construction"],
+            label[for="course-name-construction"],
+            label[for="qualification-level-other"],
+            label[for="course-name-other"] {
+                font-size: 22px; /* Set to 22px for mobile */
+            }
         }
         /* Desktop font size for labels */
         @media (min-width: 768px) {
@@ -879,9 +916,7 @@
             backdrop-filter: blur(8px); /* Subtle blur for glassy effect */
             border-radius: 2.1rem; /* Increased by 40% from 1.5rem */
             border: 1px solid rgba(255, 255, 255, 0.2); /* Faint white border */
-            box-shadow: 0 5.6px 28px rgba(0, 0, 0, 0.2), /* Original shadow */
-                        0 0 20px rgba(0, 255, 255, 0.6), /* Outer glossy cyan glow */
-                        inset 0 0 15px rgba(0, 255, 255, 0.4); /* Inner glossy cyan sheen */
+            box-shadow: 0 5.6px 28px rgba(0, 0, 0, 0.2); /* Original shadow */
             padding: 1.14576rem; /* Reduced by 7% from 1.232rem */
             display: flex;
             flex-direction: column;
@@ -894,6 +929,21 @@
             flex-shrink: 0; /* Prevents shrinking if content is too large */
             height: fit-content; /* Allow content to dictate height on mobile */
         }
+        /* Mobile-specific overrides for .left-section-container (left card) */
+        @media (max-width: 767px) {
+            .left-section-container {
+                /* Remove cyan outline from mobile */
+                box-shadow: 0 5.6px 28px rgba(0, 0, 0, 0.2), /* Original shadow */
+                            0 0 20px rgba(0, 255, 255, 0.6), /* Outer glossy cyan glow */
+                            inset 0 0 15px rgba(0, 255, 255, 0.4); /* Inner glossy cyan sheen */
+                /* Reduce vertical padding by 9% */
+                padding-top: calc(1.14576rem * 0.91);
+                padding-bottom: calc(1.14576rem * 0.91);
+                /* Reduce margin-bottom by 9% */
+                margin-bottom: calc(1.6368rem * 0.91);
+            }
+        }
+
         @media (min-width: 768px) {
             .left-section-container {
                 width: auto; /* Allow max-width to control */
@@ -940,10 +990,17 @@
 
         /* Style for the "Connect with over 10K+ employers..." text */
         .value-proposition-text {
-            font-weight: 800; /* Made bolder as requested */
+            font-weight: 800; /* Made bolder as requested (desktop default) */
             color: #FFF; /* Very white color */
             text-shadow: none; /* Removed text shadow */
             margin-bottom: 0; /* Removed margin-bottom, now handled by wrapper */
+        }
+        /* Mobile-specific override for font-weight */
+        @media (max-width: 767px) {
+            .value-proposition-text {
+                font-size: 22px; /* Set to 22px for mobile */
+                font-weight: 400; /* Not bold on mobile */
+            }
         }
         /* Style for underlined words within value-proposition-text */
         .value-proposition-text .underlined-word {
@@ -951,12 +1008,6 @@
             text-decoration-color: var(--digital-cyan); /* Cyan underline */
             text-underline-offset: 4px; /* Space between text and underline */
             font-weight: 900; /* Make them extra bold */
-        }
-        /* Mobile font size for value-proposition-text */
-        @media (max-width: 767px) {
-            .value-proposition-text {
-                font-size: 22px; /* Set to 22px for mobile */
-            }
         }
         /* Desktop font size for value-proposition-text */
         @media (min-width: 768px) {
@@ -1194,9 +1245,12 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+        /* Mobile-specific override for sign-in button size */
         @media (max-width: 767px) {
             .header-mobile-signin-button {
-                /* Display is controlled by JS now, keep as is */
+                /* Reduce padding by 10% */
+                padding: calc(0.5rem * 0.9) calc(0.7rem * 0.9);
+                font-size: calc(0.9rem * 0.9); /* Reduce font size by 10% */
             }
             .header-mobile-signin-button + #mobile-menu-button {
                 margin-left: 0.4rem; /* Reduced from 0.75rem to 0.4rem to move closer */
@@ -1594,7 +1648,7 @@
                         </div>
                         <div class="relative">
                             <label for="course-name-construction" class="block text-left text-indigo-800 text-base font-bold mb-2">
-                                Enter Your Course Name:
+                                Area of specialization:
                             </label>
                             <input type="text" id="course-name-construction" name="course-name-construction" placeholder="e.g., Civil Engineering, Construction Management" class="input-field md:px-[24px] md:py-[14.7312px]">
                             <div id="course-suggestions-construction" class="suggestions-container hidden"></div>
@@ -1628,7 +1682,7 @@
                         </div>
                         <div class="relative">
                             <label for="course-name-other" class="block text-left text-black text-base font-bold mb-2">
-                                Enter Your Course Name:
+                                Area of specialization:
                             </label>
                             <input type="text" id="course-name-other" name="course-name-other" placeholder="e.g., Nursing, Software Development, Teaching" class="input-field md:px-[24px] md:py-[14.7312px]">
                             <div id="course-suggestions-other" class="suggestions-container hidden"></div>
@@ -1639,7 +1693,7 @@
                     </div>
                 </form>
                 <p class="text-center text-lg mt-[7.3656px] text-black font-bold">
-                    Already have an account? <a href="#" id="main-form-signin-link" class="text-indigo-600 hover:text-indigo-800 underline font-semibold"><b>Sign In</b></a>
+                    Already have an account? <a href="#" id="main-form-signin-link" class="text-indigo-600 hover:text-indigo-800 underline font-semibold">Sign In</a>
                 </p>
             </div>
         </section>
