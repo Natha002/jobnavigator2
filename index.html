@@ -1045,10 +1045,15 @@
             color: #e0e0e0;
             text-align: center;
             display: none; /* Hidden by default, will be shown by JS scroll */
-            display: flex; /* Use flexbox to center content */
-            flex-direction: column;
+            flex-direction: column; /* Keep flex-direction for content centering */
             align-items: center;
             justify-content: center;
+        }
+        /* Style for the About Us heading */
+        .about-us-heading-styled {
+            color: var(--indigo-800);
+            text-shadow:
+                1px 1px 0 #FFF, -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF; /* White outline */
         }
         /* New styles for the white placard inside About Us */
         .about-us-content-placard {
