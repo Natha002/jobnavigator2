@@ -245,8 +245,8 @@
         @media (max-width: 767px) {
             header {
                 /* Reduce vertical height by 4mm (approx 4px) */
-                padding-top: calc(23.5552px - 4px);
-                padding-bottom: calc(23.5552px - 4px);
+                padding-top: 10px; /* Direct smaller value */
+                padding-bottom: 10px; /* Direct smaller value */
             }
         }
 
@@ -916,15 +916,16 @@
             backdrop-filter: blur(8px); /* Subtle blur for glassy effect */
             border-radius: 2.1rem; /* Increased by 40% from 1.5rem */
             border: 1px solid rgba(255, 255, 255, 0.2); /* Faint white border */
+            /* Default box-shadow for mobile (no cyan) */
             box-shadow: 0 5.6px 28px rgba(0, 0, 0, 0.2); /* Original shadow */
-            padding: 1.14576rem; /* Reduced by 7% from 1.232rem */
+            padding: 1.14576rem; /* Default padding for mobile */
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             color: #e0e0e0; /* Light text color */
             width: 100%; /* Default to full width on mobile */
-            margin-bottom: 1.6368rem; /* Reduced by 7% from 1.76rem */
+            margin-bottom: 1.6368rem; /* Default margin for mobile */
             flex-grow: 0; /* No longer grows to match right card by default on mobile */
             flex-shrink: 0; /* Prevents shrinking if content is too large */
             height: fit-content; /* Allow content to dictate height on mobile */
@@ -932,15 +933,13 @@
         /* Mobile-specific overrides for .left-section-container (left card) */
         @media (max-width: 767px) {
             .left-section-container {
-                /* Remove cyan outline from mobile */
-                box-shadow: 0 5.6px 28px rgba(0, 0, 0, 0.2), /* Original shadow */
-                            0 0 20px rgba(0, 255, 255, 0.6), /* Outer glossy cyan glow */
-                            inset 0 0 15px rgba(0, 255, 255, 0.4); /* Inner glossy cyan sheen */
                 /* Reduce vertical padding by 9% */
                 padding-top: calc(1.14576rem * 0.91);
                 padding-bottom: calc(1.14576rem * 0.91);
                 /* Reduce margin-bottom by 9% */
                 margin-bottom: calc(1.6368rem * 0.91);
+                /* Ensure no cyan outline on mobile */
+                box-shadow: 0 5.6px 28px rgba(0, 0, 0, 0.2); /* Original shadow, no cyan */
             }
         }
 
@@ -954,6 +953,10 @@
                 padding-left: 1.4rem; /* Keep horizontal padding */
                 padding-right: 1.4rem; /* Keep horizontal padding */
                 flex-grow: 1; /* Allow it to grow to match right card on desktop */
+                /* Apply cyan outline only on desktop */
+                box-shadow: 0 5.6px 28px rgba(0, 0, 0, 0.2), /* Original shadow */
+                            0 0 20px rgba(0, 255, 255, 0.6), /* Outer glossy cyan glow */
+                            inset 0 0 15px rgba(0, 255, 255, 0.4); /* Inner glossy cyan sheen */
             }
         }
 
@@ -1513,6 +1516,16 @@
             .company-scroller-container {
                 max-width: 216px; /* Original desktop size */
                 width: auto;
+            }
+        }
+
+        /* Mobile-specific override for the "Already have an account? Sign In" text */
+        @media (max-width: 767px) {
+            #job-form-card > p { /* Target the paragraph directly below the form */
+                font-weight: normal; /* Unbold the paragraph */
+            }
+            #main-form-signin-link {
+                font-weight: normal; /* Unbold the link text */
             }
         }
 
