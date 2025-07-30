@@ -244,9 +244,9 @@
         }
         @media (max-width: 767px) {
             header {
-                /* Reduce vertical height by 4mm (approx 4px) */
-                padding-top: 10px; /* Direct smaller value */
-                padding-bottom: 10px; /* Direct smaller value */
+                /* Reduced to 8px top/bottom padding for a smaller header */
+                padding-top: 8px;
+                padding-bottom: 8px;
             }
         }
 
@@ -998,11 +998,13 @@
             text-shadow: none; /* Removed text shadow */
             margin-bottom: 0; /* Removed margin-bottom, now handled by wrapper */
         }
-        /* Mobile-specific override for font-weight */
+        /* Mobile-specific override for font-weight and size */
         @media (max-width: 767px) {
             .value-proposition-text {
-                font-size: 22px; /* Set to 22px for mobile */
+                font-size: 20px; /* Set to 20px for mobile */
                 font-weight: 400; /* Not bold on mobile */
+                line-height: 1.3; /* Adjusted for 3 lines on mobile */
+                max-width: 280px; /* Constrain width to encourage wrapping */
             }
         }
         /* Style for underlined words within value-proposition-text */
