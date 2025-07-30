@@ -226,6 +226,13 @@
         .header-text-outline:hover {
             color: var(--indigo-800); /* Keep same color on hover for consistency with outline */
         }
+        /* Desktop font size for G-Connect text */
+        @media (min-width: 768px) {
+            .header-text-outline {
+                font-size: 1.75rem !important; /* Force 28px for both G- and Connect */
+                line-height: 1; /* Adjust line height for better alignment */
+            }
+        }
         .nav-link {
             position: relative;
             padding: 0.5rem 1rem; /* Added padding for the rectangle */
@@ -2735,10 +2742,12 @@
 
                     leftCard.style.height = `${maxHeight}px`;
                     rightSection.style.height = `${maxHeight}px`;
+                    console.log(`Desktop: Left Height: ${leftHeight}, Right Height: ${rightHeight}, Max Height: ${maxHeight}`);
                 } else {
                     // On mobile, reset height to auto
                     leftCard.style.height = 'auto';
                     rightSection.style.height = 'auto';
+                    console.log(`Mobile: Heights reset to auto.`);
                 }
             }
 
