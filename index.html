@@ -310,6 +310,7 @@
             color: #000000;
             height: 100%;
             display: flex;
+            flex-direction: column; /* Stack text vertically */
             align-items: center;
             justify-content: center;
             white-space: nowrap; /* Prevent text wrapping */
@@ -874,7 +875,7 @@
         @media (min-width: 768px) {
             .left-section-container {
                 width: auto; /* Allow max-width to control */
-                max-width: 890.56px; /* Reduced by 8% from 968px for desktop */
+                max-width: 819.3152px; /* Reduced by 8% from 890.56px for desktop */
                 /* margin-right: 2rem; Handled by gap on main-content-wrapper */
                 margin-bottom: 0; /* No bottom margin on desktop */
                 padding: 1.4rem; /* Keep padding increased for desktop */
@@ -1041,7 +1042,33 @@
             color: #e0e0e0;
             text-align: center;
             display: none; /* Hidden by default, will be shown by JS scroll */
+            display: flex; /* Use flexbox to center content */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
+        /* New styles for the white placard inside About Us */
+        .about-us-content-placard {
+            background-color: white;
+            color: #333; /* Dark text for readability */
+            padding: 1.5rem; /* Generous padding */
+            border-radius: 1rem; /* Rounded corners */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+            width: fit-content; /* Make it fit the content */
+            max-width: 90%; /* Ensure it doesn't overflow on small screens */
+            margin: 1rem auto; /* Center it with margin */
+            text-align: center; /* Center text within the placard */
+        }
+        .about-us-content-placard p {
+            font-size: 1.1rem; /* Adjust font size for readability inside placard */
+            line-height: 1.6;
+            margin-bottom: 1rem; /* Space between paragraphs */
+            color: #555; /* Slightly lighter text color */
+        }
+        .about-us-content-placard p:last-child {
+            margin-bottom: 0; /* No margin after last paragraph */
+        }
+
         @media (min-width: 768px) {
             #about-us-section {
                 border-radius: 2.25rem; /* Increased by 50% from 1.5rem */
@@ -1054,15 +1081,8 @@
                 font-size: 3.75rem; /* Increased by 50% from 2.5rem */
                 margin-bottom: 2.25rem; /* Increased by 50% from 1.5rem */
             }
-            #about-us-section p {
+            .about-us-content-placard p {
                 font-size: 1.65rem; /* Increased by 50% from 1.1rem */
-                margin-bottom: 1.5rem; /* Increased by 50% from 1rem */
-            }
-            .about-us-content-card {
-                border-radius: 1.5rem; /* Increased by 50% from 1rem */
-                padding: 2.25rem; /* Increased by 50% from 1.5rem */
-                margin-top: 1.5rem; /* Increased by 50% from 1rem */
-                box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1); /* Increased by 50% */
             }
         }
 
@@ -1391,7 +1411,7 @@
 
         <!-- Right Section: Find Your Perfect Job Form -->
         <section class="right-section-container">
-            <div id="job-form-card" class="card w-full max-w-md p-6 sm:p-8 md:p-[60px] text-center relative mx-auto md:max-w-[672px]">
+            <div id="job-form-card" class="card w-full max-w-md p-6 sm:p-8 md:p-[60px] text-center relative mx-auto md:max-w-[618.24px]">
                 <!-- Removed conflicting Tailwind classes to allow custom CSS to control font size -->
                 <h2 id="main-opportunities-title" class="font-extrabold mb-4 leading-tight opportunities-title-outline">
                     Find Your Job Matches
@@ -1399,10 +1419,10 @@
                 
                 <div class="industry-toggle-container mb-9" role="tablist">
                     <button type="button" id="construction-tab" class="industry-toggle-button-segment" role="tab" aria-selected="true" aria-controls="construction-form-section">
-                        Construction
+                        Construction<br>Industry
                     </button>
                     <button type="button" id="other-industry-tab" class="industry-toggle-button-segment" role="tab" aria-selected="false" aria-controls="other-industry-form-section">
-                        Other
+                        Other<br>Industry
                     </button>
                 </div>
 
@@ -1468,7 +1488,7 @@
                         </button>
                     </div>
                 </form>
-                <p class="text-center text-lg mt-9 text-black">
+                <p class="text-center text-lg mt-9 text-black font-bold">
                     Already have an account? <a href="#" id="main-form-signin-link" class="text-indigo-600 hover:text-indigo-800 underline font-semibold">Sign In</a>
                 </p>
             </div>
@@ -1487,7 +1507,7 @@
     <!-- About Us Section (Placeholder for Learn More) -->
     <section id="about-us-section">
         <h2 class="font-extrabold about-us-heading">About G-Connect</h2>
-        <div class="about-us-content-card">
+        <div class="about-us-content-placard">
             <p>
                 G-Connect is dedicated to bridging the gap between talented job seekers and leading employers across various industries, with a special focus on construction. Our platform is designed to make your job search efficient, secure, and successful. We believe in empowering individuals to find their dream careers and helping companies discover the perfect talent.
             </p>
@@ -2718,7 +2738,7 @@
                 if (link) {
                     link.addEventListener('click', function(event) {
                         event.preventDefault();
-                        aboutUsSection.style.display = 'block'; // Ensure it's visible before scrolling
+                        aboutUsSection.style.display = 'flex'; // Ensure it's visible before scrolling
                         aboutUsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         mobileNavMenu.classList.remove('active'); // Close mobile menu if open
                         mobileMenuButton.setAttribute('aria-expanded', 'false');
@@ -2728,7 +2748,7 @@
 
             if (learnMoreBtn) {
                 learnMoreBtn.addEventListener('click', function() {
-                    aboutUsSection.style.display = 'block'; // Ensure it's visible before scrolling
+                    aboutUsSection.style.display = 'flex'; // Ensure it's visible before scrolling
                     aboutUsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
             }
