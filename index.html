@@ -1049,10 +1049,10 @@
                 width: auto; /* Allow max-width to control */
                 max-width: calc(876.0077px * 0.93 * 0.72); /* Increased by 1.5cm, then reduced by 7% and 28% */
                 margin-bottom: 0; /* No bottom margin on desktop */
-                padding-top: calc(0.8893125rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
-                padding-bottom: calc(0.8893125rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
-                padding-left: calc(1.4rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
-                padding-right: calc(1.4rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
+                padding-top: calc(1.14576rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
+                padding-bottom: calc(1.14576rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
+                padding-left: calc(1.14576rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
+                padding-right: calc(1.14576rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
                 flex-grow: 1; /* Allow it to grow to match right card on desktop */
                 /* Apply cyan outline only on desktop */
                 box-shadow: 0 calc(5.6px * 0.93 * 0.72) calc(28px * 0.93 * 0.72) rgba(0, 0, 0, 0.2), /* Original shadow */
@@ -1074,10 +1074,10 @@
             }
             #job-form-card {
                 max-width: calc(542.65px * 0.93); /* Reduced by 7% */
-                padding-top: calc(44.912px * 0.93); /* Reduced by 7% */
-                padding-bottom: calc(44.912px * 0.93); /* Reduced by 7% */
-                padding-left: calc(60px * 0.93); /* Reduced by 7% */
-                padding-right: calc(60px * 0.93); /* Reduced by 7% */
+                padding-top: calc(2.4552rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
+                padding-bottom: calc(2.4552rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
+                padding-left: calc(2.4552rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
+                padding-right: calc(2.4552rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
                 border-radius: calc(1.5rem * 0.93); /* Reduced by 7% */
                 box-shadow: 0 calc(4px * 0.93) calc(30px * 0.93) rgba(0, 0, 0, 0.1), /* Reduced by 7% */
                             0 0 0 calc(3px * 0.93) var(--indigo-800), /* Reduced by 7% */
@@ -1149,7 +1149,7 @@
         /* Desktop adjustments for value-prop-background-wrapper */
         @media (min-width: 768px) {
             .value-prop-background-wrapper {
-                padding: calc(1.2rem * 0.93 * 0.72) calc(1.8rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
+                padding: calc(1.2rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
                 margin-bottom: calc(0.9207rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
                 border-radius: calc(1rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
             }
@@ -2224,6 +2224,230 @@
         }
 
         let currentLogoIndex = 0; // Index for the current logo in the allLogosForBlinker array
+
+        // Mock job data (restored)
+        const allJobs = [
+            {
+                title: "Civil Engineer",
+                company: "Epco Builders Ltd",
+                location: "Nairobi, Kenya",
+                date: "2024-07-25",
+                source: "LinkedIn",
+                requirements: "Bachelor's Degree in Civil Engineering, 3+ years experience in road construction.",
+                qualification: "degree",
+                course: "Civil Engineering",
+                industry: "Construction"
+            },
+            {
+                title: "Construction Project Manager",
+                company: "Seyani Brothers & Co. (K) Ltd",
+                location: "Mombasa, Kenya",
+                date: "2024-07-20",
+                source: "BrighterMonday",
+                requirements: "Diploma or Degree in Construction Management, PMP certification, 5+ years experience.",
+                qualification: "diploma",
+                course: "Construction Management",
+                industry: "Construction"
+            },
+            {
+                title: "Quantity Surveyor",
+                company: "Laxmanbhai Construction Ltd",
+                location: "Kisumu, Kenya",
+                date: "2024-07-18",
+                source: "Fuzu",
+                requirements: "Higher Diploma in Quantity Surveying, 2+ years experience in building projects.",
+                qualification: "higher-diploma",
+                course: "Quantity Surveying",
+                industry: "Construction"
+            },
+            {
+                title: "Architectural Assistant",
+                company: "Intex Construction",
+                location: "Eldoret, Kenya",
+                date: "2024-07-15",
+                source: "Company Website",
+                requirements: "Bachelor's Degree in Architecture, proficiency in AutoCAD and Revit.",
+                qualification: "degree",
+                course: "Architecture",
+                industry: "Construction"
+            },
+            {
+                title: "Structural Engineer",
+                company: "Cementers Ltd",
+                location: "Nairobi, Kenya",
+                date: "2024-07-10",
+                source: "MyJobMag",
+                requirements: "Masters in Structural Engineering, ERB registration, 4+ years experience.",
+                qualification: "masters",
+                course: "Structural Engineering",
+                industry: "Construction"
+            },
+            {
+                title: "Building Technologist",
+                company: "Hayer Bishan Singh & Sons Ltd",
+                location: "Nakuru, Kenya",
+                date: "2024-07-05",
+                source: "Careerpoint Solutions",
+                requirements: "Certificate or Diploma in Building Technology, 1+ year site experience.",
+                qualification: "certificate",
+                course: "Building Technology",
+                industry: "Construction"
+            },
+            {
+                title: "Land Surveyor",
+                company: "Associated Construction Co (K) Ltd",
+                location: "Thika, Kenya",
+                date: "2024-07-01",
+                source: "LinkedIn",
+                requirements: "Diploma in Land Surveying, experience with modern surveying equipment.",
+                qualification: "diploma",
+                course: "Land Surveying",
+                industry: "Construction"
+            },
+            {
+                title: "Urban Planner",
+                company: "Put Sarajevo General Engineering Co",
+                location: "Nairobi, Kenya",
+                date: "2024-06-28",
+                source: "Fuzu",
+                requirements: "Masters in Urban Planning, experience in master planning projects.",
+                qualification: "masters",
+                course: "Urban Planning",
+                industry: "Construction"
+            },
+            {
+                title: "Environmental Engineer (Construction)",
+                company: "Nyoro Construction Company Ltd",
+                location: "Kisii, Kenya",
+                date: "2024-06-25",
+                source: "BrighterMonday",
+                requirements: "Degree in Environmental Engineering, focus on sustainable construction practices.",
+                qualification: "degree",
+                course: "Environmental Engineering",
+                industry: "Construction"
+            },
+            {
+                title: "Geotechnical Engineer",
+                company: "Sogea Satom Kenya",
+                location: "Nairobi, Kenya",
+                date: "2024-06-20",
+                source: "Company Website",
+                requirements: "PhD in Geotechnical Engineering, strong analytical skills.",
+                qualification: "phd",
+                course: "Geotechnical Engineering",
+                industry: "Construction"
+            },
+            {
+                title: "Software Developer",
+                company: "Safaricom PLC",
+                location: "Nairobi, Kenya",
+                date: "2024-07-28",
+                source: "Safaricom Careers",
+                requirements: "Bachelor's Degree in Computer Science, 2+ years experience in mobile app development.",
+                qualification: "degree",
+                course: "Software Development",
+                industry: "Information Technology"
+            },
+            {
+                title: "Nurse",
+                company: "Aga Khan University Hospital",
+                location: "Nairobi, Kenya",
+                date: "2024-07-26",
+                source: "Hospital Website",
+                requirements: "Diploma in Nursing, valid practicing license, 1+ year clinical experience.",
+                qualification: "diploma",
+                course: "Nursing",
+                industry: "Healthcare"
+            },
+            {
+                title: "High School Teacher (Math)",
+                company: "Brookhouse School",
+                location: "Nairobi, Kenya",
+                date: "2024-07-22",
+                source: "TES Global",
+                requirements: "Bachelor's Degree in Education (Mathematics), TSC registration, 3+ years experience.",
+                qualification: "degree",
+                course: "Teaching",
+                industry: "Education"
+            },
+            {
+                title: "Financial Analyst",
+                company: "Equity Bank Group",
+                location: "Nairobi, Kenya",
+                date: "2024-07-19",
+                source: "Bank Careers",
+                requirements: "Bachelor's Degree in Finance/Economics, CPA(K) preferred, 2+ years experience.",
+                qualification: "degree",
+                course: "Financial Analysis",
+                industry: "Finance"
+            },
+            {
+                title: "Digital Marketing Specialist",
+                company: "Jumia Kenya",
+                location: "Nairobi, Kenya",
+                date: "2024-07-14",
+                source: "Jumia Careers",
+                requirements: "Diploma or Degree in Marketing, proven experience in SEO/SEM, social media marketing.",
+                qualification: "diploma",
+                course: "Digital Marketing",
+                industry: "Marketing"
+            },
+            {
+                title: "Data Scientist",
+                company: "KCB Group PLC",
+                location: "Nairobi, Kenya",
+                date: "2024-07-11",
+                source: "KCB Careers",
+                requirements: "Masters or PhD in Data Science/Statistics, strong Python/R skills, 3+ years experience.",
+                qualification: "masters",
+                course: "Data Science",
+                industry: "Information Technology"
+            },
+            {
+                title: "Graphic Designer",
+                company: "Scanad Kenya",
+                location: "Nairobi, Kenya",
+                date: "2024-07-08",
+                source: "Ad Agency Website",
+                requirements: "Certificate or Diploma in Graphic Design, proficiency in Adobe Creative Suite.",
+                qualification: "certificate",
+                course: "Graphic Design",
+                industry: "Arts & Culture"
+            },
+            {
+                title: "Journalist",
+                company: "Nation Media Group",
+                location: "Nairobi, Kenya",
+                date: "2024-07-03",
+                source: "Nation Careers",
+                requirements: "Degree in Journalism/Mass Communication, strong writing and reporting skills.",
+                qualification: "degree",
+                course: "Journalism",
+                industry: "Media"
+            },
+            {
+                title: "Cybersecurity Analyst",
+                company: "Absa Bank Kenya PLC",
+                location: "Nairobi, Kenya",
+                date: "2024-06-30",
+                source: "Absa Careers",
+                requirements: "Higher Diploma or Degree in Cybersecurity, relevant certifications (e.g., CompTIA Security+).",
+                qualification: "higher-diploma",
+                course: "Cybersecurity",
+                industry: "Information Technology"
+            },
+            {
+                title: "Biomedical Engineer",
+                company: "Kenya Medical Supplies Authority (KEMSA)",
+                location: "Nairobi, Kenya",
+                date: "2024-06-27",
+                source: "KEMSA Website",
+                requirements: "Bachelor's Degree in Biomedical Engineering, experience with medical equipment.",
+                qualification: "degree",
+                course: "Biomedical Engineering",
+                industry: "Healthcare"
+            }
+        ];
 
 
         document.addEventListener('DOMContentLoaded', function() {
