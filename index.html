@@ -746,7 +746,7 @@
             z-index: 1002; /* Increased z-index to be in front of everything */
             visibility: hidden;
             opacity: 0;
-            transition: visibility 0s, opacity 0.3s linear;
+            transition: visibility 0(s), opacity 0.3s linear;
         }
         .loader-overlay.active {
             visibility: visible;
@@ -2022,13 +2022,12 @@
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js"; // Corrected typo here
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, signInWithCustomToken, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, where, onSnapshot, getDocs } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js"; // Added getDocs
+        import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, where, onSnapshot, getDocs } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-        // --- START OF FIREBASE CONFIGURATION (RESTORED TO USER'S PREFERRED HARDCODED CONFIG) ---
+        // --- START OF FIREBASE CONFIGURATION ---
         const firebaseConfig = {
-            apiKey: "AIzaSyAxh6u9xe0kfd_dnMxUo4d7Ph0U0lBibF8", // RESTORED TO USER'S PROVIDED KEY
+            apiKey: "AIzaSyAxh6u9xe0kfd_dnMxUo4d7Ph0U0lBibF8", // Changed to empty string as per Canvas environment guidelines
             authDomain: "kaziconnectweb.firebaseapp.com",
             projectId: "kaziconnectweb",
             storageBucket: "kaziconnectweb.firebasestorage.app",
@@ -2037,195 +2036,13 @@
             measurementId: "G-0PCWR2Z0SC"
         };
 
-        // Initialize Firebase with the RESTORED hardcoded configuration
+        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app); // Corrected typo here
         const db = getFirestore(app);
         const auth = getAuth(app);
         // --- END OF FIREBASE CONFIGURATION ---
         
-        // Global variables for app ID
-        // The __app_id variable is provided by the Canvas environment, use it for Firestore paths.
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        let currentUserId = null; // Will be set after authentication
-        let currentUserName = ''; // To store the user's name for personalization
-        let currentFilteredJobs = []; // To store the jobs currently displayed for export
-
-        // Initialize tempJobSearchData with default empty strings
-        let tempJobSearchData = {
-            qualification: '',
-            course: '',
-            industry: ''
-        };
-
-        // DOM Elements
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileNavMenu = document.getElementById('mobile-nav-menu');
-        const constructionTab = document.getElementById('construction-tab');
-        const otherIndustryTab = document.getElementById('other-industry-tab');
-        const constructionFormSection = document.getElementById('construction-form-section');
-        const otherIndustryFormSection = document.getElementById('other-industry-form-section');
-        const mainOpportunitiesTitle = document.getElementById('main-opportunities-title'); // Main title for personalization
-        const footerGreeting = document.getElementById('footer-greeting'); // Footer text for personalization
-
-        const qualificationLevelConstructionSelect = document.getElementById('qualification-level-construction');
-        const courseNameConstructionInput = document.getElementById('course-name-construction');
-        const courseSuggestionsConstruction = document.getElementById('course-suggestions-construction');
-
-        const otherIndustryInput = document.getElementById('other-industry-input');
-        const industrySuggestionsOther = document.getElementById('industry-suggestions-other');
-        const qualificationLevelOtherSelect = document.getElementById('qualification-level-other');
-        const courseNameOtherInput = document.getElementById('course-name-other');
-        const courseSuggestionsOther = document.getElementById('course-suggestions-other');
-
-        const jobSearchForm = document.getElementById('job-search-form');
-        const loaderOverlay = document.getElementById('loader-overlay');
-        const authModalOverlay = document.getElementById('auth-modal-overlay'); // Corrected variable name
-        const modalCloseButton = document.getElementById('modal-close-button');
-        const modalTitle = document.getElementById('modal-title');
-        const modalSignupTab = document.getElementById('modal-signup-tab');
-        const modalSigninTab = document.getElementById('modal-signin-tab');
-        const signupForm = document.getElementById('signup-form');
-        const signinForm = document.getElementById('signin-form');
-        const signupErrorMessage = document.getElementById('signup-error-message');
-        const signinErrorMessage = document.getElementById('signin-error-message');
-        const mainFormSigninLink = document.getElementById('main-form-signin-link'); // New Sign In link
-
-        const jobMatchesSection = document.getElementById('job-matches-section');
-        const jobList = document.getElementById('job-list');
-        const logoutButton = document.getElementById('logout-button');
-        const mobileLogoutButton = document.getElementById('mobile-logout-button');
-        
-        // NEW DOM elements for the Home section
-        const homeNavLink = document.getElementById('home-nav-link');
-        const mobileHomeNavLink = document.getElementById('mobile-home-nav-link');
-        const getStartedBtn = document.getElementById('get-started-btn'); // New Get Started button
-        const learnMoreBtn = document.getElementById('learn-more-btn'); // New Learn More button
-        const leftSectionContainer = document.querySelector('.left-section-container'); // The white card
-        const jobFormCard = document.getElementById('job-form-card'); // The job form card itself
-
-        // NEW: Sign In buttons in header/mobile menu
-        const headerSigninButton = document.getElementById('header-signin-button');
-        const mobileSigninButton = document.getElementById('mobile-signin-button');
-
-        // NEW: Main content wrapper for scrolling
-        const mainContentWrapper = document.getElementById('main-content-wrapper');
-        const darkenOverlay = document.getElementById('darken-overlay'); // Darkening overlay
-        const aboutUsSection = document.getElementById('about-us-section'); // About Us section
-
-        // NEW: Custom Alert Modal elements
-        const customAlertModalOverlay = document.getElementById('custom-alert-modal-overlay');
-        const customAlertMessage = document.getElementById('custom-alert-message');
-        const customAlertCloseButton = document.getElementById('custom-alert-close-button');
-        const customAlertCountdown = document.getElementById('custom-alert-countdown'); // Countdown element
-
-        // NEW: Blinking Logo elements (now with current and next images)
-        const blinkerWindowLeft = document.getElementById('blinker-window-left');
-        const blinkerLogoLeftCurrent = blinkerWindowLeft.querySelector('.current-logo');
-        const blinkerLogoLeftNext = blinkerWindowLeft.querySelector('.next-logo');
-
-        const blinkerWindowRight = document.getElementById('blinker-window-right');
-        const blinkerLogoRightCurrent = blinkerWindowRight.querySelector('.current-logo');
-        const blinkerLogoRightNext = blinkerWindowRight.querySelector('.next-logo');
-
-        // Removed duplicate declaration of isConstructionMode
-        let isConstructionMode = true; // Default state: In Construction
-        let autoSubmitTimer = null; // To hold the countdown timer
-        let countdownInterval = null; // To hold the interval for updating countdown text
-        let logoBlinkerInterval = null; // To hold the interval for logo blinking
-
-        // Function to validate email format
-        function isValidEmail(email) {
-            // Basic regex for email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-
-        // Suggestion data
-        const constructionCourses = [
-            "Civil Engineering", "Construction Management", "Architecture",
-            "Quantity Surveying", "Structural Engineering", "Building Technology",
-            "Land Surveying", "Urban Planning", "Environmental Engineering",
-            "Geotechnical Engineering", "Electrical Engineering (Construction Focus)",
-            "Mechanical Engineering (Construction Focus)", "Construction Project Management",
-            "Real Estate Development", "Interior Design (Construction)", "Building Services Engineering"
-        ];
-
-        const otherIndustryTypes = [
-            "Healthcare", "Information Technology", "Education", "Finance",
-            "Marketing", "Retail", "Hospitality", "Manufacturing",
-            "Logistics", "Science", "Arts & Culture", "Legal", "Media",
-            "Telecommunications", "Automotive", "Aerospace", "Agriculture"
-        ];
-
-        const otherIndustryCourses = [
-            "Nursing", "Software Development", "Teaching", "Financial Analysis",
-            "Digital Marketing", "Business Administration", "Human Resources",
-            "Data Science", "Graphic Design", "Journalism", "Cybersecurity",
-            "Biomedical Engineering", "Environmental Science", "Culinary Arts"
-        ];
-
-        // Company names for the scroller (Prioritize construction related companies and agencies)
-        const companyNames = [
-            "Kenya Urban Roads Authority (KURA)",
-            "Kenya National Highways Authority (KeNHA)",
-            "Kenya Rural Roads Authority (KeRRA)",
-            "National Construction Authority (NCA)",
-            "Epco Builders Ltd",
-            "Seyani Brothers & Co. (K) Ltd",
-            "Laxmanbhai Construction Ltd",
-            "Intex Construction",
-            "Cementers Ltd",
-            "Hayer Bishan Singh & Sons Ltd",
-            "Associated Construction Co (K) Ltd",
-            "Parbat Siyani Construction Ltd",
-            "Put Sarajevo General Engineering Co",
-            "Nyoro Construction Company Ltd",
-            "Sogea Satom Kenya",
-            "Bechtel Corporation Kenya",
-            "INTEGRUM",
-            "Dancom Construction",
-            "Archistra Construction Company Ltd",
-            "Aspax Construction Company",
-            "Safaricom PLC",
-            "Equity Bank Group",
-            "KCB Group PLC",
-            "Absa Bank Kenya PLC",
-            "Other Prominent Companies" // Added for continuous loop with diverse names
-        ];
-
-        // Logo files from the provided image
-        const allLogoFiles = [
-            '1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png', '10.png',
-            '11.png', '12.png', '13.png', '14.png', '15.png', '16.png', '17.png', '18.png', '19.png', '20.png',
-            '21.png', '23.png', '24.png', '26.png', '28.png', '29.png'
-        ];
-
-        // Prioritized construction-related logos
-        const constructionLogos = [
-            '11.png', '14.png', '19.png', '26.png', '17.png', '18.png',
-            '28.png', '21.png', '12.png', '13.png', '2.png', '29.png', '20.png'
-        ];
-
-        let allLogosForBlinker = [];
-        // Add construction logos multiple times for prioritization
-        for (let i = 0; i < 3; i++) { // Repeat 3 times
-            allLogosForBlinker = allLogosForBlinker.concat(constructionLogos);
-        }
-        // Add other logos once
-        const otherLogos = allLogoFiles.filter(logo => !constructionLogos.includes(logo));
-        allLogosForBlinker = allLogosForBlinker.concat(otherLogos);
-
-        // Shuffle the array to make the sequence less predictable while maintaining prioritization
-        // Fisher-Yates (Knuth) shuffle algorithm
-        for (let i = allLogosForBlinker.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [allLogosForBlinker[i], allLogosForBlinker[j]] = [allLogosForBlinker[j], allLogosForBlinker[i]];
-        }
-
-        let currentLogoIndex = 0; // Index for the current logo in the allLogosForBlinker array
-
-        // Mock job data (restored)
+        // Mock job data (Restored and moved to top-level scope for guaranteed availability)
         const allJobs = [
             {
                 title: "Civil Engineer",
@@ -2448,6 +2265,186 @@
                 industry: "Healthcare"
             }
         ];
+
+        // Global variables for app ID
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        let currentUserId = null; // Will be set after authentication
+        let currentUserName = ''; // To store the user's name for personalization
+        let currentFilteredJobs = []; // To store the jobs currently displayed for export
+
+        // Initialize tempJobSearchData with default empty strings
+        let tempJobSearchData = {
+            qualification: '',
+            course: '',
+            industry: ''
+        };
+
+        // DOM Elements
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileNavMenu = document.getElementById('mobile-nav-menu');
+        const constructionTab = document.getElementById('construction-tab');
+        const otherIndustryTab = document.getElementById('other-industry-tab');
+        const constructionFormSection = document.getElementById('construction-form-section');
+        const otherIndustryFormSection = document.getElementById('other-industry-form-section');
+        const mainOpportunitiesTitle = document.getElementById('main-opportunities-title'); // Main title for personalization
+        const footerGreeting = document.getElementById('footer-greeting'); // Footer text for personalization
+
+        const qualificationLevelConstructionSelect = document.getElementById('qualification-level-construction');
+        const courseNameConstructionInput = document.getElementById('course-name-construction');
+        const courseSuggestionsConstruction = document.getElementById('course-suggestions-construction');
+
+        const otherIndustryInput = document.getElementById('other-industry-input');
+        const industrySuggestionsOther = document.getElementById('industry-suggestions-other');
+        const qualificationLevelOtherSelect = document.getElementById('qualification-level-other');
+        const courseNameOtherInput = document.getElementById('course-name-other');
+        const courseSuggestionsOther = document.getElementById('course-suggestions-other');
+
+        const jobSearchForm = document.getElementById('job-search-form');
+        const loaderOverlay = document.getElementById('loader-overlay');
+        const authModalOverlay = document.getElementById('auth-modal-overlay'); // Corrected variable name
+        const modalCloseButton = document.getElementById('modal-close-button');
+        const modalTitle = document.getElementById('modal-title');
+        const modalSignupTab = document.getElementById('modal-signup-tab');
+        const modalSigninTab = document.getElementById('modal-signin-tab');
+        const signupForm = document.getElementById('signup-form');
+        const signinForm = document.getElementById('signin-form');
+        const signupErrorMessage = document.getElementById('signup-error-message');
+        const signinErrorMessage = document.getElementById('signin-error-message');
+        const mainFormSigninLink = document.getElementById('main-form-signin-link'); // New Sign In link
+
+        const jobMatchesSection = document.getElementById('job-matches-section');
+        const jobList = document.getElementById('job-list');
+        const logoutButton = document.getElementById('logout-button');
+        const mobileLogoutButton = document.getElementById('mobile-logout-button');
+        
+        // NEW DOM elements for the Home section
+        const homeNavLink = document.getElementById('home-nav-link');
+        const mobileHomeNavLink = document.getElementById('mobile-home-nav-link');
+        const getStartedBtn = document.getElementById('get-started-btn'); // New Get Started button
+        const learnMoreBtn = document.getElementById('learn-more-btn'); // New Learn More button
+        const leftSectionContainer = document.querySelector('.left-section-container'); // The white card
+        const jobFormCard = document.getElementById('job-form-card'); // The job form card itself
+
+        // NEW: Sign In buttons in header/mobile menu
+        const headerSigninButton = document.getElementById('header-signin-button');
+        const mobileSigninButton = document.getElementById('mobile-signin-button');
+
+        // NEW: Main content wrapper for scrolling
+        const mainContentWrapper = document.getElementById('main-content-wrapper');
+        const darkenOverlay = document.getElementById('darken-overlay'); // Darkening overlay
+        const aboutUsSection = document.getElementById('about-us-section'); // About Us section
+
+        // NEW: Custom Alert Modal elements
+        const customAlertModalOverlay = document.getElementById('custom-alert-modal-overlay');
+        const customAlertMessage = document.getElementById('custom-alert-message');
+        const customAlertCloseButton = document.getElementById('custom-alert-close-button');
+        const customAlertCountdown = document.getElementById('custom-alert-countdown'); // Countdown element
+
+        // NEW: Blinking Logo elements (now with current and next images)
+        const blinkerWindowLeft = document.getElementById('blinker-window-left');
+        const blinkerLogoLeftCurrent = blinkerWindowLeft.querySelector('.current-logo');
+        const blinkerLogoLeftNext = blinkerWindowLeft.querySelector('.next-logo');
+
+        const blinkerWindowRight = document.getElementById('blinker-window-right');
+        const blinkerLogoRightCurrent = blinkerWindowRight.querySelector('.current-logo');
+        const blinkerLogoRightNext = blinkerWindowRight.querySelector('.next-logo');
+
+        // Removed duplicate declaration of isConstructionMode
+        let isConstructionMode = true; // Default state: In Construction
+        let autoSubmitTimer = null; // To hold the countdown timer
+        let countdownInterval = null; // To hold the interval for updating countdown text
+        let logoBlinkerInterval = null; // To hold the interval for logo blinking
+
+        // Function to validate email format
+        function isValidEmail(email) {
+            // Basic regex for email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Suggestion data
+        const constructionCourses = [
+            "Civil Engineering", "Construction Management", "Architecture",
+            "Quantity Surveying", "Structural Engineering", "Building Technology",
+            "Land Surveying", "Urban Planning", "Environmental Engineering",
+            "Geotechnical Engineering", "Electrical Engineering (Construction Focus)",
+            "Mechanical Engineering (Construction Focus)", "Construction Project Management",
+            "Real Estate Development", "Interior Design (Construction)", "Building Services Engineering"
+        ];
+
+        const otherIndustryTypes = [
+            "Healthcare", "Information Technology", "Education", "Finance",
+            "Marketing", "Retail", "Hospitality", "Manufacturing",
+            "Logistics", "Science", "Arts & Culture", "Legal", "Media",
+            "Telecommunications", "Automotive", "Aerospace", "Agriculture"
+        ];
+
+        const otherIndustryCourses = [
+            "Nursing", "Software Development", "Teaching", "Financial Analysis",
+            "Digital Marketing", "Business Administration", "Human Resources",
+            "Data Science", "Graphic Design", "Journalism", "Cybersecurity",
+            "Biomedical Engineering", "Environmental Science", "Culinary Arts"
+        ];
+
+        // Company names for the scroller (Prioritize construction related companies and agencies)
+        const companyNames = [
+            "Kenya Urban Roads Authority (KURA)",
+            "Kenya National Highways Authority (KeNHA)",
+            "Kenya Rural Roads Authority (KeRRA)",
+            "National Construction Authority (NCA)",
+            "Epco Builders Ltd",
+            "Seyani Brothers & Co. (K) Ltd",
+            "Laxmanbhai Construction Ltd",
+            "Intex Construction",
+            "Cementers Ltd",
+            "Hayer Bishan Singh & Sons Ltd",
+            "Associated Construction Co (K) Ltd",
+            "Parbat Siyani Construction Ltd",
+            "Put Sarajevo General Engineering Co",
+            "Nyoro Construction Company Ltd",
+            "Sogea Satom Kenya",
+            "Bechtel Corporation Kenya",
+            "INTEGRUM",
+            "Dancom Construction",
+            "Archistra Construction Company Ltd",
+            "Aspax Construction Company",
+            "Safaricom PLC",
+            "Equity Bank Group",
+            "KCB Group PLC",
+            "Absa Bank Kenya Kenya PLC",
+            "Other Prominent Companies" // Added for continuous loop with diverse names
+        ];
+
+        // Logo files from the provided image
+        const allLogoFiles = [
+            '1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png', '10.png',
+            '11.png', '12.png', '13.png', '14.png', '15.png', '16.png', '17.png', '18.png', '19.png', '20.png',
+            '21.png', '23.png', '24.png', '26.png', '28.png', '29.png'
+        ];
+
+        // Prioritized construction-related logos
+        const constructionLogos = [
+            '11.png', '14.png', '19.png', '26.png', '17.png', '18.png',
+            '28.png', '21.png', '12.png', '13.png', '2.png', '29.png', '20.png'
+        ];
+
+        let allLogosForBlinker = [];
+        // Add construction logos multiple times for prioritization
+        for (let i = 0; i < 3; i++) { // Repeat 3 times
+            allLogosForBlinker = allLogosForBlinker.concat(constructionLogos);
+        }
+        // Add other logos once
+        const otherLogos = allLogoFiles.filter(logo => !constructionLogos.includes(logo));
+        allLogosForBlinker = allLogosForBlinker.concat(otherLogos);
+
+        // Shuffle the array to make the sequence less predictable while maintaining prioritization
+        // Fisher-Yates (Knuth) shuffle algorithm
+        for (let i = allLogosForBlinker.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [allLogosForBlinker[i], allLogosForBlinker[j]] = [allLogosForBlinker[j], allLogosForBlinker[i]];
+        }
+
+        let currentLogoIndex = 0; // Index for the current logo in the allLogosForBlinker array
 
 
         document.addEventListener('DOMContentLoaded', function() {
