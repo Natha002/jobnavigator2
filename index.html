@@ -901,7 +901,7 @@
         }
         @media (min-width: 768px) {
             .modal-toggle-button {
-                padding: calc(0.6138rem * 0.72) calc(1.5rem * 0.72); /* Reduced by 28% */
+                padding: calc(0.6138rem * 0.72); /* Reduced by 28% */
                 font-size: calc(1.10484rem * 0.72); /* Reduced by 28% */
                 box-shadow: 0 calc(3px * 0.72) calc(6px * 0.72) rgba(0, 0, 0, 0.1); /* Reduced by 28% */
             }
@@ -996,7 +996,7 @@
         }
         @media (min-width: 768px) {
             #logout-button {
-                padding: calc(0.9207rem * 0.72) calc(2.25rem * 0.72); /* Reduced by 28% */
+                padding: calc(0.9207rem * 0.72); /* Reduced by 28% */
                 border-radius: calc(1.125rem * 0.72); /* Reduced by 28% */
                 box-shadow: 0 calc(6px * 0.72) calc(9px * 0.72) rgba(0, 0, 0, 0.1); /* Reduced by 28% */
                 font-size: calc(1.2276rem * 0.72); /* Reduced by 28% */
@@ -1047,19 +1047,19 @@
         @media (min-width: 768px) {
             .left-section-container {
                 width: auto; /* Allow max-width to control */
-                max-width: calc(876.0077px * 0.72); /* Increased by 1.5cm */
+                max-width: calc(876.0077px * 0.93 * 0.72); /* Increased by 1.5cm, then reduced by 7% and 28% */
                 margin-bottom: 0; /* No bottom margin on desktop */
-                padding-top: calc(0.8893125rem * 0.72); /* Reduced by 28% */
-                padding-bottom: calc(0.8893125rem * 0.72); /* Reduced by 28% */
-                padding-left: calc(1.4rem * 0.72); /* Reduced by 28% */
-                padding-right: calc(1.4rem * 0.72); /* Reduced by 28% */
+                padding-top: calc(0.8893125rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
+                padding-bottom: calc(0.8893125rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
+                padding-left: calc(1.4rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
+                padding-right: calc(1.4rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
                 flex-grow: 1; /* Allow it to grow to match right card on desktop */
                 /* Apply cyan outline only on desktop */
-                box-shadow: 0 calc(5.6px * 0.72) calc(28px * 0.72) rgba(0, 0, 0, 0.2), /* Original shadow */
-                            0 0 calc(20px * 0.72) rgba(0, 255, 255, 0.6), /* Outer glossy cyan glow */
-                            inset 0 0 calc(15px * 0.72) rgba(0, 255, 255, 0.4); /* Inner glossy cyan sheen */
-                border-radius: calc(2.1rem * 0.72); /* Reduced by 28% */
-                border: calc(1px * 0.72) solid rgba(255, 255, 255, 0.2); /* Reduced by 28% */
+                box-shadow: 0 calc(5.6px * 0.93 * 0.72) calc(28px * 0.93 * 0.72) rgba(0, 0, 0, 0.2), /* Original shadow */
+                            0 0 calc(20px * 0.93 * 0.72) rgba(0, 255, 255, 0.6), /* Outer glossy cyan glow */
+                            inset 0 0 calc(15px * 0.93 * 0.72) rgba(0, 255, 255, 0.4); /* Inner glossy cyan sheen */
+                border-radius: calc(2.1rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
+                border: calc(1px * 0.93 * 0.72) solid rgba(255, 255, 255, 0.2); /* Reduced by 7% and 28% */
             }
         }
 
@@ -1071,6 +1071,17 @@
         @media (min-width: 768px) {
             .right-section-container {
                 width: auto; /* Allow max-width on card to control */
+            }
+            #job-form-card {
+                max-width: calc(542.65px * 0.93); /* Reduced by 7% */
+                padding-top: calc(44.912px * 0.93); /* Reduced by 7% */
+                padding-bottom: calc(44.912px * 0.93); /* Reduced by 7% */
+                padding-left: calc(60px * 0.93); /* Reduced by 7% */
+                padding-right: calc(60px * 0.93); /* Reduced by 7% */
+                border-radius: calc(1.5rem * 0.93); /* Reduced by 7% */
+                box-shadow: 0 calc(4px * 0.93) calc(30px * 0.93) rgba(0, 0, 0, 0.1), /* Reduced by 7% */
+                            0 0 0 calc(3px * 0.93) var(--indigo-800), /* Reduced by 7% */
+                            0 0 0 calc(6px * 0.93) rgba(55, 48, 163, 0.5); /* Reduced by 7% */
             }
         }
 
@@ -1138,9 +1149,9 @@
         /* Desktop adjustments for value-prop-background-wrapper */
         @media (min-width: 768px) {
             .value-prop-background-wrapper {
-                padding: calc(1.2rem * 0.72) calc(1.8rem * 0.72); /* Reduced by 28% */
-                margin-bottom: calc(0.9207rem * 0.72); /* Reduced by 28% */
-                border-radius: calc(1rem * 0.72); /* Reduced by 28% */
+                padding: calc(1.2rem * 0.93 * 0.72) calc(1.8rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
+                margin-bottom: calc(0.9207rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
+                border-radius: calc(1rem * 0.93 * 0.72); /* Reduced by 7% and 28% */
             }
         }
 
@@ -1212,7 +1223,7 @@
         }
         @media (min-width: 768px) {
             #get-started-btn {
-                padding: calc(1.14576rem * 0.72) calc(2.8rem * 0.72); /* Reduced by 28% */
+                padding: calc(1.14576rem * 0.72); /* Reduced by 28% */
                 font-size: calc(1.4322rem * 0.72); /* Reduced by 28% */
                 gap: calc(1.05rem * 0.72); /* Reduced by 28% */
             }
@@ -1376,7 +1387,7 @@
         }
         @media (min-width: 768px) {
             footer {
-                padding: calc(4.8px * 0.72) calc(1.5rem * 0.72); /* Reduced by 28% */
+                padding: calc(4.8px * 0.72); /* Reduced by 28% */
                 border-top: calc(3px * 0.72) solid var(--indigo-800); /* Reduced by 28% */
                 box-shadow: 0 calc(-8px * 0.72) calc(20px * 0.72) rgba(0, 0, 0, 0.3); /* Reduced by 28% */
             }
@@ -1608,7 +1619,7 @@
         }
         @media (min-width: 768px) {
             .custom-alert-modal-content button {
-                padding: calc(0.6138rem * 0.72) calc(1.5rem * 0.72); /* Reduced by 28% */
+                padding: calc(0.6138rem * 0.72); /* Reduced by 28% */
                 border-radius: calc(0.75rem * 0.72); /* Reduced by 28% */
                 box-shadow: 0 calc(4px * 0.72) calc(6px * 0.72) rgba(0, 0, 0, 0.1); /* Reduced by 28% */
                 font-size: calc(0.8184rem * 0.72); /* Reduced by 28% */
